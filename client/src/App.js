@@ -9,10 +9,11 @@ class App extends Component {
   constructor(props) {
     super(props)
       this.state = {
-        setBookName: '',
-        setReview: '',
+        setusername: '',
+        setemail: '',
+        setpassword: '',
         fetchData: [],
-        reviewUpdate: ''
+        emailUpdate: ''
       }
   }
 
@@ -26,7 +27,7 @@ class App extends Component {
 
   handleChange2 = (event) => {
     this.setState({
-      reviewUpdate: event.target.value
+      emailUpdate: event.target.value
     })
   }
 
@@ -64,13 +65,13 @@ class App extends Component {
         <React.Fragment>
           <Card style={{ width: '18rem' }} className='m-2'>
             <Card.Body>
-              <Card.Title>{val.book_name}</Card.Title>
+              <Card.Title>{val.username}</Card.Title>
               <Card.Text>
-                {val.book_review}
+                {val.email}
               </Card.Text>
-              <input name='reviewUpdate' onChange={this.handleChange2} placeholder='Update Review' ></input>
-              <Button className='m-2' onClick={() => { this.edit(val.id) }}>Update</Button>
-              <Button onClick={() => { this.delete(val.id) }}>Delete</Button>
+              <input name='emailUpdate' onChange={this.handleChange2} placeholder='Update email' ></input>
+              <Button className='m-2' onClick={() => { this.edit(val.user_ID) }}>Update</Button>
+              <Button onClick={() => { this.delete(val.user_ID) }}>Delete</Button>
             </Card.Body>
           </Card>
         </React.Fragment>
@@ -81,11 +82,12 @@ class App extends Component {
       <div className='App'>
         <h1>Co2Runter</h1>
         <div className='form'>
-          <input name='setBookName' placeholder='Enter Book Name Woop' onChange={this.handleChange} />
-          <input name='setReview' placeholder='Enter Review' onChange={this.handleChange} />
+          <input name='setusername' placeholder='Enter Username' onChange={this.handleChange} />
+          <input name='setemail' placeholder='Enter Email' onChange={this.handleChange} />
+          <input name='setpassword' placeholder='Enter Password' onChange={this.handleChange} />
         </div>
 
-        <Button className='my-2' variant="primary" onClick={this.submit}>Submit</Button> <br /><br/>
+        <Button className='my-2' variant="primary" onClick={this.submit}>Register new User</Button> <br /><br/>
 
         <Container>
           <Row>

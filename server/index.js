@@ -8,7 +8,7 @@ const db = mysql.createPool({
   host: 'mysql_db', // the host name MYSQL_DATABASE: node_mysql
   user: 'MYSQL_USER', // database user MYSQL_USER: MYSQL_USER
   password: 'MYSQL_PASSWORD', // database user password MYSQL_PASSWORD: MYSQL_PASSWORD
-  database: 'books' // database name MYSQL_HOST_IP: mysql_db
+  database: 'db_co2runter' // database name MYSQL_HOST_IP: mysql_db
 })
 
 // Enable cors security headers
@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 
 // get all of the books in the database
 app.get('/get', (req, res) => {
-  const SelectQuery = " SELECT * FROM  books_reviews";
+  const SelectQuery = " SELECT * FROM  Users";
   db.query(SelectQuery, (err, result) => {
     res.send(result)
   })
@@ -33,29 +33,30 @@ app.get('/get', (req, res) => {
 
 // add a book to the database
 app.post("/insert", (req, res) => {
-  const bookName = req.body.setBookName;
-  const bookReview = req.body.setReview;
-  const InsertQuery = "INSERT INTO books_reviews (book_name, book_review) VALUES (?, ?)";
-  db.query(InsertQuery, [bookName, bookReview], (err, result) => {
+  const username = req.body.setusername; 
+  const email = req.body. setemail;
+  const password = req.body. setpassword;
+  const InsertQuery = "INSERT INTO Users (username, email, password) VALUES (?, ?, ?)";
+  db.query(InsertQuery, [username, email,password], (err, result) => {
     console.log(result)
   })
 })
 
 // delete a book from the database
-app.delete("/delete/:bookId", (req, res) => {
-  const bookId = req.params.bookId;
-  const DeleteQuery = "DELETE FROM books_reviews WHERE id = ?";
-  db.query(DeleteQuery, bookId, (err, result) => {
+app.delete("/delete/:userId", (req, res) => {
+  const userId = req.params.userId;
+  const DeleteQuery = "DELETE FROM Users WHERE user_ID = ?";
+  db.query(DeleteQuery, userId, (err, result) => {
     if (err) console.log(err);
   })
 })
 
 // update a book review
-app.put("/update/:bookId", (req, res) => {
-  const bookReview = req.body.reviewUpdate;
-  const bookId = req.params.bookId;
-  const UpdateQuery = "UPDATE books_reviews SET book_review = ? WHERE id = ?";
-  db.query(UpdateQuery, [bookReview, bookId], (err, result) => {
+app.put("/update/:userId", (req, res) => {
+  const email = req.body.emailUpdate;
+  const userId = req.params.userId;
+  const UpdateQuery = "UPDATE Users SET email = ? WHERE user_ID = ?";
+  db.query(UpdateQuery, [email, userId], (err, result) => {
     if (err) console.log(err)
   })
 })
