@@ -4,6 +4,42 @@
 
 * **URL**
 
+  /login
+
+* **Method:**
+  
+  `POST` 
+  
+
+* **Data Params**
+
+  
+   **Required:**
+ 
+   `{password=[string], usermail=[string]}`
+
+
+* **Success Response:**
+  
+  * **Code:** 200 <br />
+    **Content:** `{ token=[string] }`
+ 
+* **Error Response:**
+
+  * **Code:** 400  <br />
+    **Content:** `{ error : "Missing Username or Password" }`
+
+  OR
+
+  * **Code:** 401 <br />
+    **Content:** `{ error : "Unauthorized" }`
+
+**Title**
+----
+  <_Additional information about your API call. Try to use verbs that match both request type (fetching vs modifying) and plurality (one vs multiple)._>
+
+* **URL**
+
   <_The URL Structure (path only, no root url)_>
 
 * **Method:**
@@ -54,3 +90,4 @@
 * **Notes:**
 
   <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 
+
