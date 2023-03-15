@@ -1,93 +1,92 @@
-**Login**
-----
-  <_Additional information about your API call. Try to use verbs that match both request type (fetching vs modifying) and plurality (one vs multiple)._>
+## **Login**
 
-* **URL**
+Authenticates a user and returns a token that can be used for future requests.
 
-  /login
+- **URL**
 
-* **Method:**
-  
-  `POST` 
-  
+  `/login`
 
-* **Data Params**
+- **Method:**
 
-  
-   **Required:**
- 
-   `{password=[string], usermail=[string]}`
+  `POST`
 
+- **Data Params**
 
-* **Success Response:**
-  
-  * **Code:** 200 <br />
+  **Required:**
+
+  `{password=[string], usermail=[string]}`
+
+- **Success Response:**
+
+  - **Code:** 200 <br />
     **Content:** `{ token=[string] }`
- 
-* **Error Response:**
 
-  * **Code:** 400  <br />
+- **Error Response:**
+
+  - **Code:** 400 <br />
     **Content:** `{ error : "Missing Username or Password" }`
+  - **Code:** 500 Internal Server Error<br />
+    **Content:** `{ error : A server error occurred." }`
 
-  OR
+## **Logout**
 
-  * **Code:** 401 <br />
-    **Content:** `{ error : "Unauthorized" }`
+Invalidates the user's token to end the session.
 
-**Title**
-----
-  <_Additional information about your API call. Try to use verbs that match both request type (fetching vs modifying) and plurality (one vs multiple)._>
+- **URL**
 
-* **URL**
+  `/logout`
 
-  <_The URL Structure (path only, no root url)_>
+- **Method:**
 
-* **Method:**
-  
-  <_The request type_>
+  `POST`
 
-  `GET` | `POST` | `DELETE` | `PUT`
-  
-*  **URL Params**
+- **Data Params**
 
-   <_If URL params exist, specify them in accordance with name mentioned in URL section. Separate into optional and required. Document data constraints._> 
+  **Required:**
 
-   **Required:**
- 
-   `id=[integer]`
+  `token=[string]`
 
-   **Optional:**
- 
-   `photo_id=[alphanumeric]`
+- **Success Response:**
 
-* **Data Params**
+  - **Code:** 200 <br />
 
-  <_If making a post request, what should the body payload look like? URL Params rules apply here too._>
+- **Error Response:**
 
-* **Success Response:**
-  
-  <_What should the status code be on success and is there any returned data? This is useful when people need to to know what their callbacks should expect!_>
+  - **Code:** 401 UNAUTHORIZED <br />
+    **Content:** `{ error : "No User logged in" }`
+  - **Code:** 500 Internal Server Error<br />
+    **Content:** `{ error : A server error occurred." }`
 
-  * **Code:** 200 <br />
-    **Content:** `{ id : 12 }`
- 
-* **Error Response:**
+## **Register**
 
-  <_Most endpoints will have many ways they can fail. From unauthorized access, to wrongful parameters etc. All of those should be liste d here. It might seem repetitive, but it helps prevent assumptions from being made where they should be._>
+This endpoint allows users to create a new account by providing their username, email, and password.
 
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{ error : "Log in" }`
+- **URL**
 
-  OR
+  `/register`
 
-  * **Code:** 422 UNPROCESSABLE ENTRY <br />
-    **Content:** `{ error : "Email Invalid" }`
+- **Method:**
 
-* **Sample Call:**
+  `POST`
 
-  <_Just a sample call to your endpoint in a runnable format ($.ajax call or a curl request) - this makes life easier and more predictable._> 
+- **Data Params**
 
-* **Notes:**
+  **Required:**
 
-  <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 
+  `{password=[string], usermail=[string], username=[string]}`
 
+- **Success Response:**
+
+  - **Code:** 201 Created<br />
+    **Content:** `{ token : string }`
+
+- **Error Response:**
+
+  - **Code:** 400 Bad Request <br />
+    **Content:** `{ error : "Missing Username, Email or Password" }`
+  - **Code:** 422 UNPROCESSABLE ENTRY <br />
+    **Content:** `{ error : "Invalid Input" }`
+  - **Code:** 409 Conflict<br />
+    **Content:** `{ error : "The email or username is already assigned." }`
+  - **Code:** 500 Internal Server Error<br />
+    **Content:** `{ error : A server error occurred." }`
