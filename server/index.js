@@ -3,6 +3,11 @@ const mysql = require('mysql2');
 const cors = require('cors');
 const app = express();
 
+// read json file 
+const fs = require('fs');
+const questions = JSON.parse(fs.readFileSync('questions.json', 'utf8'));
+
+
 // Add mysql database connection
 const db = mysql.createPool({
   host: 'mysql_db', // the host name MYSQL_DATABASE: node_mysql
@@ -30,6 +35,11 @@ app.get('/get', (req, res) => {
     res.send(result)
   })
 })
+
+app.get('/questions', (req, res) => {
+  res.send(questions)
+})
+
 
 // add a book to the database
 app.post("/insert", (req, res) => {
