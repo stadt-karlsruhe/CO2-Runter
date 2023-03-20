@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `Groupmemberships` (
   `group_ID` int
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS `Prints_In_Groups` (
+CREATE TABLE IF NOT EXISTS `Prints_In_Carbon_Footprint_Groups` (
   `group_ID` int,
   `print_ID` int
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
