@@ -52,7 +52,8 @@ CREATE TABLE IF NOT EXISTS `Prints_In_Districts` (
 
 CREATE TABLE IF NOT EXISTS `Groupmemberships` (
   `user_ID` int, 
-  `group_ID` int
+  `group_ID` int,
+   UNIQUE(user_ID,group_ID)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `Prints_In_Carbon_Footprint_Groups` (
