@@ -19,7 +19,7 @@ This endpoint allows users to retrieve a list of groups they administer.
 - **Success Response:**
 
   - **Code:** 200 <br />
-    **Content:** `{ groups = [{group_id=[string], name = [string], owner_username=[string], NumberOfGroupMembers = [integer]}, ...] }`
+    **Content:** `{ groups = [{group_ID=[int], groupname = [string], groupcode = [string], owner_ID = [int] memberCount = [int],...] }`
 
 - **Error Response:**
 
@@ -39,6 +39,7 @@ This endpoint allows users to retrieve a list of groups they are a member of.
   /groups/member
 
 - **Method:**
+
 
   `GET`
 
