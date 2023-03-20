@@ -11,4 +11,10 @@ The used database is a MySQL database. It is inclouded in docker compose and the
 
   Most tables are self-explanatory, only the ComparisonPrint requires an explanation:
 
-  * **ComparisonPrint** This table stores the data of pre-calculated carbon footprints, such as the average carbon footprint in Karlsruhe in 2019 or the required footprint in 2030 to comply with the Paris Agreement. This data is used to plot them against the submitted footprints.
+  * **ComparisonPrint** 
+  
+    This table stores the data of pre-calculated carbon footprints, such as the average carbon footprint in Karlsruhe in 2019 or the required footprint in 2030 to comply with the Paris Agreement. This data is used to plot them against the submitted footprints.
+
+* **Loading test data**
+
+  With the "loader.sql" skript (in the root folder), test data can be loaded into the database. This is useful for testing the application.
