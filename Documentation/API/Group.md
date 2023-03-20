@@ -21,7 +21,7 @@ This endpoint allows users to retrieve a list of groups they administer.
 - **Success Response:**
 
   - **Code:** 200 <br />
-    **Content:** `[{group_ID=[int], groupname = [string], groupcode = [string], owner_ID = [int] memberCount = [int]},...]`
+    **Content:** `[{group_ID=[int], groupname = [string], groupcode = [string], memberCount = [int]},...]`
 
 - **Error Response:**
 
@@ -56,7 +56,7 @@ This endpoint allows users to retrieve a list of groups they are a member of.
 - **Success Response:**
 
   - **Code:** 200 <br />
-    **Content:** `[{group_ID=[int], groupname = [string], groupcode = [string], owner_name=[string], memberCount = [integer]},...] `
+    **Content:** `[{group_ID=[int], groupname = [string], groupcode = [string], ownername=[string], memberCount = [integer]},...] `
 
 
 - **Error Response:**
@@ -86,7 +86,7 @@ This endpoint allows adding a user to a group by entering the group code.
   `groupcode=[string]`,
   `token=[string]`,
   `user_ID=[integer]`
-  
+
 - **Success Response:**
 
   - **Code:** 200 <br />
@@ -117,7 +117,7 @@ This endpoint allows users to retrieve information about a group by providing it
 - **Success Response:**
 
   - **Code:** 200 Ok<br />
-    **Content:** `{name = [string], owner_username=[string], NumberOfGroupMembers = [integer]}`
+    **Content:** `{groupname = [string], ownername=[string], memberCount = [integer]}`
 
 - **Error Response:**
 
