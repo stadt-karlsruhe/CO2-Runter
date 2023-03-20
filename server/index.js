@@ -44,56 +44,28 @@ app.get('/groups/admin', (req, res) => {
           res.send(result)
         }
       })
-  })
-})
-})
-
-//todo delete
-// get all of the books in the database
-app.get('/get', (req, res) => {
-  const SelectQuery = " SELECT * FROM  Users";
-  db.query(SelectQuery, (err, result) => {
-    res.send(result)
+    })
   })
 })
 
-app.get('/questions', (req, res) => {
-  res.send(questions)
-})
-
-
-// add a book to the database
-app.post("/insert", (req, res) => {
-  const username = req.body.setusername; 
-  const email = req.body. setemail;
-  const password = req.body. setpassword;
-  const InsertQuery = "INSERT INTO Users (username, email, password) VALUES (?, ?, ?)";
-  db.query(InsertQuery, [username, email,password], (err, result) => {
-    console.log(result)
+app.get('/groups/member', (req, res) => {
+  const SelectQuery = " SELECT * FROM  Groupmemberships WHERE user_ID = ?";
+  db.query(SelectQuery, [req.query.user_ID], (err, result) => {
+    //add the group information and the member count to the result for each group
+    result.forEach((group, index) => {
+      const SelectQuery = " SELECT * FROM  Carbon_Footprint_Groups WHERE group_ID = ?";
+      db.query(SelectQuery, [group.group_ID], (err, result2) => {
+        result[index].group = result2[0];
+        const SelectQuery = " SELECT COUNT(*) AS memberCount FROM  Groupmemberships WHERE group_ID = ?";
+        db.query(SelectQuery, [group.group_ID], (err, result3) => {
+          result[index].group.memberCount = result3[0].memberCount;
+          if (index === result.length - 1) {
+            res.send(result)
+          }
+        })
+      })
+    })
   })
 })
-
-// delete a book from the database
-app.delete("/delete/:userId", (req, res) => {
-  const userId = req.params.userId;
-  const DeleteQuery = "DELETE FROM Users WHERE user_ID = ?";
-  db.query(DeleteQuery, userId, (err, result) => {
-    if (err) console.log(err);
-  })
-})
-
-// update a book review
-app.put("/update/:userId", (req, res) => {
-  const email = req.body.emailUpdate;
-  const userId = req.params.userId;
-  const UpdateQuery = "UPDATE Users SET email = ? WHERE user_ID = ?";
-  db.query(UpdateQuery, [email, userId], (err, result) => {
-    if (err) console.log(err)
-  })
-})
-
-
-
-
 
 app.listen('3001', () => { })
