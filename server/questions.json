@@ -8,6 +8,7 @@
                     "name":"Auto",
                     "schnell":{
                         "text":"Wie oft fahren Sie mit dem Auto?",
+                        "typ":"auswahl",
                         "antworten":[
                             "Nie",
                             "Selten",
@@ -46,6 +47,7 @@
                     "name":"ÖPNV",
                     "schnell":{
                         "text":"Wie oft fahren Sie mit öffentlichen Verkersmittel?",
+                        "typ":"auswahl",
                         "antworten":[
                             "Nie",
                             "Selten",
@@ -73,6 +75,7 @@
                     "name":"Fahrrad",
                     "schnell":{
                         "text":"Wie oft fahren Sie mit dem Fahrrad?",
+                        "typ":"auswahl",
                         "antworten":[
                             "Nie",
                             "Selten",
@@ -133,6 +136,7 @@
                     "name":"Ernährung",
                     "schnell":{
                         "text":"Wie ist ihr Ernährungsverhalten?",
+                        "typ":"auswahl",
                         "antworten":[
                             "Vegan",
                             "Vegetarisch",	
