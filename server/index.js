@@ -57,6 +57,11 @@ app.get('/get', (req, res) => {
   })
 })
 
+app.get('/questions', (req, res) => {
+  res.send(questions)
+})
+
+
 // add a book to the database
 app.post("/insert", (req, res) => {
   const username = req.body.setusername; 
