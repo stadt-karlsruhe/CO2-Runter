@@ -51,20 +51,29 @@ app.get('/groups/admin', (req, res) => {
 app.get('/groups/member', (req, res) => {
   const SelectQuery = " SELECT * FROM  Groupmemberships WHERE user_ID = ?";
   db.query(SelectQuery, [req.query.user_ID], (err, result) => {
-    //add the group information and the member count to the result for each group
+    // if result is empty, send empty array
+    if (result.length === 0) {
+      res.send([])
+    }
+    // for each group, get the group data and add it to the result
     result.forEach((group, index) => {
       const SelectQuery = " SELECT * FROM  Carbon_Footprint_Groups WHERE group_ID = ?";
       db.query(SelectQuery, [group.group_ID], (err, result2) => {
-        result[index].group = result2[0];
+        //count the members of each group and add it to the result
         const SelectQuery = " SELECT COUNT(*) AS memberCount FROM  Groupmemberships WHERE group_ID = ?";
         db.query(SelectQuery, [group.group_ID], (err, result3) => {
-          result[index].group.memberCount = result3[0].memberCount;
-          if (index === result.length - 1) {
-            res.send(result)
-          }
+
+          db.query("SELECT username FROM Users WHERE user_ID = ?", [result2[0].owner_ID], (err, result4) => {
+            result[index] = { ...result2[0], owner_name: result4[0].username , ...result3[0]};
+            delete result[index].user_ID;
+            delete result[index].owner_ID;
+          })
         })
       })
     })
+    setTimeout(() => {
+      res.send(result)
+    }, 100)
   })
 })
 

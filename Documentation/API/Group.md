@@ -14,14 +14,14 @@ This endpoint allows users to retrieve a list of groups they administer.
 
   **Required:**
 
-  `token=[string]`
+  `token=[string]`,
   `user_ID=[integer]`
 
 
 - **Success Response:**
 
   - **Code:** 200 <br />
-    **Content:** `{ groups = [{group_ID=[int], groupname = [string], groupcode = [string], owner_ID = [int] memberCount = [int],...] }`
+    **Content:** `[{group_ID=[int], groupname = [string], groupcode = [string], owner_ID = [int] memberCount = [int]},...]`
 
 - **Error Response:**
 
@@ -49,12 +49,14 @@ This endpoint allows users to retrieve a list of groups they are a member of.
 
   **Required:**
 
-  `token=[integer]`
+  `token=[integer]`,
+   `user_ID=[integer]`
 
 - **Success Response:**
 
   - **Code:** 200 <br />
-    **Content:** `{ groups : [{group_id=[string], name = [string], owner_username=[string], NumberOfGroupMembers = [integer]}, ...] }`
+    **Content:** `[{group_ID=[int], groupname = [string], groupcode = [string], owner_name=[string], memberCount = [integer]},...] `
+
 
 - **Error Response:**
 
