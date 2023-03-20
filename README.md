@@ -4,7 +4,7 @@
 An innovative web app that allows users to calculate and compare their personal carbon footprint, motivating them to live more environmentally conscious and reduce their energy consumption.
 
 
-# Build-and-Dockerize-a-Full-stack-React-app-with-Node.js-MySQL-and-Nginx-for-reverse-proxy
+# Build and Dockerize a Full stack React app with Node.js MySQL and Nginx for reverse proxy
 
 Run `npm i` inside the client directory
 
