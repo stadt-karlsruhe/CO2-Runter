@@ -4,9 +4,9 @@ import Slider from "@mui/material/Slider";
 const QuestionBlock = (props) => {
   const maxValue = Math.max(...props.values);
   const valueAdjustToSlider = 100/(props.values.length-1);
-  const marks = props.answer.map((answer, index) => ({
+  const marks = props.replies.map((replies, index) => ({
     value: props.values[index] * valueAdjustToSlider,
-    label: answer
+    label: replies
   }));
 
 

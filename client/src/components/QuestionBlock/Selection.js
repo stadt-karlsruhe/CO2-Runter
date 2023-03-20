@@ -21,8 +21,8 @@ const Selection = (props) => {
           label={props.label}
           onChange={handleChange}
         >
-        {props.answer.map((answer, index) => (
-        <MenuItem key={index} value={props.values[index]}>{answer}</MenuItem>
+        {props.replies.map((replies, index) => (
+        <MenuItem key={index} value={props.values[index]}>{replies}</MenuItem>
         ))}
         </Select>
       </FormControl>
