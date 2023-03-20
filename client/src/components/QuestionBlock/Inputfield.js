@@ -9,7 +9,6 @@ const Inputfield = (props) => {
         id="outlined-adornment"
         type="number"
         endAdornment={<InputAdornment position="end">{props.value}</InputAdornment>}
-        aria-describedby="outlined-weight-helper-text"
       />
     </div>
   );
