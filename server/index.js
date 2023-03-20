@@ -77,4 +77,34 @@ app.get('/groups/member', (req, res) => {
   })
 })
 
+app.post('/groups/add_user', (req, res) => {
+  console.log(req.query)
+  const SelectQuery = " SELECT group_ID FROM  Carbon_Footprint_Groups WHERE groupcode = ?";
+  db.query(SelectQuery, [req.query.groupcode], (err, result) => {
+    if (result.length === 0) {
+      res.status(404).send('Group not found');
+    } else {
+      const InsertQuery = " INSERT INTO Groupmemberships (group_ID, user_ID) VALUES (?, ?)";
+      console.log(result[0].group_ID)
+      console.log(req.query.user_ID)
+      db.query(InsertQuery, [result[0].group_ID, req.query.user_ID], (err, result) => {
+        if(err) {
+          if(err.code === 'ER_DUP_ENTRY') {
+            res.status(409).send('User already in group')
+          } else {
+          console.log(err)
+          res.status(500).send('Something went wrong')
+          }
+        } else {
+          res.status(200).send('User added to group')
+        }
+        
+      })
+    }
+  })
+})
+
+
+
+
 app.listen('3001', () => { })

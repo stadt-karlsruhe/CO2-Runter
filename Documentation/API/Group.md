@@ -38,7 +38,8 @@ This endpoint allows users to retrieve a list of groups they are a member of.
 
 - **URL**
 
-  /groups/member
+  `/groups/member`
+
 
 - **Method:**
 
@@ -73,7 +74,7 @@ This endpoint allows adding a user to a group by entering the group code.
 
 - **URL**
 
-  `/groups/<group_number>/add_user`
+  `/groups/add_user`
 
 - **Method:**
 
@@ -82,9 +83,10 @@ This endpoint allows adding a user to a group by entering the group code.
 - **Data Params**
 
   **Required:**
-
-  `token=[string]`
-
+  `groupcode=[string]`,
+  `token=[string]`,
+  `user_ID=[integer]`
+  
 - **Success Response:**
 
   - **Code:** 200 <br />
