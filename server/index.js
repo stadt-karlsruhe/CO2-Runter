@@ -28,6 +28,27 @@ app.get('/', (req, res) => {
   res.send('Hi There')
 });
 
+app.get('/questions', (req, res) => {
+  res.send(questions)
+})
+
+app.get('/groups/admin', (req, res) => {
+  const SelectQuery = " SELECT * FROM  Carbon_Footprint_Groups WHERE owner_ID = ?";
+  db.query(SelectQuery, [req.query.uid], (err, result) => {
+    //count the members of each group and add it to the result
+    result.forEach((group, index) => {
+      const SelectQuery = " SELECT COUNT(*) AS memberCount FROM  Groupmemberships WHERE group_ID = ?";
+      db.query(SelectQuery, [group.group_ID], (err, result2) => {
+        result[index].memberCount = result2[0].memberCount;
+        if (index === result.length - 1) {
+          res.send(result)
+        }
+      })
+  })
+})
+})
+
+//todo delete
 // get all of the books in the database
 app.get('/get', (req, res) => {
   const SelectQuery = " SELECT * FROM  Users";
@@ -70,5 +91,9 @@ app.put("/update/:userId", (req, res) => {
     if (err) console.log(err)
   })
 })
+
+
+
+
 
 app.listen('3001', () => { })
