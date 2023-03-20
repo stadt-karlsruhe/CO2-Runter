@@ -34,7 +34,7 @@ app.get('/questions', (req, res) => {
 
 app.get('/groups/admin', (req, res) => {
   const SelectQuery = " SELECT * FROM  Carbon_Footprint_Groups WHERE owner_ID = ?";
-  db.query(SelectQuery, [req.query.uid], (err, result) => {
+  db.query(SelectQuery, [req.query.user_ID], (err, result) => {
     //count the members of each group and add it to the result
     result.forEach((group, index) => {
       const SelectQuery = " SELECT COUNT(*) AS memberCount FROM  Groupmemberships WHERE group_ID = ?";
