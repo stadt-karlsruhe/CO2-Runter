@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS `Prints_In_Districts` (
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `Groupmemberships` (
-  `user_ID` int, 
-  `group_ID` int,
+  `user_ID` int NOT NULL, 
+  `group_ID` int  NOT NULL,
    UNIQUE(user_ID,group_ID)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
