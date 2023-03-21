@@ -29,6 +29,14 @@ function generateCode(length) {
   return result;
 }
 
+//Helperfunction to get the number of members in a group
+async function getMemberCount(group_ID) {
+    const [rows, fields] = await db.promise().query(
+        'SELECT COUNT(*) AS memberCount FROM Groupmemberships WHERE group_ID = ?', [group_ID]
+      );
+      console.log(rows[0])
+      return rows[0].memberCount;
+}
 // Enable cors security headers
 app.use(cors())
 
@@ -49,15 +57,12 @@ app.get('/groups/admin', (req, res) => {
   const SelectQuery = " SELECT * FROM  Carbon_Footprint_Groups WHERE owner_ID = ?";
   db.query(SelectQuery, [req.query.user_ID], (err, result) => {
     //count the members of each group and add it to the result
-    result.forEach((group, index) => {
-      const SelectQuery = " SELECT COUNT(*) AS memberCount FROM  Groupmemberships WHERE group_ID = ?";
-      db.query(SelectQuery, [group.group_ID], (err, result2) => {
-        result[index].memberCount = result2[0].memberCount;
-        if (index === result.length - 1) {
-          res.send(result)
-        }
-      })
+    result.forEach(async (group, index) => {
+        result[index].memberCount = await getMemberCount(group.group_ID);
     })
+    setTimeout(() => {
+      res.send(result)
+    }, 100)
   })
 })
 
@@ -75,7 +80,6 @@ app.get('/groups/member', (req, res) => {
         //count the members of each group and add it to the result
         const SelectQuery = " SELECT COUNT(*) AS memberCount FROM  Groupmemberships WHERE group_ID = ?";
         db.query(SelectQuery, [group.group_ID], (err, result3) => {
-
           db.query("SELECT username FROM Users WHERE user_ID = ?", [result2[0].owner_ID], (err, result4) => {
             result[index] = { ...result2[0], ownername: result4[0].username , ...result3[0]};
             delete result[index].user_ID;
