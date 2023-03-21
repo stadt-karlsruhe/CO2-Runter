@@ -108,7 +108,7 @@ This endpoint allows users to retrieve information about a group by providing it
 
 - **URL**
 
-  `/groups/<group_code>`
+  `/groups/get/<groupcode>`
 
 - **Method:**
 
@@ -142,7 +142,7 @@ This endpoint allows users to create a new group by providing a name.
 
   **Required:**
 
-  `token=[string], groupname=[string]`
+  `token=[string], groupname=[string],user_ID=[int]`
 
 - **Success Response:**
 
@@ -165,7 +165,7 @@ This endpoint allows an admin to delete a group by providing its number.
 
 - **URL**
 
-  `/groups/<group_name>`
+  `/groups/delete/<groupcode>`
 
 - **Method:**
 
