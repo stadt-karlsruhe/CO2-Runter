@@ -37,6 +37,15 @@ async function getMemberCount(group_ID) {
       console.log(rows[0])
       return rows[0].memberCount;
 }
+// Helper function to get username from user_ID
+async function getUsername(user_ID) {
+  const [rows, fields] = await db.promise().query(
+      'SELECT username FROM Users WHERE user_ID = ?', [user_ID]
+    );
+    console.log(rows[0])
+    return rows[0].username;
+}
+
 // Enable cors security headers
 app.use(cors())
 
@@ -66,7 +75,7 @@ app.get('/groups/admin', (req, res) => {
   })
 })
 
-app.get('/groups/member', (req, res) => {
+app.get('/groups/member', async(req, res) => {
   const SelectQuery = " SELECT * FROM  Groupmemberships WHERE user_ID = ?";
   db.query(SelectQuery, [req.query.user_ID], (err, result) => {
     // if result is empty, send empty array
@@ -74,19 +83,14 @@ app.get('/groups/member', (req, res) => {
       res.send([])
     }
     // for each group, get the group data and add it to the result
-    result.forEach((group, index) => {
-      const SelectQuery = " SELECT * FROM  Carbon_Footprint_Groups WHERE group_ID = ?";
-      db.query(SelectQuery, [group.group_ID], (err, result2) => {
-        //count the members of each group and add it to the result
-        const SelectQuery = " SELECT COUNT(*) AS memberCount FROM  Groupmemberships WHERE group_ID = ?";
-        db.query(SelectQuery, [group.group_ID], (err, result3) => {
-          db.query("SELECT username FROM Users WHERE user_ID = ?", [result2[0].owner_ID], (err, result4) => {
-            result[index] = { ...result2[0], ownername: result4[0].username , ...result3[0]};
-            delete result[index].user_ID;
-            delete result[index].owner_ID;
-          })
-        })
-      })
+    result.forEach(async (group, index) => {
+      const [rows, fields] = await db.promise().query(
+        " SELECT * FROM  Carbon_Footprint_Groups WHERE group_ID = ?", [group.group_ID]
+      );
+      result[index] = { ...rows[0]};
+      result[index].ownername = await getUsername(result[index].owner_ID);
+      result[index].memberCount = await getMemberCount(group.group_ID);
+      delete result[index].owner_ID;
     })
     setTimeout(() => {
       res.send(result)
