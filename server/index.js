@@ -2,6 +2,8 @@ const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const app = express();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // read json file 
 const fs = require('fs');
@@ -59,6 +61,49 @@ app.get('/', (req, res) => {
 app.get('/questions', (req, res) => {
   res.send(questions)
 })
+
+app.post('/register', async (req, res) => {
+    // Get user input
+    const { email, password, username } =  req.query;
+
+    // Validate user input
+    if (!(email && password && username)) {
+      res.status(400).send("All input is required");
+    }
+    // check if user already exists
+    const SelectQuery = " SELECT * FROM  Users WHERE email = ?";
+    db.query(SelectQuery, [email], async (err, result) => {
+      if (result.length > 0) {
+        res.status(409).send("User Already Exist. Please Login");
+      } else {
+        // encrypt password
+        encryptedpassword = await bcrypt.hash(password, 10);
+        // create new user
+        const InsertQuery = " INSERT INTO Users (username, email, password) VALUES (?, ?, ?)";
+        db.query(InsertQuery, [username, email, encryptedpassword], (err, result) => {
+          if(err) {
+            console.log(err)
+            res.status(500).send('Something went wrong')
+          } else {
+            user = result;
+            // create token
+            const token = jwt.sign(
+              { user_id: result.insertId, email },
+              process.env.TOKEN_KEY,
+              {
+                expiresIn: "2h",
+              }
+            );
+            // save user token
+            user.token = token;
+            res.status(201).send({token})
+          }
+        })
+      }
+    })
+})
+
+
 
 app.get('/groups/admin', (req, res) => {
   const SelectQuery = " SELECT * FROM  Carbon_Footprint_Groups WHERE owner_ID = ?";

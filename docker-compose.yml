@@ -4,6 +4,7 @@ x-common-variables: &common-variables
   MYSQL_DATABASE: db_co2runter
   MYSQL_USER: MYSQL_USER
   MYSQL_PASSWORD: MYSQL_PASSWORD
+  TOKEN_KEY: adjuhskajdkjas
 
 services:
   mysql_db:
