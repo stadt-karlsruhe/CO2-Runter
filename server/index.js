@@ -16,6 +16,19 @@ const db = mysql.createPool({
   database: 'db_co2runter' // database name MYSQL_HOST_IP: mysql_db
 })
 
+
+// Helper function to generate random alphanumeric code
+function generateCode(length) {
+  let result = '';
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
 // Enable cors security headers
 app.use(cors())
 
@@ -131,6 +144,34 @@ app.get('/groups/:groupcode', (req, res) => {
   })
 })
 
-
+app.post('/groups/create', async (req, res) => {
+    let groupcode = '';
+    let isUnique = false;
+    while (!isUnique) {
+      groupcode = generateCode(6);
+      console.log(groupcode)
+      const [rows, fields] = await db.promise().query(
+        'SELECT COUNT(*) as count FROM Carbon_Footprint_Groups WHERE groupcode = ?',
+        [groupcode]
+      );
+      if (rows[0].count === 0) {
+        isUnique = true;
+      }
+    }
+    const InsertQuery = " INSERT INTO Carbon_Footprint_Groups (groupname, groupcode, owner_ID) VALUES (?, ?, ?)";
+    db.query(InsertQuery, [req.query.groupname, groupcode, req.query.user_ID], (err, result) => {
+      if(err) {
+        console.log(err)
+        res.status(500).send('Something went wrong')
+      } else {
+        const InsertQuery = " INSERT INTO Groupmemberships (group_ID, user_ID) VALUES (?, ?)";
+        db.query(InsertQuery, [result.insertId, req.query.user_ID], (err, result2) => {
+        res.status(200).json({ groupcode });
+      }
+      )
+    }
+    })
+  })
+  
 
 app.listen('3001', () => { })

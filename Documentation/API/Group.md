@@ -132,7 +132,7 @@ This endpoint allows users to create a new group by providing a name.
 
 - **URL**
 
-  `/groups`
+  `/groups/create`
 
 - **Method:**
 
