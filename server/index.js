@@ -125,29 +125,22 @@ app.post('/groups/add_user', (req, res) => {
   })
 })
 
-app.get('/groups/:groupcode', (req, res) => {
+app.get('/groups/:groupcode',async  (req, res) => {
   const SelectQuery = " SELECT * FROM  Carbon_Footprint_Groups WHERE groupcode = ?";
-  db.query(SelectQuery, [req.params.groupcode], (err, result) => {
+  db.query(SelectQuery, [req.params.groupcode], async (err, result) => {
     if (result.length === 0) {
       res.status(404).send('Group not found');
 
     } 
     else {
-      const SelectQuery = " SELECT COUNT(*) AS memberCount FROM  Groupmemberships WHERE group_ID = ?";
-      db.query(SelectQuery, [result[0].group_ID], (err, result2) => {
-        db.query("SELECT username FROM Users WHERE user_ID = ?", [result[0].owner_ID], (err, result3) => {
-          result[0] = { ...result[0], ownername: result3[0].username , ...result2[0]};
-          delete result[0].user_ID;
-          delete result[0].owner_ID;
-          delete result[0].groupcode;
-          delete result[0].group_ID;
-          if (err){
-            res.status(500).send('Something went wrong')
-          } else {
-          res.send(result[0])
-          }
-        })
-      })
+      result[0].ownername = await getUsername(result[0].owner_ID);
+      result[0].memberCount = await getMemberCount(result[0].group_ID);
+      delete result[0].user_ID;
+      delete result[0].owner_ID;
+      delete result[0].groupcode;
+      delete result[0].group_ID;
+      res.send(result[0])
+          
     }
   })
 })
