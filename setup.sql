@@ -36,9 +36,9 @@ CREATE TABLE IF NOT EXISTS `Districts` (
 
 CREATE TABLE IF NOT EXISTS `Carbon_Footprint_Groups` (
   `group_ID` int NOT NULL AUTO_INCREMENT,
-  `groupname` varchar(50),
+  `groupname` varchar(50) NOT NULL,
   `groupcode` varchar(6) NOT NULL,
-  `owner_ID` int,
+  `owner_ID` int NOT NULL,
   PRIMARY KEY (group_ID),
   FOREIGN KEY (owner_ID) REFERENCES Users(user_ID) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;

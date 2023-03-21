@@ -34,7 +34,6 @@ async function getMemberCount(group_ID) {
     const [rows, fields] = await db.promise().query(
         'SELECT COUNT(*) AS memberCount FROM Groupmemberships WHERE group_ID = ?', [group_ID]
       );
-      console.log(rows[0])
       return rows[0].memberCount;
 }
 // Helper function to get username from user_ID
@@ -42,7 +41,6 @@ async function getUsername(user_ID) {
   const [rows, fields] = await db.promise().query(
       'SELECT username FROM Users WHERE user_ID = ?', [user_ID]
     );
-    console.log(rows[0])
     return rows[0].username;
 }
 
@@ -99,18 +97,16 @@ app.get('/groups/member', async(req, res) => {
 })
 
 app.post('/groups/add_user', (req, res) => {
-  console.log(req.query)
   const SelectQuery = " SELECT group_ID FROM  Carbon_Footprint_Groups WHERE groupcode = ?";
   db.query(SelectQuery, [req.query.groupcode], (err, result) => {
     if (result.length === 0) {
       res.status(404).send('Group not found');
     } else {
       const InsertQuery = " INSERT INTO Groupmemberships (group_ID, user_ID) VALUES (?, ?)";
-      console.log(result[0].group_ID)
-      console.log(req.query.user_ID)
       db.query(InsertQuery, [result[0].group_ID, req.query.user_ID], (err, result) => {
         if(err) {
           if(err.code === 'ER_DUP_ENTRY') {
+            console.log(err)
             res.status(409).send('User already in group')
           } else {
           console.log(err)
@@ -125,7 +121,7 @@ app.post('/groups/add_user', (req, res) => {
   })
 })
 
-app.get('/groups/:groupcode',async  (req, res) => {
+app.get('/groups/get/:groupcode',async  (req, res) => {
   const SelectQuery = " SELECT * FROM  Carbon_Footprint_Groups WHERE groupcode = ?";
   db.query(SelectQuery, [req.params.groupcode], async (err, result) => {
     if (result.length === 0) {
@@ -150,7 +146,6 @@ app.post('/groups/create', async (req, res) => {
     let isUnique = false;
     while (!isUnique) {
       groupcode = generateCode(6);
-      console.log(groupcode)
       const [rows, fields] = await db.promise().query(
         'SELECT COUNT(*) as count FROM Carbon_Footprint_Groups WHERE groupcode = ?',
         [groupcode]
