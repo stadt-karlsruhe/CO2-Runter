@@ -21,7 +21,7 @@ This endpoint allows users to retrieve a list of groups they administer.
 - **Success Response:**
 
   - **Code:** 200 <br />
-    **Content:** `[{group_ID=[int], groupname = [string], groupcode = [string], memberCount = [int]},...]`
+    **Content:** `[ groupname = [string], groupcode = [string], memberCount = [int]},...]`
 
 - **Error Response:**
 
@@ -56,7 +56,7 @@ This endpoint allows users to retrieve a list of groups they are a member of.
 - **Success Response:**
 
   - **Code:** 200 <br />
-    **Content:** `[{group_ID=[int], groupname = [string], groupcode = [string], ownername=[string], memberCount = [integer]},...] `
+    **Content:** `[{ groupname = [string], groupcode = [string], ownername=[string], memberCount = [integer]},...] `
 
 
 - **Error Response:**
@@ -179,7 +179,9 @@ This endpoint allows an admin to delete a group by providing its number.
 
 - **Success Response:**
 
-  - **Code:** 204 No Content<br />
+  - **Code:** 200 OK<br />
+    **Content:** `Group deleted`
+  
 
 - **Error Response:**
 
@@ -188,6 +190,6 @@ This endpoint allows an admin to delete a group by providing its number.
   - **Code:** 403 Forbidden <br />
     **Content:** `{ error : "The user is not allowed to delete the group." }`
   - **Code:** 404 Not Found<br />
-    **Content:** `{ error : "The group with the specified ID was not found." }`
+    **Content:** `{ error : "Group not found" }`
   - **Code:** 500 Internal Server Error<br />
-    **Content:** `{ error : A server error occurred." }`
+    **Content:** `{ error : Something went wrong" }`

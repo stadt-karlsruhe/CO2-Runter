@@ -66,6 +66,8 @@ app.get('/groups/admin', (req, res) => {
     //count the members of each group and add it to the result
     result.forEach(async (group, index) => {
         result[index].memberCount = await getMemberCount(group.group_ID);
+        delete result[index].owner_ID;
+        delete result[index].group_ID;
     })
     setTimeout(() => {
       res.send(result)
@@ -89,6 +91,7 @@ app.get('/groups/member', async(req, res) => {
       result[index].ownername = await getUsername(result[index].owner_ID);
       result[index].memberCount = await getMemberCount(group.group_ID);
       delete result[index].owner_ID;
+      delete result[index].group_ID;
     })
     setTimeout(() => {
       res.send(result)
@@ -162,12 +165,32 @@ app.post('/groups/create', async (req, res) => {
       } else {
         const InsertQuery = " INSERT INTO Groupmemberships (group_ID, user_ID) VALUES (?, ?)";
         db.query(InsertQuery, [result.insertId, req.query.user_ID], (err, result2) => {
-        res.status(200).json({ groupcode });
+        res.status(201).json({ groupcode });
       }
       )
     }
     })
   })
+
+app.delete('/groups/delete/:groupcode', (req, res) => {
+  const SelectQuery = " SELECT group_ID FROM  Carbon_Footprint_Groups WHERE groupcode = ?";
+  db.query(SelectQuery, [req.params.groupcode], (err, result) => {
+    if (result.length === 0) {
+      res.status(404).send({ error : 'Group not found'});
+    } else {
+      const DeleteQuery = " DELETE FROM Carbon_Footprint_Groups WHERE group_ID = ?";
+      db.query(DeleteQuery, [result[0].group_ID], (err, result) => {
+        if(err) {
+          console.log(err)
+          res.status(500).send({ error : 'Something went wrong'})
+        } else {
+          res.status(200).send('Group deleted')
+        }
+      })
+    }
+  })
+})
+
   
 
 app.listen('3001', () => { })
