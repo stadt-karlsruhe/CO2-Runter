@@ -4,6 +4,7 @@ const cors = require('cors');
 const app = express();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const auth = require("./middleware/auth");
 
 // read json file 
 const fs = require('fs');
@@ -54,7 +55,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
 // home page
-app.get('/', (req, res) => {
+app.get('/', auth, (req, res) => {
   res.send('Hi There')
 });
 
@@ -70,9 +71,10 @@ app.post('/register', async (req, res) => {
     if (!(email && password && username)) {
       res.status(400).send("All input is required");
     }
+    const email_low = email.toLowerCase();
     // check if user already exists
     const SelectQuery = " SELECT * FROM  Users WHERE email = ?";
-    db.query(SelectQuery, [email], async (err, result) => {
+    db.query(SelectQuery, [email_low], async (err, result) => {
       if (result.length > 0) {
         res.status(409).send("User Already Exist. Please Login");
       } else {
@@ -80,7 +82,7 @@ app.post('/register', async (req, res) => {
         encryptedpassword = await bcrypt.hash(password, 10);
         // create new user
         const InsertQuery = " INSERT INTO Users (username, email, password) VALUES (?, ?, ?)";
-        db.query(InsertQuery, [username, email, encryptedpassword], (err, result) => {
+        db.query(InsertQuery, [username, email_low, encryptedpassword], (err, result) => {
           if(err) {
             console.log(err)
             res.status(500).send('Something went wrong')
@@ -88,7 +90,7 @@ app.post('/register', async (req, res) => {
             user = result;
             // create token
             const token = jwt.sign(
-              { user_id: result.insertId, email },
+              { user_id: result.insertId, email_low },
               process.env.TOKEN_KEY,
               {
                 expiresIn: "2h",
@@ -103,6 +105,43 @@ app.post('/register', async (req, res) => {
     })
 })
 
+
+app.post('/login', async (req, res) => {
+  // Get user input
+  const { email, password } =  req.query;
+
+  // Validate user input
+  if (!(email && password)) {
+    res.status(400).send("All input is required");
+  }
+  const email_low = email.toLowerCase();
+  // check if user exists
+  const SelectQuery = " SELECT * FROM  Users WHERE email = ?";
+  db.query(SelectQuery, [email_low], async (err, result) => {
+    if (result.length === 0) {
+      res.status(400).send("Invalid Credentials");
+    } else {
+      user = result;
+      // compare password
+      const validPassword = await bcrypt.compare(password, await result[0].password);
+      if (validPassword) {
+        // create token
+        const token = jwt.sign(
+          { user_id: result[0].user_ID, email_low },
+          process.env.TOKEN_KEY,
+          {
+            expiresIn: "2h",
+          }
+        );
+        // save user token
+        user.token = token;
+        res.status(200).send({token})
+      } else {
+        res.status(400).send("Invalid Credentials");
+      }
+    }
+  })
+})
 
 
 app.get('/groups/admin', (req, res) => {
@@ -236,6 +275,9 @@ app.delete('/groups/delete/:groupcode', (req, res) => {
   })
 })
 
-  
+//get user ID from token
+app.get('/user', auth, (req, res) => {
+  res.send(req.user)
+})
 
 app.listen('3001', () => { })
