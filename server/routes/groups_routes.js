@@ -1,10 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mysql = require('mysql2');
-const cors = require('cors');
-const app = express();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const {db} = require('../services/db');
 
   // Helper function to generate random alphanumeric code
@@ -58,8 +53,7 @@ router.get('/member', async(req, res) => {
       if (result.length === 0) {
         res.send([])
       }
-      // for each group, get the group data and add it to the result
-      result.forEach(async (group, index) => {
+      else { result.forEach(async (group, index) => {
         const [rows, fields] = await db.promise().query(
           " SELECT * FROM  Carbon_Footprint_Groups WHERE group_ID = ?", [group.group_ID]
         );
@@ -71,7 +65,7 @@ router.get('/member', async(req, res) => {
       })
       setTimeout(() => {
         res.send(result)
-      }, 100)
+      }, 100)}
     })
   })
   
