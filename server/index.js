@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const auth = require("./middleware/auth");
 const groups_routes = require("./routes/groups_routes");
+const user_routes = require("./routes/user_routes");
 const {db} = require('./services/db');
 
 
@@ -112,9 +113,12 @@ app.post('/login', async (req, res) => {
 
 app.use('/groups', groups_routes);
 
- //get user ID from token
- app.get('/user', auth, (req, res) => {
+app.get('/user', auth, (req, res) => {
   res.send(req.user)
 })
+app.use('/user', user_routes);
+
+ //get user ID from token
+
 
 app.listen('3001', () => { })
