@@ -1,24 +1,24 @@
-## **User Reset Password**
+## **User change Password**
 
-This endpoint allows users to reset their password.
+This endpoint allows users to change their password by providing their new password.
 
 - **URL**
 
-  `/reset_password`
+  `/change_password`
 
 - **Method:**
 
-  `POST`
+  `PUT`
 
-- **Data Params**
+ **Data Params**
 
   **Required:**
 
-  `token=[string]`
+  `token=[string], old_password=[string], new_password=[string]`
 
 - **Success Response:**
 
-  - **Code:** 204 No Content<br />
+  - **Code:** 200 <br />
 
 - **Error Response:**
 
@@ -45,7 +45,7 @@ This endpoint allows users to change their email address by providing their new 
 
   **Required:**
 
-  `token=[string], email=[string]`
+  `token=[string], new_email=[string]`
 
 - **Success Response:**
 
@@ -53,52 +53,12 @@ This endpoint allows users to change their email address by providing their new 
 
 - **Error Response:**
 
-  - **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{ error : "The user is not logged in." }`
-  - **Code:** 403 Forbidden <br />
-    **Content:** `{ error : "The user is not entitled to delete the account." }`
+  - **Code:** 400 Bad Request<br />
+    **Content:** `{ error : "All input is required" }`
   - **Code:** 404 Not Found<br />
     **Content:** `{ error : "The user with the specified ID was not found." }`
-  - **Code:** 409 Conflict<br />
-    **Content:** `{ error : "The new email is already assigned." }`
   - **Code:** 500 Internal Server Error<br />
     **Content:** `{ error : A server error occurred." }`
-
-## **User change Password**
-
-This endpoint allows users to change their password by providing their new password.
-
-- **URL**
-
-  `/change_password`
-
-- **Method:**
-
-  `PUT`
-
-- **Data Params**
-
-  **Required:**
-
-  `token=[string], password=[string]`
-
-- **Success Response:**
-
-  - **Code:** 204 No Content<br />
-
-
-- **Error Response:**
-
-  - **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{ error : "The user is not logged in." }`
-  - **Code:** 403 Forbidden <br />
-    **Content:** `{ error : "The user is not entitled to delete the account." }`
-  - **Code:** 404 Not Found<br />
-    **Content:** `{ error : "The user with the specified ID was not found." }`
-  - **Code:** 409 Conflict<br />
-    **Content:** `{ error : "The new password must be different from the old one." }`
-  - **Code:** 500 Internal Server Error<br />
-    **Content:** `{ error : A server error occurred." }`    
 
 ## **User change Username**
 
@@ -142,7 +102,7 @@ This endpoint allows users to delete their account. When this endpoint is invoke
 
 - **URL**
 
-`/users/<user>`
+`/delete`
 
 - **Method:**
 
