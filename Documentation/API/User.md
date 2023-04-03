@@ -112,7 +112,7 @@ This endpoint allows users to delete their account. When this endpoint is invoke
 
   **Required:**
 
-  `token=[string]`
+  `token=[string], password=[string]`
 
 - **Success Response:**
 

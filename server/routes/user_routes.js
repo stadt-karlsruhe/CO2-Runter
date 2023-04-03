@@ -90,6 +90,39 @@ router.put('/change_username',auth, async (req, res) => {
   }
 })
 
+router.delete	('/delete',auth, async (req, res) => {
+    const {password} =  req.query;
+    if (!(password)) {
+        res.status(400).send("All input is required");
+        }
+        else {
+        //check password
+      db.query( "SELECT * FROM Users WHERE user_ID = ?", [req.user.user_id], async (err, result) => {
+        if(result.length == 0){
+          res.status(404).send("The user with the specified ID was not found.");
+        } else {
+          // compare password
+          const validPassword = await bcrypt.compare(password, await result[0].password);
+          if (validPassword) {
+            //delete user
+            db.query( "DELETE FROM Users WHERE user_ID = ?", [req.user.user_id], async (err, result) => {
+              if(err) {
+                console.log(err)
+                res.status(500).send('Something went wrong')
+              } else {
+                res.status(200).send("User successfully deleted")
+              }
+            })
+          } else {
+            res.status(400).send("The request was invalid or incomplete.");
+          }
+        }
+    })
+  }
+})
+
+        
+
 
 router.get('/test', (req, res) => {
     res.send(req.user)
