@@ -2,19 +2,18 @@ const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const app = express();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const auth = require("./middleware/auth");
+const groups_routes = require("./routes/groups_routes");
+const user_routes = require("./routes/user_routes");
+const {db} = require('./services/db');
+
 
 // read json file 
 const fs = require('fs');
 const questions = JSON.parse(fs.readFileSync('questions.json', 'utf8'));
 
-
-// Add mysql database connection
-const db = mysql.createPool({
-  host: 'mysql_db', // the host name MYSQL_DATABASE: node_mysql
-  user: 'MYSQL_USER', // database user MYSQL_USER: MYSQL_USER
-  password: 'MYSQL_PASSWORD', // database user password MYSQL_PASSWORD: MYSQL_PASSWORD
-  database: 'db_co2runter' // database name MYSQL_HOST_IP: mysql_db
-})
 
 // Enable cors security headers
 app.use(cors())
@@ -24,7 +23,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
 // home page
-app.get('/', (req, res) => {
+app.get('/', auth, (req, res) => {
   res.send('Hi There')
 });
 
@@ -32,40 +31,94 @@ app.get('/questions', (req, res) => {
   res.send(questions)
 })
 
-app.get('/groups/admin', (req, res) => {
-  const SelectQuery = " SELECT * FROM  Carbon_Footprint_Groups WHERE owner_ID = ?";
-  db.query(SelectQuery, [req.query.user_ID], (err, result) => {
-    //count the members of each group and add it to the result
-    result.forEach((group, index) => {
-      const SelectQuery = " SELECT COUNT(*) AS memberCount FROM  Groupmemberships WHERE group_ID = ?";
-      db.query(SelectQuery, [group.group_ID], (err, result2) => {
-        result[index].memberCount = result2[0].memberCount;
-        if (index === result.length - 1) {
-          res.send(result)
-        }
-      })
+app.post('/register', async (req, res) => {
+    // Get user input
+    const { email, password, username } =  req.query;
+
+    // Validate user input
+    if (!(email && password && username)) {
+      res.status(400).send("All input is required");
+    }
+    const email_low = email.toLowerCase();
+    // check if user already exists
+    const SelectQuery = " SELECT * FROM  Users WHERE email = ?";
+    db.query(SelectQuery, [email_low], async (err, result) => {
+      if (result.length > 0) {
+        res.status(409).send("User Already Exist. Please Login");
+      } else {
+        // encrypt password
+        encryptedpassword = await bcrypt.hash(password, 10);
+        // create new user
+        const InsertQuery = " INSERT INTO Users (username, email, password) VALUES (?, ?, ?)";
+        db.query(InsertQuery, [username, email_low, encryptedpassword], (err, result) => {
+          if(err) {
+            console.log(err)
+            res.status(500).send('Something went wrong')
+          } else {
+            user = result;
+            // create token
+            const token = jwt.sign(
+              { user_id: result.insertId, email_low },
+              process.env.TOKEN_KEY,
+              {
+                expiresIn: "2h",
+              }
+            );
+            // save user token
+            user.token = token;
+            res.status(201).send({token})
+          }
+        })
+      }
     })
+})
+
+
+app.post('/login', async (req, res) => {
+  // Get user input
+  const { email, password } =  req.query;
+
+  // Validate user input
+  if (!(email && password)) {
+    res.status(400).send("All input is required");
+  }
+  const email_low = email.toLowerCase();
+  // check if user exists
+  const SelectQuery = " SELECT * FROM  Users WHERE email = ?";
+  db.query(SelectQuery, [email_low], async (err, result) => {
+    if (result.length === 0) {
+      res.status(400).send("Invalid Credentials");
+    } else {
+      user = result;
+      // compare password
+      const validPassword = await bcrypt.compare(password, await result[0].password);
+      if (validPassword) {
+        // create token
+        const token = jwt.sign(
+          { user_id: result[0].user_ID, email_low },
+          process.env.TOKEN_KEY,
+          {
+            expiresIn: "2h",
+          }
+        );
+        // save user token
+        user.token = token;
+        res.status(200).send({token})
+      } else {
+        res.status(400).send("Invalid Credentials");
+      }
+    }
   })
 })
 
-app.get('/groups/member', (req, res) => {
-  const SelectQuery = " SELECT * FROM  Groupmemberships WHERE user_ID = ?";
-  db.query(SelectQuery, [req.query.user_ID], (err, result) => {
-    //add the group information and the member count to the result for each group
-    result.forEach((group, index) => {
-      const SelectQuery = " SELECT * FROM  Carbon_Footprint_Groups WHERE group_ID = ?";
-      db.query(SelectQuery, [group.group_ID], (err, result2) => {
-        result[index].group = result2[0];
-        const SelectQuery = " SELECT COUNT(*) AS memberCount FROM  Groupmemberships WHERE group_ID = ?";
-        db.query(SelectQuery, [group.group_ID], (err, result3) => {
-          result[index].group.memberCount = result3[0].memberCount;
-          if (index === result.length - 1) {
-            res.send(result)
-          }
-        })
-      })
-    })
-  })
+app.use('/groups', groups_routes);
+
+app.get('/user', auth, (req, res) => {
+  res.send(req.user)
 })
+app.use('/user', user_routes);
+
+ //get user ID from token
+
 
 app.listen('3001', () => { })

@@ -46,6 +46,12 @@ Insert into Groupmemberships (group_ID, user_ID) Values (1, 2);
 Insert into Groupmemberships (group_ID, user_ID) Values (1, 3);
 Insert into Groupmemberships (group_ID, user_ID) Values (2, 1);
 Insert into Groupmemberships (group_ID, user_ID) Values (2, 2);
+Insert into Groupmemberships (group_ID, user_ID) Values (1, 4);
+Insert into Groupmemberships (group_ID, user_ID) Values (3, 2);
+Insert into Groupmemberships (group_ID, user_ID) Values (4, 3);
+Insert into Groupmemberships (group_ID, user_ID) Values (5, 1);
+Insert into Groupmemberships (group_ID, user_ID) Values (5, 2);
+Insert into Groupmemberships (group_ID, user_ID) Values (1, 1);
 
 -- Test data for Prints_In_Carbon_Footprint_Groups table
 Insert into Prints_In_Carbon_Footprint_Groups (group_ID, print_ID) Values (1, 1);

@@ -28,35 +28,6 @@ Authenticates a user and returns a token that can be used for future requests.
   - **Code:** 500 Internal Server Error<br />
     **Content:** `{ error : A server error occurred." }`
 
-## **Logout**
-
-Invalidates the user's token to end the session.
-
-- **URL**
-
-  `/logout`
-
-- **Method:**
-
-  `POST`
-
-- **Data Params**
-
-  **Required:**
-
-  `token=[string]`
-
-- **Success Response:**
-
-  - **Code:** 200 <br />
-
-- **Error Response:**
-
-  - **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{ error : "No User logged in" }`
-  - **Code:** 500 Internal Server Error<br />
-    **Content:** `{ error : A server error occurred." }`
-
 ## **Register**
 
 This endpoint allows users to create a new account by providing their username, email, and password.

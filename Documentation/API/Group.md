@@ -14,14 +14,14 @@ This endpoint allows users to retrieve a list of groups they administer.
 
   **Required:**
 
-  `token=[string]`
+  `token=[string]`,
   `user_ID=[integer]`
 
 
 - **Success Response:**
 
   - **Code:** 200 <br />
-    **Content:** `{ groups = [{group_ID=[int], groupname = [string], groupcode = [string], owner_ID = [int] memberCount = [int],...] }`
+    **Content:** `[ groupname = [string], groupcode = [string], memberCount = [int]},...]`
 
 - **Error Response:**
 
@@ -38,7 +38,8 @@ This endpoint allows users to retrieve a list of groups they are a member of.
 
 - **URL**
 
-  /groups/member
+  `/groups/member`
+
 
 - **Method:**
 
@@ -49,12 +50,14 @@ This endpoint allows users to retrieve a list of groups they are a member of.
 
   **Required:**
 
-  `token=[integer]`
+  `token=[integer]`,
+   `user_ID=[integer]`
 
 - **Success Response:**
 
   - **Code:** 200 <br />
-    **Content:** `{ groups : [{group_id=[string], name = [string], owner_username=[string], NumberOfGroupMembers = [integer]}, ...] }`
+    **Content:** `[{ groupname = [string], groupcode = [string], ownername=[string], memberCount = [integer]},...] `
+
 
 - **Error Response:**
 
@@ -71,7 +74,7 @@ This endpoint allows adding a user to a group by entering the group code.
 
 - **URL**
 
-  `/groups/<group_number>/add_user`
+  `/groups/add_user`
 
 - **Method:**
 
@@ -80,8 +83,9 @@ This endpoint allows adding a user to a group by entering the group code.
 - **Data Params**
 
   **Required:**
-
-  `token=[string]`
+  `groupcode=[string]`,
+  `token=[string]`,
+  `user_ID=[integer]`
 
 - **Success Response:**
 
@@ -104,7 +108,7 @@ This endpoint allows users to retrieve information about a group by providing it
 
 - **URL**
 
-  `/groups/<group_code>`
+  `/groups/get/<groupcode>`
 
 - **Method:**
 
@@ -113,7 +117,7 @@ This endpoint allows users to retrieve information about a group by providing it
 - **Success Response:**
 
   - **Code:** 200 Ok<br />
-    **Content:** `{name = [string], owner_username=[string], NumberOfGroupMembers = [integer]}`
+    **Content:** `{groupname = [string], ownername=[string], memberCount = [integer]}`
 
 - **Error Response:**
 
@@ -128,7 +132,7 @@ This endpoint allows users to create a new group by providing a name.
 
 - **URL**
 
-  `/groups`
+  `/groups/create`
 
 - **Method:**
 
@@ -138,7 +142,7 @@ This endpoint allows users to create a new group by providing a name.
 
   **Required:**
 
-  `token=[string], groupname=[string]`
+  `token=[string], groupname=[string],user_ID=[int]`
 
 - **Success Response:**
 
@@ -161,7 +165,7 @@ This endpoint allows an admin to delete a group by providing its number.
 
 - **URL**
 
-  `/groups/<group_name>`
+  `/groups/delete/<groupcode>`
 
 - **Method:**
 
@@ -175,7 +179,9 @@ This endpoint allows an admin to delete a group by providing its number.
 
 - **Success Response:**
 
-  - **Code:** 204 No Content<br />
+  - **Code:** 200 OK<br />
+    **Content:** `Group deleted`
+  
 
 - **Error Response:**
 
@@ -184,6 +190,6 @@ This endpoint allows an admin to delete a group by providing its number.
   - **Code:** 403 Forbidden <br />
     **Content:** `{ error : "The user is not allowed to delete the group." }`
   - **Code:** 404 Not Found<br />
-    **Content:** `{ error : "The group with the specified ID was not found." }`
+    **Content:** `{ error : "Group not found" }`
   - **Code:** 500 Internal Server Error<br />
-    **Content:** `{ error : A server error occurred." }`
+    **Content:** `{ error : Something went wrong" }`
