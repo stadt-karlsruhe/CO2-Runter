@@ -1,47 +1,27 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Inputfield from "./Inputfield";
-import Selection from "./Selection";
-import Slider from "./Slider";
+import React, { useState } from "react";
+import Switch from "@mui/material/Switch";
+import Question from "./Question";
 
 const QuestionBlock = (props) => {
-  const answerTyp = props.question.typ;
-  const questionText = props.question.text;
+  const [isDetailed, setIsDetailed] = useState(false);
 
-  switch (answerTyp) {
-    case "input":
-      return (
-        <Box>
-          <h4>{questionText}</h4>
-          <Inputfield value={props.value} />
-        </Box>
-      );
-    case "auswahl":
-      return (
-        <Box>
-          <h4>{questionText}</h4>
-          <Selection
-            label={props.label}
-            replies={props.question.replies}
-            values={props.question.values}
-          />
-        </Box>
-      );
-    case "slider":
-      return (
-        <Box>
-          <h4>{questionText}</h4>
-          <Slider replies={props.replies} values={props.values} />
-        </Box>
-      );
-    default:
-      return (
-        <Box>
-          <h4>{questionText}</h4>
-          <p>Es wurde kein Antwortformat für diese Frage gefunden</p>
-        </Box>
-      );
-  }
+  const handleSwitchChange = () => {
+    setIsDetailed((prevIsDetailed) => !prevIsDetailed);
+  };
+
+  return (
+    <div>
+      <h3>{props.questions.name}</h3>
+
+      {isDetailed ? (
+        <Question questions={props.questions.detailed}></Question>
+      ) : (
+        <Question questions={props.questions.quick}></Question>
+      )}
+
+      <Switch checked={isDetailed} onChange={handleSwitchChange} />
+    </div>
+  );
 };
 
 export default QuestionBlock;
