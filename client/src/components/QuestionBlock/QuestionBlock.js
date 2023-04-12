@@ -14,11 +14,12 @@ const QuestionBlock = (props) => {
       <h3>{props.questions.name}</h3>
 
       {isDetailed ? (
-        <Question questions={props.questions.detailed}></Question>
+        props.questions.detailed.questions.map((question) => (
+          <Question question={question} />
+        ))
       ) : (
-        <Question questions={props.questions.quick}></Question>
+        <Question question={props.questions.quick} />
       )}
-
       <Switch checked={isDetailed} onChange={handleSwitchChange} />
     </div>
   );
