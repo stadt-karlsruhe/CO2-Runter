@@ -87,7 +87,7 @@ function Header(props) {
                 <ListItemIcon>
                   <LineAxisIcon fontSize="small" />
                 </ListItemIcon>
-                <ListItemText>Dashboard</ListItemText>
+                <ListItemText>CO2 Runter Dashboard</ListItemText>
               </MenuItem>
             </Menu>
           </>
