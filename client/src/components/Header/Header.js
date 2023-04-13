@@ -14,6 +14,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
+import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from "@mui/icons-material/Logout";
 import LineAxisIcon from "@mui/icons-material/LineAxis";
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
@@ -93,12 +94,31 @@ function Header(props) {
           </>
         ) : (
           <>
-            <Button color="inherit" onClick={props.handleLogin}>
-              Log in/Registrieren
-            </Button>
-            <Button color="inherit" onClick={props.handleDashboard}>
-              Dashboard
-            </Button>
+            <IconButton color="inherit" onClick={handleMenu}>
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              keepMounted
+              transformOrigin={{ vertical: "top", horizontal: "right" }}
+              open={open}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={props.handleLogout}>
+                <ListItemIcon>
+                  <LoginIcon fontSize="small" />
+                </ListItemIcon>
+                <ListItemText>Log in</ListItemText>
+              </MenuItem>
+              <Divider />
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <LineAxisIcon fontSize="small" />
+                </ListItemIcon>
+                <ListItemText>CO2 Runter Dashboard</ListItemText>
+              </MenuItem>
+            </Menu>
           </>
         )}
       </Toolbar>
