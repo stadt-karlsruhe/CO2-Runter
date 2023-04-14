@@ -1,7 +1,7 @@
 import React from "react";
-import { Container, Divider, Grid, Link, Typography } from "@mui/material";
+import { Container, Divider, Grid, Link, Typography, } from "@mui/material";
 
-function Footer() {
+const Footer = () => {
   return (
     <footer>
       <Divider />
@@ -17,9 +17,9 @@ function Footer() {
               rel="noopener"
             >
               <img
-                src={process.env.PUBLIC_URL + "/images/Logos/logo-icon.svg"}
+                src={process.env.PUBLIC_URL + "/images/Logos/Stadtkarlsruhe-logo.svg"}
                 alt="Stadt Karlsruhe"
-                width="80"
+                width="100"
                 height="100"
               />
             </Link>
@@ -49,7 +49,7 @@ function Footer() {
               <img
                 src={process.env.PUBLIC_URL + "/images/Logos/dhbw-logo.svg"}
                 alt="DHBW Karlsruhe"
-                width="150"
+                width="100"
                 height="100"
               />
             </Link>
