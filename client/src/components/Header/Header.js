@@ -17,7 +17,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LineAxisIcon from "@mui/icons-material/LineAxis";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Header = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -34,6 +34,11 @@ const Header = (props) => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleDashboard = () => {
+    navigate("/Dashboard");
+    handleClose();
   };
 
   return (
@@ -94,7 +99,7 @@ const Header = (props) => {
                 <ListItemText>Neuen CO2-Fußabdruck berechnen</ListItemText>
               </MenuItem>
               <Divider />
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={handleDashboard}>
                 <ListItemIcon>
                   <LineAxisIcon fontSize="small" />
                 </ListItemIcon>
@@ -115,18 +120,18 @@ const Header = (props) => {
               open={open}
               onClose={handleClose}
             >
+              <MenuItem onClick={handleDashboard}>
+                <ListItemIcon>
+                  <LineAxisIcon fontSize="small" />
+                </ListItemIcon>
+                <ListItemText>CO2 Runter Dashboard</ListItemText>
+              </MenuItem>
+              <Divider />
               <MenuItem onClick={props.handleLogout}>
                 <ListItemIcon>
                   <LoginIcon fontSize="small" />
                 </ListItemIcon>
                 <ListItemText>Log in</ListItemText>
-              </MenuItem>
-              <Divider />
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <LineAxisIcon fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>CO2 Runter Dashboard</ListItemText>
               </MenuItem>
             </Menu>
           </>
@@ -134,6 +139,6 @@ const Header = (props) => {
       </Toolbar>
     </AppBar>
   );
-}
+};
 
 export default Header;
