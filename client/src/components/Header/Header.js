@@ -4,24 +4,29 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  Button,
   Menu,
   MenuItem,
   Divider,
   ListItemText,
   ListItemIcon,
 } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
-import LoginIcon from '@mui/icons-material/Login';
+import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LineAxisIcon from "@mui/icons-material/LineAxis";
-import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import { useNavigate } from 'react-router-dom';
 
-function Header(props) {
+const Header = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/");
+  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -34,9 +39,14 @@ function Header(props) {
   return (
     <AppBar position="static" color="transparent">
       <Toolbar>
-        <IconButton edge="start" color="inherit" aria-label="menu">
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          onClick={handleClick}
+        >
           <img
-            src={process.env.PUBLIC_URL + '/images/Logos/logo-icon.svg'}
+            src={process.env.PUBLIC_URL + "/images/Logos/logo-icon.svg"}
             alt="Logo"
             width="30"
             height="30"
