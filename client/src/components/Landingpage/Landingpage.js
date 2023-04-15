@@ -10,8 +10,19 @@ import { ExpandMore } from "@mui/icons-material";
 import Header from "../Header/Header";
 import HeroSection from "./HeroSection";
 import Footer from "../Footer/Footer";
+import { useNavigate } from "react-router-dom";
 
 const Landingpage = () => {
+  const navigate = useNavigate();
+
+  const handleCO2 = () => {
+    navigate("/CO2Rechner");
+  };
+
+  const handleDashboard = () => {
+    navigate("/Dashboard");
+  };
+
   return (
     <div className="App">
       <Header />
@@ -50,10 +61,10 @@ const Landingpage = () => {
         </Accordion>
       </div>
       <div className="buttons">
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={handleCO2}>
           CO2 Rechner starten
         </Button>
-        <Button variant="contained" color="secondary">
+        <Button variant="contained" color="secondary" onClick={handleDashboard}>
           Zum Dashboard
         </Button>
       </div>
