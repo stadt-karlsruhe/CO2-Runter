@@ -1,4 +1,5 @@
 import React from "react";
+import MobileStepper from "@mui/material/MobileStepper";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
@@ -23,14 +24,35 @@ const QuestionCategory = (props) => {
       {props.category[activeStep].questions.map((categoryQuestions) => (
         <QuestionBlock questions={categoryQuestions} />
       ))}
-      <div>
-        {activeStep > 0 && (
-          <button onClick={() => handleStepChange(activeStep - 1)}>Back</button>
-        )}
-        {activeStep < 4 - 1 && (
-          <button onClick={() => handleStepChange(activeStep + 1)}>Next</button>
-        )}
-      </div>
+      <MobileStepper
+        variant="dots"
+        steps={props.category.length}
+        activeStep={activeStep}
+        nextButton={
+          <button
+            onClick={() => handleStepChange(activeStep + 1)}
+            disabled={activeStep === props.category.length - 1}
+          >
+            Next
+          </button>
+        }
+        backButton={
+          <button
+            onClick={() => handleStepChange(activeStep - 1)}
+            disabled={activeStep === 0}
+          >
+            Back
+          </button>
+        }
+      >
+        {props.category.map((label, index) => (
+          <Step key={index}>
+            <StepLabel onClick={() => handleStepChange(index)}>
+              {label.name}
+            </StepLabel>
+          </Step>
+        ))}
+      </MobileStepper>
     </div>
   );
 };

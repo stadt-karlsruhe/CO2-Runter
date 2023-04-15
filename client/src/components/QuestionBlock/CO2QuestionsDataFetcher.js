@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { Typography } from "@mui/material";
+import questionDemo from "../../questions_NotPUSH.json";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import QuestionCategory from "../QuestionBlock/QuestionCategory";
 
 const CO2QuestionsDataFetcher = () => {
-  const [questions, setQuestions] = useState(null);
+  const [questions, setQuestions] = useState(questionDemo); //questionDemo durch null ersetzen, wenn mit Backend testen möchte
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -13,14 +18,22 @@ const CO2QuestionsDataFetcher = () => {
     fetchQuestions();
   }, []);
 
-  // Render the questions data or a loading message
   return (
     <div>
       {questions ? (
-        // Render the questions data here
-        <div> Render the questions data </div>
+        <>
+          <Header />
+          <QuestionCategory category={questionDemo.category}></QuestionCategory>
+          <Footer />
+        </>
       ) : (
-        <div>Loading...</div>
+        <>
+          <Header />
+          <Typography>
+            Fehler beim Laden der Fragen. Bitte versuchen sie es später erneut.
+          </Typography>
+          <Footer />
+        </>
       )}
     </div>
   );
