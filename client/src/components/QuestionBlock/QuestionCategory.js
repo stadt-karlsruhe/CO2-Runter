@@ -13,13 +13,13 @@ const QuestionCategory = (props) => {
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
-
   const handleSwitchChange = (name) => {
     setIsDetailed((prevIsDetailed) => ({
       ...prevIsDetailed,
       [name]: !prevIsDetailed[name],
     }));
   };
+
   return (
     <Container maxWidth="sm">
       <Box sx={{ my: 2 }}>

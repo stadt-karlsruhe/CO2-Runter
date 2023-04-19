@@ -24,7 +24,7 @@ const QuestionBlock = (props) => {
         <FormGroup>
           <Stack direction="row" spacing={1} alignItems="center">
             <Typography>schnell</Typography>
-            <Switch checked={props.isDetailed} onChange={props.onSwitchChange} />
+            <Switch checked={!!props.isDetailed} onChange={props.onSwitchChange} />
             <Typography>detailliert</Typography>
           </Stack>
         </FormGroup>
