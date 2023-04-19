@@ -2,9 +2,10 @@ import React from "react";
 import Selection from "./Selection";
 import InputField from "./Inputfield";
 import Slider from "./Slider";
+import { Box, Container, Typography } from "@mui/material";
 
 const Question = (props) => {
-  const { text, typ, replies, values } = props.question;
+  const { text, typ, replies, values, unit } = props.question;
 
   let Component;
 
@@ -24,11 +25,16 @@ const Question = (props) => {
   }
 
   return (
-    <div>
-      <h5>{text}</h5>
-      {Component && <Component replies={replies} values={values} />}
-    </div>
+    <Container>
+      <Box sx={{ my: 2 }}>
+        <Typography variant="h6" component="div">
+          {text}
+        </Typography>
+        {Component && <Component replies={replies} values={values} unit={unit} />}
+      </Box>
+    </Container>
   );
 };
 
 export default Question;
+
