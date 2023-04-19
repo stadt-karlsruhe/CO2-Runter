@@ -2,7 +2,7 @@ import * as React from "react";
 import Slider from "@mui/material/Slider";
 
 const QuestionBlock = (props) => {
-  const maxValue = Math.max(...props.values);
+  const minValue = Math.min(...props.values);
   const valueAdjustToSlider = 100/(props.values.length-1);
   const marks = props.replies.map((replies, index) => ({
     value: props.values[index] * valueAdjustToSlider,
@@ -21,7 +21,7 @@ const QuestionBlock = (props) => {
   return (
       <Slider
         aria-label="Restricted values"
-        defaultValue={maxValue}
+        defaultValue={minValue}
         valueLabelFormat={valueLabelFormat}
         getAriaValueText={valuetext}
         step={null}

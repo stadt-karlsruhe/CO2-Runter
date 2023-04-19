@@ -12,20 +12,24 @@ const Selection = (props) => {
   };
 
   return (
-      <FormControl fullWidth>
-        <InputLabel id="simple-select-label">{props.label}</InputLabel>
-        <Select
-          labelId="simple-select-label"
-          id="simple-select"
-          value={answer}
-          label={props.label}
-          onChange={handleChange}
-        >
+    <FormControl fullWidth>
+      {answer === "" && (
+        <InputLabel id="simple-select-label">Wählen Sie eine Option</InputLabel>
+      )}
+      <Select
+        labelId="simple-select-label"
+        id="simple-select"
+        value={answer}
+        label={props.label}
+        onChange={handleChange}
+      >
         {props.replies.map((replies, index) => (
-        <MenuItem key={index} value={props.values[index]}>{replies}</MenuItem>
+          <MenuItem key={index} value={props.values[index]}>
+            {replies}
+          </MenuItem>
         ))}
-        </Select>
-      </FormControl>
+      </Select>
+    </FormControl>
   );
 };
 
