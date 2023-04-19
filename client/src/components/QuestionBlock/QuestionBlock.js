@@ -6,6 +6,7 @@ import {
   Container,
   Divider,
   FormGroup,
+  Paper,
   Stack,
   Typography,
 } from "@mui/material";
@@ -13,8 +14,10 @@ import {
 const QuestionBlock = (props) => {
   return (
     <Container maxWidth="sm">
-      <Box sx={{ my: 2 }}>
-        <Typography variant="h5" component="div">
+      <Paper
+        sx={{ my: 2, p: 2, backgroundColor: "#f0f0f0", borderRadius: "8px" }}
+      >
+        <Typography variant="h5" component="div" sx={{ fontWeight: 'bold' }}>
           {props.questions.name}
         </Typography>
         <Divider />
@@ -43,7 +46,7 @@ const QuestionBlock = (props) => {
             </Stack>
           </FormGroup>
         </Box>
-      </Box>
+      </Paper>
     </Container>
   );
 };

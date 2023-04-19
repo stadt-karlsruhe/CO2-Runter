@@ -27,14 +27,17 @@ const Question = (props) => {
   return (
     <Container>
       <Box sx={{ my: 2 }}>
-        <Typography variant="h6" component="div">
-          {text}
-        </Typography>
-        {Component && <Component replies={replies} values={values} unit={unit} />}
+        <Box sx={{ mb: 2 }}>
+          <Typography variant="h6" component="div">
+            {text}
+          </Typography>
+        </Box>
+        {Component && (
+          <Component replies={replies} values={values} unit={unit} />
+        )}
       </Box>
     </Container>
   );
 };
 
 export default Question;
-
