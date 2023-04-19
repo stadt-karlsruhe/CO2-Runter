@@ -33,14 +33,16 @@ const QuestionCategory = (props) => {
             </Step>
           ))}
         </Stepper>
-        {props.category[activeStep].questions.map((categoryQuestions) => (
-          <QuestionBlock
-            key={categoryQuestions.name}
-            questions={categoryQuestions}
-            isDetailed={isDetailed[categoryQuestions.name]}
-            onSwitchChange={() => handleSwitchChange(categoryQuestions.name)}
-          />
-        ))}
+        <Box sx={{ overflow: "auto", maxHeight: "70vh" }}>
+          {props.category[activeStep].questions.map((categoryQuestions) => (
+            <QuestionBlock
+              key={categoryQuestions.name}
+              questions={categoryQuestions}
+              isDetailed={isDetailed[categoryQuestions.name]}
+              onSwitchChange={() => handleSwitchChange(categoryQuestions.name)}
+            />
+          ))}
+        </Box>
         <MobileStepper
           variant="dots"
           steps={props.category.length}

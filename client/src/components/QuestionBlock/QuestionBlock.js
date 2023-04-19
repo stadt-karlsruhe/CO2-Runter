@@ -1,7 +1,14 @@
 import React from "react";
 import Switch from "@mui/material/Switch";
 import Question from "./Question";
-import { Box, Container, Divider, FormGroup, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  Divider,
+  FormGroup,
+  Stack,
+  Typography,
+} from "@mui/material";
 
 const QuestionBlock = (props) => {
   return (
@@ -20,14 +27,22 @@ const QuestionBlock = (props) => {
           ))
         ) : (
           <Question question={props.questions.quick} />
-          )}
-        <FormGroup>
-          <Stack direction="row" spacing={1} alignItems="center">
-            <Typography>schnell</Typography>
-            <Switch checked={!!props.isDetailed} onChange={props.onSwitchChange} />
-            <Typography>detailliert</Typography>
-          </Stack>
-        </FormGroup>
+        )}
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <FormGroup>
+            <Stack direction="row" spacing={1} alignItems="center">
+              {props.isDetailed ? (
+                <Typography>detailliert</Typography>
+              ) : (
+                <Typography>schnell</Typography>
+              )}
+              <Switch
+                checked={!!props.isDetailed}
+                onChange={props.onSwitchChange}
+              />
+            </Stack>
+          </FormGroup>
+        </Box>
       </Box>
     </Container>
   );
