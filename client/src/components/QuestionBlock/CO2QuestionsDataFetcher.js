@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import questionDemo from "../../questions_NotPUSH.json";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import QuestionCategory from "../QuestionBlock/QuestionCategory";
 
 const CO2QuestionsDataFetcher = () => {
-  const [questions, setQuestions] = useState(questionDemo); //questionDemo durch null ersetzen, wenn mit Backend testen möchte
+  const [questions, setQuestions] = useState(questionDemo);
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -19,23 +19,19 @@ const CO2QuestionsDataFetcher = () => {
   }, []);
 
   return (
-    <div>
-      {questions ? (
-        <>
-          <Header />
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Header />
+      <Container sx={{ flex: 1 }}>
+        {questions ? (
           <QuestionCategory category={questionDemo.category}></QuestionCategory>
-          <Footer />
-        </>
-      ) : (
-        <>
-          <Header />
+        ) : (
           <Typography>
             Fehler beim Laden der Fragen. Bitte versuchen sie es später erneut.
           </Typography>
-          <Footer />
-        </>
-      )}
-    </div>
+        )}
+      </Container>
+      <Footer />
+    </Box>
   );
 };
 
