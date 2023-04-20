@@ -1,5 +1,6 @@
 import React from "react";
 import MobileStepper from "@mui/material/MobileStepper";
+import CurrentCO2 from "./CurrentCO2";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
@@ -43,6 +44,7 @@ const QuestionCategory = (props) => {
             />
           ))}
         </Box>
+        <CurrentCO2 co2Value="20" />
         <MobileStepper
           variant="dots"
           steps={props.category.length}
