@@ -5,7 +5,13 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import QuestionBlock from "./QuestionBlock";
-import { Box, Button, Container, useMediaQuery } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Button,
+  Container,
+  useMediaQuery,
+} from "@mui/material";
 
 const QuestionCategory = (props) => {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -24,7 +30,7 @@ const QuestionCategory = (props) => {
   };
   return (
     <Container maxWidth="sm">
-      <Box sx={{ my: 2 }}>
+      <Box sx={{ my: 2, textAlign: "center" }}>
         <Stepper activeStep={activeStep}>
           {props.category.map((label, index) => (
             <Step key={label.name}>
@@ -34,7 +40,12 @@ const QuestionCategory = (props) => {
             </Step>
           ))}
         </Stepper>
-        <Box sx={{ overflow: "auto", maxHeight: "70vh" }}>
+        {isSmallScreen && (
+          <Typography variant="caption" align="center" sx={{fontWeight: "bold"}}>
+            {props.category[activeStep].name}
+          </Typography>
+        )}
+        <Box sx={{ overflow: "scroll", maxHeight: "70vh" }}>
           {props.category[activeStep].questions.map((categoryQuestions) => (
             <QuestionBlock
               key={categoryQuestions.name}

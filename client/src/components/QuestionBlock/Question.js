@@ -1,7 +1,7 @@
 import React from "react";
 import Selection from "./Selection";
 import InputField from "./Inputfield";
-import Slider from "./Slider";
+import CostumSlider from "./CostumSlider";
 import { Box, Container, Typography } from "@mui/material";
 
 const Question = (props) => {
@@ -17,7 +17,7 @@ const Question = (props) => {
       Component = InputField;
       break;
     case "slider":
-      Component = Slider;
+      Component = CostumSlider;
       break;
     default:
       Component = null;
