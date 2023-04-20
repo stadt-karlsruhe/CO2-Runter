@@ -5,6 +5,7 @@ import LandingPage from "./components/Landingpage/Landingpage";
 import Impressum from "./components/Impressum/Impressum";
 import DataPrivacy from "./components/DataPrivacy/DataPrivacy";
 import CO2QuestionsDataFetcher from "./components/QuestionBlock/CO2QuestionsDataFetcher";
+import InformationPage from "./components/Information/InformationPage";
 import theme from "./styles/theme.js";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/Dashboard" element={<LandingPage />} />
           <Route path="/datenschutz" element={<DataPrivacy />} />
           <Route path="/impressum" element={<Impressum />} />
+          <Route path="/information" element={<InformationPage />} />
         </Routes>
       </Router>
     </ThemeProvider>

@@ -2,16 +2,16 @@ import React from 'react';
 import Header from '../Header/Header';
 import { Container, Typography } from '@mui/material';
 
-const Impressum = () => {
+const InformationPage = () => {
   return (
     <>
       <Header />
       <Container>
-        <Typography variant="h4">Impressum</Typography>
-        Add your Impressum information here 
+        <Typography variant="h4">Informationen</Typography>
+        Add your information here 
       </Container>
     </>
   );
 }
 
-export default Impressum;
+export default InformationPage;
