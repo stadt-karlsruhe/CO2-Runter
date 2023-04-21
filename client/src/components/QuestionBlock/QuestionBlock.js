@@ -24,7 +24,7 @@ const QuestionBlock = (props) => {
         <Divider />
         {props.isDetailed ? (
           props.questions.detailed.questions.map((question) => (
-            <Box key={question.id}>
+            <Box>
               <Question question={question} onCo2ValuesChange={props.onCo2ValuesChange}/>
               <Divider sx={{ my: 1 }} />
             </Box>

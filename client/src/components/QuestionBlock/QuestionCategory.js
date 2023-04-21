@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import MobileStepper from "@mui/material/MobileStepper";
-import CurrentCO2 from "./CurrentCO2";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
@@ -12,6 +11,7 @@ import {
   Container,
   useMediaQuery,
 } from "@mui/material";
+import CalculationSum from "./Calculation/CalculationSum";
 
 const QuestionCategory = (props) => {
   const [activeStep, setActiveStep] = useState(0);
@@ -19,8 +19,15 @@ const QuestionCategory = (props) => {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   const [co2Values, setCo2Values] = useState ([]);
 
-  const handleCo2ValuesChange = (value) => {
-    setCo2Values((prevValues) => [...prevValues, value]);
+  const handleCo2ValuesChange = (index, value) => {
+    setCo2Values((prevValues) => {
+      // Erstelle eine Kopie des vorherigen Werte-Arrays
+      const newValues = [...prevValues];
+      // Aktualisiere den Wert an der angegebenen Position
+      newValues[index] = value;
+      // Gebe das aktualisierte Werte-Array zurück
+      return newValues;
+    });
   };
 
 
@@ -59,11 +66,11 @@ const QuestionCategory = (props) => {
               questions={categoryQuestions}
               isDetailed={isDetailed[categoryQuestions.name]}
               onSwitchChange={() => handleSwitchChange(categoryQuestions.name)}
-              onCo2ValuesChange={handleCo2ValuesChange}
+              onCo2ValuesChange={(value)=>handleCo2ValuesChange (index, value)}
             />
           ))}
         </Box>
-        <CurrentCO2 co2Value="20" />
+        <CalculationSum values={co2Values} />
         <MobileStepper
           variant="dots"
           steps={props.category.length}
