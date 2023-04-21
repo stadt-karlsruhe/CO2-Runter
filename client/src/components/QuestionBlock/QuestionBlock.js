@@ -14,6 +14,7 @@ import {
 const QuestionBlock = (props) => {
   return (
     <Container maxWidth="sm">
+      <div>{props.test}</div>
       <Paper
         sx={{ my: 2, p: 2, backgroundColor: "#f0f0f0", borderRadius: "8px" }}
       >

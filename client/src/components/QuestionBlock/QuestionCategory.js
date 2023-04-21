@@ -12,7 +12,6 @@ import {
   Container,
   useMediaQuery,
 } from "@mui/material";
-import { v4 as uuidv4 } from 'uuid';
 
 const QuestionCategory = (props) => {
   const [activeStep, setActiveStep] = useState(0);
@@ -53,9 +52,10 @@ const QuestionCategory = (props) => {
           </Typography>
         )}
         <Box sx={{ overflow: "scroll", maxHeight: "70vh" }}>
-          {props.category[activeStep].questions.map((categoryQuestions) => (
+          {props.category[activeStep].questions.map((categoryQuestions, index) => (
             <QuestionBlock
-              key={uuidv4()}
+              key={index}
+              test={index}
               questions={categoryQuestions}
               isDetailed={isDetailed[categoryQuestions.name]}
               onSwitchChange={() => handleSwitchChange(categoryQuestions.name)}
