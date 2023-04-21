@@ -51,7 +51,7 @@ const Header = (props) => {
           onClick={handleClick}
         >
           <img
-            src={process.env.PUBLIC_URL + "/images/Logos/logo-icon.svg"}
+            src={process.env.PUBLIC_URL + "/images/Logos/CO2RunterLogo.svg"}
             alt="Logo"
             width="30"
             height="30"
