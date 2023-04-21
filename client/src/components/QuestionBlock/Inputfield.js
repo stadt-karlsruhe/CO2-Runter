@@ -13,7 +13,8 @@ const Inputfield = (props) => {
   };
 
   const handleChange = (event) => {
-    setValue(event.target.value)
+    const valueAsNumber = parseFloat(event.target.value);
+    setValue(valueAsNumber);
     props.onCo2ValuesChange(event.target.value);
   };
 

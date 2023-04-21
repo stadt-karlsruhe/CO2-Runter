@@ -62,7 +62,6 @@ const QuestionCategory = (props) => {
           {props.category[activeStep].questions.map((categoryQuestions, index) => (
             <QuestionBlock
               key={index}
-              test={index}
               questions={categoryQuestions}
               isDetailed={isDetailed[categoryQuestions.name]}
               onSwitchChange={() => handleSwitchChange(categoryQuestions.name)}
@@ -96,11 +95,6 @@ const QuestionCategory = (props) => {
           }
         />
       </Box>
-      <div>Test<ul>
-        {co2Values.map((value, index) => (
-          <li key={index}>{value}</li>
-        ))}
-      </ul></div>
     </Container>
   );
 };
