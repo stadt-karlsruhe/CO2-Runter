@@ -22,12 +22,13 @@ const QuestionBlock = (props) => {
         </Typography>
         <Divider />
         {props.isDetailed ? (
-          props.questions.detailed.questions.map((question) => (
-            <Box>
+          props.questions.detailed.questions.map((question, index) => (
+            <Box key={index}>
               <Question question={question} onCo2ValuesChange={props.onCo2ValuesChange}/>
               <Divider sx={{ my: 1 }} />
             </Box>
-          ))
+          )
+          )
         ) : (
           <Question question={props.questions.quick} onCo2ValuesChange={props.onCo2ValuesChange}/>
         )}
