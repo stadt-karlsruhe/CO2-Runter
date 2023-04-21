@@ -17,9 +17,13 @@ const CostumSlider = (props) => {
         : replies,
   }));
 
-  function valueLabelFormat(value) {
+  const handleChange = (event) => {
+    props.onCo2ValuesChange(event.target.value);
+  };
+
+  const valueLabelFormat = (value) => {
     return marks.findIndex((mark) => mark.value === value);
-  }
+  };
   return (
     <Slider
       aria-label="Restricted values"
@@ -27,6 +31,7 @@ const CostumSlider = (props) => {
       valueLabelFormat={valueLabelFormat}
       step={null}
       marks={marks}
+      onChange={handleChange}
     />
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MobileStepper from "@mui/material/MobileStepper";
 import CurrentCO2 from "./CurrentCO2";
 import Stepper from "@mui/material/Stepper";
@@ -12,11 +12,18 @@ import {
   Container,
   useMediaQuery,
 } from "@mui/material";
+import { v4 as uuidv4 } from 'uuid';
 
 const QuestionCategory = (props) => {
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [isDetailed, setIsDetailed] = React.useState({});
+  const [activeStep, setActiveStep] = useState(0);
+  const [isDetailed, setIsDetailed] = useState({});
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+  const [co2Values, setCo2Values] = useState ([]);
+
+  const handleCo2ValuesChange = (value) => {
+    setCo2Values((prevValues) => [...prevValues, value]);
+  };
+
 
   const handleStepChange = (step) => {
     setActiveStep(step);
@@ -48,10 +55,11 @@ const QuestionCategory = (props) => {
         <Box sx={{ overflow: "scroll", maxHeight: "70vh" }}>
           {props.category[activeStep].questions.map((categoryQuestions) => (
             <QuestionBlock
-              key={categoryQuestions.name}
+              key={uuidv4()}
               questions={categoryQuestions}
               isDetailed={isDetailed[categoryQuestions.name]}
               onSwitchChange={() => handleSwitchChange(categoryQuestions.name)}
+              onCo2ValuesChange={handleCo2ValuesChange}
             />
           ))}
         </Box>
@@ -81,6 +89,11 @@ const QuestionCategory = (props) => {
           }
         />
       </Box>
+      <div>Test<ul>
+        {co2Values.map((value, index) => (
+          <li key={index}>{value}</li>
+        ))}
+      </ul></div>
     </Container>
   );
 };

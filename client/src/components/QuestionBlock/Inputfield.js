@@ -12,6 +12,11 @@ const Inputfield = (props) => {
     }
   };
 
+  const handleChange = (event) => {
+    setValue(event.target.value)
+    props.onCo2ValuesChange(event.target.value);
+  };
+
   return (
     <Container>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -19,7 +24,7 @@ const Inputfield = (props) => {
           id="outlined-adornment"
           type="number"
           value={value}
-          onChange={(event) => setValue(event.target.value)}
+          onChange={handleChange}
           onFocus={handleFocus}
           inputProps={{ style: { textAlign: "right" } }}
           endAdornment={

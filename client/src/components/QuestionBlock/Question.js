@@ -33,7 +33,7 @@ const Question = (props) => {
           </Typography>
         </Box>
         {Component && (
-          <Component replies={replies} values={values} unit={unit} />
+          <Component replies={replies} values={values} unit={unit} onCo2ValuesChange={props.onCo2ValuesChange}/>
         )}
       </Box>
     </Container>

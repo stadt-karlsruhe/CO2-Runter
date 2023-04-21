@@ -9,6 +9,7 @@ const Selection = (props) => {
 
   const handleChange = (event) => {
     setAnswer(event.target.value);
+    props.onCo2ValuesChange(event.target.value);
   };
 
   return (

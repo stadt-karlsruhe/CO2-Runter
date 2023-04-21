@@ -24,12 +24,12 @@ const QuestionBlock = (props) => {
         {props.isDetailed ? (
           props.questions.detailed.questions.map((question) => (
             <Box key={question.id}>
-              <Question question={question} />
+              <Question question={question} onCo2ValuesChange={props.onCo2ValuesChange}/>
               <Divider sx={{ my: 1 }} />
             </Box>
           ))
         ) : (
-          <Question question={props.questions.quick} />
+          <Question question={props.questions.quick} onCo2ValuesChange={props.onCo2ValuesChange}/>
         )}
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           <FormGroup>
