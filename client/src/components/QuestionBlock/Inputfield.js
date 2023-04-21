@@ -14,8 +14,13 @@ const Inputfield = (props) => {
 
   const handleChange = (event) => {
     const valueAsNumber = parseFloat(event.target.value);
-    setValue(valueAsNumber);
-    props.onCo2ValuesChange(event.target.value);
+    if (valueAsNumber > props.maxInput) {
+      setValue(props.maxInput);
+      props.onCo2ValuesChange(props.maxInput);
+    } else {
+      setValue(valueAsNumber);
+      props.onCo2ValuesChange(event.target.value);
+    }
   };
 
   return (
@@ -27,7 +32,7 @@ const Inputfield = (props) => {
           value={value}
           onChange={handleChange}
           onFocus={handleFocus}
-          inputProps={{ style: { textAlign: "right" } }}
+          inputProps={{ style: { textAlign: "right" }, min: 0, max: props.maxInput }}
           endAdornment={
             <InputAdornment position="end">{props.unit}</InputAdornment>
           }

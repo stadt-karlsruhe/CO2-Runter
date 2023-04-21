@@ -5,7 +5,7 @@ import CostumSlider from "./CostumSlider";
 import { Box, Container, Typography } from "@mui/material";
 
 const Question = (props) => {
-  const { text, typ, replies, values, unit } = props.question;
+  const { text, typ, replies, values, unit, maxInput } = props.question;
 
   let Component;
 
@@ -33,7 +33,7 @@ const Question = (props) => {
           </Typography>
         </Box>
         {Component && (
-          <Component replies={replies} values={values} unit={unit} onCo2ValuesChange={props.onCo2ValuesChange}/>
+          <Component replies={replies} values={values} unit={unit} maxInput={maxInput} onCo2ValuesChange={props.onCo2ValuesChange}/>
         )}
       </Box>
     </Container>
