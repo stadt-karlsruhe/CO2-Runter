@@ -20,7 +20,6 @@ const QuestionBlock = (props) => {
   const calculateDetailedCo2 = () => {
     const formulaString = props.questions.detailed.formula;
     const formula = eval(`(${formulaString})`);
-    console.log(co2Values + " : " + formula(co2Values));
     return formula(co2Values);
   };
 
