@@ -15,8 +15,6 @@ const Inputfield = (props) => {
   const calculateCO2 = (number) => {
     const formulaString = props.formula;
     const formula = eval(`(${formulaString})`);
-    const co2 = formula(value);
-    console.log("Formel als String: " + formulaString+ "  Formel:"+ formula+ "co2: "+ co2  +"  number:"+number )
     return formula(number);
   }
 
@@ -29,7 +27,6 @@ const Inputfield = (props) => {
     } else {
       setValue(valueAsNumber);
       props.onCo2ValuesChange(calculateCO2(valueAsNumber));
-      console.log(calculateCO2(event.target.value)+"     "+ valueAsNumber)
     }}
   };
 
