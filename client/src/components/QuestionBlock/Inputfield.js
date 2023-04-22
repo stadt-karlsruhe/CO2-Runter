@@ -12,15 +12,25 @@ const Inputfield = (props) => {
     }
   };
 
+  const calculateCO2 = (number) => {
+    const formulaString = props.formula;
+    const formula = eval(`(${formulaString})`);
+    const co2 = formula(value);
+    console.log("Formel als String: " + formulaString+ "  Formel:"+ formula+ "co2: "+ co2  +"  number:"+number )
+    return formula(number);
+  }
+
   const handleChange = (event) => {
     const valueAsNumber = parseFloat(event.target.value);
+    if (!isNaN(valueAsNumber)) {
     if (valueAsNumber > props.maxInput) {
       setValue(props.maxInput);
-      props.onCo2ValuesChange(props.maxInput);
+      props.onCo2ValuesChange(calculateCO2(props.maxInput));
     } else {
       setValue(valueAsNumber);
-      props.onCo2ValuesChange(event.target.value);
-    }
+      props.onCo2ValuesChange(calculateCO2(valueAsNumber));
+      console.log(calculateCO2(event.target.value)+"     "+ valueAsNumber)
+    }}
   };
 
   return (
