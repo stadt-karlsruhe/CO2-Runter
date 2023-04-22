@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Switch from "@mui/material/Switch";
 import Question from "./Question";
 import {
@@ -12,6 +12,26 @@ import {
 } from "@mui/material";
 
 const QuestionBlock = (props) => {
+  const [co2Values, setCo2Values] = useState([]);
+
+
+  const calculateDetailedCo2 = (values) => {
+    const formulaString = props.questions.detailed.formula;
+    console.log(formulaString)
+    const formula = eval(`(${formulaString})`);
+    console.log(values+" : "+formula(values))
+    return formula(values);
+  }
+
+  const handleCo2ValuesChange = (index, value) => {
+    const newCo2Values = [...co2Values];
+    newCo2Values[index] = value;
+    setCo2Values(newCo2Values);
+    const co2 = calculateDetailedCo2(co2Values)
+    props.onCo2ValuesChange(co2)
+  }
+
+
   return (
     <Container maxWidth="sm">
       <Paper
@@ -24,7 +44,7 @@ const QuestionBlock = (props) => {
         {props.isDetailed ? (
           props.questions.detailed.questions.map((question, index) => (
             <Box key={index}>
-              <Question question={question} onCo2ValuesChange={props.onCo2ValuesChange}/>
+              <Question question={question} onCo2ValuesChange={(value) => handleCo2ValuesChange(index, value)}/>
               <Divider sx={{ my: 1 }} />
             </Box>
           )
