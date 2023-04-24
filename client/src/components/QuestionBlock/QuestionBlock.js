@@ -38,12 +38,11 @@ const QuestionBlock = (props) => {
 
   useEffect(() => {
     if (isDetailed) {
-      const co2 = calculateDetailedCo2();
-      onCo2ValuesChange(co2);
+      onCo2ValuesChange(calculateDetailedCo2());
     } else {
       onCo2ValuesChange(quickInputValue);
     }
-  }, [co2Values, calculateDetailedCo2, onCo2ValuesChange, isDetailed]);
+  }, [quickInputValue, calculateDetailedCo2, onCo2ValuesChange, isDetailed]);
 
   const handleCo2ValuesChange = (index, value, inputValue) => {
     const newCo2Values = [...co2Values];

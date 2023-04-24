@@ -17,19 +17,15 @@ const QuestionCategory = (props) => {
   const [activeStep, setActiveStep] = useState(0);
   const [isDetailed, setIsDetailed] = useState({});
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
-  const [co2Values, setCo2Values] = useState ([]);
+  const [co2ValuesPerCategory, setCo2ValuesPerCategory] = useState ([]);
 
   const handleCo2ValuesChange = (index, value) => {
-    setCo2Values((prevValues) => {
-      // Erstelle eine Kopie des vorherigen Werte-Arrays
+    setCo2ValuesPerCategory((prevValues) => {
       const newValues = [...prevValues];
-      // Aktualisiere den Wert an der angegebenen Position
       newValues[index] = value;
-      // Gebe das aktualisierte Werte-Array zurück
       return newValues;
     });
   };
-
 
   const handleStepChange = (step) => {
     setActiveStep(step);
@@ -69,7 +65,7 @@ const QuestionCategory = (props) => {
             />
           ))}
         </Box>
-        <CalculationSum values={co2Values} />
+        <CalculationSum values={co2ValuesPerCategory} />
         <MobileStepper
           variant="dots"
           steps={props.category.length}
