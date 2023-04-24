@@ -22,7 +22,7 @@ const LoginRegister = () => {
           <Tab label="Registrieren" value="1" />
         </Tabs>
         <TabPanel value="0">
-        <LoginForm />
+        <LoginForm link={"/"}/>
         </TabPanel>
         <TabPanel value="1">
           <RegisterForm />

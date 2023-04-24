@@ -1,7 +1,8 @@
 import * as React from "react";
 import { TextField, Button, Stack, Alert } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState(null);
@@ -10,6 +11,7 @@ const LoginForm = () => {
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   const isEmailValid = !email || emailRegex.test(email);
   const isFormFilled = isEmailValid && isPasswordValid && password && email;
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,6 +26,7 @@ const LoginForm = () => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("token", data.token);
+        navigate(props.link)
       } else {
         setError("Anmeldung fehlgeschlagen");
       }

@@ -24,7 +24,7 @@ const Landingpage = () => {
   };
 
   const handleNewGroup = () => {
-    navigate("/NewGroup/loggedIn");
+    navigate("/NewGroup/loggedOut");
   };
 
   return (

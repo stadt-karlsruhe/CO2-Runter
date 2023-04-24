@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Button, TextField, Typography, Stack } from "@mui/material";
+import GroupSuccesfull from "./GroupSuccesfull";
 
 const GroupLoggedIn = () => {
   const [groupName, setGroupName] = useState("");
@@ -34,30 +35,30 @@ const GroupLoggedIn = () => {
 
   return (
     <>
-      <Header />
+      <Header />{" "}
       <Stack spacing={2}>
-        <Typography variant="h4">Neue Gruppe erstellen</Typography>
-        <Typography>
-          Geben Sie einen Gruppenname ein. Anschließend wird Ihnen von uns
-          einmal der Gruppenbeitrittscode, sowie ein Link und QR-Code
-          mitgeteilt.
-        </Typography>
-        <TextField
-          label="Gruppenname"
-          value={groupName}
-          onChange={(e) => setGroupName(e.target.value)}
-        />
-        <Button disabled={!groupName} onClick={handleCreateGroup}>
-          Gruppe erstellen
-        </Button>
-        {groupCode && (
+        {groupCode ? (
+          <GroupSuccesfull groupCode={groupCode} groupName={groupName} />
+        ) : (
           <>
-            <Typography>Gruppenbeitrittscode: {groupCode}</Typography>
-            {/* Hier können Sie auch den Link und QR-Code anzeigen */}
+            <Typography variant="h4">Neue Gruppe erstellen</Typography>
+            <Typography>
+              Geben Sie einen Gruppenname ein. Anschließend wird Ihnen von uns
+              einmal der Gruppenbeitrittscode, sowie ein Link und QR-Code
+              mitgeteilt.
+            </Typography>
+            <TextField
+              label="Gruppenname"
+              value={groupName}
+              onChange={(e) => setGroupName(e.target.value)}
+            />
+            <Button disabled={!groupName} onClick={handleCreateGroup}>
+              Gruppe erstellen
+            </Button>
+            {error && <Typography color="error">{error}</Typography>}
           </>
         )}
-        {error && <Typography color="error">{error}</Typography>}
-        <Button onClick={() =>navigate(-1)}>Zurück</Button>
+        <Button onClick={() => navigate(-1)}>Zurück</Button>
       </Stack>
       <Footer />
     </>

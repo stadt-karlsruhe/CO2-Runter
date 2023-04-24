@@ -9,6 +9,7 @@ import InformationPage from "./components/Information/InformationPage";
 import Login from "./components/Login/LoginRegister"
 import theme from "./styles/theme.js";
 import GroupLoggedOut from "./components/Group/GroupLoggedOut";
+import GroupLoggedIn from "./components/Group/GroupLoggedIn";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
           <Route path="/impressum" element={<Impressum />} />
           <Route path="/information" element={<InformationPage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/NewGroup/loggedIn" element={<GroupLoggedOut />} />
+          <Route path="/NewGroup/loggedOut" element={<GroupLoggedOut />} />
+          <Route path="/NewGroup/loggedIn" element={<GroupLoggedIn />} />
         </Routes>
       </Router>
     </ThemeProvider>
