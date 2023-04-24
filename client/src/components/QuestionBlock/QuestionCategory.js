@@ -1,23 +1,16 @@
 import React, { useState } from "react";
-import MobileStepper from "@mui/material/MobileStepper";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import QuestionBlock from "./QuestionBlock";
-import {
-  Typography,
-  Box,
-  Button,
-  Container,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Container, useMediaQuery } from "@mui/material";
 import CalculationSum from "./Calculation/CalculationSum";
+import Questions from "./Questions";
+import QuestionStepper from "./QuestionStepper";
+import BottomStepper from "./BottomStepper";
 
 const QuestionCategory = (props) => {
   const [activeStep, setActiveStep] = useState(0);
   const [isDetailed, setIsDetailed] = useState({});
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
-  const [co2ValuesPerCategory, setCo2ValuesPerCategory] = useState ([]);
+  const [co2ValuesPerCategory, setCo2ValuesPerCategory] = useState([]);
+  const [totalCo2, setTotalCo2] = useState(0);
 
   const handleCo2ValuesChange = (index, value) => {
     setCo2ValuesPerCategory((prevValues) => {
@@ -37,58 +30,31 @@ const QuestionCategory = (props) => {
       [name]: !prevIsDetailed[name],
     }));
   };
+
   return (
     <Container maxWidth="sm">
       <Box sx={{ my: 2, textAlign: "center" }}>
-        <Stepper activeStep={activeStep}>
-          {props.category.map((label, index) => (
-            <Step key={label.name}>
-              <StepLabel onClick={() => handleStepChange(index)}>
-                {!isSmallScreen && label.name}
-              </StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-        {isSmallScreen && (
-          <Typography variant="caption" align="center" sx={{fontWeight: "bold"}}>
-            {props.category[activeStep].name}
-          </Typography>
-        )}
-        <Box sx={{ overflow: "scroll", maxHeight: "70vh" }}>
-          {props.category[activeStep].questions.map((categoryQuestions, index) => (
-            <QuestionBlock
-              key={index}
-              questions={categoryQuestions}
-              isDetailed={isDetailed[categoryQuestions.name]}
-              onSwitchChange={() => handleSwitchChange(categoryQuestions.name)}
-              onCo2ValuesChange={(value)=>handleCo2ValuesChange (index, value)}
-            />
-          ))}
-        </Box>
-        <CalculationSum values={co2ValuesPerCategory} />
-        <MobileStepper
-          variant="dots"
-          steps={props.category.length}
+        <QuestionStepper
           activeStep={activeStep}
-          position={"static"}
-          nextButton={
-            <Button
-              size="small"
-              onClick={() => handleStepChange(activeStep + 1)}
-              disabled={activeStep === props.category.length - 1}
-            >
-              Next
-            </Button>
-          }
-          backButton={
-            <Button
-              size="small"
-              onClick={() => handleStepChange(activeStep - 1)}
-              disabled={activeStep === 0}
-            >
-              Back
-            </Button>
-          }
+          category={props.category}
+          onStepChange={handleStepChange}
+          isSmallScreen={isSmallScreen}
+        />
+        <Questions
+          questions={props.category[activeStep].questions}
+          isDetailed={isDetailed}
+          onSwitchChange={handleSwitchChange}
+          onCo2ValuesChange={handleCo2ValuesChange}
+        />
+        <CalculationSum
+          values={co2ValuesPerCategory}
+          totalCo2={totalCo2}
+          setTotalCo2={setTotalCo2}
+        />
+        <BottomStepper
+          activeStep={activeStep}
+          category={props.category}
+          onStepChange={handleStepChange}
         />
       </Box>
     </Container>
