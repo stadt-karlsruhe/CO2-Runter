@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import Switch from "@mui/material/Switch";
 import Question from "./Question";
 import {
@@ -16,22 +16,42 @@ const QuestionBlock = (props) => {
     (question) => question.defaultValue
   );
   const [co2Values, setCo2Values] = useState(defaultValues);
+  const [inputValues, setInputValues] = useState([]);
+  const co2InputRef = useRef(inputValues);
+  const [quickInputValue, setQuickInputValue] = useState("");
+  const { onCo2ValuesChange, isDetailed } = props;
 
-  const calculateDetailedCo2 = () => {
+  useEffect(() => {
+    co2InputRef.current = co2Values;
+  }, [co2Values]);
+
+  const handleSwitchChange = (event) => {
+    props.onSwitchChange(event);
+    setCo2Values(co2InputRef.current);
+  };
+
+  const calculateDetailedCo2 = useCallback(() => {
     const formulaString = props.questions.detailed.formula;
     const formula = eval(`(${formulaString})`);
     return formula(co2Values);
-  };
+  }, [co2Values, props.questions.detailed.formula]);
 
   useEffect(() => {
-    const co2 = calculateDetailedCo2();
-    props.onCo2ValuesChange(co2);
-  }, [co2Values]);
+    if (isDetailed) {
+      const co2 = calculateDetailedCo2();
+      onCo2ValuesChange(co2);
+    } else {
+      onCo2ValuesChange(quickInputValue);
+    }
+  }, [co2Values, calculateDetailedCo2, onCo2ValuesChange, isDetailed]);
 
-  const handleCo2ValuesChange = (index, value) => {
+  const handleCo2ValuesChange = (index, value, inputValue) => {
     const newCo2Values = [...co2Values];
     newCo2Values[index] = value;
     setCo2Values(newCo2Values);
+    const newInputValues = [...inputValues];
+    newInputValues[index] = inputValue;
+    setInputValues(newInputValues);
   };
 
   return (
@@ -39,17 +59,14 @@ const QuestionBlock = (props) => {
       <Paper
         sx={{ my: 2, p: 2, backgroundColor: "#f0f0f0", borderRadius: "8px" }}
       >
-        <Typography variant="h5" component="div" sx={{ fontWeight: "bold" }}>
-          {props.questions.name}
-        </Typography>
-        <Divider />
-        {props.isDetailed ? (
+        {isDetailed ? (
           props.questions.detailed.questions.map((question, index) => (
             <Box key={index}>
               <Question
                 question={question}
-                onCo2ValuesChange={(value) =>
-                  handleCo2ValuesChange(index, value)
+                co2Value={inputValues[index]}
+                onCo2ValuesChange={(value, inputValue) =>
+                  handleCo2ValuesChange(index, value, inputValue)
                 }
               />
               <Divider sx={{ my: 1 }} />
@@ -58,20 +75,21 @@ const QuestionBlock = (props) => {
         ) : (
           <Question
             question={props.questions.quick}
-            onCo2ValuesChange={props.onCo2ValuesChange}
+            co2Value={quickInputValue}
+            onCo2ValuesChange={setQuickInputValue}
           />
         )}
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           <FormGroup>
             <Stack direction="row" spacing={1} alignItems="center">
-              {props.isDetailed ? (
+              {isDetailed ? (
                 <Typography>detailliert</Typography>
               ) : (
                 <Typography>schnell</Typography>
               )}
               <Switch
-                checked={!!props.isDetailed}
-                onChange={props.onSwitchChange}
+                checked={!!isDetailed}
+                onChange={handleSwitchChange}
               />
             </Stack>
           </FormGroup>

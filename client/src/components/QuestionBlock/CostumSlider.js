@@ -7,7 +7,6 @@ const CostumSlider = (props) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const minValue = Math.min(...props.values);
   const valueAdjustToSlider = 100 / (props.values.length - 1);
   let marks = props.replies.map((replies, index) => ({
     value: props.values[index] * valueAdjustToSlider,
@@ -18,7 +17,7 @@ const CostumSlider = (props) => {
   }));
 
   const handleChange = (event) => {
-    props.onCo2ValuesChange(event.target.value);
+    props.onCo2ValuesChange(event.target.value, event.target.value);
   };
 
   const valueLabelFormat = (value) => {
@@ -27,7 +26,7 @@ const CostumSlider = (props) => {
   return (
     <Slider
       aria-label="Restricted values"
-      defaultValue={minValue}
+      defaultValue={props.value !== undefined ? props.value : 0}
       valueLabelFormat={valueLabelFormat}
       step={null}
       marks={marks}
