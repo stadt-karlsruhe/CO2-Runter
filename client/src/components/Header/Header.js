@@ -28,6 +28,10 @@ const Header = (props) => {
     navigate("/");
   };
 
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -127,7 +131,7 @@ const Header = (props) => {
                 <ListItemText>CO2 Runter Dashboard</ListItemText>
               </MenuItem>
               <Divider />
-              <MenuItem onClick={props.handleLogout}>
+              <MenuItem onClick={handleLogin}>
                 <ListItemIcon>
                   <LoginIcon fontSize="small" />
                 </ListItemIcon>
