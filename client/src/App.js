@@ -8,7 +8,7 @@ import CO2QuestionsDataFetcher from "./components/QuestionBlock/CO2QuestionsData
 import InformationPage from "./components/Information/InformationPage";
 import Login from "./components/Login/LoginRegister"
 import theme from "./styles/theme.js";
-import GroupLoggedIn from "./components/Group/GroupLoggedIn";
+import GroupLoggedOut from "./components/Group/GroupLoggedOut";
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
           <Route path="/impressum" element={<Impressum />} />
           <Route path="/information" element={<InformationPage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/NewGroup/loggedIn" element={<GroupLoggedIn />} />
+          <Route path="/NewGroup/loggedIn" element={<GroupLoggedOut />} />
         </Routes>
       </Router>
     </ThemeProvider>
