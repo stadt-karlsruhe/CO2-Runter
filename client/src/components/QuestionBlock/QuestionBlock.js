@@ -18,7 +18,10 @@ const QuestionBlock = (props) => {
   const [co2Values, setCo2Values] = useState(defaultValues);
   const [inputValues, setInputValues] = useState([]);
   const co2InputRef = useRef(inputValues);
-  const [quickInputValue, setQuickInputValue] = useState("");
+  const [quickInputReminder, setQuickInputReminder] = useState("");
+  const [quickInputValue, setQuickInputValue] = useState(
+    props.questions.quick.defaultValue
+  );
   const { onCo2ValuesChange, isDetailed } = props;
 
   useEffect(() => {
@@ -28,6 +31,11 @@ const QuestionBlock = (props) => {
   const handleSwitchChange = (event) => {
     props.onSwitchChange(event);
     setCo2Values(co2InputRef.current);
+  };
+
+  const handleQuick = (value) => {
+    setQuickInputValue(value);
+    setQuickInputReminder(value);
   };
 
   const calculateDetailedCo2 = useCallback(() => {
@@ -74,8 +82,8 @@ const QuestionBlock = (props) => {
         ) : (
           <Question
             question={props.questions.quick}
-            co2Value={quickInputValue}
-            onCo2ValuesChange={setQuickInputValue}
+            co2Value={quickInputReminder}
+            onCo2ValuesChange={handleQuick}
           />
         )}
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -86,10 +94,7 @@ const QuestionBlock = (props) => {
               ) : (
                 <Typography>schnell</Typography>
               )}
-              <Switch
-                checked={!!isDetailed}
-                onChange={handleSwitchChange}
-              />
+              <Switch checked={!!isDetailed} onChange={handleSwitchChange} />
             </Stack>
           </FormGroup>
         </Box>

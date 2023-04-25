@@ -6,6 +6,9 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 const CostumSlider = (props) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const [value, setValue] = React.useState(
+    props.value !== undefined ? props.value : 0
+  );
 
   const valueAdjustToSlider = 100 / (props.values.length - 1);
   let marks = props.replies.map((replies, index) => ({
@@ -15,9 +18,9 @@ const CostumSlider = (props) => {
         ? ""
         : replies,
   }));
-
-  const handleChange = (event) => {
-    props.onCo2ValuesChange(event.target.value, event.target.value);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    props.onCo2ValuesChange(newValue / valueAdjustToSlider);
   };
 
   const valueLabelFormat = (value) => {
@@ -26,7 +29,7 @@ const CostumSlider = (props) => {
   return (
     <Slider
       aria-label="Restricted values"
-      defaultValue={props.value !== undefined ? props.value : 0}
+      value={value}
       valueLabelFormat={valueLabelFormat}
       step={null}
       marks={marks}

@@ -9,18 +9,21 @@ const QuestionCategory = (props) => {
   const [activeStep, setActiveStep] = useState(0);
   const [isDetailed, setIsDetailed] = useState({});
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
-  const [co2ValuesPerCategory, setCo2ValuesPerCategory] = useState([]);
+  const [co2ValuesPerCategory, setCo2ValuesPerCategory] = useState(
+    Array.from({ length: props.category.length }, () => [])
+  );
   const [totalCo2, setTotalCo2] = useState(0);
 
   const handleCo2ValuesChange = (index, value) => {
     setCo2ValuesPerCategory((prevValues) => {
       const newValues = [...prevValues];
-      newValues[index] = value;
+      newValues[activeStep][index] = value;
       return newValues;
     });
   };
 
   const handleStepChange = (step) => {
+    {console.log(co2ValuesPerCategory)}
     setActiveStep(step);
   };
 
