@@ -41,6 +41,7 @@ const QuestionCategory = (props) => {
           isSmallScreen={isSmallScreen}
         />
         <Questions
+          key={activeStep}
           questions={props.category[activeStep].questions}
           isDetailed={isDetailed}
           onSwitchChange={handleSwitchChange}

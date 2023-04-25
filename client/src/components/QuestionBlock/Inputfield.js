@@ -30,9 +30,7 @@ const Inputfield = (props) => {
 
   return (
     <Container>
-      {" "}
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        {" "}
         <OutlinedInput
           id="outlined-adornment"
           type="number"
@@ -47,8 +45,8 @@ const Inputfield = (props) => {
           endAdornment={
             <InputAdornment position="end">{props.unit}</InputAdornment>
           }
-        />{" "}
-      </Box>{" "}
+        />
+      </Box>
     </Container>
   );
 };
