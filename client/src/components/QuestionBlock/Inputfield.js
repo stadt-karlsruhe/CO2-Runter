@@ -4,7 +4,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { Box, Container } from "@mui/material";
 
 const Inputfield = (props) => {
-  const [value, setValue] = React.useState(props.value);
+  const [value, setValue] = React.useState(props.value !== undefined ? props.value : 0);
   const handleFocus = () => {
     if (value === 0) {
       setValue("");
@@ -34,7 +34,7 @@ const Inputfield = (props) => {
         <OutlinedInput
           id="outlined-adornment"
           type="number"
-          value={props.value !== undefined ? props.value : 0}
+          value={value}
           onChange={handleChange}
           onFocus={handleFocus}
           inputProps={{
