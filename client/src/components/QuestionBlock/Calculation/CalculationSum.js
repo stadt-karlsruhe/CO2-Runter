@@ -7,9 +7,10 @@ const CalculationSum = (props) => {
 
   useEffect(() => {
     const valuesAsNumbers = props.values
+      .flat()
       .map((value) => (value === "" ? 0 : parseFloat(value)))
       .filter((value) => !isNaN(value));
-  
+
     setTotalCo2(
       baseCO2 + valuesAsNumbers.reduce((sum, number) => sum + number, 0)
     );
