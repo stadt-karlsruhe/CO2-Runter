@@ -7,6 +7,7 @@ import DataPrivacy from "./components/DataPrivacy/DataPrivacy";
 import CO2QuestionsDataFetcher from "./components/QuestionBlock/CO2QuestionsDataFetcher";
 import InformationPage from "./components/Information/InformationPage";
 import theme from "./styles/theme.js";
+import Dashboard from "./components/Dashboard/Dashboard"
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/CO2Rechner" element={<CO2QuestionsDataFetcher />} />
-          <Route path="/Dashboard" element={<LandingPage />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/datenschutz" element={<DataPrivacy />} />
           <Route path="/impressum" element={<Impressum />} />
           <Route path="/information" element={<InformationPage />} />
