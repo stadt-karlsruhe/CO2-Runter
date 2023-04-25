@@ -23,7 +23,6 @@ const QuestionCategory = (props) => {
   };
 
   const handleStepChange = (step) => {
-    {console.log(co2ValuesPerCategory)}
     setActiveStep(step);
   };
 
