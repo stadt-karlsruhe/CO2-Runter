@@ -4,7 +4,7 @@ import CalculationSum from "./Calculation/CalculationSum";
 import Questions from "./Questions";
 import QuestionStepper from "./QuestionStepper";
 import BottomStepper from "./BottomStepper";
-import FinishScreen from "../DistrictGroupChoice/FinishScreen";
+import ChoiceScreen from "../DistrictGroupChoice/ChoiceScreen";
 
 const QuestionCategory = (props) => {
   const [finish, setFinish] = useState(false);
@@ -65,7 +65,7 @@ const QuestionCategory = (props) => {
           />
         </Box>
       ) : (
-        <FinishScreen co2ValuesPerCategory={co2ValuesPerCategory} />
+        <ChoiceScreen co2ValuesPerCategory={co2ValuesPerCategory} />
       )}
     </Container>
   );
