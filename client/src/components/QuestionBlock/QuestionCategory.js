@@ -4,6 +4,7 @@ import CalculationSum from "./Calculation/CalculationSum";
 import Questions from "./Questions";
 import QuestionStepper from "./QuestionStepper";
 import BottomStepper from "./BottomStepper";
+import FinishScreen from "../DistrictGroupChoice/FinishScreen";
 
 const QuestionCategory = (props) => {
   const [finish, setFinish] = useState(false);
@@ -24,6 +25,7 @@ const QuestionCategory = (props) => {
   };
 
   const handleStepChange = (step) => {
+    console.log(co2ValuesPerCategory)
     setActiveStep(step);
   };
 
@@ -64,7 +66,9 @@ const QuestionCategory = (props) => {
           />
         </Box>
       ) : (
-        <Box></Box>
+        <>
+        {console.log(co2ValuesPerCategory)}
+        <FinishScreen co2ValuesPerCategory={co2ValuesPerCategory} /></>
       )}
     </Container>
   );
