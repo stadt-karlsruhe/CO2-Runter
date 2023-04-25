@@ -8,6 +8,7 @@ const auth = require("./middleware/auth");
 const groups_routes = require("./routes/groups_routes");
 const user_routes = require("./routes/user_routes");
 const {db} = require('./services/db');
+const dashboard_routes = require("./routes/dashboard_routes");
 
 
 // read json file 
@@ -111,14 +112,16 @@ app.post('/login', async (req, res) => {
   })
 })
 
-app.use('/groups', groups_routes);
-
 app.get('/user', auth, (req, res) => {
   res.send(req.user)
 })
+
+
+app.use('/groups', groups_routes);
 app.use('/user', user_routes);
 
- //get user ID from token
+app.use('/dashboard', dashboard_routes);
+
 
 
 app.listen('3001', () => { })
