@@ -25,7 +25,6 @@ const QuestionCategory = (props) => {
   };
 
   const handleStepChange = (step) => {
-    console.log(co2ValuesPerCategory)
     setActiveStep(step);
   };
 
@@ -66,9 +65,7 @@ const QuestionCategory = (props) => {
           />
         </Box>
       ) : (
-        <>
-        {console.log(co2ValuesPerCategory)}
-        <FinishScreen co2ValuesPerCategory={co2ValuesPerCategory} /></>
+        <FinishScreen co2ValuesPerCategory={co2ValuesPerCategory} />
       )}
     </Container>
   );
