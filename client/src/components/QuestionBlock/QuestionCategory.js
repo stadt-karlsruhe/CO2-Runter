@@ -6,6 +6,7 @@ import QuestionStepper from "./QuestionStepper";
 import BottomStepper from "./BottomStepper";
 
 const QuestionCategory = (props) => {
+  const [finish, setFinish] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const [isDetailed, setIsDetailed] = useState({});
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
@@ -35,31 +36,36 @@ const QuestionCategory = (props) => {
 
   return (
     <Container maxWidth="sm">
-      <Box sx={{ my: 2, textAlign: "center" }}>
-        <QuestionStepper
-          activeStep={activeStep}
-          category={props.category}
-          onStepChange={handleStepChange}
-          isSmallScreen={isSmallScreen}
-        />
-        <Questions
-          key={activeStep}
-          questions={props.category[activeStep].questions}
-          isDetailed={isDetailed}
-          onSwitchChange={handleSwitchChange}
-          onCo2ValuesChange={handleCo2ValuesChange}
-        />
-        <CalculationSum
-          values={co2ValuesPerCategory}
-          totalCo2={totalCo2}
-          setTotalCo2={setTotalCo2}
-        />
-        <BottomStepper
-          activeStep={activeStep}
-          category={props.category}
-          onStepChange={handleStepChange}
-        />
-      </Box>
+      {!finish ? (
+        <Box sx={{ my: 2, textAlign: "center" }}>
+          <QuestionStepper
+            activeStep={activeStep}
+            category={props.category}
+            onStepChange={handleStepChange}
+            isSmallScreen={isSmallScreen}
+          />
+          <Questions
+            key={activeStep}
+            questions={props.category[activeStep].questions}
+            isDetailed={isDetailed}
+            onSwitchChange={handleSwitchChange}
+            onCo2ValuesChange={handleCo2ValuesChange}
+          />
+          <CalculationSum
+            values={co2ValuesPerCategory}
+            totalCo2={totalCo2}
+            setTotalCo2={setTotalCo2}
+          />
+          <BottomStepper
+            activeStep={activeStep}
+            category={props.category}
+            onStepChange={handleStepChange}
+            onFinish={setFinish}
+          />
+        </Box>
+      ) : (
+        <Box></Box>
+      )}
     </Container>
   );
 };
