@@ -23,6 +23,10 @@ const Landingpage = () => {
     navigate("/Dashboard");
   };
 
+  const handleNewGroup = () => {
+    navigate("/NewGroup/loggedOut");
+  };
+
   return (
     <div className="App">
       <Header />
@@ -57,6 +61,23 @@ const Landingpage = () => {
               Nachdem du den CO2 Rechner benutzt hast, kannst du die Ergebnisse
               in deinem Dashboard sehen.
             </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMore />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+            <Typography variant="h6">
+              Wie funktioniert das Gruppensystem?
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              Hier kommt noch Text wie unser Gruppenssystem funktioniert.
+            </Typography>
+            <Button variant="contained" color="secondary" onClick={handleNewGroup}>Neue Gruppe erstellen</Button>
           </AccordionDetails>
         </Accordion>
       </div>
