@@ -38,7 +38,7 @@
 
   **Required:**
  
-   `districts={JSON}, groups={JSON} ,answers={JSON}`
+   `districts={JSON}, groups={JSON} ,data={JSON}`
 
 * **Success Response:**
 
