@@ -111,14 +111,26 @@ app.post('/login', async (req, res) => {
   })
 })
 
-app.use('/groups', groups_routes);
-
-app.get('/user', auth, (req, res) => {
-  res.send(req.user)
+// route get list of all disticts 
+app.get('/districts', (req, res) => {
+  const SelectQuery = " SELECT * FROM  Districts";
+  db.query(SelectQuery, (err, result) => {
+    if(err) {
+      console.log(err)
+      res.status(500).send('Something went wrong')
+    } else {
+      res.status(200).send(result)
+    }
+  })
 })
+
+
+app.use('/groups', groups_routes);
 app.use('/user', user_routes);
 
  //get user ID from token
-
+app.get('/user', auth, (req, res) => {
+  res.send(req.user)
+})
 
 app.listen('3001', () => { })

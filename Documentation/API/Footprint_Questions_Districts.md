@@ -51,3 +51,29 @@
   - **Code:** 500 Internal Server Error<br />
     **Content:** `{ error : A server error occurred." }`
 
+
+**Get Districts**
+----
+  This endpoint allows to retrieve a list of all districts
+
+* **URL**
+
+  `/districts`
+
+* **Method:**
+
+  `GET` 
+
+* **Success Response:**
+  
+  A JSON is expected which contains the list of districts.
+
+  * **Code:** 200 OK<br />
+    **Content:** `[{"district_ID": Number ,"name": String }, ... ]`
+ 
+* **Error Response:**
+
+  - **Code:** 500 Internal Server Error<br />
+    **Content:** `{ error : "Something went wrong" }`
+
+
