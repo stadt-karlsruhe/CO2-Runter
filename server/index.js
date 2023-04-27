@@ -8,6 +8,7 @@ const auth = require("./middleware/auth");
 const groups_routes = require("./routes/groups_routes");
 const user_routes = require("./routes/user_routes");
 const {db} = require('./services/db');
+const dashboard_routes = require("./routes/dashboard_routes");
 
 
 // read json file 
@@ -111,14 +112,78 @@ app.post('/login', async (req, res) => {
   })
 })
 
+// route get list of all disticts 
+app.get('/districts', (req, res) => {
+  const SelectQuery = " SELECT * FROM  Districts";
+  db.query(SelectQuery, (err, result) => {
+    if(err) {
+      console.log(err)
+      res.status(500).send('Something went wrong')
+    } else {
+      res.status(200).send(result)
+    }
+  })
+})
+
+// route save foodprint to db 
+app.post('/foodprint', (req, res) => {
+  let sucsses = true;
+  // Get user input
+  const { groups, district, data } = req.body;
+  // Validate user input
+  if (!((groups || district) && data)) {
+    sucsses = false;
+    res.status(400).send("All input is required");
+  }
+  else {
+    const InsertQuery = "INSERT INTO CO2Prints (mobility, housing, consume, nutrition, date) VALUES (?, ?, ?, ?, ?)";
+    db.query(InsertQuery, [data.mobility, data.housing, data.consume, data.nutrition, new Date()], (err, result) => {
+      if(err) {
+        console.log(err)
+        sucsses = false;
+        res.status(500).send('Something went wrong')
+      } else {
+        // get the id of the foodprint
+        const foodprint_id = result.insertId;
+        // if a district is selected add the foodprint to the table Prints_In_Districts with this columns: district_ID	and print_ID
+        if(district) {
+          const InsertQuery = "INSERT INTO Prints_In_Districts (district_ID, print_ID) VALUES (?, ?)";
+          db.query(InsertQuery, [district, foodprint_id], (err, result) => {
+            if(err) {
+              console.log(err)
+              sucsses = false;
+              res.status(500).send('Something went wrong')
+            } 
+          })
+        }
+        // if there are groups selected add the foodprint to all groups in the table Prints_In_Carbon_Footprint_Groups with this columns: group_ID and print_ID
+        if(groups) {
+          groups.forEach(group => {
+            const InsertQuery = "INSERT INTO Prints_In_Carbon_Footprint_Groups (group_ID, print_ID) VALUES (?, ?)";
+            db.query(InsertQuery, [group, foodprint_id], (err, result) => {
+              if(err) {
+                console.log(err)
+                sucsses = false;
+                res.status(500).send('Something went wrong')
+              } 
+            })
+          });
+        }
+      }
+    })
+    if (sucsses) {
+      res.status(200).send('Foodprint saved')
+    }
+  }
+})
+
 app.use('/groups', groups_routes);
+app.use('/user', user_routes);
+app.use('/dashboard', dashboard_routes);
+
 
 app.get('/user', auth, (req, res) => {
   res.send(req.user)
 })
-app.use('/user', user_routes);
-
- //get user ID from token
-
 
 app.listen('3001', () => { })
