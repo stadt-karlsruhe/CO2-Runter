@@ -15,8 +15,8 @@
               "Häufig",
               "Sehr häufig"
             ],
-            "values": [0, 1, 2, 3, 4],
-            "defaultValue": 2
+            "values": [0, 1.07, 1.79, 3.58, 5.37],
+            "defaultValue": 1.79
           },
           "detailed": {
             "questions": [
@@ -26,14 +26,6 @@
                 "replies": ["Diesel", "Benzin", "Erdgas", "Elektro", "Hybrid"],
                 "values": [0, 1, 2, 3, 4],
                 "defaultValue": 2
-              },
-              {
-                "text": "Wie viele Kilometer fahren Sie pro Jahr?",
-                "typ": "input",
-                "unit": "km",
-                "maxInput": 1000000,
-                "defaultValue": 0,
-                "formula": "function (value) { return value / 10; }"
               },
               {
                 "text": "Was ist ihr Verbrauch?",
@@ -47,6 +39,14 @@
                 ],
                 "values": [0, 1, 2, 3, 4],
                 "defaultValue": 2
+              },
+              {
+                "text": "Wie viele Kilometer fahren Sie pro Jahr?",
+                "typ": "input",
+                "unit": "km",
+                "maxInput": 1000000,
+                "defaultValue": 0,
+                "formula": "function (value) { return value / 10; }"
               }
             ],
             "formula": "function (values) { return values[0] + values[1] + values[2]; }"
@@ -64,18 +64,18 @@
               "Häufig",
               "Sehr häufig"
             ],
-            "values": [0, 1, 2, 3, 4],
-            "defaultValue": 2
+            "values": [0, -0.01, -0.04, 0.41, -1.02],
+            "defaultValue": 0
           },
           "detailed": {
             "questions": [
               {
-                "text": "Wie viele Tage in der Woche nutzen sie ÖPNV?",
+                "text": "Wie viele Kilometer fahren Sie mit Öffentlichen Verkehrmittel pro Woche?",
                 "typ": "input",
-                "unit": "Tage pro Woche",
+                "unit": "km",
                 "maxInput": 1000000,
                 "defaultValue": 0,
-                "formula": "function (value) { return value / 10; }"
+                "formula": "function (value) { return value * -0.0000408 * 52; }"
               }
             ],
             "formula": "function (values) { return values[0]; }"
@@ -84,7 +84,7 @@
         {
           "name": "Fahrrad",
           "quick": {
-            "text": "Wie oft fahren Sie mit dem Fahrrad?",
+            "text": "Wie oft fahren Sie mit dem Fahrrad pro Woche?",
             "typ": "auswahl",
             "replies": [
               "Nie",
@@ -93,8 +93,8 @@
               "Häufig",
               "Sehr häufig"
             ],
-            "values": [0, -1, -2, -3, -4],
-            "defaultValue": 2
+            "values": [0, -0.02, -0.08, -0.41, -0.82],
+            "defaultValue": 0
           },
           "detailed": {
             "questions": [
@@ -102,9 +102,9 @@
                 "text": "Wie viele Kilometer fahren Sie pro Woche?",
                 "typ": "input",
                 "unit": "km",
-                "maxInput": 1000000,
+                "maxInput": 100000,
                 "defaultValue": 0,
-                "formula": "function (value) { return value / 10; }"
+                "formula": "function (value) { return value * -0.000164 * 52; }"
               }
             ],
             "formula": "function (values) { return values[0]; }"
@@ -128,7 +128,7 @@
                 "unit": "Stunden",
                 "maxInput": 1000000,
                 "defaultValue": 0,
-                "formula": "function (value) { return value / 10; }"
+                "formula": "function (value) { return value * 0.1328; }"
               },
               {
                 "text": "Wie viele Stunden Langstrecke sind Sie geflogen?",
@@ -136,7 +136,7 @@
                 "unit": "Stunden",
                 "maxInput": 1000000,
                 "defaultValue": 0,
-                "formula": "function (value) { return value / 10; }"
+                "formula": "function (value) { return value * 0.1717; }"
               }
             ],
             "formula": "function (values) { return values[0] + values[1]; }"
@@ -159,7 +159,7 @@
               "Mischkost",
               "Fleischbetont"
             ],
-            "values": [0, 1, 2, 3, 4],
+            "values": [1.05, 1.30, 1.66, 1.75, 2.19],
             "defaultValue": 3
           },
           "detailed": {
@@ -213,7 +213,7 @@
             "text": "Wie viele Personen leben in ihrem Haushalt?",
             "typ": "input",
             "unit": "Personen",
-            "maxInput": 999,
+            "maxInput": 10,
             "defaultValue": 1,
             "formula": "function (value) { return value / 10; }"
           },
