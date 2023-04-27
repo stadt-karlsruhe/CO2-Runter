@@ -5,10 +5,9 @@ import CostumSlider from "./CostumSlider";
 import { Box, Container, Typography } from "@mui/material";
 
 const Question = (props) => {
-  const { text, typ, replies, values, unit } = props.question;
-
+  const { text, typ, replies, values, unit, maxInput, formula } =
+    props.question;
   let Component;
-
   switch (typ) {
     case "auswahl":
       Component = Selection;
@@ -23,17 +22,25 @@ const Question = (props) => {
       Component = null;
       break;
   }
-
   return (
     <Container>
       <Box sx={{ my: 2 }}>
+        {" "}
         <Box sx={{ mb: 2 }}>
           <Typography variant="h6" component="div">
             {text}
-          </Typography>
+          </Typography>{" "}
         </Box>
         {Component && (
-          <Component replies={replies} values={values} unit={unit} />
+          <Component
+            value={props.co2Value}
+            replies={replies}
+            values={values}
+            unit={unit}
+            maxInput={maxInput}
+            formula={formula}
+            onCo2ValuesChange={props.onCo2ValuesChange}
+          />
         )}
       </Box>
     </Container>
