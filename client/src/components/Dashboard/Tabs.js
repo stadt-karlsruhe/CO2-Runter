@@ -5,6 +5,7 @@ import MapIcon from "@mui/icons-material/Map";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import Box from "@mui/material/Box";
 import Map from "./Map";
+import Co2Card from "./Contribution";
 //import Chart from "./Chart";
 
 
@@ -42,6 +43,7 @@ export default function MyTabs() {
       >
         <Tab icon={<MapIcon />} label="Karte" />
         <Tab icon={<BarChartIcon />} label="Charts" />
+        <Tab icon={<BarChartIcon />} label="Beteiligung" />
       </Tabs>
       <TabPanel value={value} index={0}>
         <Map/>
@@ -49,6 +51,10 @@ export default function MyTabs() {
       <TabPanel value={value} index={1}>
         <h1>Here will be some nice charts soon</h1>
       </TabPanel>
+      <TabPanel value={value} index={2}>
+        <Co2Card co2Footprint={0} />
+      </TabPanel>
+
     </div>
   );
 }
