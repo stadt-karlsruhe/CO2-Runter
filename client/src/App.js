@@ -11,6 +11,7 @@ import theme from "./styles/theme.js";
 import Dashboard from "./components/Dashboard/Dashboard"
 import GroupLoggedOut from "./components/Group/GroupLoggedOut";
 import GroupLoggedIn from "./components/Group/GroupLoggedIn";
+import FinishScreen from "./components/DistrictGroupChoice/FinishScreen";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/NewGroup/loggedOut" element={<GroupLoggedOut />} />
           <Route path="/NewGroup/loggedIn" element={<GroupLoggedIn />} />
+          <Route path="/CO2Rechner/finish" element={<FinishScreen />} />
         </Routes>
       </Router>
     </ThemeProvider>

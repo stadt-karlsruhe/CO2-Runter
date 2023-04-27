@@ -24,6 +24,11 @@ const QuestionCategory = (props) => {
     });
   };
 
+  const getCategoryNames = () => {
+    const names = props.category.map((category) => category.name);
+    return names;
+  };
+
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
@@ -65,7 +70,7 @@ const QuestionCategory = (props) => {
           />
         </Box>
       ) : (
-        <ChoiceScreen co2ValuesPerCategory={co2ValuesPerCategory} categories={props.categories} />
+        <ChoiceScreen co2ValuesPerCategory={co2ValuesPerCategory} categories={getCategoryNames()} />
       )}
     </Container>
   );
