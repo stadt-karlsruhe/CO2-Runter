@@ -29,7 +29,7 @@ const RegisterForm = () => {
         setError('Die Passwörter stimmen nicht überein');
       } else {
         try {
-          const response = await axios.post('/api/register', { username, usermail: email, password });
+          const response = await axios.post('/api/register', { username, email, password });
           if (response.status === 200) {
             localStorage.setItem('token', response.data.token);         
           }
