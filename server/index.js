@@ -190,6 +190,19 @@ app.get('/foodprint/total', (req, res) => {
   })
 })
 
+// route get total number of foodprints in a district for all districts
+app.get('/foodprint/districts', (req, res) => {
+  const SelectQuery = " SELECT Districts.name, COUNT(Prints_In_Districts.print_ID) AS total FROM Districts LEFT JOIN Prints_In_Districts ON Districts.district_ID = Prints_In_Districts.district_ID GROUP BY Districts.district_ID";
+  db.query(SelectQuery, (err, result) => {
+    if(err) {
+      console.log(err)
+      res.status(500).send('Something went wrong')
+    } else {
+      res.status(200).send(result)
+    }
+  })
+})
+
 app.use('/groups', groups_routes);
 app.use('/user', user_routes);
 app.use('/dashboard', dashboard_routes);
