@@ -8,6 +8,7 @@ const auth = require("./middleware/auth");
 const groups_routes = require("./routes/groups_routes");
 const user_routes = require("./routes/user_routes");
 const {db} = require('./services/db');
+const dashboard_routes = require("./routes/dashboard_routes");
 
 
 // read json file 
@@ -176,12 +177,11 @@ app.post('/foodprint', (req, res) => {
   }
 })
 
-
-
 app.use('/groups', groups_routes);
 app.use('/user', user_routes);
+app.use('/dashboard', dashboard_routes);
 
- //get user ID from token
+
 app.get('/user', auth, (req, res) => {
   res.send(req.user)
 })
