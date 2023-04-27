@@ -23,7 +23,7 @@ const FinishScreen = ({ co2ValuesPerCategory, categories }) => {
   const handleSubmitData = async () => {
     try {
       // Hier müssen Sie die districts-, groups- und answers-Daten angeben
-      const response = await axios.post("/footprint", {
+      const response = await axios.post("/api/footprint", {
         districts: {},
         groups: {},
         answers: {},

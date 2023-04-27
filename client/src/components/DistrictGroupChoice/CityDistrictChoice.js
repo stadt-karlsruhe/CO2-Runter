@@ -10,7 +10,7 @@ const CityDistrictChoice = () => {
       try {
         const response = await axios.get("/api/districts");
         if (response.status === 200) {
-          setDistricts(response.data);
+          setDistricts(response.data);         
         }
       } catch (error) {
         console.error(error);
@@ -22,6 +22,7 @@ const CityDistrictChoice = () => {
   return (
     <>
       <Typography variant="body1">Wählen Sie ihren Stadteil, in dem sie Ansässig sind.</Typography>
+      {console.log(districts)}
       <Autocomplete
         options={districts}
         getOptionLabel={(option) => option.name}

@@ -17,7 +17,7 @@ const GroupChoice = () => {
   useEffect(() => {
     const fetchGroups = async () => {
       try {
-        const response = await axios.get("/groups/member", {
+        const response = await axios.get("/api/groups/member", {
           params: {
             // Hier müssen Sie den Token und die Benutzer-ID angeben
             token: "YOUR_TOKEN_HERE",
@@ -40,7 +40,7 @@ const GroupChoice = () => {
 
   const handleAddGroup = async () => {
     try {
-      const response = await axios.get(`/groups/get/${groupCode}`);
+      const response = await axios.get(`/api/groups/get/${groupCode}`);
       if (response.status === 200) {
         setGroups((prevGroups) => [...prevGroups, response.data]);
       }

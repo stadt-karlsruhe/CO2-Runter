@@ -1,6 +1,7 @@
 import * as React from "react";
 import { TextField, Button, Stack, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const LoginForm = (props) => {
   const [email, setEmail] = React.useState("");
@@ -16,22 +17,17 @@ const LoginForm = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ usermail: email, password }),
-      });
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem("token", data.token);
-        navigate(props.link)
-      } else {
-        setError("Anmeldung fehlgeschlagen");
+      const response = await axios.post('/api/login', { usermail: email, password });
+      if (response.status === 200) {
+        localStorage.setItem('token', response.data.token);
+      navigate(props.link);         
       }
     } catch (error) {
-      setError("Ein Serverfehler ist aufgetreten");
+      if (error.response && error.response.status === 401) {
+        setError('Anmeldung fehlgeschlagen');
+      } else {
+        setError('Ein Serverfehler ist aufgetreten');
+      }
     }
   };
 

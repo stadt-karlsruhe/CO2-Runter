@@ -1,5 +1,6 @@
 import * as React from "react";
 import { TextField, Button, Stack, Alert } from "@mui/material";
+import axios from 'axios';
 
 const RegisterForm = () => {
   const [username, setUsername] = React.useState("");
@@ -22,36 +23,37 @@ const RegisterForm = () => {
     confirmPassword &&
     email;
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (password !== confirmPassword) {
-      setError("Die Passwörter stimmen nicht überein");
-    } else {
-      try {
-        const response = await fetch("/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, usermail: email, password }),
-        });
-        if (response.ok) {
-          const data = await response.json();
-          localStorage.setItem("token", data.token);
-        } else if (response.status === 400) {
-          setError("Fehlender Benutzername, E-Mail oder Passwort");
-        } else if (response.status === 422) {
-          setError("Ungültige Eingabe");
-        } else if (response.status === 409) {
-          setError("Die E-Mail oder der Benutzername ist bereits vergeben");
-        } else {
-          setError("Registrierung fehlgeschlagen");
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      if (password !== confirmPassword) {
+        setError('Die Passwörter stimmen nicht überein');
+      } else {
+        try {
+          const response = await axios.post('/api/register', { username, usermail: email, password });
+          if (response.status === 200) {
+            localStorage.setItem('token', response.data.token);         
+          }
+        } catch (error) {
+          if (error.response) {
+            switch (error.response.status) {
+              case 400:
+                setError('Fehlender Benutzername, E-Mail oder Passwort');
+                break;
+              case 422:
+                setError('Ungültige Eingabe');
+                break;
+              case 409:
+                setError('Die E-Mail oder der Benutzername ist bereits vergeben');
+                break;
+              default:
+                setError('Registrierung fehlgeschlagen');
+            }
+          } else {
+            setError('Ein Serverfehler ist aufgetreten');
+          }
         }
-      } catch (error) {
-        setError("Ein Serverfehler ist aufgetreten");
       }
-    }
-  };
+    };
 
   return (
     <form onSubmit={handleSubmit}>
