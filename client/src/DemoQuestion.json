@@ -24,12 +24,12 @@
                   "text": "Welchen Kraftstoff tanken Sie?",
                   "typ": "auswahl",
                   "replies": ["Diesel", "Benzin", "Erdgas", "Elektro", "Hybrid"],
-                  "values": [0, 1, 2, 3, 4],
+                  "values": [0.72, 1, 0.78, 0.44, 0.78],
                   "defaultValue": 2
                 },
                 {
                   "text": "Was ist ihr Verbrauch?",
-                  "typ": "slider",
+                  "typ": "auswahl",
                   "replies": [
                     "Sehr niedrig",
                     "Niedrig",
@@ -37,8 +37,8 @@
                     "Hoch",
                     "Sehr hoch"
                   ],
-                  "values": [0, 1, 2, 3, 4],
-                  "defaultValue": 2
+                  "values": [0.72, 0.89, 1.17, 1.33, 1.61],
+                  "defaultValue": 1.17
                 },
                 {
                   "text": "Wie viele Kilometer fahren Sie pro Jahr?",
@@ -46,10 +46,10 @@
                   "unit": "km",
                   "maxInput": 1000000,
                   "defaultValue": 0,
-                  "formula": "function (value) { return value / 10; }"
+                  "formula": "function (value) { return value * 0.000179; }"
                 }
               ],
-              "formula": "function (values) { return values[0] + values[1] + values[2]; }"
+              "formula": "function (values) { return values[0] * values[1] * values[2]; }"
             }
           },
           {
@@ -123,7 +123,7 @@
             "detailed": {
               "questions": [
                 {
-                  "text": "Wie viele Stunden Kurzstrecke sind Sie geflogen?",
+                  "text": "Wie viele Stunden Kurzstrecke fliegen Sie pro Jahr?",
                   "typ": "input",
                   "unit": "Stunden",
                   "maxInput": 1000000,
@@ -131,7 +131,7 @@
                   "formula": "function (value) { return value * 0.1328; }"
                 },
                 {
-                  "text": "Wie viele Stunden Langstrecke sind Sie geflogen?",
+                  "text": "Wie viele Stunden Langstrecke fliegen Sie pro Jahr?",
                   "typ": "input",
                   "unit": "Stunden",
                   "maxInput": 1000000,
@@ -353,8 +353,8 @@
               "text": "Wie würden sie ihr Kaufverhalten beschreiben?",
               "typ": "auswahl",
               "replies": ["sparsam", "normal", "großzügig"],
-              "values": [0, 1, 2],
-              "defaultValue": 1
+              "values": [2.75, 2.9, 3.04],
+              "defaultValue": 2.9
             },
             "detailed": {
               "questions": [
@@ -369,33 +369,33 @@
                   "text": "Was sind ihre Kaufkriterien?",
                   "typ": "auswahl",
                   "replies": ["Preiswert", "Qualität", "Nachhaltigkeit"],
-                  "values": [0, 1, 2],
+                  "values": [1.05, 1, 0.95],
                   "defaultValue": 1
                 },
                 {
                   "text": "Wie oft kaufen sie gebrauchte/secondhand Produkte?",
                   "typ": "auswahl",
                   "replies": ["Selten", "Gelegentlich", "Häufig"],
-                  "values": [0, 1, 2],
+                  "values": [1.05, 1, 0.95],
                   "defaultValue": 1
                 },
                 {
                   "text": "Was sind ihr groben Ausgaben pro Kopf und Monat?",
                   "typ": "input",
                   "unit": "€",
-                  "maxInput": 10000000,
+                  "maxInput": 10000,
                   "defaultValue": 500,
-                  "formula": "function (value) { return value / 500; }"
+                  "formula": "function (value) { return value * 0.001997 + 0.03/2.9; }"
                 },
                 {
                   "text": "Haben nutzen sie Kliemafreundliche geldanlagen?",
                   "typ": "auswahl",
                   "replies": ["Ja", "Nein"],
-                  "values": [0, 1],
+                  "values": [0.11, 0],
                   "defaultValue": 1
                 }
               ],
-              "formula": "function (values) { return values[0] + values[1] + values[2] + values[3] + values[4]; }"
+              "formula": "function (values) { return (values[0] * values[1] * values[2] * values[3]) - values[4]; }"
             }
           }
         ]
