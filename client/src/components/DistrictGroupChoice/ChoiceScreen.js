@@ -5,8 +5,9 @@ import CityDistrictChoice from "./CityDistrictChoice";
 import GroupChoice from "./GroupChoice";
 import Login from "./Login";
 
-const FinishScreen = ({ co2ValuesPerCategory }) => {
+const FinishScreen = ({ co2ValuesPerCategory, categories }) => {
   const [tabValue, setTabValue] = useState(0);
+  const [sentData, setSentData] = useState(false);
   const [finish, setFinish] = useState(false);
   const isLoggedIn = false; // Hier können Sie den Anmeldestatus des Benutzers überprüfen
 
@@ -28,7 +29,8 @@ const FinishScreen = ({ co2ValuesPerCategory }) => {
         answers: {},
       });
       if (response.status === 200) {
-        handleContinue();
+        setSentData(true);
+        setFinish(true);
       }
     } catch (error) {
       console.error(error);
@@ -36,6 +38,7 @@ const FinishScreen = ({ co2ValuesPerCategory }) => {
   };
 
   const handleContinue = () => {
+    setSentData(false);
     setFinish(true);
   };
 
@@ -64,7 +67,7 @@ const FinishScreen = ({ co2ValuesPerCategory }) => {
           </Button>
         </>
       ) : (
-        <></>
+        <FinishScreen co2ValuesPerCategory={co2ValuesPerCategory} categories={categories} dataSent={sentData} />
       )}
     </>
   );

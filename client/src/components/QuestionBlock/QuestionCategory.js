@@ -65,7 +65,7 @@ const QuestionCategory = (props) => {
           />
         </Box>
       ) : (
-        <ChoiceScreen co2ValuesPerCategory={co2ValuesPerCategory} />
+        <ChoiceScreen co2ValuesPerCategory={co2ValuesPerCategory} categories={props.categories} />
       )}
     </Container>
   );
