@@ -34,7 +34,7 @@ app.get('/questions', (req, res) => {
 
 app.post('/register', async (req, res) => {
     // Get user input
-    const { email, password, username } =  req.query;
+    const { email, password, username } =  req.body;
 
     // Validate user input
     if (!(email && password && username)) {
@@ -77,7 +77,7 @@ app.post('/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
   // Get user input
-  const { email, password } =  req.query;
+  const { email, password } =  req.body;
 
   // Validate user input
   if (!(email && password)) {
