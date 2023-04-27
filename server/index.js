@@ -131,14 +131,23 @@ app.post('/footprint', (req, res) => {
   // Get user input
   const { groups, district, data } = req.body;
   // Validate user input 
-  if (!(groups && district && data)) {
-    if (!(((groups.length > 0 )|| (district.length > 0)) && data && data.mobility && data.housing && data.consume && data.nutrition ))
+  if (!(groups && district && data )) {
+      sucsses = false;
+      res.status(400).send("All input is required");
+      console.log("field missing")
+  }else if(!(((groups.length > 0 )|| (district > 0) && data.length == 4))){ 
     sucsses = false;
     res.status(400).send("All input is required");
+    console.log("data in field missing")
+    console.log(groups.length)
+    console.log(district)
+    console.log(data.length)
   }
+
+
   else {
     const InsertQuery = "INSERT INTO CO2Prints (mobility, housing, consume, nutrition, date) VALUES (?, ?, ?, ?, ?)";
-    db.query(InsertQuery, [data.mobility, data.housing, data.consume, data.nutrition, new Date()], (err, result) => {
+    db.query(InsertQuery, [data[0], data[1], data[2], data[3], new Date()], (err, result) => {
       if(err) {
         console.log(err)
         sucsses = false;
