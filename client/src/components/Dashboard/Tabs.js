@@ -1,18 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import MapIcon from "@mui/icons-material/Map";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import Box from "@mui/material/Box";
 import Map from "./Map";
+import Co2Card from "./Contribution";
 //import Chart from "./Chart";
 
-
-export default function MyTabs() {
+const MyTabs = () => {
   const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    const storedValue = localStorage.getItem("selectedTab");
+    if (storedValue) {
+      setValue(parseInt(storedValue));
+    }
+  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    localStorage.setItem("selectedTab", newValue);
   };
 
   const TabPanel = (props) => {
@@ -42,13 +50,19 @@ export default function MyTabs() {
       >
         <Tab icon={<MapIcon />} label="Karte" />
         <Tab icon={<BarChartIcon />} label="Charts" />
+        <Tab icon={<BarChartIcon />} label="Beteiligung" />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <Map/>
+        <Map />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <h1>Here will be some nice charts soon</h1>
       </TabPanel>
+      <TabPanel value={value} index={2}>
+        <Co2Card co2Footprint={0} />
+      </TabPanel>
     </div>
   );
-}
+};
+
+export default MyTabs;
