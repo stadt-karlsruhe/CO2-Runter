@@ -7,19 +7,19 @@ import Login from "./Login";
 import { useNavigate } from "react-router-dom";
 
 
-const FinishScreen = ({ co2ValuesPerCategory, categories }) => {
+const FinishScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const [tabValue, setTabValue] = useState(0);
   const [sentData, setSentData] = useState(false);
   const navigate = useNavigate();
   const isLoggedIn = false; // Hier können Sie den Anmeldestatus des Benutzers überprüfen
 
-  const co2Sum = co2ValuesPerCategory.reduce(
-    (sum, category) => sum + category.reduce((a, b) => a + b, 0),
-    0
-  );
-
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
+  };
+
+  const truncate = (num, decimalPlaces) => {
+    const factor = Math.pow(10, decimalPlaces);
+    return Math.floor(num * factor) / factor;
   };
 
   const handleSubmitData = async () => {
@@ -52,6 +52,7 @@ const FinishScreen = ({ co2ValuesPerCategory, categories }) => {
         co2ValuesPerCategory: co2ValuesPerCategory,
         categories: categories,
         dataSent: sentData,
+        totalCo2: totalCo2,
       },
     });
   };
@@ -62,7 +63,7 @@ const FinishScreen = ({ co2ValuesPerCategory, categories }) => {
       <Typography variant="body1">
         Herzlichen Glückwunsch! Sie haben das Ende erreicht.
       </Typography>
-      <Typography variant="h4">{co2Sum}</Typography>
+      <Typography variant="h4">{truncate(totalCo2, 2)} t CO2</Typography>
       <Typography variant="body1">
         Hier ist die Summe Ihrer CO2-Werte pro Kategorie.
       </Typography>

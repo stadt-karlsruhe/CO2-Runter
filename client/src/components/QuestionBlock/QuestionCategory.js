@@ -70,7 +70,7 @@ const QuestionCategory = (props) => {
           />
         </Box>
       ) : (
-        <ChoiceScreen co2ValuesPerCategory={co2ValuesPerCategory} categories={getCategoryNames()} />
+        <ChoiceScreen totalCo2={totalCo2} co2ValuesPerCategory={co2ValuesPerCategory} categories={getCategoryNames()} />
       )}
     </Container>
   );

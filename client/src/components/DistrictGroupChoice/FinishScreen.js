@@ -13,11 +13,17 @@ const FinishScreen = () => {
   const co2ValuesPerCategory = location.state.co2ValuesPerCategory;
   const categories = location.state.categories;
   const dataSent = location.state.dataSent;
+  const totalCo2 = location.state.totalCo2;
 
   const co2SumPerCategory = co2ValuesPerCategory.map((category) =>
     category.reduce((a, b) => a + b, 0)
   );
   const totalCo2Sum = co2SumPerCategory.reduce((a, b) => a + b, 0);
+
+  const truncate = (num, decimalPlaces) => {
+    const factor = Math.pow(10, decimalPlaces);
+    return Math.floor(num * factor) / factor;
+  };
 
   const chartData = categories.map((category, index) => ({
     name: category,
@@ -27,7 +33,7 @@ const FinishScreen = () => {
   return (
     <>
       <Header />
-      <Typography>Dein Aktueller Fußabdruck beträgt: {totalCo2Sum}</Typography>
+      <Typography>Dein Aktueller Fußabdruck beträgt: {truncate(totalCo2, 2)} t CO2</Typography>
       <PieChart width={400} height={400}>
         <Pie
           data={chartData}
