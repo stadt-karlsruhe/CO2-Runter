@@ -6,7 +6,8 @@ const HeroSection = () => {
     <div className="hero">
       <Typography variant="h1">CO2 Runter</Typography>
       <Typography variant="h5">
-        Berechne deinen CO2-Fußabdruck und reduziere ihn
+        
+Wie viel CO2 kann ich durch einen veränderten Lebensstil einsparen und wie viel macht es in meinem Stadtteil aus, wenn ich noch andere in meinem Umfeld davon überzeuge?
       </Typography>
     </div>
   );
