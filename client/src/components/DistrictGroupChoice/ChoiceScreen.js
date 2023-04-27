@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const FinishScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const [tabValue, setTabValue] = useState(0);
+  const [selectedDistricts, setSelectedDistricts] = useState();
   const [sentData, setSentData] = useState(false);
   const navigate = useNavigate();
   const isLoggedIn = false; // Hier können Sie den Anmeldestatus des Benutzers überprüfen
@@ -26,7 +27,7 @@ const FinishScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
     try {
       // Hier müssen Sie die districts-, groups- und answers-Daten angeben
       const response = await axios.post("/api/footprint", {
-        districts: {},
+        districts: {selectedDistricts},
         groups: {},
         data: {},
       });
@@ -59,7 +60,6 @@ const FinishScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
 
   return (
     <>
-    {console.log("Kategorien:"+ categories)}
       <Typography variant="body1">
         Herzlichen Glückwunsch! Sie haben das Ende erreicht.
       </Typography>
@@ -71,7 +71,7 @@ const FinishScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
         <Tab label="Stadtteile" />
         <Tab label="Gruppen" />
       </Tabs>
-      {tabValue === 0 && <CityDistrictChoice />}
+      {tabValue === 0 && <CityDistrictChoice setSelectedDistricts={setSelectedDistricts} />}
       {tabValue === 1 && (isLoggedIn ? <GroupChoice /> : <Login />)}
       <Button onClick={handleSubmitData} variant="contained">
         Daten abschicken

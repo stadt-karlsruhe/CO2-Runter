@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Autocomplete, TextField, Typography } from "@mui/material";
 
-const CityDistrictChoice = () => {
+const CityDistrictChoice = (props) => {
   const [districts, setDistricts] = useState([]);
 
   useEffect(() => {
@@ -19,13 +19,18 @@ const CityDistrictChoice = () => {
     fetchDistricts();
   }, []);
 
+  const handleAutocompleteChange = (event, value) => {
+    console.log(value)
+    props.setSelectedDistricts(value);
+  };
+
   return (
     <>
       <Typography variant="body1">Wählen Sie ihren Stadteil, in dem sie Ansässig sind.</Typography>
-      {console.log(districts)}
       <Autocomplete
         options={districts}
         getOptionLabel={(option) => option.name}
+        onChange={handleAutocompleteChange}
         renderInput={(params) => (
           <TextField {...params} label="Stadtteil auswählen" />
         )}
