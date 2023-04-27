@@ -17,13 +17,13 @@ const LoginForm = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('/api/login', { usermail: email, password });
+      const response = await axios.post('/api/login', { email, password });
       if (response.status === 200) {
         localStorage.setItem('token', response.data.token);
       navigate(props.link);         
       }
     } catch (error) {
-      if (error.response && error.response.status === 401) {
+      if (error.response && error.response.status === 400) {
         setError('Anmeldung fehlgeschlagen');
       } else {
         setError('Ein Serverfehler ist aufgetreten');
