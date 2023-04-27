@@ -28,11 +28,11 @@ const FinishScreen = ({ co2ValuesPerCategory, categories }) => {
       const response = await axios.post("/api/footprint", {
         districts: {},
         groups: {},
-        answers: {},
+        data: {},
       });
       if (response.status === 200) {
         setSentData(true);
-        navigate("/CO2-Rechner/finish", {
+        navigate("/CO2Rechner/finish", {
           state: {
             co2ValuesPerCategory: co2ValuesPerCategory,
             categories: categories,
