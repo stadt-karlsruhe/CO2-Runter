@@ -177,6 +177,19 @@ app.post('/foodprint', (req, res) => {
   }
 })
 
+// route get total number of foodprints	
+app.get('/foodprint/total', (req, res) => {
+  const SelectQuery = " SELECT COUNT(*) AS total FROM  CO2Prints";
+  db.query(SelectQuery, (err, result) => {
+    if(err) {
+      console.log(err)
+      res.status(500).send('Something went wrong')
+    } else {
+      res.status(200).send(result)
+    }
+  })
+})
+
 app.use('/groups', groups_routes);
 app.use('/user', user_routes);
 app.use('/dashboard', dashboard_routes);
