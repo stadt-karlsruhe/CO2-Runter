@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -17,12 +18,12 @@ import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LineAxisIcon from "@mui/icons-material/LineAxis";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
-import { useNavigate } from "react-router-dom";
 
 const Header = (props) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const navigate = useNavigate();
 
   const handleClick = () => {
     navigate("/");
@@ -41,7 +42,7 @@ const Header = (props) => {
   };
 
   const handleDashboard = () => {
-    navigate("/Dashboard");
+    navigate("/dashboard");
     handleClose();
   };
 
@@ -61,8 +62,14 @@ const Header = (props) => {
             height="30"
           />
         </IconButton>
-        <Typography variant="h6" style={{ flexGrow: 1 }}>
-          CO2 Runter: App
+        <Typography
+          variant="h6"
+          style={{ flexGrow: 1, cursor: "pointer" }}
+          onClick={handleClick}
+        >
+          {location.pathname === "/Dashboard"
+            ? "CO2 Runter: Dashboard"
+            : "CO2 Runter: App"}
         </Typography>
         {props.user ? (
           <>
@@ -144,5 +151,4 @@ const Header = (props) => {
     </AppBar>
   );
 };
-
 export default Header;
