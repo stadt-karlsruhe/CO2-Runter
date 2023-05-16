@@ -29,7 +29,7 @@ const Footer = () => {
                   "/images/Logos/Stadtkarlsruhe-logo.svg"
                 }
                 alt="Stadt Karlsruhe"
-                width="100"
+                width="80"
                 height="100"
                 className="footer-image"
               />
@@ -47,7 +47,7 @@ const Footer = () => {
                   process.env.PUBLIC_URL + "/images/Logos/CodeFor-karlsruhe.svg"
                 }
                 alt="OK-Lab Karlsruhe"
-                width="100"
+                width="80"
                 height="100"
                 className="footer-image"
               />
@@ -63,7 +63,7 @@ const Footer = () => {
               <img
                 src={process.env.PUBLIC_URL + "/images/Logos/dhbw-logo.svg"}
                 alt="DHBW Karlsruhe"
-                width="100"
+                width="80"
                 height="100"
                 className="footer-image"
               />

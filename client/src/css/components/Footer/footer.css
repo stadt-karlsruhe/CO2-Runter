@@ -29,9 +29,9 @@
 }
 
 .footer-image {
-  display: block;
-  margin: 0 auto;
-}
+    width: 20vw; 
+    max-width: 140px; 
+  }
 
 .footer-links {
     display: flex;
