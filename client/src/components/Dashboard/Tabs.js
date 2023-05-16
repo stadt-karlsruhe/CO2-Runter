@@ -6,7 +6,7 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import Box from "@mui/material/Box";
 import Map from "./Map";
 import Co2Card from "./Contribution";
-//import Chart from "./Chart";
+import Charts from "./Charts";
 
 const MyTabs = () => {
   const [value, setValue] = useState(0);
@@ -57,6 +57,7 @@ const MyTabs = () => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <h1>Here will be some nice charts soon</h1>
+        <Charts />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Co2Card co2Footprint={0} />
