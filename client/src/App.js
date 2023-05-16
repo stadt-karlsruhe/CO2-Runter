@@ -12,6 +12,7 @@ import Dashboard from "./components/Dashboard/Dashboard"
 import GroupLoggedOut from "./components/Group/GroupLoggedOut";
 import GroupLoggedIn from "./components/Group/GroupLoggedIn";
 import FinishScreen from "./components/DistrictGroupChoice/FinishScreen";
+import "./styles/fonts.css";
 
 function App() {
   return (
