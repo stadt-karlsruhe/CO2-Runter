@@ -6,8 +6,12 @@ import Impressum from "./components/Impressum/Impressum";
 import DataPrivacy from "./components/DataPrivacy/DataPrivacy";
 import CO2QuestionsDataFetcher from "./components/QuestionBlock/CO2QuestionsDataFetcher";
 import InformationPage from "./components/Information/InformationPage";
+import Login from "./components/Login/LoginRegister"
 import theme from "./styles/theme.js";
 import Dashboard from "./components/Dashboard/Dashboard"
+import GroupLoggedOut from "./components/Group/GroupLoggedOut";
+import GroupLoggedIn from "./components/Group/GroupLoggedIn";
+import FinishScreen from "./components/DistrictGroupChoice/FinishScreen";
 
 function App() {
   return (
@@ -20,6 +24,10 @@ function App() {
           <Route path="/datenschutz" element={<DataPrivacy />} />
           <Route path="/impressum" element={<Impressum />} />
           <Route path="/information" element={<InformationPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/NewGroup/loggedOut" element={<GroupLoggedOut />} />
+          <Route path="/NewGroup/loggedIn" element={<GroupLoggedIn />} />
+          <Route path="/CO2Rechner/finish" element={<FinishScreen />} />
         </Routes>
       </Router>
     </ThemeProvider>

@@ -10,6 +10,11 @@ const CurrentCO2 = ({ co2Value }) => {
     navigate("/information");
   };
 
+  const truncate = (num, decimalPlaces) => {
+    const factor = Math.pow(10, decimalPlaces);
+    return Math.floor(num * factor) / factor;
+  };
+
   return (
     <Card sx={{
         display: "block",
@@ -21,7 +26,7 @@ const CurrentCO2 = ({ co2Value }) => {
       <CardContent>
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Typography variant="h6" component="div">
-            Ihr aktueller CO2 Fußabdruck beträgt: {co2Value}t
+            Ihr aktueller CO2 Fußabdruck beträgt: {truncate(co2Value, 2)}t
           </Typography>
           <IconButton onClick={handleInforamtion}>
             <InfoIcon />

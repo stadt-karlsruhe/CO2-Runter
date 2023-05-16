@@ -34,7 +34,7 @@ app.get('/questions', (req, res) => {
 
 app.post('/register', async (req, res) => {
     // Get user input
-    const { email, password, username } =  req.query;
+    const { email, password, username } =  req.body;
 
     // Validate user input
     if (!(email && password && username)) {
@@ -77,7 +77,7 @@ app.post('/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
   // Get user input
-  const { email, password } =  req.query;
+  const { email, password } =  req.body;
 
   // Validate user input
   if (!(email && password)) {
@@ -125,30 +125,40 @@ app.get('/districts', (req, res) => {
   })
 })
 
-// route save foodprint to db 
-app.post('/foodprint', (req, res) => {
+// route save footprint to db 
+app.post('/footprint', (req, res) => {
   let sucsses = true;
   // Get user input
   const { groups, district, data } = req.body;
-  // Validate user input
-  if (!((groups || district) && data)) {
+  // Validate user input 
+  if (!(groups && district && data )) {
+      sucsses = false;
+      res.status(400).send("All input is required");
+      console.log("field missing")
+  }else if(!(((groups.length > 0 )|| (district > 0) && data.length == 4))){ 
     sucsses = false;
     res.status(400).send("All input is required");
+    console.log("data in field missing")
+    console.log(groups.length)
+    console.log(district)
+    console.log(data.length)
   }
+
+
   else {
     const InsertQuery = "INSERT INTO CO2Prints (mobility, housing, consume, nutrition, date) VALUES (?, ?, ?, ?, ?)";
-    db.query(InsertQuery, [data.mobility, data.housing, data.consume, data.nutrition, new Date()], (err, result) => {
+    db.query(InsertQuery, [data[0], data[1], data[2], data[3], new Date()], (err, result) => {
       if(err) {
         console.log(err)
         sucsses = false;
         res.status(500).send('Something went wrong')
       } else {
-        // get the id of the foodprint
-        const foodprint_id = result.insertId;
-        // if a district is selected add the foodprint to the table Prints_In_Districts with this columns: district_ID	and print_ID
-        if(district) {
+        // get the id of the footprint
+        const footprint_id = result.insertId;
+        // if a district is selected add the footprint to the table Prints_In_Districts with this columns: district_ID	and print_ID
+        if(district.length > 0) {
           const InsertQuery = "INSERT INTO Prints_In_Districts (district_ID, print_ID) VALUES (?, ?)";
-          db.query(InsertQuery, [district, foodprint_id], (err, result) => {
+          db.query(InsertQuery, [district, footprint_id], (err, result) => {
             if(err) {
               console.log(err)
               sucsses = false;
@@ -156,11 +166,11 @@ app.post('/foodprint', (req, res) => {
             } 
           })
         }
-        // if there are groups selected add the foodprint to all groups in the table Prints_In_Carbon_Footprint_Groups with this columns: group_ID and print_ID
-        if(groups) {
+        // if there are groups selected add the footprint to all groups in the table Prints_In_Carbon_Footprint_Groups with this columns: group_ID and print_ID
+        if(groups.length > 0) {
           groups.forEach(group => {
             const InsertQuery = "INSERT INTO Prints_In_Carbon_Footprint_Groups (group_ID, print_ID) VALUES (?, ?)";
-            db.query(InsertQuery, [group, foodprint_id], (err, result) => {
+            db.query(InsertQuery, [group, footprint_id], (err, result) => {
               if(err) {
                 console.log(err)
                 sucsses = false;
@@ -172,7 +182,7 @@ app.post('/foodprint', (req, res) => {
       }
     })
     if (sucsses) {
-      res.status(200).send('Foodprint saved')
+      res.status(200).send('Footprint saved')
     }
   }
 })

@@ -28,6 +28,10 @@ const Header = (props) => {
     navigate("/");
   };
 
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -51,7 +55,7 @@ const Header = (props) => {
           onClick={handleClick}
         >
           <img
-            src={process.env.PUBLIC_URL + "/images/Logos/logo-icon.svg"}
+            src={process.env.PUBLIC_URL + "/images/Logos/CO2RunterLogo.svg"}
             alt="Logo"
             width="30"
             height="30"
@@ -127,7 +131,7 @@ const Header = (props) => {
                 <ListItemText>CO2 Runter Dashboard</ListItemText>
               </MenuItem>
               <Divider />
-              <MenuItem onClick={props.handleLogout}>
+              <MenuItem onClick={handleLogin}>
                 <ListItemIcon>
                   <LoginIcon fontSize="small" />
                 </ListItemIcon>
