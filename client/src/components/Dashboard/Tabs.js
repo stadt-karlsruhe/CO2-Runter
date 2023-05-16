@@ -56,7 +56,6 @@ const MyTabs = () => {
         <Map />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <h1>Here will be some nice charts soon</h1>
         <Charts />
       </TabPanel>
       <TabPanel value={value} index={2}>

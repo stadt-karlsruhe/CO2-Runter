@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
-import Button from "@mui/material/Button";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
 
 const Chart_avg = () => {
   const [footprints, setFootprints] = useState([
@@ -15,6 +18,33 @@ const Chart_avg = () => {
     },
     { 
         name: "Footprint 2",
+        values: [
+            { category: "Category 1", value: 3 },
+            { category: "Category 2", value: 5 },
+            { category: "Category 3", value: 10 },
+            { category: "Category 4", value: 1 },
+        ],
+    },
+    { 
+        name: "Footprint 3",
+        values: [
+            { category: "Category 1", value: 3 },
+            { category: "Category 2", value: 5 },
+            { category: "Category 3", value: 10 },
+            { category: "Category 4", value: 1 },
+        ],
+    },
+    { 
+        name: "Footprint D",
+        values: [
+            { category: "Category 1", value: 3 },
+            { category: "Category 2", value: 5 },
+            { category: "Category 3", value: 10 },
+            { category: "Category 4", value: 1 },
+        ],
+    },
+    { 
+        name: "Footprint 5",
         values: [
             { category: "Category 1", value: 3 },
             { category: "Category 2", value: 5 },
@@ -59,10 +89,6 @@ const Chart_avg = () => {
     // Add the average values to the selectedData and selectedCategories arrays
     selectedData.push(average.map((valueObj) => ({ category: valueObj.category, value: valueObj.value })));
     selectedCategories.push("Average");
-    console.log("Selected footprints");
-    console.log("Data:" + selectedData);
-    console.log("Categories:" + selectedCategories);
-    console.log(selectedFootprints);
 
     return {
       tooltip: {
@@ -72,7 +98,7 @@ const Chart_avg = () => {
         },
       },
       legend: {
-        data: selectedCategories,
+        data: available_Categories,
       },
       grid: {
         left: "3%",
@@ -86,27 +112,27 @@ const Chart_avg = () => {
         //selectedData[0].map((data) => data.category), // Use the categories from the first selectedData array
       },
       
-      yAxis: {
-        type: "value",
-        boundaryGap: [0, 0.01],
-      },
-      series: available_Categories.map((data, index) => ({
-        name: data,
-        type: "bar",
-        stack: "stack",
-        barWidth: "60%",
-        data: selectedData.map((selectedData) => selectedData[index].value),
-        label: {
-          show: true,
-          position: "inside",
-          formatter: "{c} t CO2e",
-        },
-      })),
-    };
-  };
+      yAxis
+: {
+type: "value",
+boundaryGap: [0, 0.01],
+},
+series: available_Categories.map((data, index) => ({
+name: data,
+type: "bar",
+stack: "stack",
+barWidth: "60%",
+data: selectedData.map((selectedData) => selectedData[index].value),
+label: {
+show: true,
+position: "inside",
+formatter: "{c} t CO2e",
+},
+})),
+};
+};
 
-  const handleFootprintClick
-= (footprint) => {
+const handleFootprintClick = (footprint) => {
 if (selectedFootprints.includes(footprint.name)) {
 setSelectedFootprints(selectedFootprints.filter((fp) => fp !== footprint.name));
 } else {
@@ -116,28 +142,34 @@ setSelectedFootprints([...selectedFootprints, footprint.name]);
 }
 };
 
+const handleSelectChange = (event) => {
+setSelectedFootprints(event.target.value);
+};
+
 return (
     <div>
-        <ReactEcharts option={getOption()} style={{ height: "500px" }} />
-        <div>
+      <ReactEcharts option={getOption()} style={{ height: "500px" }} />
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+        <FormControl>
+            <InputLabel id="demo-multiple-name-label">Angezeigte Fußabdrücke wählen</InputLabel>
+          <Select
+            multiple
+            label="Angezeigte Fußabdrücke wählen"
+            value={selectedFootprints}
+            onChange={handleSelectChange}
+            renderValue={(selected) => selected.join(", ")}
+            style={{ minWidth: "300px" }} // Adjust the width as needed
+          >
             {footprints.map((footprint) => (
-            <Button
-                key={footprint.name}
-                onClick={() => handleFootprintClick(footprint)}
-                variant="contained"
-                style={{
-                    backgroundColor: selectedFootprints.includes(footprint.name) ? "blue" : "gray",
-                    color: "white",
-                    margin: "10px",
-                }}
-                disabled={selectedFootprints.length >= 4 && !selectedFootprints.includes(footprint.name)}
-            >
+              <MenuItem key={footprint.name} value={footprint.name}>
                 {footprint.name}
-            </Button>
-        ))}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
     </div>
-</div>
-);
+  );
 };
 
 export default Chart_avg;
