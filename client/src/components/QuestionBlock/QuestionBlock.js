@@ -87,16 +87,14 @@ const QuestionBlock = (props) => {
           />
         )}
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <FormGroup>
-            <Stack direction="row" spacing={1} alignItems="center">
-              {isDetailed ? (
+          {props.questions.detailed.questions.length > 0 && (
+            <FormGroup>
+              <Stack direction="row" spacing={1} alignItems="center">
                 <Typography>detailliert</Typography>
-              ) : (
-                <Typography>schnell</Typography>
-              )}
-              <Switch checked={!!isDetailed} onChange={handleSwitchChange} />
-            </Stack>
-          </FormGroup>
+                <Switch checked={!!isDetailed} onChange={handleSwitchChange} />
+              </Stack>
+            </FormGroup>
+          )}
         </Box>
       </Paper>
     </Container>
