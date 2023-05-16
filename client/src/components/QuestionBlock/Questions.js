@@ -8,7 +8,15 @@ const Questions = ({
   onSwitchChange,
   onCo2ValuesChange,
 }) => (
-  <Box sx={{ overflow: "scroll", maxHeight: "70vh" }}>
+  <Box
+    sx={{
+      overflow: "scroll",
+      maxHeight: "70vh",
+      "@media (max-width: 600px)": {
+        maxHeight: "63vh",
+      },
+    }}
+  >
     {questions.map((categoryQuestions, index) => (
       <QuestionBlock
         key={index}
