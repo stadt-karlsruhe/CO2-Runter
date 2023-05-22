@@ -3,9 +3,12 @@ import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, TextField, Card } from "@mui/material";
 
-const GroupChoice = () => {
+const GroupChoice = (props) => {
   const [groups, setGroups] = useState([]);
   const [groupCode, setGroupCode] = useState("");
+  const [selectedRows, setSelectedRows] = useState([]);
+  const { setSelectedDistricts } = props;
+
 
   const columns = [
     { field: "groupname", headerName: "Gruppenname", width: 150 },
@@ -32,7 +35,8 @@ const GroupChoice = () => {
       }
     };
     fetchGroups();
-  }, []);
+    setSelectedDistricts(selectedRows);
+  }, [selectedRows, setSelectedDistricts]);
 
   const handleGroupCodeChange = (event) => {
     setGroupCode(event.target.value);
@@ -52,11 +56,16 @@ const GroupChoice = () => {
   return (
     <Card style={{ width: "90%", marginBottom: "10px", padding: "25px", backgroundColor: "#f7f9f5" }}>
       <DataGrid
-        rows={groups}
-        columns={columns}
-        pageSize={5}
-        checkboxSelection
-      />
+   rows={groups}
+  columns={columns}
+  pageSize={5}
+  checkboxSelection
+  onSelectionModelChange={(newSelection) => {
+    setSelectedRows(newSelection.selectionModel);
+  }}
+  selectionModel={selectedRows}
+/>
+
       <TextField
         label="Gruppencode"
         value={groupCode}

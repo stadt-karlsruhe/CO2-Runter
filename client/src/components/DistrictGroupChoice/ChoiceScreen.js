@@ -8,10 +8,11 @@ import { useNavigate } from "react-router-dom";
 
 const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const [tabValue, setTabValue] = useState(0);
-  const [selectedDistricts, setSelectedDistricts] = useState();
+  const [selectedDistricts, setSelectedDistricts] = useState("");
+  const [selectedGroups, setSelectedGroups] = useState([]);
   const [sentData, setSentData] = useState(false);
   const navigate = useNavigate();
-  const isLoggedIn = false; // Hier können Sie den Anmeldestatus des Benutzers überprüfen
+  const isLoggedIn = false;
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
@@ -27,8 +28,8 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
       // Hier müssen Sie die districts-, groups- und answers-Daten angeben
       const response = await axios.post("/api/footprint", {
         districts: { selectedDistricts },
-        groups: {},
-        data: {},
+        groups: {selectedGroups},
+        data: {co2ValuesPerCategory},
       });
       if (response.status === 200) {
         setSentData(true);
@@ -73,7 +74,7 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
         <Tab label="Gruppen" />
       </Tabs>
       {tabValue === 0 && <CityDistrictChoice setSelectedDistricts={setSelectedDistricts} />}
-      {tabValue === 1 && (isLoggedIn ? <GroupChoice /> : <Login />)}
+      {tabValue === 1 && (isLoggedIn ? <GroupChoice setSelectedGroups={setSelectedGroups}/> : <Login />)}
       <Button onClick={handleSubmitData} variant="contained" style={{ display: "block", marginBottom: "10px", marginTop: "10px" }}>
         Daten abschicken
       </Button>
