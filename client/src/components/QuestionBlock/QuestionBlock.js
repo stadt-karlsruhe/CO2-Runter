@@ -64,7 +64,7 @@ const QuestionBlock = (props) => {
   return (
     <Container maxWidth="sm">
       <Paper
-        sx={{ my: 2, p: 2, backgroundColor: "#f0f0f0", borderRadius: "8px" }}
+        sx={{ my: 1, p: 2, backgroundColor: "#f7f9f5", borderRadius: "8px" }}
       >
         {isDetailed ? (
           props.questions.detailed.questions.map((question, index) => (
