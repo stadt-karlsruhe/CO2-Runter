@@ -4,7 +4,7 @@ import { Tab, Tabs, Typography } from "@mui/material";
 import { TabContext, TabPanel } from "@mui/lab";
 import GroupChoice from "./GroupChoice";
 
-const Login = () => {
+const Login = (setSelectedGroups) => {
   const [value, setValue] = React.useState("0");
 
   const handleChange = (event, newValue) => {
@@ -37,7 +37,7 @@ const Login = () => {
           <Tab label="Login" value="1" />
         </Tabs>
         <TabPanel value="0">
-          <GroupChoice />
+          <GroupChoice setSelectedGroups={setSelectedGroups}/>
         </TabPanel>
         <TabPanel value="1">
           <div

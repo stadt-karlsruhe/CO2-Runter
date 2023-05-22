@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const [tabValue, setTabValue] = useState(0);
-  const [selectedDistricts, setSelectedDistricts] = useState("");
+  const [selectedDistricts, setSelectedDistricts] = useState();
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [sentData, setSentData] = useState(false);
   const navigate = useNavigate();
@@ -18,6 +18,11 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
     setTabValue(newValue);
   };
 
+  const co2SumPerCategory = co2ValuesPerCategory.map((category) =>
+    category.reduce((a, b) => a + b, 0)
+  );
+
+
   const truncate = (num, decimalPlaces) => {
     const factor = Math.pow(10, decimalPlaces);
     return Math.floor(num * factor) / factor;
@@ -25,11 +30,17 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
 
   const handleSubmitData = async () => {
     try {
-      // Hier müssen Sie die districts-, groups- und answers-Daten angeben
+      console.log({
+        groups: selectedGroups,
+        district: selectedDistricts,
+        data: co2SumPerCategory
+      })
       const response = await axios.post("/api/footprint", {
-        districts: { selectedDistricts },
-        groups: {selectedGroups},
-        data: {co2ValuesPerCategory},
+        json:{
+          groups: selectedGroups,
+          district: selectedDistricts,
+          data: co2SumPerCategory
+        }
       });
       if (response.status === 200) {
         setSentData(true);
@@ -74,7 +85,7 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
         <Tab label="Gruppen" />
       </Tabs>
       {tabValue === 0 && <CityDistrictChoice setSelectedDistricts={setSelectedDistricts} />}
-      {tabValue === 1 && (isLoggedIn ? <GroupChoice setSelectedGroups={setSelectedGroups}/> : <Login />)}
+      {tabValue === 1 && (isLoggedIn ? <GroupChoice setSelectedGroups={setSelectedGroups}/> : <Login setSelectedGroups={setSelectedGroups}/>)}
       <Button onClick={handleSubmitData} variant="contained" style={{ display: "block", marginBottom: "10px", marginTop: "10px" }}>
         Daten abschicken
       </Button>

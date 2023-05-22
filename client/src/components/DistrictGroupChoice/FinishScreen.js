@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#696969"];
 
 const FinishScreen = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const FinishScreen = () => {
   const co2ValuesPerCategory = location.state.co2ValuesPerCategory;
   const categories = location.state.categories;
   const dataSent = location.state.dataSent;
-  const totalCo2 = location.state.totalCo2;
+  const baseCO2 = 3.5;
 
   const co2SumPerCategory = co2ValuesPerCategory.map((category) =>
     category.reduce((a, b) => a + b, 0)
@@ -25,30 +25,32 @@ const FinishScreen = () => {
     return Math.floor(num * factor) / factor;
   };
 
-  const chartData = categories.map((category, index) => ({
+  const chartData = [...categories, "Grundwert"].map((category, index) => ({
     name: category,
-    value: co2SumPerCategory[index],
+    value: index === categories.length ? baseCO2 : co2SumPerCategory[index],
   }));
+  
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "50px", marginBottom: "50px" }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <Header />
-      <Typography variant="h6" style={{ marginBottom: "15px", marginTop: "25px" }}>Dein Aktueller Fußabdruck beträgt: {truncate(totalCo2Sum, 2)} t CO2</Typography>
+      <Typography variant="h6" style={{ marginBottom: "15px", marginTop: "25px" }}>Dein Aktueller Fußabdruck beträgt: {truncate(totalCo2Sum+baseCO2, 2)} t CO2</Typography>
       <PieChart width={400} height={400}>
-        <Pie
-          data={chartData}
-          cx={200}
-          cy={200}
-          labelLine={false}
-          label={({ name, value }) => `${name}: ${value}`}
-          outerRadius={80}
-          fill="#8884d8"
-          dataKey="value"
-        >
-          {chartData.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
+      <Pie
+  data={chartData}
+  cx={200}
+  cy={200}
+  labelLine={false}
+  label={({ name, value }) => `${name}: ${value}`}
+  outerRadius={80}
+  fill="#8884d8"
+  dataKey="value"
+>
+  {chartData.map((entry, index) => (
+    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+  ))}
+</Pie>
+
       </PieChart>
       <Typography variant="body1" style={{ marginTop: "20px", marginBottom: "20px" }}>
         {dataSent
