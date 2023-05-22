@@ -30,15 +30,10 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
 
   const handleSubmitData = async () => {
     try {
-      console.log({
-        groups: selectedGroups,
-        district: selectedDistricts,
-        data: co2SumPerCategory
-      })
       const response = await axios.post("/api/footprint", {
         json:{
           groups: selectedGroups,
-          district: selectedDistricts,
+          district: selectedDistricts ?? 0,
           data: co2SumPerCategory
         }
       });

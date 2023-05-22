@@ -12,6 +12,7 @@ const CityDistrictChoice = (props) => {
         if (response.status === 200) {
           setDistricts(response.data);
         }
+        
       } catch (error) {
         console.error(error);
       }
@@ -20,7 +21,7 @@ const CityDistrictChoice = (props) => {
   }, []);
 
   const handleAutocompleteChange = (event, value) => {
-    props.setSelectedDistricts(value);
+    props.setSelectedDistricts(districts[value].district_ID);
   };
 
   return (
