@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Card } from "@mui/material";
 
 const GroupChoice = () => {
   const [groups, setGroups] = useState([]);
@@ -50,7 +50,7 @@ const GroupChoice = () => {
   };
 
   return (
-    <>
+    <Card style={{ width: "90%", marginBottom: "10px", padding: "25px", backgroundColor: "#f7f9f5" }}>
       <DataGrid
         rows={groups}
         columns={columns}
@@ -63,7 +63,7 @@ const GroupChoice = () => {
         onChange={handleGroupCodeChange}
       />
       <Button onClick={handleAddGroup}>Gruppe hinzufügen</Button>
-    </>
+    </Card>
   );
 };
 
