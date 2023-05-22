@@ -6,8 +6,7 @@ import GroupChoice from "./GroupChoice";
 import Login from "./Login";
 import { useNavigate } from "react-router-dom";
 
-
-const FinishScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
+const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const [tabValue, setTabValue] = useState(0);
   const [selectedDistricts, setSelectedDistricts] = useState();
   const [sentData, setSentData] = useState(false);
@@ -27,7 +26,7 @@ const FinishScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
     try {
       // Hier müssen Sie die districts-, groups- und answers-Daten angeben
       const response = await axios.post("/api/footprint", {
-        districts: {selectedDistricts},
+        districts: { selectedDistricts },
         groups: {},
         data: {},
       });
@@ -59,28 +58,30 @@ const FinishScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   };
 
   return (
-    <>
-      <Typography variant="body1">
+    <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+      <Typography variant="body1" style={{ marginBottom: "10px", marginTop: "15px" }}>
         Herzlichen Glückwunsch! Sie haben das Ende erreicht.
       </Typography>
-      <Typography variant="h4">{truncate(totalCo2, 2)} t CO2</Typography>
-      <Typography variant="body1">
+      <Typography variant="h4" style={{ marginBottom: "10px" }}>
+        {truncate(totalCo2, 2)} t CO2
+      </Typography>
+      <Typography variant="body1" style={{ marginBottom: "10px" }}>
         Hier ist die Summe Ihrer CO2-Werte pro Kategorie.
       </Typography>
-      <Tabs value={tabValue} onChange={handleTabChange}>
+      <Tabs value={tabValue} onChange={handleTabChange} style={{ display: "flex", justifyContent: "center", marginBottom: "10px" }}>
         <Tab label="Stadtteile" />
         <Tab label="Gruppen" />
       </Tabs>
       {tabValue === 0 && <CityDistrictChoice setSelectedDistricts={setSelectedDistricts} />}
       {tabValue === 1 && (isLoggedIn ? <GroupChoice /> : <Login />)}
-      <Button onClick={handleSubmitData} variant="contained">
+      <Button onClick={handleSubmitData} variant="contained" style={{ display: "block", marginBottom: "10px", marginTop: "10px" }}>
         Daten abschicken
       </Button>
-      <Button onClick={handleContinue} variant="outlined">
+      <Button onClick={handleContinue} variant="outlined" style={{ display: "block", marginBottom: "10px" }}>
         Weiter ohne Daten zu senden
       </Button>
-    </>
+    </div>
   );
 };
 
-export default FinishScreen;
+export default ChoiceScreen;

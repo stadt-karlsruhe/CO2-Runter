@@ -93,7 +93,7 @@ const RegisterForm = () => {
             "Das Passwort muss mindestens 4 Zeichen lang sein"
           }
         />
-        <Button variant="contained" type="submit" disabled={!isFormFilled}>
+        <Button variant="contained" type="submit" disabled={!isFormFilled} className="btn">
           Registrieren
         </Button>
       </Stack>

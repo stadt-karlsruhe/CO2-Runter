@@ -31,9 +31,9 @@ const FinishScreen = () => {
   }));
 
   return (
-    <>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "50px", marginBottom: "50px" }}>
       <Header />
-      <Typography>Dein Aktueller Fußabdruck beträgt: {truncate(totalCo2, 2)} t CO2</Typography>
+      <Typography variant="h6" style={{ marginBottom: "15px", marginTop: "25px" }}>Dein Aktueller Fußabdruck beträgt: {truncate(totalCo2, 2)} t CO2</Typography>
       <PieChart width={400} height={400}>
         <Pie
           data={chartData}
@@ -50,19 +50,21 @@ const FinishScreen = () => {
           ))}
         </Pie>
       </PieChart>
-      <Typography variant="body1">
+      <Typography variant="body1" style={{ marginTop: "20px", marginBottom: "20px" }}>
         {dataSent
           ? "Danke für das Mitmachen bei der Co2App. Deine Daten wurden an das Dashboard übermittelt."
           : "Schade das Sie ihre Daten nicht mit uns und den anderen Nutzern teilen wollen."}
       </Typography>
-      <Button variant="contained" onClick={() => navigate("/")}>
-        Zum Dashboard
-      </Button>
-      <Button variant="outlined" onClick={() => navigate("/")}>
-        Home
-      </Button>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <Button variant="contained" onClick={() => navigate("/")} style={{ width: "100%", marginBottom: "10px", marginTop: "10px" }}>
+          Zum Dashboard
+        </Button>
+        <Button variant="outlined" onClick={() => navigate("/")} style={{ width: "100%", marginBottom: "10px" }}>
+          Home
+        </Button>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
