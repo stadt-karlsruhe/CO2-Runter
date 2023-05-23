@@ -22,7 +22,6 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
     category.reduce((a, b) => a + b, 0)
   );
 
-
   const truncate = (num, decimalPlaces) => {
     const factor = Math.pow(10, decimalPlaces);
     return Math.floor(num * factor) / factor;
@@ -31,11 +30,9 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const handleSubmitData = async () => {
     try {
       const response = await axios.post("/api/footprint", {
-        json:{
-          groups: selectedGroups,
-          district: selectedDistricts ?? 0,
-          data: co2SumPerCategory
-        }
+        groups: selectedGroups,
+        district: selectedDistricts ?? 0,
+        data: co2SumPerCategory,
       });
       if (response.status === 200) {
         setSentData(true);
@@ -65,8 +62,18 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-      <Typography variant="body1" style={{ marginBottom: "10px", marginTop: "15px" }}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <Typography
+        variant="body1"
+        style={{ marginBottom: "10px", marginTop: "15px" }}
+      >
         Herzlichen Glückwunsch! Sie haben das Ende erreicht.
       </Typography>
       <Typography variant="h4" style={{ marginBottom: "10px" }}>
@@ -75,16 +82,39 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
       <Typography variant="body1" style={{ marginBottom: "10px" }}>
         Hier ist die Summe Ihrer CO2-Werte pro Kategorie.
       </Typography>
-      <Tabs value={tabValue} onChange={handleTabChange} style={{ display: "flex", justifyContent: "center", marginBottom: "10px" }}>
+      <Tabs
+        value={tabValue}
+        onChange={handleTabChange}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "10px",
+        }}
+      >
         <Tab label="Stadtteile" />
         <Tab label="Gruppen" />
       </Tabs>
-      {tabValue === 0 && <CityDistrictChoice setSelectedDistricts={setSelectedDistricts} />}
-      {tabValue === 1 && (isLoggedIn ? <GroupChoice setSelectedGroups={setSelectedGroups}/> : <Login setSelectedGroups={setSelectedGroups}/>)}
-      <Button onClick={handleSubmitData} variant="contained" style={{ display: "block", marginBottom: "10px", marginTop: "10px" }}>
+      {tabValue === 0 && (
+        <CityDistrictChoice setSelectedDistricts={setSelectedDistricts} />
+      )}
+      {tabValue === 1 &&
+        (isLoggedIn ? (
+          <GroupChoice setSelectedGroups={setSelectedGroups} />
+        ) : (
+          <Login setSelectedGroups={setSelectedGroups} />
+        ))}
+      <Button
+        onClick={handleSubmitData}
+        variant="contained"
+        style={{ display: "block", marginBottom: "10px", marginTop: "10px" }}
+      >
         Daten abschicken
       </Button>
-      <Button onClick={handleContinue} variant="outlined" style={{ display: "block", marginBottom: "10px" }}>
+      <Button
+        onClick={handleContinue}
+        variant="outlined"
+        style={{ display: "block", marginBottom: "10px" }}
+      >
         Weiter ohne Daten zu senden
       </Button>
     </div>
