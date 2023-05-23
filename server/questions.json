@@ -15,8 +15,8 @@
               "Häufig",
               "Sehr häufig"
             ],
-            "values": [0, 1.07, 1.79, 3.58, 5.37],
-            "defaultValue": 1.79
+            "values": [0, 0.50, 0.98, 1.23, 1.79],
+            "defaultValue": 0.98
           },
           "detailed": {
             "questions": [
@@ -25,7 +25,7 @@
                 "typ": "auswahl",
                 "replies": ["Diesel", "Benzin", "Erdgas", "Elektro", "Hybrid"],
                 "values": [0.72, 1, 0.78, 0.44, 0.78],
-                "defaultValue": 2
+                "defaultValue": 1
               },
               {
                 "text": "Was ist ihr Verbrauch?",
@@ -118,7 +118,7 @@
             "unit": "Stunden",
             "maxInput": 1000000,
             "defaultValue": 0,
-            "formula": "function (value) { return value / 2; }"
+            "formula": "function (value) { return value * 0.15; }"
           },
           "detailed": {
             "questions": [
@@ -214,7 +214,7 @@
             "typ": "input",
             "unit": "Personen",
             "maxInput": 10,
-            "defaultValue": 1,
+            "defaultValue": 0.5,
             "formula": "function (value) { return value / 10; }"
           },
           "detailed": {
@@ -229,7 +229,7 @@
             "typ": "input",
             "unit": "m²",
             "maxInput": 1000000,
-            "defaultValue": 1,
+            "defaultValue": 0.5,
             "formula": "function (value) { return value / 10; }"
           },
           "detailed": {
@@ -250,7 +250,7 @@
               "2005-2019"
             ],
             "values": [4, 3, 2, 1, 0],
-            "defaultValue": 1
+            "defaultValue": 0.5
           },
           "detailed": {
             "questions": [
@@ -260,7 +260,7 @@
                 "unit": "Jahr",
                 "maxInput": 10000,
                 "defaultValue": 2000,
-                "formula": "function (value) { return value / 1000; }"
+                "formula": "function (value) { return value / 4000; }"
               }
             ],
             "formula": "function (values) { return values[0]; }"
@@ -281,7 +281,7 @@
               "Sonstiges"
             ],
             "values": [0, 1, 2, 3, 4, 5, 6],
-            "defaultValue": 1
+            "defaultValue": 0.5
           },
           "detailed": {
             "questions": [
@@ -298,15 +298,15 @@
                   "Sonstiges"
                 ],
                 "values": [0, 1, 2, 3, 4, 5, 6],
-                "defaultValue": 1
+                "defaultValue": 0.5
               },
               {
-                "text": "Wie hoch ist ihr verbrauch?",
+                "text": "Wie hoch ist ihr verbrauch pro Jahr?",
                 "typ": "input",
                 "unit": "kWh",
                 "maxInput": 1000000,
                 "defaultValue": 20,
-                "formula": "function (value) { return value / 10; }"
+                "formula": "function (value) { return value / 100; }"
               }
             ],
             "formula": "function (values) { return values[0] + values[1]; }"
@@ -328,14 +328,14 @@
                 "typ": "auswahl",
                 "replies": ["Ökostrom", "Strommix", "Fossile Energien"],
                 "values": [0, 1, 2],
-                "defaultValue": 1
+                "defaultValue": 0.5
               },
               {
-                "text": "Wie hoch ist ihr verbrauch?",
+                "text": "Wie hoch ist ihr verbrauch pro Jahr?",
                 "typ": "input",
                 "unit": "kWh",
                 "maxInput": 1000000,
-                "defaultValue": 10,
+                "defaultValue": 5,
                 "formula": "function (value) { return value / 10; }"
               }
             ],
@@ -353,8 +353,8 @@
             "text": "Wie würden sie ihr Kaufverhalten beschreiben?",
             "typ": "auswahl",
             "replies": ["sparsam", "normal", "großzügig"],
-            "values": [2.75, 2.9, 3.04],
-            "defaultValue": 2.9
+            "values": [0.75, 1.3, 2.04],
+            "defaultValue": 1
           },
           "detailed": {
             "questions": [
