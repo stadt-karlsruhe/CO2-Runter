@@ -34,6 +34,7 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
         district: selectedDistricts ?? 0,
         data: co2SumPerCategory,
       });
+      console.log(response);
       if (response.status === 200) {
         setSentData(true);
         navigate("/CO2Rechner/finish", {
