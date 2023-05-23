@@ -146,6 +146,10 @@ app.post('/footprint', (req, res) => {
 
 
   else {
+    console.log("data is ok")
+    console.log(groups)
+    console.log(district)
+    console.log(data)
     const InsertQuery = "INSERT INTO CO2Prints (mobility, housing, consume, nutrition, date) VALUES (?, ?, ?, ?, ?)";
     db.query(InsertQuery, [data[0], data[1], data[2], data[3], new Date()], (err, result) => {
       if(err) {
@@ -156,7 +160,8 @@ app.post('/footprint', (req, res) => {
         // get the id of the footprint
         const footprint_id = result.insertId;
         // if a district is selected add the footprint to the table Prints_In_Districts with this columns: district_ID	and print_ID
-        if(district.length > 0) {
+        if(district > 0) {
+          console.log("Addedto :"+ district)
           const InsertQuery = "INSERT INTO Prints_In_Districts (district_ID, print_ID) VALUES (?, ?)";
           db.query(InsertQuery, [district, footprint_id], (err, result) => {
             if(err) {
