@@ -4,76 +4,57 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
+import axios from "axios";
 
 const Chart_avg = () => {
-  const [footprints, setFootprints] = useState([
-    {
-      name: "Footprint A",
-      values: [
-        { category: "Category 1", value: 7 },
-        { category: "Category 2", value: 3 },
-        { category: "Category 3", value: 4 },
-        { category: "Category 4", value: 2 },
-      ],
-    },
-    { 
-        name: "Footprint 2",
-        values: [
-            { category: "Category 1", value: 3 },
-            { category: "Category 2", value: 5 },
-            { category: "Category 3", value: 10 },
-            { category: "Category 4", value: 1 },
-        ],
-    },
-    { 
-        name: "Footprint 3",
-        values: [
-            { category: "Category 1", value: 3 },
-            { category: "Category 2", value: 5 },
-            { category: "Category 3", value: 10 },
-            { category: "Category 4", value: 1 },
-        ],
-    },
-    { 
-        name: "Footprint D",
-        values: [
-            { category: "Category 1", value: 3 },
-            { category: "Category 2", value: 5 },
-            { category: "Category 3", value: 10 },
-            { category: "Category 4", value: 1 },
-        ],
-    },
-    { 
-        name: "Footprint 5",
-        values: [
-            { category: "Category 1", value: 3 },
-            { category: "Category 2", value: 5 },
-            { category: "Category 3", value: 10 },
-            { category: "Category 4", value: 1 },
-        ],
-    },
-    // Add more footprints with their respective values and categories here
-  ]);
-  const [average, setAverage] = useState([
-    { category: "Category 1", value: 3 },
-    { category: "Category 2", value: 2 },
-    { category: "Category 3", value: 4 },
-    { category: "Category 4", value: 1 },
-  ]); // Set average values for each category
+  const [footprints, setFootprints] = useState([]);
+  const [average, setAverage] = useState([]);
   const [selectedFootprints, setSelectedFootprints] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch footprints data from the server
-    // Replace this with your actual API calls
-    // axios.get("/footprints/all").then((response) => {
-    //   setAverage(response.data.average);
-    // });
-    // axios.get("/footprints/comparison").then((response) => {
-    //   setFootprints(response.data);
-    // });
+    const fetchData = async () => {
+      try {
+        const averageResponse = await axios.get("/api/dashboard/footprints/average");
+        setAverage(averageResponse.data);
+        console.log(averageResponse.data);
+
+        const footprintsResponse = await axios.get("/api/dashboard/comparisonprints");
+        setFootprints(footprintsResponse.data);
+        console.log(footprintsResponse.data);
+
+        setIsLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
+  useEffect(() => {
+    // Reload the options and chart when the data is available
+    if (footprints && average && footprints.length > 0 && average.length > 0) {
+      // Force re-render by updating the selectedFootprints state
+      setSelectedFootprints([...selectedFootprints]);
+    }
+  }, [footprints, average]);
+
+  
   const getOption = () => {
+    if (
+      isLoading ||
+      error ||
+      footprints === undefined ||
+      footprints.length === 0 ||
+      average === undefined ||
+      average.length === 0
+    ) {
+      // Handle loading and error states
+      return null;
+    }
     const selectedData = selectedFootprints.map((selectedFootprint) => {
       const footprint = footprints.find((f) => f.name === selectedFootprint);
       return footprint.values.map((valueObj) => ({ category: valueObj.category, value: valueObj.value }));
@@ -88,7 +69,7 @@ const Chart_avg = () => {
 
     // Add the average values to the selectedData and selectedCategories arrays
     selectedData.push(average.map((valueObj) => ({ category: valueObj.category, value: valueObj.value })));
-    selectedCategories.push("Average");
+    selectedCategories.push("Durchschnitt");
 
     return {
       tooltip: {
@@ -147,9 +128,19 @@ setSelectedFootprints(event.target.value);
 };
 
 return (
-    <div>
-      <ReactEcharts option={getOption()} style={{ height: "500px" }} />
-      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+  <div>
+    {isLoading ? (
+      <div>Loading...</div>
+    ) : error ? (
+      <div>Error: {error}</div>
+    ) : (
+      <>
+        {footprints && average && footprints.length > 0 && average.length > 0 ? (
+          <ReactEcharts option={getOption()} style={{ height: "500px" }} />
+        ) : (
+          <div>Data not available.</div>
+        )}
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
         <FormControl>
             <InputLabel id="demo-multiple-name-label">Angezeigte Fußabdrücke wählen</InputLabel>
           <Select
@@ -166,10 +157,12 @@ return (
               </MenuItem>
             ))}
           </Select>
-        </FormControl>
-      </div>
-    </div>
-  );
-};
+        </FormControl> 
+        </div>
+      </>
+    )}
+  </div>
+);
+};	
 
 export default Chart_avg;

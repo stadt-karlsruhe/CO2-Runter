@@ -1,6 +1,6 @@
 ## **Get Footprint Data for all Districts**
 
-This endpoint allows users to retrieve a list of groups they administer.
+This endpoint allows you to get the footprint data for all districts.
 
 - **URL**
 
