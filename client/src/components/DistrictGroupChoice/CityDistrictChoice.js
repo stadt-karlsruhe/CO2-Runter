@@ -12,6 +12,7 @@ const CityDistrictChoice = (props) => {
         if (response.status === 200) {
           setDistricts(response.data);
         }
+        
       } catch (error) {
         console.error(error);
       }
@@ -20,14 +21,14 @@ const CityDistrictChoice = (props) => {
   }, []);
 
   const handleAutocompleteChange = (event, value) => {
-    console.log(value);
     props.setSelectedDistricts(value);
+    //props.setSelectedDistricts(districts[value].district_ID);
   };
 
   return (
     <Card style={{ width: "90%", marginBottom: "10px", padding: "25px", backgroundColor: "#f7f9f5" }}>
       <Typography variant="body1" style={{ marginBottom: "10px" }}>
-        Wählen Sie ihren Stadteil, in dem sie Ansässig sind.
+        Wählen Sie ihren Stadtteil, in dem sie ansässig sind.
       </Typography>
       <Autocomplete
         options={districts}

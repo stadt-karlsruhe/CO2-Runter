@@ -9,13 +9,18 @@ import { useNavigate } from "react-router-dom";
 const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const [tabValue, setTabValue] = useState(0);
   const [selectedDistricts, setSelectedDistricts] = useState();
+  const [selectedGroups, setSelectedGroups] = useState([]);
   const [sentData, setSentData] = useState(false);
   const navigate = useNavigate();
-  const isLoggedIn = false; // Hier können Sie den Anmeldestatus des Benutzers überprüfen
+  const isLoggedIn = false;
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
+
+  const co2SumPerCategory = co2ValuesPerCategory.map((category) =>
+    category.reduce((a, b) => a + b, 0)
+  );
 
   const truncate = (num, decimalPlaces) => {
     const factor = Math.pow(10, decimalPlaces);
@@ -24,12 +29,14 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
 
   const handleSubmitData = async () => {
     try {
-      // Hier müssen Sie die districts-, groups- und answers-Daten angeben
       const response = await axios.post("/api/footprint", {
-        districts: { selectedDistricts },
-        groups: {},
-        data: {},
+        groups: selectedGroups,
+        district: selectedDistricts.district_ID ?? 0,
+        data: co2SumPerCategory,
       });
+
+      console.log(selectedGroups);
+
       if (response.status === 200) {
         setSentData(true);
         navigate("/CO2Rechner/finish", {
@@ -58,8 +65,18 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-      <Typography variant="body1" style={{ marginBottom: "10px", marginTop: "15px" }}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <Typography
+        variant="body1"
+        style={{ marginBottom: "10px", marginTop: "15px" }}
+      >
         Herzlichen Glückwunsch! Sie haben das Ende erreicht.
       </Typography>
       <Typography variant="h4" style={{ marginBottom: "10px" }}>
@@ -68,16 +85,39 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
       <Typography variant="body1" style={{ marginBottom: "10px" }}>
         Hier ist die Summe Ihrer CO2-Werte pro Kategorie.
       </Typography>
-      <Tabs value={tabValue} onChange={handleTabChange} style={{ display: "flex", justifyContent: "center", marginBottom: "10px" }}>
+      <Tabs
+        value={tabValue}
+        onChange={handleTabChange}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "10px",
+        }}
+      >
         <Tab label="Stadtteile" />
         <Tab label="Gruppen" />
       </Tabs>
-      {tabValue === 0 && <CityDistrictChoice setSelectedDistricts={setSelectedDistricts} />}
-      {tabValue === 1 && (isLoggedIn ? <GroupChoice /> : <Login />)}
-      <Button onClick={handleSubmitData} variant="contained" style={{ display: "block", marginBottom: "10px", marginTop: "10px" }}>
+      {tabValue === 0 && (
+        <CityDistrictChoice setSelectedDistricts={setSelectedDistricts} />
+      )}
+      {tabValue === 1 &&
+        (isLoggedIn ? (
+          <GroupChoice setSelectedGroups={setSelectedGroups} />
+        ) : (
+          <Login setSelectedGroups={setSelectedGroups} />
+        ))}
+      <Button
+        onClick={handleSubmitData}
+        variant="contained"
+        style={{ display: "block", marginBottom: "10px", marginTop: "10px" }}
+      >
         Daten abschicken
       </Button>
-      <Button onClick={handleContinue} variant="outlined" style={{ display: "block", marginBottom: "10px" }}>
+      <Button
+        onClick={handleContinue}
+        variant="outlined"
+        style={{ display: "block", marginBottom: "10px" }}
+      >
         Weiter ohne Daten zu senden
       </Button>
     </div>
