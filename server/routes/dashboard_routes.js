@@ -64,23 +64,22 @@ router.get('/footprints',async (req, res) => {
   });
 });
 
-//return a json with the calculated average footprint of all footprints seperated by category
-router.get('/footprints/average',async (req, res) => {
-    const query = `
+router.get('/footprints/average', async (req, res) => {
+  const query = `
     SELECT 'mobility' AS category,
-            AVG(mobility) AS value
+      ROUND(AVG(mobility), 2) AS value
     FROM CO2Prints
     UNION
     SELECT 'housing' AS category,
-            AVG(housing) AS value
+      ROUND(AVG(housing), 2) AS value
     FROM CO2Prints
     UNION
     SELECT 'consume' AS category,
-            AVG(consume) AS value
+      ROUND(AVG(consume), 2) AS value
     FROM CO2Prints
     UNION
     SELECT 'nutrition' AS category,
-            AVG(nutrition) AS value
+      ROUND(AVG(nutrition), 2) AS value
     FROM CO2Prints
   `;
 
@@ -90,22 +89,21 @@ router.get('/footprints/average',async (req, res) => {
       console.error(error);
       res.status(500).json({ error: 'Error retrieving data' });
     } else {
-     // Map the results to the desired JSON format
+      // Map the results to the desired JSON format
       const categories = results.map((result) => ({
         category: result.category,
         value: result.value,
-    }));
+      }));
 
-    // Send the categories as JSON
-    res.json(categories);
-
+      // Send the categories as JSON
+      res.json(categories);
     }
   });
 });
 
 router.get('/comparisonprints', async (req, res) => {
   const query = `
-    SELECT name, mobility AS 'Category 1', housing AS 'Category 2', consume AS 'Category 3', nutrition AS 'Category 4'
+    SELECT name, mobility AS 'Mobilität', housing AS 'Wohnen', consume AS 'Konsum', nutrition AS 'Ernährung'
     FROM ComparisonPrints
   `;
 
@@ -120,7 +118,7 @@ router.get('/comparisonprints', async (req, res) => {
         const name = result.name;
         const values = Object.entries(result).map(([category, value]) => ({
           category,
-          value
+          value: value,
         }));
 
         // Remove the 'name' entry from the values array
@@ -134,5 +132,7 @@ router.get('/comparisonprints', async (req, res) => {
     }
   });
 });
+
+
 
 module.exports = router;
