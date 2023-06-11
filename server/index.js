@@ -4,6 +4,7 @@ const cors = require('cors');
 const app = express();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
 const auth = require("./middleware/auth");
 const groups_routes = require("./routes/groups_routes");
 const user_routes = require("./routes/user_routes");
@@ -11,7 +12,7 @@ const {db} = require('./services/db');
 const dashboard_routes = require("./routes/dashboard_routes");
 
 
-// read json file 
+// read questions from json file 
 const fs = require('fs');
 const questions = JSON.parse(fs.readFileSync('questions.json', 'utf8'));
 
@@ -23,15 +24,12 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
-// home page
-app.get('/', auth, (req, res) => {
-  res.send('Hi There')
-});
-
+//Route that returns all questions
 app.get('/questions', (req, res) => {
   res.send(questions)
 })
 
+//Route to register a new user
 app.post('/register', async (req, res) => {
     // Get user input
     const { email, password, username } =  req.body;
@@ -74,7 +72,7 @@ app.post('/register', async (req, res) => {
     })
 })
 
-
+//Route to login a user
 app.post('/login', async (req, res) => {
   // Get user input
   const { email, password } =  req.body;
@@ -112,7 +110,8 @@ app.post('/login', async (req, res) => {
   })
 })
 
-// route get list of all disticts 
+
+// Route to get all districts
 app.get('/districts', (req, res) => {
   const SelectQuery = " SELECT * FROM  Districts";
   db.query(SelectQuery, (err, result) => {
