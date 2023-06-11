@@ -24,6 +24,8 @@ const Header = (props) => {
   const location = useLocation();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const CO2Token = localStorage.getItem('CO2Token');
+
 
   const handleClick = () => {
     navigate("/");
@@ -71,7 +73,8 @@ const Header = (props) => {
             ? "CO2 Runter: Dashboard"
             : "CO2 Runter: App"}
         </Typography>
-        {props.user ? (
+        {console.log("Read localStorage: "+CO2Token)}
+        {CO2Token ? (
           <>
             <IconButton color="inherit" onClick={handleMenu}>
               <MenuIcon />
