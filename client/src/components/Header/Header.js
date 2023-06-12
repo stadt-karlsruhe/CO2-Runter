@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   AppBar,
@@ -18,6 +18,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LineAxisIcon from "@mui/icons-material/LineAxis";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import axios from 'axios';
 
 const Header = (props) => {
   const navigate = useNavigate();
@@ -25,7 +26,38 @@ const Header = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const [co2Token, setCo2Token] = useState(localStorage.getItem('CO2Token'));
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+
+  const checkTokenValidity = async () => {
+    try {
+      const response = await axios.get('/api/isUserAuth', {
+        headers: {
+          'x-access-token': `${co2Token}`,
+        },
+      });
+      if (response.status === 200) {
+        console.log('Token is valid');
+        setIsLoggedIn(true);
+      }
+      console.log(response.status);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        console.log('Token is invalid or expired');
+        setIsLoggedIn(false);
+      } else {
+        console.log(error);
+        console.log('An error occurred during token validation');
+      }
+    }
+  };
+
+  useEffect(() => {
+    console.log("Token überprüfen: " + co2Token);
+    if (co2Token) {
+      checkTokenValidity();
+    }
+  }, [co2Token]);
 
   const handleClick = () => {
     navigate("/");
@@ -42,7 +74,6 @@ const Header = (props) => {
   const handleLogout = () => {
     localStorage.removeItem('CO2Token');
     setCo2Token(null);
-    console.log("setCo2Token: " + co2Token);
     handleClose();
   };
 
@@ -85,7 +116,7 @@ const Header = (props) => {
             : "CO2 Runter: App"}
         </Typography>
         {console.log("Read localStorage: "+co2Token)}
-        {co2Token ? (
+        {isLoggedIn ? (
           <>
             <IconButton color="inherit" onClick={handleMenu}>
               <MenuIcon />
