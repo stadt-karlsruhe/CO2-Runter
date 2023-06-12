@@ -22,7 +22,6 @@ const CityDistrictChoice = (props) => {
 
   const handleAutocompleteChange = (event, value) => {
     props.setSelectedDistricts(value);
-    //props.setSelectedDistricts(districts[value].district_ID);
   };
 
   return (

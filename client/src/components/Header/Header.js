@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   AppBar,
@@ -24,7 +24,7 @@ const Header = (props) => {
   const location = useLocation();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const CO2Token = localStorage.getItem('CO2Token');
+  const [co2Token, setCo2Token] = useState(localStorage.getItem('CO2Token'));
 
 
   const handleClick = () => {
@@ -41,7 +41,8 @@ const Header = (props) => {
 
   const handleLogout = () => {
     localStorage.removeItem('CO2Token');
-    CO2Token = null;
+    setCo2Token(null);
+    console.log("setCo2Token: " + co2Token);
     handleClose();
   };
 
@@ -83,8 +84,8 @@ const Header = (props) => {
             ? "CO2 Runter: Dashboard"
             : "CO2 Runter: App"}
         </Typography>
-        {console.log("Read localStorage: "+CO2Token)}
-        {CO2Token ? (
+        {console.log("Read localStorage: "+co2Token)}
+        {co2Token ? (
           <>
             <IconButton color="inherit" onClick={handleMenu}>
               <MenuIcon />

@@ -12,7 +12,7 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [sentData, setSentData] = useState(false);
   const navigate = useNavigate();
-  const isLoggedIn = false;
+  const CO2Token = localStorage.getItem('CO2Token');
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
@@ -101,7 +101,7 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
         <CityDistrictChoice setSelectedDistricts={setSelectedDistricts} />
       )}
       {tabValue === 1 &&
-        (isLoggedIn ? (
+        (CO2Token ? (
           <GroupChoice setSelectedGroups={setSelectedGroups} />
         ) : (
           <Login setSelectedGroups={setSelectedGroups} />
