@@ -46,7 +46,6 @@ const Header = (props) => {
         console.log('Token is invalid or expired');
         setIsLoggedIn(false);
       } else {
-        console.log(error);
         console.log('An error occurred during token validation');
       }
     }
@@ -115,7 +114,6 @@ const Header = (props) => {
             ? "CO2 Runter: Dashboard"
             : "CO2 Runter: App"}
         </Typography>
-        {console.log("Read localStorage: "+co2Token)}
         {isLoggedIn ? (
           <>
             <IconButton color="inherit" onClick={handleMenu}>
