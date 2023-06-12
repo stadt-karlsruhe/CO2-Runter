@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const config = process.env;
 
 const auth = (req, res, next) => {
-  const token = req.body.token || req.query.token || req.headers['x-access-token'];
+  const token = req.body.co2token || req.query.co2token || req.headers['co2token'];
   if (!token) {
     return res.status(401).json({ error: 'Access denied. No token provided.' });
   }
