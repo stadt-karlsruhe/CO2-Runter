@@ -33,7 +33,7 @@ const Header = (props) => {
     try {
       const response = await axios.get('/api/isUserAuth', {
         headers: {
-          'x-access-token': `${co2Token}`,
+          'co2token': `${co2Token}`,
         },
       });
       if (response.status === 200) {
