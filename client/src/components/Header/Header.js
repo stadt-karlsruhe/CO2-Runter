@@ -35,6 +35,16 @@ const Header = (props) => {
     navigate("/login");
   };
 
+  const handleNewPrint = () => {
+    navigate("/CO2Rechner");
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('CO2Token');
+    CO2Token = null;
+    handleClose();
+  };
+
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -99,14 +109,14 @@ const Header = (props) => {
                 </ListItemIcon>
                 <ListItemText>Profil</ListItemText>
               </MenuItem>
-              <MenuItem onClick={props.handleLogout}>
+              <MenuItem onClick={handleLogout}>
                 <ListItemIcon>
                   <LogoutIcon fontSize="small" />
                 </ListItemIcon>
                 <ListItemText>Log out</ListItemText>
               </MenuItem>
               <Divider />
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={handleNewPrint}>
                 <ListItemIcon>
                   <NoteAddIcon fontSize="small" />
                 </ListItemIcon>
