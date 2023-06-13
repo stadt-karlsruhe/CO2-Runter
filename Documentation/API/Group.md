@@ -142,12 +142,12 @@ This endpoint allows users to create a new group by providing a name.
 
   **Required:**
 
-  `token=[string], groupname=[string],user_ID=[int]`
+  `co2token=[string], groupname=[string]`
 
 - **Success Response:**
 
   - **Code:** 201 Created<br />
-    **Content:** `{ groupname: [string], groupcode=[string] }`
+    **Content:** `{ groupcode=[string] }`
 
 - **Error Response:**
 
