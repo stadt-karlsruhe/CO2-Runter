@@ -104,11 +104,17 @@ This endpoint allows users to retrieve information about a group by providing it
 
 - **URL**
 
-  `/groups/get/<groupcode>`
+  `/groups/get`
 
 - **Method:**
 
   `GET`
+
+  **Data Params**
+
+  **Required:**
+  `groupcode=[string]`
+
 
 - **Success Response:**
 

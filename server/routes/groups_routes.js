@@ -95,9 +95,9 @@ router.post('/add_user', auth,(req, res) => {
     })
   })
   
-router.get('/get/:groupcode',async  (req, res) => {
+router.get('/get',async  (req, res) => {
     const SelectQuery = " SELECT * FROM  Carbon_Footprint_Groups WHERE groupcode = ?";
-    db.query(SelectQuery, [req.params.groupcode], async (err, result) => {
+    db.query(SelectQuery, [req.body.groupcode], async (err, result) => {
       if (result.length === 0) {
         res.status(404).send('Group not found');
   
