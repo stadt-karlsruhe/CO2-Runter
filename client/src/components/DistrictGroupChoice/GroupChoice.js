@@ -7,7 +7,7 @@ const GroupChoice = (setSelectedGroups) => {
   const [groups, setGroups] = useState([]);
   const [groupCode, setGroupCode] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
-  const [co2Token, setCo2Token] = useState(localStorage.getItem('CO2Token'));
+  const co2Token = localStorage.getItem('CO2Token');
 
   const columns = [
     { field: "groupname", headerName: "Gruppenname", width: 150 },
@@ -19,13 +19,14 @@ const GroupChoice = (setSelectedGroups) => {
   useEffect(() => {
     const fetchGroups = async () => {
       try {
-        const response = await axios.get("/groups/member", {
+        const response = await axios.get("/api/groups/member", {
           params: {
-            token: `co2Token`,
+            co2token: co2Token,
           },
         });
         if (response.status === 200) {
-          setGroups(response.data);
+          setGroups(response);
+          console.log(response)
         }
       } catch (error) {
         console.error(error);
@@ -42,7 +43,7 @@ const GroupChoice = (setSelectedGroups) => {
 
   const handleAddGroup = async () => {
     try {
-      const response = await axios.get(`/groups/get/${groupCode}`);
+      const response = await axios.get(`/api/groups/get`,{groupcode: groupCode});
       if (response.status === 200) {
         const newGroup = response.data;
         setGroups((prevGroups) => [...prevGroups, newGroup]);
