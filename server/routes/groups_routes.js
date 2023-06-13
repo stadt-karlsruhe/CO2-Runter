@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {db} = require('../services/db');
 const auth = require("../middleware/auth");
+const e = require('express');
 
   // Helper function to generate random alphanumeric code
   function generateCode(length) {
@@ -144,21 +145,26 @@ router.post('/create', auth, async (req, res) => {
       })
     })
   
-router.delete('/delete/:groupcode', (req, res) => {
-    const SelectQuery = " SELECT group_ID FROM  Carbon_Footprint_Groups WHERE groupcode = ?";
-    db.query(SelectQuery, [req.params.groupcode], (err, result) => {
+router.delete('/delete',auth,  (req, res) => {
+    const SelectQuery = " SELECT group_ID, owner_ID FROM  Carbon_Footprint_Groups WHERE groupcode = ?";
+    db.query(SelectQuery, [req.body.groupcode], (err, result) => {
       if (result.length === 0) {
         res.status(404).send({ error : 'Group not found'});
       } else {
-        const DeleteQuery = " DELETE FROM Carbon_Footprint_Groups WHERE group_ID = ?";
-        db.query(DeleteQuery, [result[0].group_ID], (err, result) => {
-          if(err) {
-            console.log(err)
-            res.status(500).send({ error : 'Something went wrong'})
-          } else {
-            res.status(200).send('Group deleted')
-          }
-        })
+        console.log(result)
+        if (result[0].owner_ID !== req.user.user_id) {
+          res.status(403).send({ error : 'You are not the owner of this group'});
+        } else {
+          const DeleteQuery = " DELETE FROM Carbon_Footprint_Groups WHERE group_ID = ?";
+          db.query(DeleteQuery, [result[0].group_ID], (err, result) => {
+            if(err) {
+              console.log(err)
+              res.status(500).send({ error : 'Something went wrong'})
+            } else {
+              res.status(200).send('Group deleted')
+            }
+          })
+        }
       }
     })
   })

@@ -167,7 +167,7 @@ This endpoint allows an admin to delete a group by providing its number.
 
 - **URL**
 
-  `/groups/delete/<groupcode>`
+  `/groups/delete`
 
 - **Method:**
 
@@ -177,7 +177,7 @@ This endpoint allows an admin to delete a group by providing its number.
 
   **Required:**
 
-  `token=[string]`
+   `{ co2token=[string], groupname=[string] }`
 
 - **Success Response:**
 
