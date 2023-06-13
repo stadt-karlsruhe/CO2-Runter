@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {db} = require('../services/db');
+const auth = require("../middleware/auth");
 
   // Helper function to generate random alphanumeric code
   function generateCode(length) {
@@ -114,7 +115,7 @@ router.get('/get/:groupcode',async  (req, res) => {
     })
   })
   
-router.post('/create', async (req, res) => {
+router.post('/create', auth, async (req, res) => {
       let groupcode = '';
       let isUnique = false;
       while (!isUnique) {
@@ -127,14 +128,15 @@ router.post('/create', async (req, res) => {
           isUnique = true;
         }
       }
+      console.log(req.user.user_id)
       const InsertQuery = " INSERT INTO Carbon_Footprint_Groups (groupname, groupcode, owner_ID) VALUES (?, ?, ?)";
-      db.query(InsertQuery, [req.query.groupname, groupcode, req.query.user_ID], (err, result) => {
+      db.query(InsertQuery, [req.body.groupname, groupcode, req.user.user_id], (err, result) => {
         if(err) {
           console.log(err)
           res.status(500).send('Something went wrong')
         } else {
           const InsertQuery = " INSERT INTO Groupmemberships (group_ID, user_ID) VALUES (?, ?)";
-          db.query(InsertQuery, [result.insertId, req.query.user_ID], (err, result2) => {
+          db.query(InsertQuery, [result.insertId, req.user.user_id], (err, result2) => {
           res.status(201).json({ groupcode });
         }
         )
