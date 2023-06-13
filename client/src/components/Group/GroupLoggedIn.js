@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -15,14 +15,16 @@ const GroupLoggedIn = () => {
   const handleCreateGroup = async () => {
     const token = localStorage.getItem("CO2Token");
     try {
-      const response = await axios.post("/groups/create", {
-        token: token,
+      const response = await axios.post("/api/groups/create", {
+        co2token: token,
         groupname: groupName,
       });
       if (response.status === 200) {
-        const data = response.data;
-        setGroupCode(data.groupcode);
+        console.log("Responsedata: "+ response)
+        setGroupCode(response.groupcode);  
+        console.log(groupCode)    
       } else {
+        console.log("Was?: " + response.data)
         const data = response.data;
         setError(data.error);
       }
@@ -31,15 +33,20 @@ const GroupLoggedIn = () => {
     }
   };
 
+  useEffect(() => {
+    console.log("do something")   
+  }, [groupCode]);
+
   return (
     <>
-      <Header />{" "}
+      <Header />
       <Stack spacing={2}>
         {groupCode ? (
           <GroupSuccesfull groupCode={groupCode} groupName={groupName} />
         ) : (
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
             <Typography variant="h4">Neue Gruppe erstellen</Typography>
+            {console.log(groupCode)}
             <Typography>
               Geben Sie einen Gruppenname ein. Anschließend wird Ihnen von uns
               einmal der Gruppenbeitrittscode, sowie ein Link und QR-Code
