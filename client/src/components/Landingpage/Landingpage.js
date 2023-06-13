@@ -13,9 +13,12 @@ import HeroSection from "./HeroSection";
 import Footer from "../Footer/Footer";
 import { useNavigate } from "react-router-dom";
 import "../../css/components/Landingpage/landingpage.css";
+import CheckAuth from "../CheckAuth";
 
 const Landingpage = () => {
   const navigate = useNavigate();
+  const isLoggedIn = CheckAuth();
+  
 
   const handleCO2 = () => {
     navigate("/CO2Rechner");
@@ -26,7 +29,11 @@ const Landingpage = () => {
   };
 
   const handleNewGroup = () => {
-    navigate("/NewGroup/loggedOut");
+    if(isLoggedIn){
+      navigate("/NewGroup/loggedIn");
+    }else{
+      navigate("/NewGroup/loggedOut");
+    }
   };
 
   return (

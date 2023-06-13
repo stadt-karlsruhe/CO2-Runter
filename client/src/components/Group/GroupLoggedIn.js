@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Button, TextField, Typography, Stack } from "@mui/material";
 import GroupSuccesfull from "./GroupSuccesfull";
+import axios from "axios";
 
 const GroupLoggedIn = () => {
   const [groupName, setGroupName] = useState("");
@@ -12,20 +13,17 @@ const GroupLoggedIn = () => {
   const navigate = useNavigate();
 
   const handleCreateGroup = async () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("CO2Token");
     try {
-      const response = await fetch("/groups/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ token, groupname: groupName }),
+      const response = await axios.post("/groups/create", {
+        token: token,
+        groupname: groupName,
       });
-      if (response.ok) {
-        const data = await response.json();
+      if (response.status === 200) {
+        const data = response.data;
         setGroupCode(data.groupcode);
       } else {
-        const data = await response.json();
+        const data = response.data;
         setError(data.error);
       }
     } catch (err) {
@@ -51,6 +49,7 @@ const GroupLoggedIn = () => {
               label="Gruppenname"
               value={groupName}
               onChange={(e) => setGroupName(e.target.value)}
+              style={{ width: "70%" }}
             />
             <Button disabled={!groupName} onClick={handleCreateGroup}>
               Gruppe erstellen
