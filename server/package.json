@@ -9,7 +9,7 @@
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.0",
-    "mysql2": "^2.2.5"
+    "mysql2": "^3.3.5"
   },
   "scripts": {
     "start": "node index.js",
