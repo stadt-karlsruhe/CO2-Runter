@@ -70,14 +70,14 @@ router.get('/member', auth, async(req, res) => {
     })
   })
   
-router.post('/add_user', (req, res) => {
+router.post('/add_user', auth,(req, res) => {
     const SelectQuery = " SELECT group_ID FROM  Carbon_Footprint_Groups WHERE groupcode = ?";
-    db.query(SelectQuery, [req.query.groupcode], (err, result) => {
+    db.query(SelectQuery, [req.body.groupcode], (err, result) => {
       if (result.length === 0) {
         res.status(404).send('Group not found');
       } else {
         const InsertQuery = " INSERT INTO Groupmemberships (group_ID, user_ID) VALUES (?, ?)";
-        db.query(InsertQuery, [result[0].group_ID, req.query.user_ID], (err, result) => {
+        db.query(InsertQuery, [result[0].group_ID, req.user.user_id], (err, result) => {
           if(err) {
             if(err.code === 'ER_DUP_ENTRY') {
               console.log(err)

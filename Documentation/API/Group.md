@@ -81,8 +81,7 @@ This endpoint allows adding a user to a group by entering the group code.
 
   **Required:**
   `groupcode=[string]`,
-  `token=[string]`,
-  `user_ID=[integer]`
+  `co2token=[string]`
 
 - **Success Response:**
 
@@ -93,7 +92,7 @@ This endpoint allows adding a user to a group by entering the group code.
   - **Code:** 401 UNAUTHORIZED <br />
     **Content:** `{ error : "The user is not logged in." }`
   - **Code:** 404 Not Found<br />
-    **Content:** `{ error : "The group with the specified ID was not found." }`
+    **Content:** `{ error : "Group not found" }`
   - **Code:** 409 Conflict<br />
     **Content:** `{ error : "The user is already a member of the group." }`
   - **Code:** 500 Internal Server Error<br />
