@@ -47,9 +47,9 @@ router.get('/admin',async (req, res) => {
 })
 
   
-router.get('/member', async(req, res) => {
+router.get('/member', auth, async(req, res) => {
     const SelectQuery = " SELECT * FROM  Groupmemberships WHERE user_ID = ?";
-    db.query(SelectQuery, [req.query.user_ID], (err, result) => {
+    db.query(SelectQuery, [req.user.user_id], (err, result) => {
       // if result is empty, send empty array
       if (result.length === 0) {
         res.send([])

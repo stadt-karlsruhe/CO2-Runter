@@ -50,8 +50,7 @@ This endpoint allows users to retrieve a list of groups they are a member of.
 
   **Required:**
 
-  `token=[integer]`,
-   `user_ID=[integer]`
+  `co2token=[integer]`
 
 - **Success Response:**
 
