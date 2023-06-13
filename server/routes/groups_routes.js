@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {db} = require('../services/db');
 const auth = require("../middleware/auth");
+const e = require('express');
 
   // Helper function to generate random alphanumeric code
   function generateCode(length) {
@@ -31,9 +32,9 @@ const auth = require("../middleware/auth");
   }
   
 
-router.get('/admin',async (req, res) => {
+router.get('/admin', auth, async (req, res) => {
   const SelectQuery = " SELECT * FROM  Carbon_Footprint_Groups WHERE owner_ID = ?";
-  db.query(SelectQuery, [req.query.user_ID], (err, result) => {
+  db.query(SelectQuery, [req.user.user_id], (err, result) => {
     //count the members of each group and add it to the result
     result.forEach(async (group, index) => {
         result[index].memberCount = await getMemberCount(group.group_ID);
@@ -47,9 +48,9 @@ router.get('/admin',async (req, res) => {
 })
 
   
-router.get('/member', async(req, res) => {
+router.get('/member', auth, async(req, res) => {
     const SelectQuery = " SELECT * FROM  Groupmemberships WHERE user_ID = ?";
-    db.query(SelectQuery, [req.query.user_ID], (err, result) => {
+    db.query(SelectQuery, [req.user.user_id], (err, result) => {
       // if result is empty, send empty array
       if (result.length === 0) {
         res.send([])
@@ -70,14 +71,14 @@ router.get('/member', async(req, res) => {
     })
   })
   
-router.post('/add_user', (req, res) => {
+router.post('/add_user', auth,(req, res) => {
     const SelectQuery = " SELECT group_ID FROM  Carbon_Footprint_Groups WHERE groupcode = ?";
-    db.query(SelectQuery, [req.query.groupcode], (err, result) => {
+    db.query(SelectQuery, [req.body.groupcode], (err, result) => {
       if (result.length === 0) {
         res.status(404).send('Group not found');
       } else {
         const InsertQuery = " INSERT INTO Groupmemberships (group_ID, user_ID) VALUES (?, ?)";
-        db.query(InsertQuery, [result[0].group_ID, req.query.user_ID], (err, result) => {
+        db.query(InsertQuery, [result[0].group_ID, req.user.user_id], (err, result) => {
           if(err) {
             if(err.code === 'ER_DUP_ENTRY') {
               console.log(err)
@@ -95,9 +96,9 @@ router.post('/add_user', (req, res) => {
     })
   })
   
-router.get('/get/:groupcode',async  (req, res) => {
+router.get('/get',async  (req, res) => {
     const SelectQuery = " SELECT * FROM  Carbon_Footprint_Groups WHERE groupcode = ?";
-    db.query(SelectQuery, [req.params.groupcode], async (err, result) => {
+    db.query(SelectQuery, [req.body.groupcode], async (err, result) => {
       if (result.length === 0) {
         res.status(404).send('Group not found');
   
@@ -144,21 +145,26 @@ router.post('/create', auth, async (req, res) => {
       })
     })
   
-router.delete('/delete/:groupcode', (req, res) => {
-    const SelectQuery = " SELECT group_ID FROM  Carbon_Footprint_Groups WHERE groupcode = ?";
-    db.query(SelectQuery, [req.params.groupcode], (err, result) => {
+router.delete('/delete',auth,  (req, res) => {
+    const SelectQuery = " SELECT group_ID, owner_ID FROM  Carbon_Footprint_Groups WHERE groupcode = ?";
+    db.query(SelectQuery, [req.body.groupcode], (err, result) => {
       if (result.length === 0) {
         res.status(404).send({ error : 'Group not found'});
       } else {
-        const DeleteQuery = " DELETE FROM Carbon_Footprint_Groups WHERE group_ID = ?";
-        db.query(DeleteQuery, [result[0].group_ID], (err, result) => {
-          if(err) {
-            console.log(err)
-            res.status(500).send({ error : 'Something went wrong'})
-          } else {
-            res.status(200).send('Group deleted')
-          }
-        })
+        console.log(result)
+        if (result[0].owner_ID !== req.user.user_id) {
+          res.status(403).send({ error : 'You are not the owner of this group'});
+        } else {
+          const DeleteQuery = " DELETE FROM Carbon_Footprint_Groups WHERE group_ID = ?";
+          db.query(DeleteQuery, [result[0].group_ID], (err, result) => {
+            if(err) {
+              console.log(err)
+              res.status(500).send({ error : 'Something went wrong'})
+            } else {
+              res.status(200).send('Group deleted')
+            }
+          })
+        }
       }
     })
   })

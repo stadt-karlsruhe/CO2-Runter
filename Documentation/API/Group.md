@@ -14,9 +14,7 @@ This endpoint allows users to retrieve a list of groups they administer.
 
   **Required:**
 
-  `token=[string]`,
-  `user_ID=[integer]`
-
+  `co2token=[string]`,
 
 - **Success Response:**
 
@@ -50,8 +48,7 @@ This endpoint allows users to retrieve a list of groups they are a member of.
 
   **Required:**
 
-  `token=[integer]`,
-   `user_ID=[integer]`
+  `co2token=[integer]`
 
 - **Success Response:**
 
@@ -84,8 +81,7 @@ This endpoint allows adding a user to a group by entering the group code.
 
   **Required:**
   `groupcode=[string]`,
-  `token=[string]`,
-  `user_ID=[integer]`
+  `co2token=[string]`
 
 - **Success Response:**
 
@@ -96,7 +92,7 @@ This endpoint allows adding a user to a group by entering the group code.
   - **Code:** 401 UNAUTHORIZED <br />
     **Content:** `{ error : "The user is not logged in." }`
   - **Code:** 404 Not Found<br />
-    **Content:** `{ error : "The group with the specified ID was not found." }`
+    **Content:** `{ error : "Group not found" }`
   - **Code:** 409 Conflict<br />
     **Content:** `{ error : "The user is already a member of the group." }`
   - **Code:** 500 Internal Server Error<br />
@@ -108,11 +104,17 @@ This endpoint allows users to retrieve information about a group by providing it
 
 - **URL**
 
-  `/groups/get/<groupcode>`
+  `/groups/get`
 
 - **Method:**
 
   `GET`
+
+  **Data Params**
+
+  **Required:**
+  `groupcode=[string]`
+
 
 - **Success Response:**
 
@@ -165,7 +167,7 @@ This endpoint allows an admin to delete a group by providing its number.
 
 - **URL**
 
-  `/groups/delete/<groupcode>`
+  `/groups/delete`
 
 - **Method:**
 
@@ -175,7 +177,7 @@ This endpoint allows an admin to delete a group by providing its number.
 
   **Required:**
 
-  `token=[string]`
+   `{ co2token=[string], groupname=[string] }`
 
 - **Success Response:**
 
