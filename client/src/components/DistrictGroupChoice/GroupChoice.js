@@ -25,8 +25,8 @@ const GroupChoice = (setSelectedGroups) => {
           },
         });
         if (response.status === 200) {
-          setGroups(response);
-          console.log(response)
+          setGroups(response.data);
+          console.log(response.data)
         }
       } catch (error) {
         console.error(error);
@@ -37,13 +37,38 @@ const GroupChoice = (setSelectedGroups) => {
     }
   }, []);
 
+  useEffect(() => {
+    const existingGroupCode = localStorage.getItem("groupCode");
+
+    const fetchGroupByCode = async (groupCode) => {
+      console.log(groupCode)
+      try {
+        const response = await axios.get(`/api/groups/get`, {
+            groupcode: groupCode,
+        });
+        if (response.status === 200) {
+          const newGroup = response.data;
+          setGroups((prevGroups) => [...prevGroups, newGroup]);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (existingGroupCode) {
+      fetchGroupByCode(existingGroupCode);
+    }
+  }, []);
+
   const handleGroupCodeChange = (event) => {
     setGroupCode(event.target.value);
   };
 
   const handleAddGroup = async () => {
     try {
-      const response = await axios.get(`/api/groups/get`,{groupcode: groupCode});
+      const response = await axios.get(`/api/groups/get`,{
+          groupcode: groupCode,
+      });
       if (response.status === 200) {
         const newGroup = response.data;
         setGroups((prevGroups) => [...prevGroups, newGroup]);
@@ -67,6 +92,7 @@ const GroupChoice = (setSelectedGroups) => {
           setSelectedGroups(selectedGroupCodes);
         }}
         selectionModel={selectedRows}
+        getRowId={(row) => row.groupcode}
       />
 
       <TextField

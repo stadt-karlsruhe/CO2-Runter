@@ -16,12 +16,20 @@ const CO2QuestionsDataFetcher = () => {
         const data = response.data;
         setQuestions(data);
       } catch (error) {
-        //Nur für übungszwecke
+        //TODO entferne, sowie JSON ausm fronend entfernen; Nur für übungszwecke
         setQuestions(DemoQuestion);
       }
     };
   
     fetchQuestions();
+  }, []);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const groupCode = urlParams.get("groupcode");
+    if (groupCode) {
+      localStorage.setItem("groupCode", groupCode);
+    }
   }, []);
 
   return (

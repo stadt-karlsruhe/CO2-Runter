@@ -5,8 +5,8 @@ import QRCodeGenerator from "./QRCodeGenerator";
 
 const GroupSuccesfull = (props) => {
   //TODO Fertige URL adden
-  const joinLink = "URL/CO2Rechner/" + props.groupCode;
-  const dashLink = "URL/Dashboard/" + props.groupCode;
+  const joinLink = "URL/CO2Rechner?groupcode=" + props.groupCode;
+  const dashLink = "URL/Dashboard?groupcode=" + props.groupCode;
 
   return (
     <Stack spacing={2}>
