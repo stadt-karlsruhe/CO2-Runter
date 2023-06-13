@@ -51,6 +51,7 @@ const GroupLoggedIn = () => {
               label="Gruppenname"
               value={groupName}
               onChange={(e) => setGroupName(e.target.value)}
+              style={{ width: "70%" }}
             />
             <Button disabled={!groupName} onClick={handleCreateGroup}>
               Gruppe erstellen
