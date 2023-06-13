@@ -14,9 +14,7 @@ This endpoint allows users to retrieve a list of groups they administer.
 
   **Required:**
 
-  `token=[string]`,
-  `user_ID=[integer]`
-
+  `co2token=[string]`,
 
 - **Success Response:**
 

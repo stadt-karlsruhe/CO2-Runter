@@ -31,9 +31,9 @@ const auth = require("../middleware/auth");
   }
   
 
-router.get('/admin',async (req, res) => {
+router.get('/admin', auth, async (req, res) => {
   const SelectQuery = " SELECT * FROM  Carbon_Footprint_Groups WHERE owner_ID = ?";
-  db.query(SelectQuery, [req.query.user_ID], (err, result) => {
+  db.query(SelectQuery, [req.user.user_id], (err, result) => {
     //count the members of each group and add it to the result
     result.forEach(async (group, index) => {
         result[index].memberCount = await getMemberCount(group.group_ID);
