@@ -38,7 +38,7 @@ const GroupLoggedIn = () => {
         {groupCode ? (
           <GroupSuccesfull groupCode={groupCode} groupName={groupName} />
         ) : (
-          <>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
             <Typography variant="h4">Neue Gruppe erstellen</Typography>
             <Typography>
               Geben Sie einen Gruppenname ein. Anschließend wird Ihnen von uns
@@ -51,11 +51,11 @@ const GroupLoggedIn = () => {
               onChange={(e) => setGroupName(e.target.value)}
               style={{ width: "70%" }}
             />
-            <Button disabled={!groupName} onClick={handleCreateGroup}>
+            <Button disabled={!groupName} onClick={handleCreateGroup} variant="contained">
               Gruppe erstellen
             </Button>
             {error && <Typography color="error">{error}</Typography>}
-          </>
+          </div>
         )}
         <Button onClick={() => navigate(-1)}>Zurück</Button>
       </Stack>
