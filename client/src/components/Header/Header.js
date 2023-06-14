@@ -75,6 +75,7 @@ const Header = (props) => {
     localStorage.removeItem('groupCode');
     setCo2Token(null);
     handleClose();
+    navigate("/");
   };
 
   const handleMenu = (event) => {
