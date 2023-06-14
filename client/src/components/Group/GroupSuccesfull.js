@@ -4,9 +4,9 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import QRCodeGenerator from "./QRCodeGenerator";
 
 const GroupSuccesfull = (props) => {
-  //TODO Fertige URL adden
-  const joinLink = "URL/CO2Rechner?groupcode=" + props.groupCode;
-  const dashLink = "URL/Dashboard?groupcode=" + props.groupCode;
+  const rootUrl = window.location.origin;
+  const joinLink = `${rootUrl}/CO2Rechner?groupcode=${props.groupCode}`;
+  const dashLink = `${rootUrl}/Dashboard?groupcode=${props.groupCode}`;
 
   return (
     <Stack spacing={2}>

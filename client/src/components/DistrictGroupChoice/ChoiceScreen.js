@@ -29,14 +29,13 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
 
   const handleSubmitData = async () => {
     try {
+      const districtId = selectedDistricts ? selectedDistricts.district_ID : 0;
+      console.log(districtId+" : "+ selectedDistricts)
       const response = await axios.post("/api/footprint", {
         groups: selectedGroups,
-        district: selectedDistricts.district_ID ?? 0,
+        district: districtId,
         data: co2SumPerCategory,
       });
-
-      console.log(selectedGroups);
-
       if (response.status === 200) {
         setSentData(true);
         navigate("/CO2Rechner/finish", {
