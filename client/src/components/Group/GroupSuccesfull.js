@@ -8,6 +8,16 @@ const GroupSuccesfull = (props) => {
   const joinLink = `${rootUrl}/CO2Rechner?groupcode=${props.groupCode}`;
   const dashLink = `${rootUrl}/Dashboard?groupcode=${props.groupCode}`;
 
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        console.log("Text copied to clipboard:", text);
+      })
+      .catch((error) => {
+        console.error("Failed to copy text to clipboard:", error);
+      });
+  };
+
   return (
     <Stack spacing={2}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
@@ -19,12 +29,18 @@ const GroupSuccesfull = (props) => {
         Sie an gemeinsam ihren CO2-Fußabdruck zu berechnen.
       </Typography>
       <Typography>Beitrittslink:</Typography>
-      <Button endIcon={<ContentCopyIcon />}>{joinLink}</Button>
+      <Button endIcon={<ContentCopyIcon />} onClick={() => copyToClipboard(joinLink)}>
+        {joinLink}
+      </Button>
       <Typography>Dashboardlink:</Typography>
-      <Button endIcon={<ContentCopyIcon />}>{dashLink}</Button>
+      <Button endIcon={<ContentCopyIcon />} onClick={() => copyToClipboard(dashLink)}>
+        {dashLink}
+      </Button>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Typography>Gruppen Code:</Typography>
-        <Button endIcon={<ContentCopyIcon />}>{props.groupCode}</Button>
+        <Button endIcon={<ContentCopyIcon />} onClick={() => copyToClipboard(props.groupCode)}>
+          {props.groupCode}
+        </Button>
       </Box>
       <QRCodeGenerator text={joinLink} />
       </div>

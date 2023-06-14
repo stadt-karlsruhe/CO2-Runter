@@ -19,8 +19,9 @@ const GroupLoggedIn = () => {
         co2token: token,
         groupname: groupName,
       });
+
       if (response.status === 201) {
-        setGroupCode(response.groupcode);   
+        setGroupCode(response.data.groupcode);   
       } else {
         const data = response.data;
         setError(data.error);
@@ -29,10 +30,6 @@ const GroupLoggedIn = () => {
       setError("A server error occurred.");
     }
   };
-
-  useEffect(() => {
-    console.log("do something")   
-  }, [groupCode]);
 
   return (
     <>
@@ -43,7 +40,6 @@ const GroupLoggedIn = () => {
         ) : (
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "5px"}}>
             <Typography variant="h4">Neue Gruppe erstellen</Typography>
-            {console.log(groupCode)}
             <Typography>
               Geben Sie einen Gruppenname ein. Anschließend wird Ihnen von uns
               einmal der Gruppenbeitrittscode, sowie ein Link und QR-Code
