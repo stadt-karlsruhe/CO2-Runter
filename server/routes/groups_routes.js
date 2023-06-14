@@ -96,9 +96,10 @@ router.post('/add_user', auth,(req, res) => {
     })
   })
   
-router.get('/get',async  (req, res) => {
+router.get('/get', async  (req, res) => {
+
     const SelectQuery = " SELECT * FROM  Carbon_Footprint_Groups WHERE groupcode = ?";
-    db.query(SelectQuery, [req.body.groupcode], async (err, result) => {
+    db.query(SelectQuery, [req.query.groupcode], async (err, result) => {
       if (result.length === 0) {
         res.status(404).send('Group not found');
   
@@ -108,8 +109,8 @@ router.get('/get',async  (req, res) => {
         result[0].memberCount = await getMemberCount(result[0].group_ID);
         delete result[0].user_ID;
         delete result[0].owner_ID;
-        delete result[0].groupcode;
         delete result[0].group_ID;
+        result[0].groupcode;
         res.send(result[0])
             
       }
@@ -129,7 +130,6 @@ router.post('/create', auth, async (req, res) => {
           isUnique = true;
         }
       }
-      console.log(req.user.user_id)
       const InsertQuery = " INSERT INTO Carbon_Footprint_Groups (groupname, groupcode, owner_ID) VALUES (?, ?, ?)";
       db.query(InsertQuery, [req.body.groupname, groupcode, req.user.user_id], (err, result) => {
         if(err) {
@@ -144,7 +144,7 @@ router.post('/create', auth, async (req, res) => {
       }
       })
     })
-  
+
 router.delete('/delete',auth,  (req, res) => {
     const SelectQuery = " SELECT group_ID, owner_ID FROM  Carbon_Footprint_Groups WHERE groupcode = ?";
     db.query(SelectQuery, [req.body.groupcode], (err, result) => {
