@@ -20,7 +20,7 @@ const GroupChoice = (setSelectedGroups) => {
     const fetchGroups = async () => {
       try {
         const response = await axios.get("/api/groups/member", {
-          params: {
+          headers: {
             co2token: co2Token,
           },
         });
@@ -38,15 +38,26 @@ const GroupChoice = (setSelectedGroups) => {
   }, []);
 
   useEffect(() => {
+    localStorage.setItem("groupCode", JSON.stringify(groups));
+    console.log("loade state to local storage")
+  }, [groups]);
+
+
+  useEffect(() => {
     const existingGroupCode = localStorage.getItem("groupCode");
 
     const fetchGroupByCode = async (groupCode) => {
-      console.log(groupCode)
       try {
-        const response = await axios.get(`/api/groups/get`, {
+        const response = await axios.get("/api/groups/get", {
+          params: {
             groupcode: groupCode,
+          }
         });
         if (response.status === 200) {
+          const groupExists = groups.find((group) => group.groupcode === newGroup.groupcode);
+          if (groupExists) {
+            return;
+          }
           const newGroup = response.data;
           setGroups((prevGroups) => [...prevGroups, newGroup]);
         }
@@ -65,12 +76,20 @@ const GroupChoice = (setSelectedGroups) => {
   };
 
   const handleAddGroup = async () => {
+    console.log("Groupe Add" + groupCode)
     try {
-      const response = await axios.get(`/api/groups/get`,{
-          groupcode: groupCode,
+      const response = await axios.get(`/api/groups/get`, {
+        params: {
+        groupcode: groupCode,
+        }
       });
       if (response.status === 200) {
         const newGroup = response.data;
+        //check if group is already in groups
+        const groupExists = groups.find((group) => group.groupcode === newGroup.groupcode);
+        if (groupExists) {
+          return;
+        }
         setGroups((prevGroups) => [...prevGroups, newGroup]);
         setSelectedGroups((prevSelectedGroups) => [...prevSelectedGroups, newGroup.groupcode]);
       }
