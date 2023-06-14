@@ -19,12 +19,9 @@ const GroupLoggedIn = () => {
         co2token: token,
         groupname: groupName,
       });
-      if (response.status === 200) {
-        console.log("Responsedata: "+ response)
-        setGroupCode(response.groupcode);  
-        console.log(groupCode)    
+      if (response.status === 201) {
+        setGroupCode(response.groupcode);   
       } else {
-        console.log("Was?: " + response.data)
         const data = response.data;
         setError(data.error);
       }
@@ -44,7 +41,7 @@ const GroupLoggedIn = () => {
         {groupCode ? (
           <GroupSuccesfull groupCode={groupCode} groupName={groupName} />
         ) : (
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "5px"}}>
             <Typography variant="h4">Neue Gruppe erstellen</Typography>
             {console.log(groupCode)}
             <Typography>

@@ -72,6 +72,7 @@ const Header = (props) => {
 
   const handleLogout = () => {
     localStorage.removeItem('CO2Token');
+    localStorage.removeItem('groupCode');
     setCo2Token(null);
     handleClose();
   };
