@@ -134,6 +134,7 @@ const GroupChoice = (setSelectedGroups) => {
         onSelectionModelChange={(newSelection) => {
           setSelectedRows(newSelection.selectionModel);
           const selectedGroupCodes = newSelection.selectionModel.map((rowId) => groups[rowId].groupcode);
+          console.log("setting" + selectedGroupCodes + "as selected groups");
           setSelectedGroups(selectedGroupCodes);
         }}
         selectionModel={selectedRows}
