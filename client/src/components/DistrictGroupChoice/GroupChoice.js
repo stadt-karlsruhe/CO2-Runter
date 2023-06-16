@@ -111,10 +111,9 @@ const GroupChoice = ({ updateSelectedGroups  }) => {
   const handleSelectionChange = (newSelection) => {
     setSelectedRows(newSelection);
     console.log("new Selection" + newSelection);
-    const selectedGroupCodes = selectedRows.map((row) => row);
     console.log("selected rows" + selectedRows);
     console.log("setting" + selectedGroupCodes + "as selected groups");
-    updateSelectedGroups((prevSelectedGroups) => [...prevSelectedGroups, selectedGroupCodes]);
+    updateSelectedGroups((prevSelectedGroups) => [...prevSelectedGroups]);
   };
 
 
