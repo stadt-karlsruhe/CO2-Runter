@@ -64,7 +64,7 @@ const QuestionBlock = (props) => {
   return (
     <Container maxWidth="sm">
       <Paper
-        sx={{ my: 2, p: 2, backgroundColor: "#f0f0f0", borderRadius: "8px" }}
+        sx={{ my: 1, p: 2, backgroundColor: "#f7f9f5", borderRadius: "8px" }}
       >
         {isDetailed ? (
           props.questions.detailed.questions.map((question, index) => (
@@ -87,16 +87,14 @@ const QuestionBlock = (props) => {
           />
         )}
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <FormGroup>
-            <Stack direction="row" spacing={1} alignItems="center">
-              {isDetailed ? (
+          {props.questions.detailed.questions.length > 0 && (
+            <FormGroup>
+              <Stack direction="row" spacing={1} alignItems="center">
                 <Typography>detailliert</Typography>
-              ) : (
-                <Typography>schnell</Typography>
-              )}
-              <Switch checked={!!isDetailed} onChange={handleSwitchChange} />
-            </Stack>
-          </FormGroup>
+                <Switch checked={!!isDetailed} onChange={handleSwitchChange} />
+              </Stack>
+            </FormGroup>
+          )}
         </Box>
       </Paper>
     </Container>

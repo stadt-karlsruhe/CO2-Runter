@@ -41,7 +41,7 @@ const QuestionCategory = (props) => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="lg">
       {!finish ? (
         <Box sx={{ my: 2, textAlign: "center" }}>
           <QuestionStepper

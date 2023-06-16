@@ -12,9 +12,13 @@ import Header from "../Header/Header";
 import HeroSection from "./HeroSection";
 import Footer from "../Footer/Footer";
 import { useNavigate } from "react-router-dom";
+import "../../css/components/Landingpage/landingpage.css";
+import CheckAuth from "../CheckAuth";
 
 const Landingpage = () => {
   const navigate = useNavigate();
+  const isLoggedIn = CheckAuth();
+  
 
   const handleCO2 = () => {
     navigate("/CO2Rechner");
@@ -25,7 +29,11 @@ const Landingpage = () => {
   };
 
   const handleNewGroup = () => {
-    navigate("/NewGroup/loggedOut");
+    if(isLoggedIn){
+      navigate("/NewGroup/loggedIn");
+    }else{
+      navigate("/NewGroup/loggedOut");
+    }
   };
 
   return (
@@ -43,7 +51,7 @@ const Landingpage = () => {
               Wie funktioniert der CO2 Rechner?
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails className="accordionDetail">
             <Typography>
               Laut Energiebilanz Karlsruhe 2019 liegt der CO2 Ausstoß bei 7,8t
               jährlich pro Kopf. Die Effekte durch privaten Konsum sind dabei
@@ -61,6 +69,7 @@ const Landingpage = () => {
               Situation im Einzelfall nicht möglich. Weitere Informationen zum
               UBA-Modell und den Einsparpotentialen finden sich{" "}
               <Link
+                className="text-link"
                 href="https://www.umweltbundesamt.de/publikationen/klimaneutral-leben"
                 target="_blank"
               >
@@ -79,7 +88,7 @@ const Landingpage = () => {
               Wo kann ich die Ergebnisse vom CO2 Rechner sehen?
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails className="accordionDetail">
             <Typography>
               Persönliche Maßnahmen für den Klimaschutz werden umso
               erfolgreicher, wenn wir auch andere Menschen davon überzeugen.
@@ -87,11 +96,12 @@ const Landingpage = () => {
               dort als Mitstreiter:Innen gewinnen können und nehmen Sie so an
               der Klima-Challenge teil. Die aktuellen Ergebnisse sind auf
               unserem{" "}
-              <Link href="/Dashboard" target="_blank">
+              <Link className="text-link" href="/Dashboard" target="_blank">
                 CO2-Dashboard
               </Link>{" "}
               sichtbar. Im Kanal "Grüne Stadt" der{" "}
               <Link
+                className="text-link"
                 href="https://www.karlsruhe.de/stadt-rathaus/so-ist-karlsruhe/digital-smart/karlsruheapp"
                 target="_blank"
               >
@@ -111,7 +121,7 @@ const Landingpage = () => {
               Wie funktioniert das Gruppensystem?
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails className="accordionDetail">
             <Typography>
               Hier kommt noch Text wie unser Gruppenssystem funktioniert.
             </Typography>
@@ -125,7 +135,7 @@ const Landingpage = () => {
           </AccordionDetails>
         </Accordion>
       </div>
-      <div className="buttons">
+      <div className="landingpage-buttons">
         <Button variant="contained" color="primary" onClick={handleCO2}>
           CO2 Rechner starten
         </Button>

@@ -6,10 +6,26 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import Box from "@mui/material/Box";
 import Map from "./Map";
 import Co2Card from "./Contribution";
-//import Chart from "./Chart";
+import Charts from "./Charts";
+import Groups from "./Groups";
+import CheckAuth from "../CheckAuth";
+
 
 const MyTabs = () => {
   const [value, setValue] = useState(0);
+  const isLoggedIn = CheckAuth();
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const groupCode = urlParams.get("groupcode");
+    if (groupCode) {
+      localStorage.setItem("groupCode", groupCode);
+    }
+    if(isLoggedIn){
+      addUserToGroup(groupCode);
+      console.log("add user")
+    }
+  }, []);
 
   useEffect(() => {
     const storedValue = localStorage.getItem("selectedTab");
@@ -50,15 +66,20 @@ const MyTabs = () => {
       >
         <Tab icon={<MapIcon />} label="Karte" />
         <Tab icon={<BarChartIcon />} label="Charts" />
+        <Tab icon={<BarChartIcon />} label="Gruppen" />
         <Tab icon={<BarChartIcon />} label="Beteiligung" />
+
       </Tabs>
       <TabPanel value={value} index={0}>
         <Map />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <h1>Here will be some nice charts soon</h1>
+        <Charts />
       </TabPanel>
       <TabPanel value={value} index={2}>
+        <Groups />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
         <Co2Card co2Footprint={0} />
       </TabPanel>
     </div>

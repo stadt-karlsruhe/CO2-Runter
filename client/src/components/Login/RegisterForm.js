@@ -1,5 +1,6 @@
 import * as React from "react";
 import { TextField, Button, Stack, Alert } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const RegisterForm = () => {
@@ -22,6 +23,7 @@ const RegisterForm = () => {
     password &&
     confirmPassword &&
     email;
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
       event.preventDefault();
@@ -30,8 +32,11 @@ const RegisterForm = () => {
       } else {
         try {
           const response = await axios.post('/api/register', { username, email, password });
-          if (response.status === 200) {
-            localStorage.setItem('token', response.data.token);         
+          console.log("Registrierung antwort Status: "+response.status);
+          if (response.status === 201) {
+            localStorage.setItem('CO2Token', response.data.token);  
+            console.log("Neuer Token: "+response.data.token);   
+            navigate("/");    
           }
         } catch (error) {
           if (error.response) {
@@ -93,7 +98,7 @@ const RegisterForm = () => {
             "Das Passwort muss mindestens 4 Zeichen lang sein"
           }
         />
-        <Button variant="contained" type="submit" disabled={!isFormFilled}>
+        <Button variant="contained" type="submit" disabled={!isFormFilled} className="btn">
           Registrieren
         </Button>
       </Stack>

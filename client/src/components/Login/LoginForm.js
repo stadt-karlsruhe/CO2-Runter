@@ -19,7 +19,8 @@ const LoginForm = (props) => {
     try {
       const response = await axios.post('/api/login', { email, password });
       if (response.status === 200) {
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('CO2Token', response.data.token);
+        console.log(response.data.token)
       navigate(props.link);         
       }
     } catch (error) {
@@ -50,7 +51,7 @@ const LoginForm = (props) => {
           error={!isPasswordValid}
           helperText={!isPasswordValid && 'Das Passwort muss mindestens 4 Zeichen lang sein'}
         />
-        <Button variant="contained" type="submit" disabled={!isFormFilled}>
+        <Button variant="contained" type="submit" disabled={!isFormFilled} className="btn">
           Anmelden
         </Button>
       </Stack>

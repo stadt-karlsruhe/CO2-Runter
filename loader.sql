@@ -42,11 +42,8 @@ Insert into CO2Prints (mobility, housing, consume, nutrition, date) Values (3.0,
 
 
 -- Test data for ComparisonPrints table
-Insert into ComparisonPrints (name, mobility, housing, consume, nutrition, totalPrint, date) Values ("TestData1", 1.0, 2.0, 3.0, 4.0, 10.0, "2020-01-01");
-Insert into ComparisonPrints (name, mobility, housing, consume, nutrition, totalPrint, date) Values ("TestData2", 2.0, 3.0, 4.0, 5.0, 14.0, "2020-01-02");
-Insert into ComparisonPrints (name, mobility, housing, consume, nutrition, totalPrint, date) Values ("TestData3", 3.0, 4.0, 5.0, 6.0, 18.0, "2020-01-03");
-Insert into ComparisonPrints (name, mobility, housing, consume, nutrition, totalPrint, date) Values ("TestData4", 4.0, 5.0, 6.0, 7.0, 22.0, "2020-01-04");
-Insert into ComparisonPrints (name, mobility, housing, consume, nutrition, totalPrint, date) Values ("TestData5", 5.0, 6.0, 7.0, 8.0, 26.0, "2020-01-05");
+Insert into ComparisonPrints (name, mobility, housing, consume, nutrition, totalPrint, date) Values ("Deutschland", 2.2, 2.7, 3.4, 1.7, 10, "2020-01-01");
+Insert into ComparisonPrints (name, mobility, housing, consume, nutrition, totalPrint, date) Values ("Karlsruhe", 2.32, 3.36, 3.45, 1.89, 11, "2020-01-02");
 
 -- Test data for Districts table
 Insert into Districts (name) Values ("Knielingen");

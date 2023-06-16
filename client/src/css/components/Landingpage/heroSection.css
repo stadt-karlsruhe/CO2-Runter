@@ -1,0 +1,13 @@
+.hero {
+    background-color: #f7f9f5;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .container {
+    width: 80vw;
+    max-width: 100%;
+    text-align: center;
+  }
