@@ -9,13 +9,14 @@ import { useNavigate } from "react-router-dom";
 const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const [tabValue, setTabValue] = useState(0);
   const [selectedDistricts, setSelectedDistricts] = useState();
-  const [selectedGroups, setSelectedGroups] = useState(["12354",]);
+  const [selectedGroups, setSelectedGroups] = useState(["12354"]);
   const [sentData, setSentData] = useState(false);
   const navigate = useNavigate();
   const CO2Token = localStorage.getItem('CO2Token');
 
   function updateSelectedGroups(newSelection) {
-    updateSelectedGroups(newSelection);
+    setSelectedGroups(newSelection);
+    return
   };
   
   const handleTabChange = (event, newValue) => {
@@ -35,6 +36,7 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
     try {
       const districtId = selectedDistricts ? selectedDistricts.district_ID : 0;
       console.log(districtId+" : "+ selectedDistricts)
+      console.log("Gruppen: " + selectedGroups)
       const response = await axios.post("/api/footprint", {
         groups: selectedGroups,
         district: districtId,
@@ -105,7 +107,7 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
       )}
       {tabValue === 1 &&
         (CO2Token ? (
-          <GroupChoice  updateSelectedGroups={updateSelectedGroups} selectedGroups={selectedGroups} />
+          <GroupChoice  updateSelectedGroups={updateSelectedGroups}/>
         ) : (
           <Login setSelectedGroups={setSelectedGroups} />
         ))}

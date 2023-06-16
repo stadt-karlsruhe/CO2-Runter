@@ -3,10 +3,10 @@ import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, TextField, Card } from "@mui/material";
 
-const GroupChoice = ({ updateSelectedGroups , selectedGroups }) => {
+const GroupChoice = ({ updateSelectedGroups  }) => {
   const [groups, setGroups] = useState([]);
   const [groupCode, setGroupCode] = useState("");
-  const [selectedRows, setSelectedRows] = useState([selectedGroups]);
+  const [selectedRows, setSelectedRows] = useState([]);
   const co2Token = localStorage.getItem('CO2Token');
 
   const columns = [
@@ -110,9 +110,11 @@ const GroupChoice = ({ updateSelectedGroups , selectedGroups }) => {
 
   const handleSelectionChange = (newSelection) => {
     setSelectedRows(newSelection);
-    const selectedGroupCodes = selectedRows.map((row) => row.groupcode);
+    console.log("new Selection" + newSelection);
+    const selectedGroupCodes = selectedRows.map((row) => row);
+    console.log("selected rows" + selectedRows);
     console.log("setting" + selectedGroupCodes + "as selected groups");
-    updateSelectedGroups(selectedGroupCodes);
+    updateSelectedGroups((prevSelectedGroups) => [...prevSelectedGroups, selectedGroupCodes]);
   };
 
 
