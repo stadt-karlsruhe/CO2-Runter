@@ -133,6 +133,93 @@ router.get('/comparisonprints', async (req, res) => {
   });
 });
 
+router.get('/groupfootprint', (req, res) => {
+  const groupCode = req.query.groupcode;
 
+  if (!groupCode) {
+    return res.status(400).json({ error: 'Missing groupcode' });
+  }
+
+  const groupQuery = `
+    SELECT group_ID, groupname
+    FROM Carbon_Footprint_Groups
+    WHERE groupcode = ?
+  `;
+
+  db.query(groupQuery, [groupCode], (error, groupResults) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Error retrieving data' });
+    }
+
+    if (groupResults.length === 0) {
+      return res.status(404).json({ error: 'Group not found' });
+    }
+
+    const groupId = groupResults[0].group_ID;
+    const groupName = groupResults[0].groupname;
+
+    const printQuery = `
+      SELECT print_ID
+      FROM Prints_In_Carbon_Footprint_Groups
+      WHERE group_ID = ?
+    `;
+
+    db.query(printQuery, [groupId], (error, printResults) => {
+      if (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Error retrieving data' });
+      }
+
+      if (printResults.length === 0) {
+        const response = {
+          name: groupName,
+          values: [],
+        };
+
+        return res.json(response);
+      }
+
+      const printIDs = printResults.map((result) => result.print_ID);
+
+      const footprintQuery = `
+        SELECT 'Mobilität' AS category, ROUND(AVG(mobility), 2) AS value
+        FROM CO2Prints
+        WHERE print_ID IN (?)
+        UNION
+        SELECT 'Wohnen' AS category, ROUND(AVG(housing), 2) AS value
+        FROM CO2Prints
+        WHERE print_ID IN (?)
+        UNION
+        SELECT 'Konsum' AS category, ROUND(AVG(consume), 2) AS value
+        FROM CO2Prints
+        WHERE print_ID IN (?)
+        UNION
+        SELECT 'Ernährung' AS category, ROUND(AVG(nutrition), 2) AS value
+        FROM CO2Prints
+        WHERE print_ID IN (?)
+      `;
+
+      db.query(footprintQuery, [printIDs, printIDs, printIDs, printIDs], (error, footprintResults) => {
+        if (error) {
+          console.error(error);
+          return res.status(500).json({ error: 'Error retrieving data' });
+        }
+
+        const categories = footprintResults.map((result) => ({
+          category: result.category,
+          value: result.value || 0,
+        }));
+
+        const response = {
+          name: groupName,
+          values: categories,
+        };
+
+        return res.json(response);
+      });
+    });
+  });
+});
 
 module.exports = router;

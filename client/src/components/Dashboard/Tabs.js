@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Map from "./Map";
 import Co2Card from "./Contribution";
 import Charts from "./Charts";
+import Groups from "./Groups";
 
 const MyTabs = () => {
   const [value, setValue] = useState(0);
@@ -50,7 +51,9 @@ const MyTabs = () => {
       >
         <Tab icon={<MapIcon />} label="Karte" />
         <Tab icon={<BarChartIcon />} label="Charts" />
+        <Tab icon={<BarChartIcon />} label="Gruppen" />
         <Tab icon={<BarChartIcon />} label="Beteiligung" />
+
       </Tabs>
       <TabPanel value={value} index={0}>
         <Map />
@@ -59,6 +62,9 @@ const MyTabs = () => {
         <Charts />
       </TabPanel>
       <TabPanel value={value} index={2}>
+        <Groups />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
         <Co2Card co2Footprint={0} />
       </TabPanel>
     </div>
