@@ -115,12 +115,14 @@ export default function District_Map() {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "80vw", height: "80vh" }}>
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "60vh" }}>
       {dataLoaded ? (
-        <ReactEcharts option={mapOption} style={{ width: "100%", height: "100%" }} />
+          <ReactEcharts option={mapOption} style={{ width: "100%", height: "60vh" }} />
       ) : (
         <div>Loading...</div>
       )}
     </div>
   );
+  
+  
 };
