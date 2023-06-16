@@ -12,8 +12,12 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [sentData, setSentData] = useState(false);
   const navigate = useNavigate();
-  const isLoggedIn = false;
+  const CO2Token = localStorage.getItem('CO2Token');
 
+  function updateSelectedGroups(newSelection) {
+    setState(newSelection);
+  };
+  
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
@@ -29,14 +33,13 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
 
   const handleSubmitData = async () => {
     try {
+      const districtId = selectedDistricts ? selectedDistricts.district_ID : 0;
+      console.log(districtId+" : "+ selectedDistricts)
       const response = await axios.post("/api/footprint", {
         groups: selectedGroups,
-        district: selectedDistricts.district_ID ?? 0,
+        district: districtId,
         data: co2SumPerCategory,
       });
-
-      console.log(selectedGroups);
-
       if (response.status === 200) {
         setSentData(true);
         navigate("/CO2Rechner/finish", {
@@ -101,8 +104,8 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
         <CityDistrictChoice setSelectedDistricts={setSelectedDistricts} />
       )}
       {tabValue === 1 &&
-        (isLoggedIn ? (
-          <GroupChoice setSelectedGroups={setSelectedGroups} />
+        (CO2Token ? (
+          <GroupChoice  updateSelectedGroups={updateSelectedGroups} />
         ) : (
           <Login setSelectedGroups={setSelectedGroups} />
         ))}

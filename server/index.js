@@ -226,4 +226,9 @@ app.get('/user', auth, (req, res) => {
   res.send(req.user)
 })
 
+// endpoint to check if token is valid
+app.get('/isUserAuth', auth, (req, res) => {
+  res.status(200).send(true);
+})
+
 app.listen('3001', () => { })

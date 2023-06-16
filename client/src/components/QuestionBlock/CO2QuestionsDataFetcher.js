@@ -5,9 +5,11 @@ import Footer from "../Footer/Footer";
 import QuestionCategory from "../QuestionBlock/QuestionCategory";
 import DemoQuestion from "../../DemoQuestion.json"
 import axios from 'axios';
+import CheckAuth from "../CheckAuth";
 
 const CO2QuestionsDataFetcher = () => {
   const [questions, setQuestions] = useState("");
+  const isLoggedIn = CheckAuth();
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -16,13 +18,37 @@ const CO2QuestionsDataFetcher = () => {
         const data = response.data;
         setQuestions(data);
       } catch (error) {
-        //Nur für übungszwecke
+        //TODO entferne, sowie JSON ausm fronend entfernen; Nur für übungszwecke
         setQuestions(DemoQuestion);
       }
     };
   
     fetchQuestions();
   }, []);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const groupCode = urlParams.get("groupcode");
+    if (groupCode) {
+      localStorage.setItem("groupCode", groupCode);
+    }
+    if(isLoggedIn){
+      addUserToGroup(groupCode);
+      console.log("add user")
+    }
+  }, []);
+
+  const addUserToGroup = async (groupCode) => {
+    const co2Token = localStorage.getItem("CO2Token");
+    try {
+      await axios.post(`/api/groups/add_user`,{
+          co2token: co2Token,
+          groupcode: groupCode
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>

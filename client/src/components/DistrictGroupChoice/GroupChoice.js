@@ -3,10 +3,11 @@ import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, TextField, Card } from "@mui/material";
 
-const GroupChoice = (setSelectedGroups) => {
+const GroupChoice = ({ updateSelectedGroups }) => {
   const [groups, setGroups] = useState([]);
   const [groupCode, setGroupCode] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
+  const co2Token = localStorage.getItem('CO2Token');
 
   const columns = [
     { field: "groupname", headerName: "Gruppenname", width: 150 },
@@ -15,25 +16,75 @@ const GroupChoice = (setSelectedGroups) => {
     { field: "memberCount", headerName: "Mitgliederzahl", width: 150 },
   ];
 
-
   useEffect(() => {
     const fetchGroups = async () => {
       try {
         const response = await axios.get("/api/groups/member", {
-          params: {
-            token: "YOUR_TOKEN_HERE",
-            user_ID: "YOUR_USER_ID_HERE",
+          headers: {
+            co2token: co2Token,
           },
         });
         if (response.status === 200) {
           setGroups(response.data);
+          console.log(response.data)
         }
       } catch (error) {
         console.error(error);
       }
     };
-    fetchGroups();
+    if(co2Token){
+      fetchGroups();
+    }
   }, []);
+
+  // useEffect(() => {
+  //   // save state to local storage
+  //   //check if group is already in local storage
+  //   if (groups.length === 0) {
+  //     return;
+  //   }
+  //   if (localStorage.getItem("groupCode")) {
+  //     const prevcodes = localStorage.getItem("groupCode");
+  //     const groupExists = groups.find((group) => group.groupcode === prevcodes);
+  //     if (groupExists) {
+  //       return;
+  //     }
+  //   }
+  //   prevcodes = localStorage.getItem("groupCode");
+  //   localStorage.setItem("groupCode",  prevcodes + groups[groups.length - 1].groupcode);
+  // }, [groups]);
+
+
+  useEffect(() => {
+    const existingGroupCode = localStorage.getItem("groupCode");
+  
+    const fetchGroupByCode = async (groupCode) => {
+      try {
+        const response = await axios.get("/api/groups/get", {
+          params: {
+            groupcode: groupCode,
+          }
+        });
+        if (response.status === 200) {
+          const newGroup = response.data;
+          // Check if the group already exists in the groups array
+          const groupExists = groups.some((group) => group.groupcode === newGroup.groupcode);
+          if (groupExists) {
+            return;
+          }
+          setGroups((prevGroups) => [...prevGroups, newGroup]);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    if (existingGroupCode) {
+      fetchGroupByCode(existingGroupCode);
+    }
+  }, []); // Empty dependency array, causing the effect to run only once
+  
+  
 
   const handleGroupCodeChange = (event) => {
     setGroupCode(event.target.value);
@@ -41,16 +92,44 @@ const GroupChoice = (setSelectedGroups) => {
 
   const handleAddGroup = async () => {
     try {
-      const response = await axios.get(`/api/groups/get/${groupCode}`);
+      const response = await axios.get(`/api/groups/get`, {
+        params: {
+        groupcode: groupCode,
+        }
+      });
       if (response.status === 200) {
         const newGroup = response.data;
+        //check if group is already in groups
+        const groupExists = groups.find((group) => group.groupcode === newGroup.groupcode);
+        if (groupExists) {
+          return;
+        }
         setGroups((prevGroups) => [...prevGroups, newGroup]);
-        setSelectedGroups((prevSelectedGroups) => [...prevSelectedGroups, newGroup.groupcode]);
+        //updateSelectedGroups((prevSelectedGroups) => [...prevSelectedGroups, newGroup.groupcode]);
       }
     } catch (error) {
       console.error(error);
     }
   };
+
+  // check for duplicate in groups and remove one so all groups are unique
+  useEffect(() => {
+    const uniqueGroups = groups.filter((group, index, self) =>
+      index === self.findIndex((t) => (
+        t.groupcode === group.groupcode
+      ))
+    );
+    setGroups(uniqueGroups);
+  }, [groups]);
+
+
+  const handleSelectionChange = (newSelection) => {
+    setSelectedRows(newSelection);
+    const selectedGroupCodes = selectedRows.map((row) => row.groupcode);
+    console.log("setting" + selectedGroupCodes + "as selected groups");
+    updateSelectedGroups(selectedGroupCodes);
+  };
+
 
   return (
     <Card style={{ width: "90%", marginBottom: "10px", padding: "25px", backgroundColor: "#f7f9f5" }}>
@@ -59,12 +138,9 @@ const GroupChoice = (setSelectedGroups) => {
         columns={columns}
         pageSize={5}
         checkboxSelection
-        onSelectionModelChange={(newSelection) => {
-          setSelectedRows(newSelection.selectionModel);
-          const selectedGroupCodes = newSelection.selectionModel.map((rowId) => groups[rowId].groupcode);
-          setSelectedGroups(selectedGroupCodes);
-        }}
-        selectionModel={selectedRows}
+        onRowSelectionModelChange={handleSelectionChange}
+        rowSelectionModel={selectedRows}
+        getRowId={(row) => row.groupcode}
       />
 
       <TextField
