@@ -112,7 +112,6 @@ const GroupChoice = ({ updateSelectedGroups  }) => {
     setSelectedRows(newSelection);
     console.log("new Selection" + newSelection);
     console.log("selected rows" + selectedRows);
-    console.log("setting" + selectedGroupCodes + "as selected groups");
     updateSelectedGroups((prevSelectedGroups) => [...prevSelectedGroups]);
   };
 
