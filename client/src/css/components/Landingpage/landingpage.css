@@ -1,0 +1,17 @@
+.accordion {
+  background-color: #f7f9f5;
+  padding: 10px;
+}
+
+.accordionDetail {
+  background-color: #f7f9f5;
+  border: 1px solid #ddd;
+}
+
+.landingpage-buttons {
+  margin: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
