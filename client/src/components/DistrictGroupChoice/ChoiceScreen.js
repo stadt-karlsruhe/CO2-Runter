@@ -14,6 +14,10 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const navigate = useNavigate();
   const CO2Token = localStorage.getItem('CO2Token');
 
+  function updateSelectedGroups(newSelection) {
+    setState(newSelection);
+  };
+  
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
@@ -101,7 +105,7 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
       )}
       {tabValue === 1 &&
         (CO2Token ? (
-          <GroupChoice setSelectedGroups={setSelectedGroups} />
+          <GroupChoice  updateSelectedGroups={updateSelectedGroups} />
         ) : (
           <Login setSelectedGroups={setSelectedGroups} />
         ))}

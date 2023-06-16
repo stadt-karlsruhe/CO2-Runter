@@ -3,7 +3,7 @@ import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, TextField, Card } from "@mui/material";
 
-const GroupChoice = (setSelectedGroups) => {
+const GroupChoice = ({ updateSelectedGroups }) => {
   const [groups, setGroups] = useState([]);
   const [groupCode, setGroupCode] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
@@ -105,7 +105,7 @@ const GroupChoice = (setSelectedGroups) => {
           return;
         }
         setGroups((prevGroups) => [...prevGroups, newGroup]);
-        setSelectedGroups((prevSelectedGroups) => [...prevSelectedGroups, newGroup.groupcode]);
+        //updateSelectedGroups((prevSelectedGroups) => [...prevSelectedGroups, newGroup.groupcode]);
       }
     } catch (error) {
       console.error(error);
@@ -123,6 +123,13 @@ const GroupChoice = (setSelectedGroups) => {
   }, [groups]);
 
 
+  const handleSelectionChange = (newSelection) => {
+    setSelectedRows(newSelection);
+    const selectedGroupCodes = selectedRows.map((row) => row.groupcode);
+    console.log("setting" + selectedGroupCodes + "as selected groups");
+    updateSelectedGroups(selectedGroupCodes);
+  };
+
 
   return (
     <Card style={{ width: "90%", marginBottom: "10px", padding: "25px", backgroundColor: "#f7f9f5" }}>
@@ -131,13 +138,8 @@ const GroupChoice = (setSelectedGroups) => {
         columns={columns}
         pageSize={5}
         checkboxSelection
-        onSelectionModelChange={(newSelection) => {
-          setSelectedRows(newSelection.selectionModel);
-          const selectedGroupCodes = newSelection.selectionModel.map((rowId) => groups[rowId].groupcode);
-          console.log("setting" + selectedGroupCodes + "as selected groups");
-          setSelectedGroups(selectedGroupCodes);
-        }}
-        selectionModel={selectedRows}
+        onRowSelectionModelChange={handleSelectionChange}
+        rowSelectionModel={selectedRows}
         getRowId={(row) => row.groupcode}
       />
 
