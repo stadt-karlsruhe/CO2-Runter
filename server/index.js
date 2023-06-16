@@ -4,6 +4,7 @@ const cors = require('cors');
 const app = express();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
 const auth = require("./middleware/auth");
 const groups_routes = require("./routes/groups_routes");
 const user_routes = require("./routes/user_routes");
@@ -11,7 +12,7 @@ const {db} = require('./services/db');
 const dashboard_routes = require("./routes/dashboard_routes");
 
 
-// read json file 
+// read questions from json file 
 const fs = require('fs');
 const questions = JSON.parse(fs.readFileSync('questions.json', 'utf8'));
 
@@ -23,15 +24,12 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
-// home page
-app.get('/', auth, (req, res) => {
-  res.send('Hi There')
-});
-
+//Route that returns all questions
 app.get('/questions', (req, res) => {
   res.send(questions)
 })
 
+//Route to register a new user
 app.post('/register', async (req, res) => {
     // Get user input
     const { email, password, username } =  req.body;
@@ -74,7 +72,7 @@ app.post('/register', async (req, res) => {
     })
 })
 
-
+//Route to login a user
 app.post('/login', async (req, res) => {
   // Get user input
   const { email, password } =  req.body;
@@ -112,7 +110,8 @@ app.post('/login', async (req, res) => {
   })
 })
 
-// route get list of all disticts 
+
+// Route to get all districts
 app.get('/districts', (req, res) => {
   const SelectQuery = " SELECT * FROM  Districts";
   db.query(SelectQuery, (err, result) => {
@@ -146,6 +145,10 @@ app.post('/footprint', (req, res) => {
 
 
   else {
+    console.log("data is ok")
+    console.log(groups)
+    console.log(district)
+    console.log(data)
     const InsertQuery = "INSERT INTO CO2Prints (mobility, housing, consume, nutrition, date) VALUES (?, ?, ?, ?, ?)";
     db.query(InsertQuery, [data[0], data[1], data[2], data[3], new Date()], (err, result) => {
       if(err) {
@@ -156,7 +159,8 @@ app.post('/footprint', (req, res) => {
         // get the id of the footprint
         const footprint_id = result.insertId;
         // if a district is selected add the footprint to the table Prints_In_Districts with this columns: district_ID	and print_ID
-        if(district.length > 0) {
+        if(district > 0) {
+          console.log("Addedto :"+ district)
           const InsertQuery = "INSERT INTO Prints_In_Districts (district_ID, print_ID) VALUES (?, ?)";
           db.query(InsertQuery, [district, footprint_id], (err, result) => {
             if(err) {

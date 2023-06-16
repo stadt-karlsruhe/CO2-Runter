@@ -221,5 +221,4 @@ router.get('/groupfootprint', (req, res) => {
     });
   });
 });
-
 module.exports = router;
