@@ -9,14 +9,38 @@ const GroupSuccesfull = (props) => {
   const dashLink = `${rootUrl}/Dashboard?groupcode=${props.groupCode}`;
 
   const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text)
-      .then(() => {
-        console.log("Text copied to clipboard:", text);
-      })
-      .catch((error) => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          console.log("Text copied to clipboard:", text);
+        })
+        .catch((error) => {
+          console.error("Failed to copy text to clipboard:", error);
+        });
+    } else {
+      // Fallback option for unsupported browsers or environments
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      try {
+        const successful = document.execCommand("copy");
+        if (successful) {
+          console.log("Text copied to clipboard:", text);
+        } else {
+          console.error("Failed to copy text to clipboard.");
+        }
+      } catch (error) {
         console.error("Failed to copy text to clipboard:", error);
-      });
+      } finally {
+        document.body.removeChild(textarea);
+      }
+    }
   };
+  
 
   return (
     <Stack spacing={2}>
