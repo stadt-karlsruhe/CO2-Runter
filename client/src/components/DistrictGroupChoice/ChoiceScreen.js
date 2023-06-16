@@ -15,7 +15,7 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const CO2Token = localStorage.getItem('CO2Token');
 
   function updateSelectedGroups(newSelection) {
-    setState(newSelection);
+    updateSelectedGroups(newSelection);
   };
   
   const handleTabChange = (event, newValue) => {

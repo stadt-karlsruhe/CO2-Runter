@@ -37,22 +37,7 @@ const GroupChoice = ({ updateSelectedGroups , selectedGroups }) => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   // save state to local storage
-  //   //check if group is already in local storage
-  //   if (groups.length === 0) {
-  //     return;
-  //   }
-  //   if (localStorage.getItem("groupCode")) {
-  //     const prevcodes = localStorage.getItem("groupCode");
-  //     const groupExists = groups.find((group) => group.groupcode === prevcodes);
-  //     if (groupExists) {
-  //       return;
-  //     }
-  //   }
-  //   prevcodes = localStorage.getItem("groupCode");
-  //   localStorage.setItem("groupCode",  prevcodes + groups[groups.length - 1].groupcode);
-  // }, [groups]);
+  
 
 
   useEffect(() => {
@@ -127,7 +112,7 @@ const GroupChoice = ({ updateSelectedGroups , selectedGroups }) => {
     setSelectedRows(newSelection);
     const selectedGroupCodes = selectedRows.map((row) => row.groupcode);
     console.log("setting" + selectedGroupCodes + "as selected groups");
-    //updateSelectedGroups(selectedGroupCodes);
+    updateSelectedGroups(selectedGroupCodes);
   };
 
 

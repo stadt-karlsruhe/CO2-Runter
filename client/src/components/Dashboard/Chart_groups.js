@@ -100,24 +100,29 @@ const Chart_groups = () => {
       isLoading ||
       error ||
       footprints === undefined ||
-      footprints.length === 0 
+      footprints.length === 0
     ) {
       // Handle loading and error states
       return null;
     }
-    const selectedData = selectedFootprints.map((selectedFootprint) => {
-        const footprint = footprints.find((f) => f.name === selectedFootprint);
-        return footprint.values.map((valueObj) => ({ category: valueObj.category, value: valueObj.value }));
-      });
   
-      const selectedCategories = selectedFootprints.map((selectedFootprint) => {
-        const footprint = footprints.find((f) => f.name === selectedFootprint);
-        return footprint.name;
-      });
-
-    const available_Categories = footprints[0].values.map((valueObj) => valueObj.category);
-
-
+    const selectedData = selectedFootprints.map((selectedFootprint) => {
+      const footprint = footprints.find((f) => f.name === selectedFootprint);
+      return footprint.values.map((valueObj) => ({
+        category: valueObj.category,
+        value: valueObj.value,
+      }));
+    });
+  
+    const selectedCategories = selectedFootprints.map((selectedFootprint) => {
+      const footprint = footprints.find((f) => f.name === selectedFootprint);
+      return footprint.name;
+    });
+  
+    const available_Categories = footprints[0].values.map(
+      (valueObj) => valueObj.category
+    );
+  
     return {
       tooltip: {
         trigger: "axis",
@@ -137,29 +142,26 @@ const Chart_groups = () => {
       xAxis: {
         type: "category",
         data: selectedCategories,
-        //selectedData[0].map((data) => data.category), // Use the categories from the first selectedData array
       },
-      
-      yAxis
-: {
-type: "value",
-boundaryGap: [0, 0.01],
-},
-series: available_Categories.map((data, index) => ({
-name: data,
-type: "bar",
-stack: "stack",
-barWidth: "60%",
-data: selectedData.map((selectedData) => selectedData[index].value),
-label: {
-show: true,
-position: "inside",
-formatter: "{c} t CO2e",
-},
-})),
-};
-};
-
+      yAxis: {
+        type: "value",
+        boundaryGap: [0, 0.01],
+      },
+      series: available_Categories.map((data, index) => ({
+        name: data,
+        type: "bar",
+        stack: "stack",
+        barWidth: "60%",
+        data: selectedData.map((selectedData) => selectedData[index].value),
+        label: {
+          show: true,
+          position: "inside",
+          formatter: "{c} t CO2e",
+        },
+      })),
+    };
+  };
+  
 
 
 const handleSelectChange = (event) => {
