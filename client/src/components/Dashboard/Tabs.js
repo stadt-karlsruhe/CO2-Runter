@@ -8,10 +8,24 @@ import Map from "./Map";
 import Co2Card from "./Contribution";
 import Charts from "./Charts";
 import Groups from "./Groups";
+import CheckAuth from "../CheckAuth";
 
 
 const MyTabs = () => {
   const [value, setValue] = useState(0);
+  const isLoggedIn = CheckAuth();
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const groupCode = urlParams.get("groupcode");
+    if (groupCode) {
+      localStorage.setItem("groupCode", groupCode);
+    }
+    if(isLoggedIn){
+      addUserToGroup(groupCode);
+      console.log("add user")
+    }
+  }, []);
 
   useEffect(() => {
     const storedValue = localStorage.getItem("selectedTab");

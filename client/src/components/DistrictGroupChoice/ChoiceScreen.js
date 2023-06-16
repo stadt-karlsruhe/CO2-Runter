@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const [tabValue, setTabValue] = useState(0);
   const [selectedDistricts, setSelectedDistricts] = useState();
-  const [selectedGroups, setSelectedGroups] = useState([]);
+  const [selectedGroups, setSelectedGroups] = useState(["12354",]);
   const [sentData, setSentData] = useState(false);
   const navigate = useNavigate();
   const CO2Token = localStorage.getItem('CO2Token');
@@ -105,7 +105,7 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
       )}
       {tabValue === 1 &&
         (CO2Token ? (
-          <GroupChoice  updateSelectedGroups={updateSelectedGroups} />
+          <GroupChoice  updateSelectedGroups={updateSelectedGroups} selectedGroups={selectedGroups} />
         ) : (
           <Login setSelectedGroups={setSelectedGroups} />
         ))}

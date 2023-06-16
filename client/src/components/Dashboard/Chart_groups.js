@@ -7,12 +7,48 @@ import FormControl from "@mui/material/FormControl";
 import axios from "axios";
 
 const Chart_groups = () => {
-  const [availableGroups, setAvailableGroups] = useState(["12354","13456"]);
-  const [footprints, setFootprints] = useState([]);
-  const [selectedFootprints, setSelectedFootprints] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+    const [availableGroups, setAvailableGroups] = useState(["12354","13456"]);
+    const [footprints, setFootprints] = useState([]);
+    const [selectedFootprints, setSelectedFootprints] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const co2Token = localStorage.getItem('CO2Token');
 
+
+    //get all groups the user is member of, if a co2 token is available
+    useEffect(() => {
+        const fetchGroups = async () => {
+          try {
+            const response = await axios.get("/api/groups/member", {
+              headers: {
+                co2token: co2Token,
+              },
+            });
+            if (response.status === 200) {
+              const newGroups = response.data.map((group) => group.groupcode);
+              setAvailableGroups((prevGroups) => [...prevGroups, ...newGroups]);
+              console.log("Groups from Login" + response.data);
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        };
+        if (co2Token) {
+          fetchGroups();
+        }
+      }, []);
+
+// gets teh group code from local storage and adds it to the available groups
+  useEffect(() => {
+   const groupCode = localStorage.getItem("groupCode");
+   // check if a group code is set in local storage and add it to the available groups
+    if (groupCode) {
+        setAvailableGroups((prevGroups) => [...prevGroups, groupCode]);
+    }
+    }, []);
+
+
+// get the footprints for all available groups
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,18 +65,26 @@ const Chart_groups = () => {
                 console.log("Footprint data for group " + availableGroups[i] + " successfully retrieved");  
                 console.log(response.data);
                 if (response.data.values.length > 0) {
+                //check if the group is already in the footprints array
+                const groupExists = footprints.some((footprint) => footprint.name === response.data.name);
+                if (groupExists) {
+                    console.log("Group " + availableGroups[i] + " already exists in the footprints array");
+                    return;
+                }
                 setFootprints((prevFootprints) => [...prevFootprints, response.data]);
                 } else {
                 console.log("No footprint data for group " + availableGroups[i]);
                 }
             }
         }
+        console.log("Footprint data for all groups successfully retrieved");
+        console.log(footprints);
         }
         catch (error) {console.error(error);}
         setIsLoading(false);
     };
     fetchData();
-  }, []);
+  }, [availableGroups]);
 
   useEffect(() => {
     // Reload the options and chart when the data is available
@@ -116,15 +160,7 @@ formatter: "{c} t CO2e",
 };
 };
 
-const handleFootprintClick = (footprint) => {
-if (selectedFootprints.includes(footprint.name)) {
-setSelectedFootprints(selectedFootprints.filter((fp) => fp !== footprint.name));
-} else {
-if (selectedFootprints.length < 4) {
-setSelectedFootprints([...selectedFootprints, footprint.name]);
-}
-}
-};
+
 
 const handleSelectChange = (event) => {
 setSelectedFootprints(event.target.value);
@@ -154,6 +190,7 @@ return (
             renderValue={(selected) => selected.join(", ")}
             style={{ minWidth: "300px" }} // Adjust the width as needed
           >
+            {console.log("Footprints: " + footprints)}
             {footprints.map((footprint) => (
               <MenuItem key={footprint.name} value={footprint.name}>
                 {footprint.name}
