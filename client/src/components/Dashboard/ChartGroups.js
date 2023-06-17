@@ -7,7 +7,7 @@ import FormControl from "@mui/material/FormControl";
 import axios from "axios";
 
 const ChartGroups= () => {
-    const [availableGroups, setAvailableGroups] = useState(["12354","13456"]);
+    const [availableGroups, setAvailableGroups] = useState([]);
     const [footprints, setFootprints] = useState([]);
     const [selectedFootprints, setSelectedFootprints] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -70,8 +70,24 @@ const ChartGroups= () => {
                 if (groupExists) {
                     console.log("Group " + availableGroups[i] + " already exists in the footprints array");
                     return;
-                }
-                setFootprints((prevFootprints) => [...prevFootprints, response.data]);
+                }    
+                // add the data to the footprints array check if the group is already in the footprints array and dont add it again
+                setFootprints((prevFootprints) => {
+                  // Check if response.data already exists in prevFootprints
+                  const isDataExists = prevFootprints.some((footprint) => {
+                    // Compare the data to check for uniqueness
+                    return footprint.name === response.data.name;
+                  });
+                
+                  // If response.data is not already present, append it to prevFootprints
+                  if (!isDataExists) {
+                    return [...prevFootprints, response.data];
+                  }
+                
+                  // If response.data already exists, return prevFootprints without modifying it
+                  return prevFootprints;
+                });
+                
                 } else {
                 console.log("No footprint data for group " + availableGroups[i]);
                 }
@@ -165,7 +181,7 @@ const ChartGroups= () => {
 
 
 const handleSelectChange = (event) => {
-setSelectedFootprints(event.target.value);
+  setSelectedFootprints(event.target.value);
 };
 
 return (
@@ -183,7 +199,7 @@ return (
         )}
         <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
         <FormControl>
-            <InputLabel id="demo-multiple-name-label">Angezeigte Fußabdrücke wählen</InputLabel>
+            <InputLabel id="demo-multiple-name-label">Angezeigte Gruppen wählen</InputLabel>
           <Select
             multiple
             label="Angezeigte Fußabdrücke wählen"
@@ -192,7 +208,6 @@ return (
             renderValue={(selected) => selected.join(", ")}
             style={{ minWidth: "300px" }} // Adjust the width as needed
           >
-            {console.log("Footprints: " + footprints)}
             {footprints.map((footprint) => (
               <MenuItem key={footprint.name} value={footprint.name}>
                 {footprint.name}
