@@ -58,7 +58,7 @@ const FinishScreen = () => {
           : "Schade das Sie ihre Daten nicht mit uns und den anderen Nutzern teilen wollen."}
       </Typography>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <Button variant="contained" onClick={() => navigate("/")} style={{ width: "100%", marginBottom: "10px", marginTop: "10px" }}>
+        <Button variant="contained" onClick={() => history.push("/Dashboard")} style={{ width: "100%", marginBottom: "10px", marginTop: "10px" }}>
           Zum Dashboard
         </Button>
         <Button variant="outlined" onClick={() => navigate("/")} style={{ width: "100%", marginBottom: "10px" }}>
