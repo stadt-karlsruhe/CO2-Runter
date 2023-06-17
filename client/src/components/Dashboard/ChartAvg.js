@@ -6,7 +6,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import axios from "axios";
 
-const Chart_avg = () => {
+const ChartAvg = () => {
   const [footprints, setFootprints] = useState([]);
   const [average, setAverage] = useState([]);
   const [selectedFootprints, setSelectedFootprints] = useState([]);
@@ -165,4 +165,4 @@ return (
 );
 };	
 
-export default Chart_avg;
+export default ChartAvg;

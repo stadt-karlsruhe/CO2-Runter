@@ -6,7 +6,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import axios from "axios";
 
-const Chart_groups = () => {
+const ChartGroups= () => {
     const [availableGroups, setAvailableGroups] = useState(["12354","13456"]);
     const [footprints, setFootprints] = useState([]);
     const [selectedFootprints, setSelectedFootprints] = useState([]);
@@ -207,4 +207,4 @@ return (
 );
 };	
 
-export default Chart_groups;
+export default ChartGroups;

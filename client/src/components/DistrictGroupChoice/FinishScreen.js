@@ -1,7 +1,7 @@
 import React from "react";
 import { PieChart, Pie, Cell } from "recharts";
 import { Typography, Button } from "@mui/material";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link} from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
@@ -58,9 +58,11 @@ const FinishScreen = () => {
           : "Schade das Sie ihre Daten nicht mit uns und den anderen Nutzern teilen wollen."}
       </Typography>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <Button variant="contained" onClick={() => history.push("/Dashboard")} style={{ width: "100%", marginBottom: "10px", marginTop: "10px" }}>
-          Zum Dashboard
-        </Button>
+        <Link to="/Dashboard" style={{ textDecoration: "none", width: "100%", marginBottom: "10px" }}>
+          <Button variant="contained" style={{ width: "100%", marginBottom: "10px", marginTop: "10px" }}>
+            Zum Dashboard
+          </Button>
+        </Link>
         <Button variant="outlined" onClick={() => navigate("/")} style={{ width: "100%", marginBottom: "10px" }}>
           Home
         </Button>

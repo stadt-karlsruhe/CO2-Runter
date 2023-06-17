@@ -9,6 +9,7 @@ import Co2Card from "./Contribution";
 import Charts from "./Charts";
 import Groups from "./Groups";
 import CheckAuth from "../CheckAuth";
+import axios from "axios";
 
 
 const MyTabs = () => {
