@@ -27,6 +27,19 @@ const MyTabs = () => {
     }
   }, []);
 
+  const addUserToGroup = async (groupCode) => {
+    const co2Token = localStorage.getItem("CO2Token");
+    try {
+      await axios.post(`/api/groups/add_user`,{
+          co2token: co2Token,
+          groupcode: groupCode
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   useEffect(() => {
     const storedValue = localStorage.getItem("selectedTab");
     if (storedValue) {

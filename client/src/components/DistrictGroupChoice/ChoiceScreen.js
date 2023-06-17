@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Tab, Tabs, Typography, Button } from "@mui/material";
 import CityDistrictChoice from "./CityDistrictChoice";
@@ -6,13 +6,18 @@ import GroupChoice from "./GroupChoice";
 import Login from "./Login";
 import { useNavigate } from "react-router-dom";
 
+
 const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const [tabValue, setTabValue] = useState(0);
   const [selectedDistricts, setSelectedDistricts] = useState();
-  const [selectedGroups, setSelectedGroups] = useState(["12354"]);
+  const [selectedGroups, setSelectedGroups] = useState([]);
   const [sentData, setSentData] = useState(false);
   const navigate = useNavigate();
   const CO2Token = localStorage.getItem('CO2Token');
+
+  useEffect(() => {
+    console.log("selectedGroups: " + selectedGroups)
+  }, [selectedGroups])
 
   function updateSelectedGroups(newSelection) {
     setSelectedGroups(newSelection);
@@ -36,7 +41,7 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
     try {
       const districtId = selectedDistricts ? selectedDistricts.district_ID : 0;
       console.log(districtId+" : "+ selectedDistricts)
-      console.log("Gruppen: " + selectedGroups)
+      console.log("Submited Groups: " + selectedGroups)
       const response = await axios.post("/api/footprint", {
         groups: selectedGroups,
         district: districtId,

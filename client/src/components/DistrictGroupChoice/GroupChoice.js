@@ -16,6 +16,7 @@ const GroupChoice = ({ updateSelectedGroups  }) => {
     { field: "memberCount", headerName: "Mitgliederzahl", width: 150 },
   ];
 
+  // if co2Token is set, fetch groups from backend
   useEffect(() => {
     const fetchGroups = async () => {
       try {
@@ -26,12 +27,12 @@ const GroupChoice = ({ updateSelectedGroups  }) => {
         });
         if (response.status === 200) {
           setGroups(response.data);
-          console.log(response.data)
         }
       } catch (error) {
         console.error(error);
       }
     };
+
     if(co2Token){
       fetchGroups();
     }
@@ -39,9 +40,9 @@ const GroupChoice = ({ updateSelectedGroups  }) => {
 
   
 
-
+  // if groupCode in localStorage, fetch group from backend
   useEffect(() => {
-    const existingGroupCode = localStorage.getItem("groupCode");
+    const existingGroupCodeInLocalStorag = localStorage.getItem("groupCode");
   
     const fetchGroupByCode = async (groupCode) => {
       try {
@@ -57,6 +58,7 @@ const GroupChoice = ({ updateSelectedGroups  }) => {
           if (groupExists) {
             return;
           }
+          // Add the new group to the groups array
           setGroups((prevGroups) => [...prevGroups, newGroup]);
         }
       } catch (error) {
@@ -64,17 +66,18 @@ const GroupChoice = ({ updateSelectedGroups  }) => {
       }
     };
   
-    if (existingGroupCode) {
-      fetchGroupByCode(existingGroupCode);
+    if (existingGroupCodeInLocalStorag) {
+      fetchGroupByCode(existingGroupCodeInLocalStorag);
     }
-  }, []); // Empty dependency array, causing the effect to run only once
+  }, []);
   
   
-
+ // updates groupCode state when input changes
   const handleGroupCodeChange = (event) => {
     setGroupCode(event.target.value);
   };
 
+  //updates groups state when group is added and adds user to group if logged in
   const handleAddGroup = async () => {
     try {
       const response = await axios.get(`/api/groups/get`, {
@@ -90,10 +93,26 @@ const GroupChoice = ({ updateSelectedGroups  }) => {
           return;
         }
         setGroups((prevGroups) => [...prevGroups, newGroup]);
-        //updateSelectedGroups((prevSelectedGroups) => [...prevSelectedGroups, newGroup.groupcode]);
+        // add user to group
+        if(co2Token){
+          try {
+          const response2 = await axios.post(`/api/groups/add_user`, {
+            groupcode: groupCode,
+          }, {
+            headers: {
+              co2token: co2Token,
+            },
+          });
+          if (response2.status === 200) {
+            console.log("User added to group");
+          }
+        } catch (error) {
+          console.error("Adding User to Group" + error);
+        }
+      }
       }
     } catch (error) {
-      console.error(error);
+      console.error("Getting Groupe Data" + error);
     }
   };
 
@@ -108,11 +127,26 @@ const GroupChoice = ({ updateSelectedGroups  }) => {
   }, [groups]);
 
 
+  useEffect(() => {
+    if (selectedRows.length === 0) {
+      return;
+    }
+    const selectedGroups = selectedRows.map((row) => row);
+    updateSelectedGroups((prevSelectedGroups) => {
+      // Filter out already existing group codes from selectedGroups
+      const newGroups = selectedGroups.filter(
+        (group) => !prevSelectedGroups.includes(group)
+      );
+  
+      // Combine existing and new group codes
+      return [...prevSelectedGroups, ...newGroups];
+    });
+  }, [selectedRows]);
+  
+
   const handleSelectionChange = (newSelection) => {
+    console.log("new Selection: " + newSelection);
     setSelectedRows(newSelection);
-    console.log("new Selection" + newSelection);
-    console.log("selected rows" + selectedRows);
-    updateSelectedGroups((prevSelectedGroups) => [...prevSelectedGroups]);
   };
 
 
