@@ -58,11 +58,14 @@ CREATE TABLE IF NOT EXISTS `Groupmemberships` (
 
 CREATE TABLE IF NOT EXISTS `Prints_In_Carbon_Footprint_Groups` (
   `group_ID` int,
-  `print_ID` int
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `print_ID` int,
+  UNIQUE KEY `unique_combination` (`group_ID`, `print_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `Prints_In_Carbon_Footprint_Groups`
+  ADD FOREIGN KEY (`group_ID`) REFERENCES `Carbon_Footprint_Groups` (`group_ID`) ON DELETE CASCADE,
+  ADD FOREIGN KEY (`print_ID`) REFERENCES `CO2Prints` (`print_ID`) ON DELETE CASCADE;
 
 ALTER TABLE `Groupmemberships` ADD FOREIGN KEY (`user_ID`) REFERENCES `Users`(`user_ID`) ON DELETE CASCADE;
 ALTER TABLE `Groupmemberships` ADD FOREIGN KEY (`group_ID`) REFERENCES `Carbon_Footprint_Groups`(`group_ID`) ON DELETE CASCADE;
-ALTER TABLE `Prints_In_Carbon_Footprint_Groups` ADD FOREIGN KEY (`group_ID`) REFERENCES `Carbon_Footprint_Groups`(`group_ID`)ON DELETE CASCADE;
-ALTER TABLE `Prints_In_Carbon_Footprint_Groups` ADD FOREIGN KEY (`print_ID`) REFERENCES `CO2Prints`(`print_ID`)ON DELETE CASCADE;
 
