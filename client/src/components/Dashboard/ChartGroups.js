@@ -4,6 +4,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
+import { Button, TextField } from "@mui/material";
 import axios from "axios";
 
 const ChartGroups= () => {
@@ -11,7 +12,9 @@ const ChartGroups= () => {
     const [footprints, setFootprints] = useState([]);
     const [selectedFootprints, setSelectedFootprints] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [groupCode, setGroupCode] = useState("");
+    const [getDataError, setgetDataError] = useState(null);
+    const [error, setError] = useState(null); 
     const co2Token = localStorage.getItem('CO2Token');
 
 
@@ -69,7 +72,8 @@ const ChartGroups= () => {
                 const groupExists = footprints.some((footprint) => footprint.name === response.data.name);
                 if (groupExists) {
                     console.log("Group " + availableGroups[i] + " already exists in the footprints array");
-                    return;
+                    // if the group is already in the footprints array, dont add it again
+                    continue;
                 }    
                 // add the data to the footprints array check if the group is already in the footprints array and dont add it again
                 setFootprints((prevFootprints) => {
@@ -110,7 +114,6 @@ const ChartGroups= () => {
     }
   }, [footprints]);
 
-  
   const getOption = () => {
     if (
       isLoading ||
@@ -178,48 +181,83 @@ const ChartGroups= () => {
     };
   };
   
+  const handleAddGroup = async () => {
+    try {
+      const response = await axios.get("/api/groups/get", {
+        params: {
+          groupcode: groupCode,
+          }
+      });
+      if (response.status === 200) {
+        console.log("Group " + groupCode + " successfully added");
+        setAvailableGroups((prevGroups) => [...prevGroups, groupCode]);
+      }
+    } catch (error) {
+      console.error(error);
+      setgetDataError("Group not found");
+      setGroupCode("");
+    }
+    setGroupCode("");
+  };
 
+  const handleSelectChange = (event) => {
+    setSelectedFootprints(event.target.value);
+  };
 
-const handleSelectChange = (event) => {
-  setSelectedFootprints(event.target.value);
-};
+  const handleGroupCodeChange = (event) => {
+    setGroupCode(event.target.value);
+    setgetDataError(null);
+  };
 
-return (
-  <div>
-    {isLoading ? (
-      <div>Loading...</div>
-    ) : error ? (
-      <div>Error: {error}</div>
-    ) : (
-      <>
-        {footprints && footprints.length > 0  ? (
-          <ReactEcharts option={getOption()} style={{ height: "500px" }} />
-        ) : (
-          <div>Data not available.</div>
-        )}
-        <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-        <FormControl>
-            <InputLabel id="demo-multiple-name-label">Angezeigte Gruppen wählen</InputLabel>
-          <Select
-            multiple
-            label="Angezeigte Fußabdrücke wählen"
-            value={selectedFootprints}
-            onChange={handleSelectChange}
-            renderValue={(selected) => selected.join(", ")}
-            style={{ minWidth: "300px" }} // Adjust the width as needed
-          >
-            {footprints.map((footprint) => (
-              <MenuItem key={footprint.name} value={footprint.name}>
-                {footprint.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl> 
+  return (
+    <div>
+      {isLoading ? (
+        <div>Loading...</div>
+      ): (
+        <>
+          {footprints && footprints.length > 0  ? (
+            <ReactEcharts option={getOption()} style={{ height: "500px" }} />
+          ) : (
+            <div>Data not available.</div>
+          )}
+          <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+          <FormControl>
+              <InputLabel id="demo-multiple-name-label">Angezeigte Gruppen wählen</InputLabel>
+            <Select
+              multiple
+              label="Angezeigte Fußabdrücke wählen"
+              value={selectedFootprints}
+              onChange={handleSelectChange}
+              renderValue={(selected) => selected.join(", ")}
+              style={{ minWidth: "300px" }} // Adjust the width as needed
+            >
+              {footprints.map((footprint) => (
+                <MenuItem key={footprint.name} value={footprint.name}>
+                  {footprint.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl> 
+          </div>
+          <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+            <TextField
+            error={getDataError}
+            label="Gruppencode"
+            value={groupCode}
+            helperText={getDataError}
+            onChange={handleGroupCodeChange}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                handleAddGroup();
+              }
+            }}
+            />
+          <Button onClick={handleAddGroup}>Gruppe hinzufügen</Button>
         </div>
-      </>
-    )}
-  </div>
-);
+        </>
+      )}
+    </div>
+  );
 };	
 
 export default ChartGroups;
