@@ -31,8 +31,9 @@ const Contribution_per_district = () => {
       data: footprints_in_districts.map((d) => d.name),
       axisLabel: {
         interval: 0,
-        rotate: 30,
-      }
+        rotate: 0, // Adjust the rotation angle as needed
+        margin: 15, // Adjust the margin as needed
+      },
     },
     xAxis: {
       type: "value",
@@ -45,17 +46,18 @@ const Contribution_per_district = () => {
       },
     ],
   };
-
+  
   return (
-    <div style={{ margin: "20px"}}>
-    <Card>
-      <CardHeader title="Beteiligung pro Stadtteil" />
-      <CardContent>
-        <ReactEcharts option={options} style={{ height: "500px" }} />
-      </CardContent>
-    </Card>
+    <div style={{ margin: "20px" }}>
+      <Card style={{ width: "90%", marginBottom: "10px", padding: "25px", backgroundColor: "#f7f9f5" }}>
+        <CardHeader title="Beteiligung pro Stadtteil" />
+        <CardContent>
+          <ReactEcharts option={options} style={{ height: "500px" }} />
+        </CardContent>
+      </Card>
     </div>
   );
+  
 };
 
 export default Contribution_per_district;

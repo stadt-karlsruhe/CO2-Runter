@@ -5,6 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import { Button, TextField } from "@mui/material";
+import Card from "@mui/material/Card";
 import axios from "axios";
 
 const ChartGroups= () => {
@@ -30,7 +31,6 @@ const ChartGroups= () => {
             if (response.status === 200) {
               const newGroups = response.data.map((group) => group.groupcode);
               setAvailableGroups((prevGroups) => [...prevGroups, ...newGroups]);
-              console.log("Groups from Login" + response.data);
             }
           } catch (error) {
             console.error(error);
@@ -65,13 +65,10 @@ const ChartGroups= () => {
             },
             });
             if (response.status === 200) {
-                console.log("Footprint data for group " + availableGroups[i] + " successfully retrieved");  
-                console.log(response.data);
                 if (response.data.values.length > 0) {
                 //check if the group is already in the footprints array
                 const groupExists = footprints.some((footprint) => footprint.name === response.data.name);
                 if (groupExists) {
-                    console.log("Group " + availableGroups[i] + " already exists in the footprints array");
                     // if the group is already in the footprints array, dont add it again
                     continue;
                 }    
@@ -93,12 +90,10 @@ const ChartGroups= () => {
                 });
                 
                 } else {
-                console.log("No footprint data for group " + availableGroups[i]);
+                  continue;
                 }
             }
-        }
-        console.log("Footprint data for all groups successfully retrieved");
-        console.log(footprints);
+          }
         }
         catch (error) {console.error(error);}
         setIsLoading(false);
@@ -189,12 +184,11 @@ const ChartGroups= () => {
           }
       });
       if (response.status === 200) {
-        console.log("Group " + groupCode + " successfully added");
         setAvailableGroups((prevGroups) => [...prevGroups, groupCode]);
       }
     } catch (error) {
       console.error(error);
-      setgetDataError("Group not found");
+      setgetDataError("Gruppe nicht gefunden");
       setGroupCode("");
     }
     setGroupCode("");
@@ -210,54 +204,55 @@ const ChartGroups= () => {
   };
 
   return (
-    <div>
+    <Card style={{ width: "90%", marginBottom: "10px", padding: "25px", backgroundColor: "#f7f9f5" }}>
       {isLoading ? (
-        <div>Loading...</div>
+        <div style={{ textAlign: "center" }}>Daten werden geladen ...</div>
       ): (
         <>
           {footprints && footprints.length > 0  ? (
             <ReactEcharts option={getOption()} style={{ height: "500px" }} />
           ) : (
-            <div>Data not available.</div>
+            <div style={{ textAlign: "center" }}>Keine Daten verfügbar: Wähle eine Gruppe aus oder füge eine Neue hinzu</div>
           )}
           <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-          <FormControl>
+            <FormControl>
               <InputLabel id="demo-multiple-name-label">Angezeigte Gruppen wählen</InputLabel>
-            <Select
-              multiple
-              label="Angezeigte Fußabdrücke wählen"
-              value={selectedFootprints}
-              onChange={handleSelectChange}
-              renderValue={(selected) => selected.join(", ")}
-              style={{ minWidth: "300px" }} // Adjust the width as needed
-            >
-              {footprints.map((footprint) => (
-                <MenuItem key={footprint.name} value={footprint.name}>
-                  {footprint.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl> 
+              <Select
+                multiple
+                label="Angezeigte Fußabdrücke wählen"
+                value={selectedFootprints}
+                onChange={handleSelectChange}
+                renderValue={(selected) => selected.join(", ")}
+                style={{ minWidth: "250px" }} // Adjust the width as needed
+              >
+                {footprints.map((footprint) => (
+                  <MenuItem key={footprint.name} value={footprint.name}>
+                    {footprint.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl> 
           </div>
           <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
             <TextField
-            error={getDataError}
-            label="Gruppencode"
-            value={groupCode}
-            helperText={getDataError}
-            onChange={handleGroupCodeChange}
-            onKeyDown={(event) => {
-              if (event.key === "Enter") {
-                handleAddGroup();
-              }
-            }}
+              error={getDataError}
+              label="Gruppencode"
+              value={groupCode}
+              helperText={getDataError}
+              onChange={handleGroupCodeChange}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  handleAddGroup();
+                }
+              }}
             />
-          <Button onClick={handleAddGroup}>Gruppe hinzufügen</Button>
-        </div>
+            <Button onClick={handleAddGroup}>Gruppe hinzufügen</Button>
+          </div>
         </>
       )}
-    </div>
+    </Card>
   );
+  
 };	
 
 export default ChartGroups;
