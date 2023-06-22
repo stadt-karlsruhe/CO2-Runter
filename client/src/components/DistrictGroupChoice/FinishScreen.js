@@ -13,7 +13,7 @@ const FinishScreen = () => {
   const co2ValuesPerCategory = location.state.co2ValuesPerCategory;
   const categories = location.state.categories;
   const dataSent = location.state.dataSent;
-  const baseCO2 = 3.5;
+  const baseCO2 = 1.15;
 
   const co2SumPerCategory = co2ValuesPerCategory.map((category) =>
     category.reduce((a, b) => a + b, 0)
