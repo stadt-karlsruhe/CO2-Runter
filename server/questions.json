@@ -6,39 +6,34 @@
         {
           "name": "Auto",
           "quick": {
-            "text": "Wie oft fahren Sie mit dem Auto?",
+            "text": "Wie viel fahren Sie mit dem Auto?",
             "typ": "auswahl",
             "replies": [
               "Nie",
-              "Selten",
-              "Gelegentlich",
-              "Häufig",
-              "Sehr häufig"
+              "Wenig",
+              "Durchschnittlich",
+              "Viel",
+              "Sehr viel"
             ],
-            "values": [0, 0.50, 0.98, 1.23, 1.79],
-            "defaultValue": 0.98
+            "values": [0, 0.67, 1.34, 2.15, 3.58],
+            "defaultValue": 1.34
           },
           "detailed": {
             "questions": [
               {
-                "text": "Welchen Kraftstoff tanken Sie?",
+                "text": "Welchen Kraftstoff nutzen Sie?",
                 "typ": "auswahl",
-                "replies": ["Diesel", "Benzin", "Erdgas", "Elektro", "Hybrid"],
-                "values": [0.72, 1, 0.78, 0.44, 0.78],
-                "defaultValue": 1
+                "replies": ["Diesel", "Benzin", "Erdgas", "Elektro"],
+                "values": [0.003, 0.0027, 0.0026, 0.0004],
+                "defaultValue": 0.0027
               },
               {
                 "text": "Was ist ihr Verbrauch?",
-                "typ": "auswahl",
-                "replies": [
-                  "Sehr niedrig",
-                  "Niedrig",
-                  "Mittel",
-                  "Hoch",
-                  "Sehr hoch"
-                ],
-                "values": [0.72, 0.89, 1.17, 1.33, 1.61],
-                "defaultValue": 1.17
+                "typ": "input",
+                "unit": " pro 100km",
+                "maxInput": 50,
+                "defaultValue": 6.7,
+                "formula": "function (value) { return value }"
               },
               {
                 "text": "Wie viele Kilometer fahren Sie pro Jahr?",
@@ -46,7 +41,7 @@
                 "unit": "km",
                 "maxInput": 1000000,
                 "defaultValue": 0,
-                "formula": "function (value) { return value * 0.000179; }"
+                "formula": "function (value) { return value/100 }"
               }
             ],
             "formula": "function (values) { return values[0] * values[1] * values[2]; }"
@@ -64,8 +59,8 @@
               "Häufig",
               "Sehr häufig"
             ],
-            "values": [0, -0.01, -0.04, 0.41, -1.02],
-            "defaultValue": 0
+            "values": [0, 0.06, 0.12, 0.2, 0.32],
+            "defaultValue": 0.12
           },
           "detailed": {
             "questions": [
@@ -73,38 +68,9 @@
                 "text": "Wie viele Kilometer fahren Sie mit Öffentlichen Verkehrmittel pro Woche?",
                 "typ": "input",
                 "unit": "km",
-                "maxInput": 1000000,
-                "defaultValue": 0,
-                "formula": "function (value) { return value * -0.0000408 * 52; }"
-              }
-            ],
-            "formula": "function (values) { return values[0]; }"
-          }
-        },
-        {
-          "name": "Fahrrad",
-          "quick": {
-            "text": "Wie oft fahren Sie mit dem Fahrrad pro Woche?",
-            "typ": "auswahl",
-            "replies": [
-              "Nie",
-              "Selten",
-              "Gelegentlich",
-              "Häufig",
-              "Sehr häufig"
-            ],
-            "values": [0, -0.02, -0.08, -0.41, -0.82],
-            "defaultValue": 0
-          },
-          "detailed": {
-            "questions": [
-              {
-                "text": "Wie viele Kilometer fahren Sie pro Woche?",
-                "typ": "input",
-                "unit": "km",
                 "maxInput": 100000,
-                "defaultValue": 0,
-                "formula": "function (value) { return value * -0.000164 * 52; }"
+                "defaultValue": 0.12,
+                "formula": "function (value) { return value * -0.000049 * 52; }"
               }
             ],
             "formula": "function (values) { return values[0]; }"
@@ -116,8 +82,8 @@
             "text": "Wie viele Stunden fliegen Sie pro Jahr?",
             "typ": "input",
             "unit": "Stunden",
-            "maxInput": 1000000,
-            "defaultValue": 0,
+            "maxInput": 1000,
+            "defaultValue": 0.61,
             "formula": "function (value) { return value * 0.15; }"
           },
           "detailed": {
@@ -127,7 +93,7 @@
                 "typ": "input",
                 "unit": "Stunden",
                 "maxInput": 1000000,
-                "defaultValue": 0,
+                "defaultValue": 0.305,
                 "formula": "function (value) { return value * 0.1328; }"
               },
               {
@@ -135,7 +101,7 @@
                 "typ": "input",
                 "unit": "Stunden",
                 "maxInput": 1000000,
-                "defaultValue": 0,
+                "defaultValue": 0.305,
                 "formula": "function (value) { return value * 0.1717; }"
               }
             ],
