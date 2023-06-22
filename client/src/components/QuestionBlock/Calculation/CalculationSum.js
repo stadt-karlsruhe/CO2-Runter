@@ -3,7 +3,7 @@ import CurrentCO2 from "../CurrentCO2";
 
 const CalculationSum = (props) => {
   const { totalCo2, setTotalCo2 } = props;
-  const baseCO2 = 3.5;
+  const baseCO2 = 1.15;
 
   useEffect(() => {
     const valuesAsNumbers = props.values
