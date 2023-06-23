@@ -38,7 +38,7 @@ const Contribution_per_district = () => {
       },      
     },
     grid: {
-      left: "10%",
+      left: "1%",
       containLabel: true,
     },
     xAxis: {
