@@ -170,7 +170,7 @@ const ChartGroups= () => {
         label: {
           show: true,
           position: "inside",
-          formatter: "{c} t CO2e",
+          formatter: "{c}t CO2",
         },
       })),
     };

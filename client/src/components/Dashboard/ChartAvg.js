@@ -104,7 +104,7 @@ data: selectedData.map((selectedData) => selectedData[index].value),
 label: {
 show: true,
 position: "inside",
-formatter: "{c} t CO2e",
+formatter: "{c}t CO2",
 },
 })),
 };
