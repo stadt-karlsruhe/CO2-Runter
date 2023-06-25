@@ -132,6 +132,7 @@ const GroupChoice = ({ updateSelectedGroups  }) => {
       return;
     }
     const selectedGroups = selectedRows.map((row) => row);
+    
     updateSelectedGroups((prevSelectedGroups) => {
       // Filter out already existing group codes from selectedGroups
       const newGroups = selectedGroups.filter(
@@ -139,9 +140,10 @@ const GroupChoice = ({ updateSelectedGroups  }) => {
       );
   
       // Combine existing and new group codes
+      console.log(prevSelectedGroups+" neue: "+ newGroups)
       return [...prevSelectedGroups, ...newGroups];
     });
-  }, [selectedRows]);
+  }, [selectedRows, updateSelectedGroups]);
   
 
   const handleSelectionChange = (newSelection) => {

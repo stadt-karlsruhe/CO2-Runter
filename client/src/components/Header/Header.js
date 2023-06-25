@@ -91,6 +91,11 @@ const Header = (props) => {
     handleClose();
   };
 
+  const handleGroupSettings = () => {
+    navigate("/groupSettings");
+    handleClose();
+  };
+
   return (
     <AppBar position="static" color="transparent">
       <Toolbar>
@@ -129,11 +134,11 @@ const Header = (props) => {
               open={open}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={handleGroupSettings}>
                 <ListItemIcon>
                   <SettingsIcon fontSize="small" />
                 </ListItemIcon>
-                <ListItemText>Einstellungen</ListItemText>
+                <ListItemText>Gruppen Informationen</ListItemText>
               </MenuItem>
               <MenuItem onClick={handleClose}>
                 <ListItemIcon>

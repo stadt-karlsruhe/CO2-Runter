@@ -3,7 +3,7 @@ import axios from "axios";
 import { Card, Button } from "@mui/material";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import GroupSuccessful from "../GroupSuccessful/GroupSuccessful";
+import GroupSuccessful from "./GroupSuccesfull";
 
 const GroupSettingsSelector = () => {
   const [groups, setGroups] = useState([]);
@@ -74,6 +74,7 @@ const GroupSettingsSelector = () => {
   const handleGroupClick = (groupCode, groupName) => {
     setGroupCode(groupCode);
     setGroupName(groupName);
+    setShowGroupSuccess(true);
   };
 
   return (
@@ -95,7 +96,7 @@ const GroupSettingsSelector = () => {
               <li key={group.groupcode}>
                 {group.groupname}
                 <Button
-                  onClick={() => handleGroupClick(group.groupCode, group.groupname)}
+                  onClick={() => handleGroupClick(group)}
                   style={{ marginLeft: "10px" }}
                 >
                   +

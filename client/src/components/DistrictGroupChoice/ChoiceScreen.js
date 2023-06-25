@@ -19,11 +19,12 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   
   }, [selectedGroups])
 
-  function updateSelectedGroups(newSelection) {
-    console.log(newSelection)
-    setSelectedGroups(newSelection);
-    return
-  };
+  function updateSelectedGroups(prevSelectedGroups) {
+    console.log(prevSelectedGroups);
+    setSelectedGroups(prevSelectedGroups);
+    return;
+  }
+  
   
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
