@@ -4,6 +4,7 @@ import { Card, Button } from "@mui/material";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import GroupSuccessful from "./GroupSuccesfull";
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const GroupSettingsSelector = () => {
   const [groups, setGroups] = useState([]);
@@ -70,7 +71,7 @@ const GroupSettingsSelector = () => {
     );
     setGroups(uniqueGroups);
   }, [groups]);
-
+  
   const handleGroupClick = (groupCode, groupName) => {
     setGroupCode(groupCode);
     setGroupName(groupName);
@@ -88,6 +89,7 @@ const GroupSettingsSelector = () => {
           backgroundColor: "#f7f9f5",
         }}
       >
+        {console.log("Test: "+groups)}
         {showGroupSuccess ? (
           <GroupSuccessful groupCode={groupCode} groupName={groupName} />
         ) : (
@@ -98,8 +100,9 @@ const GroupSettingsSelector = () => {
                 <Button
                   onClick={() => handleGroupClick(group)}
                   style={{ marginLeft: "10px" }}
+                  endIcon={<SettingsIcon />}
                 >
-                  +
+                Links & QR-Code
                 </Button>
               </li>
             ))}
