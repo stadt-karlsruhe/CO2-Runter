@@ -1,113 +1,54 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Card, Button } from "@mui/material";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import GroupSuccessful from "../GroupSuccessful/GroupSuccessful";
+import React from "react";
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  IconButton,
+  useMediaQuery,
+} from "@mui/material";
+import InfoIcon from "@mui/icons-material/Info";
+import { useNavigate } from "react-router-dom";
 
-const GroupSettingsSelector = () => {
-  const [groups, setGroups] = useState([]);
-  const [groupCode, setGroupCode] = useState("");
-  const [groupName, setGroupName] = useState("");
-  const co2Token = localStorage.getItem('CO2Token');
-  const [showGroupSuccess, setShowGroupSuccess] = useState(false);
+const CurrentCO2 = ({ co2Value }) => {
+  const navigate = useNavigate();
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
-  useEffect(() => {
-    const fetchGroups = async () => {
-      try {
-        const response = await axios.get("/api/groups/member", {
-          headers: {
-            co2token: co2Token,
-          },
-        });
-        if (response.status === 200) {
-          setGroups(response.data);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    if (co2Token) {
-      fetchGroups();
-    }
-  }, []);
-
-  useEffect(() => {
-    const existingGroupCodeInLocalStorage = localStorage.getItem("groupCode");
-
-    const fetchGroupByCode = async (groupCode) => {
-      try {
-        const response = await axios.get("/api/groups/get", {
-          params: {
-            groupcode: groupCode,
-          },
-        });
-        if (response.status === 200) {
-          const newGroup = response.data;
-          const groupExists = groups.some(
-            (group) => group.groupcode === newGroup.groupcode
-          );
-          if (groupExists) {
-            return;
-          }
-          setGroups((prevGroups) => [...prevGroups, newGroup]);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    if (existingGroupCodeInLocalStorage) {
-      fetchGroupByCode(existingGroupCodeInLocalStorage);
-    }
-  }, []);
-
-  useEffect(() => {
-    const uniqueGroups = groups.filter(
-      (group, index, self) =>
-        index === self.findIndex((t) => t.groupcode === group.groupcode)
-    );
-    setGroups(uniqueGroups);
-  }, [groups]);
-
-  const handleGroupClick = (groupCode, groupName) => {
-    setGroupCode(groupCode);
-    setGroupName(groupName);
+  const handleInformation = () => {
+    navigate("/information");
   };
 
+  const truncate = (num, decimalPlaces) => {
+    const factor = Math.pow(10, decimalPlaces);
+    return Math.floor(num * factor) / factor;
+  };
+
+  const variant = isSmallScreen ? "h10" : "h6";
+
   return (
-    <>
-      <Header />
-      <Card
-        style={{
-          width: "90%",
-          marginBottom: "10px",
-          padding: "25px",
-          backgroundColor: "#f7f9f5",
-        }}
-      >
-        {showGroupSuccess ? (
-          <GroupSuccessful groupCode={groupCode} groupName={groupName} />
-        ) : (
-          <ul>
-            {groups.map((group) => (
-              <li key={group.groupcode}>
-                {group.groupname}
-                <Button
-                  onClick={() => handleGroupClick(group.groupCode, group.groupname)}
-                  style={{ marginLeft: "10px" }}
-                >
-                  +
-                </Button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </Card>
-      <Footer />
-    </>
+    <Card
+      sx={{
+        display: "block",
+        margin: "0 auto",
+        width: "80%",
+        maxWidth: "100%",
+        border: "1px solid rgba(0, 0, 0, 0.1)",
+        borderRadius: "8px",
+        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+      }}
+    >
+      <CardContent>
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <Typography variant={variant} component="h10" >
+            Ihr aktueller CO2 Fußabdruck beträgt: {truncate(co2Value, 2)}t
+          </Typography>
+          <IconButton onClick={handleInformation}>
+            <InfoIcon />
+          </IconButton>
+        </Box>
+      </CardContent>
+    </Card>
   );
 };
 
-export default GroupSettingsSelector;
+export default CurrentCO2;
