@@ -16,10 +16,11 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const CO2Token = localStorage.getItem('CO2Token');
 
   useEffect(() => {
-    console.log("selectedGroups: " + selectedGroups)
+  
   }, [selectedGroups])
 
   function updateSelectedGroups(newSelection) {
+    console.log(newSelection)
     setSelectedGroups(newSelection);
     return
   };
@@ -40,8 +41,6 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const handleSubmitData = async () => {
     try {
       const districtId = selectedDistricts ? selectedDistricts.district_ID : 0;
-      console.log(districtId+" : "+ selectedDistricts)
-      console.log("Submited Groups: " + selectedGroups)
       const response = await axios.post("/api/footprint", {
         groups: selectedGroups,
         district: districtId,

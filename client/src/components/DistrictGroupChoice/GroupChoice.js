@@ -145,7 +145,6 @@ const GroupChoice = ({ updateSelectedGroups  }) => {
   
 
   const handleSelectionChange = (newSelection) => {
-    console.log("new Selection: " + newSelection);
     setSelectedRows(newSelection);
   };
 

@@ -28,7 +28,6 @@ const CheckAuth = () => {
   };
 
   useEffect(() => {
-    console.log("Token überprüfen: " + co2Token);
     if (co2Token) {
       checkTokenValidity();
     }

@@ -181,7 +181,7 @@
             "unit": "Personen",
             "maxInput": 10,
             "defaultValue": 0.5,
-            "formula": "function (value) { return value / 10; }"
+            "formula": "function (value) { Math.exp(-0.0626 * value + 0.760); }"
           },
           "detailed": {
             "questions": [],
@@ -194,7 +194,7 @@
             "text": "Wie groß ist ihre Wohnung?",
             "typ": "input",
             "unit": "m²",
-            "maxInput": 1000000,
+            "maxInput": 500,
             "defaultValue": 0.5,
             "formula": "function (value) { return value / 10; }"
           },
@@ -209,27 +209,18 @@
             "text": "Wie alt ist ihr Haus bzw wann wurde es zu letzt renoviert?",
             "typ": "slider",
             "replies": [
-              "vor 1945",
-              "1945-1964",
-              "1965-1984",
-              "1985-2004",
-              "2005-2019"
+              "vor 1978",
+              "1978-1994",
+              "1995-2011",
+              "ab 2011",
+              "unbekannt"
             ],
             "values": [4, 3, 2, 1, 0],
             "defaultValue": 0.5
           },
           "detailed": {
-            "questions": [
-              {
-                "text": "Wie alt ist ihr Haus bzw wann wurde es zu letzt renoviert?",
-                "typ": "input",
-                "unit": "Jahr",
-                "maxInput": 10000,
-                "defaultValue": 2000,
-                "formula": "function (value) { return value / 4000; }"
-              }
-            ],
-            "formula": "function (values) { return values[0]; }"
+            "questions": [],
+            "formula": ""
           }
         },
         {
@@ -238,16 +229,11 @@
             "text": "Wie wird ihr Haus beheizt?",
             "typ": "auswahl",
             "replies": [
-              "Öl",
-              "Gas",
-              "Holz",
-              "Elektro",
-              "Wärmepumpe",
-              "Fernwärme",
-              "Sonstiges"
+              "fossil",
+              "erneuerbar"
             ],
-            "values": [0, 1, 2, 3, 4, 5, 6],
-            "defaultValue": 0.5
+            "values": [1.36, 0.08],
+            "defaultValue": 1.36
           },
           "detailed": {
             "questions": [
@@ -283,9 +269,9 @@
           "quick": {
             "text": "Woher beziehen Sie ihren Strom?",
             "typ": "auswahl",
-            "replies": ["Ökostrom", "Strommix", "Fossile Energien"],
-            "values": [0, 1, 2],
-            "defaultValue": 1
+            "replies": ["Ökostrom", "Strommix"],
+            "values": [0.49,0.03],
+            "defaultValue": 0.49
           },
           "detailed": {
             "questions": [

@@ -34,7 +34,6 @@ const CO2QuestionsDataFetcher = () => {
     }
     if(isLoggedIn){
       addUserToGroup(groupCode);
-      console.log("add user")
     }
   }, []);
 
