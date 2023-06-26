@@ -20,7 +20,6 @@ const LoginForm = (props) => {
       const response = await axios.post('/api/login', { email, password });
       if (response.status === 200) {
         localStorage.setItem('CO2Token', response.data.token);
-        console.log(response.data.token)
       navigate(props.link);         
       }
     } catch (error) {

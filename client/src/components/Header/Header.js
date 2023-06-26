@@ -39,7 +39,6 @@ const Header = (props) => {
         console.log('Token is valid');
         setIsLoggedIn(true);
       }
-      console.log(response.status);
     } catch (error) {
       if (error.response && error.response.status === 401) {
         console.log('Token is invalid or expired');
@@ -51,7 +50,6 @@ const Header = (props) => {
   };
 
   useEffect(() => {
-    console.log("Token überprüfen: " + co2Token);
     if (co2Token) {
       checkTokenValidity();
     }

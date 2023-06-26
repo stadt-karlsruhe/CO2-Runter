@@ -16,7 +16,6 @@ const CheckAuth = () => {
         console.log("Token is valid");
         setIsLoggedIn(true);
       }
-      console.log(response.status);
     } catch (error) {
       if (error.response && error.response.status === 401) {
         console.log("Token is invalid or expired");

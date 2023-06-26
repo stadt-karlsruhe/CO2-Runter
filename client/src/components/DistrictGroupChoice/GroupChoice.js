@@ -140,7 +140,6 @@ const GroupChoice = ({ updateSelectedGroups  }) => {
       );
   
       // Combine existing and new group codes
-      console.log(prevSelectedGroups+" neue: "+ newGroups)
       return [...prevSelectedGroups, ...newGroups];
     });
   }, [selectedRows, updateSelectedGroups]);

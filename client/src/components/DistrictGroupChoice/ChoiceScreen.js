@@ -20,7 +20,6 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   }, [selectedGroups])
 
   function updateSelectedGroups(prevSelectedGroups) {
-    console.log(prevSelectedGroups);
     setSelectedGroups(prevSelectedGroups);
     return;
   }

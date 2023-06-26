@@ -3,7 +3,6 @@ import { Box, Container, Typography } from "@mui/material";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import QuestionCategory from "../QuestionBlock/QuestionCategory";
-import DemoQuestion from "../../DemoQuestion.json"
 import axios from 'axios';
 import CheckAuth from "../CheckAuth";
 
