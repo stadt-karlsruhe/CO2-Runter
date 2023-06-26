@@ -52,7 +52,7 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
           state: {
             co2ValuesPerCategory: co2ValuesPerCategory,
             categories: categories,
-            dataSent: sentData,
+            dataSent: true,
           },
         });
       }
