@@ -18,8 +18,7 @@ const CO2QuestionsDataFetcher = () => {
         const data = response.data;
         setQuestions(data);
       } catch (error) {
-        //TODO entferne, sowie JSON ausm fronend entfernen; Nur für übungszwecke
-        setQuestions(DemoQuestion);
+        console.log("Fragen nicht gefunden!")
       }
     };
   
