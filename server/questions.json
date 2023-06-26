@@ -207,7 +207,7 @@
           "name": "Baujahr/Renovierungsstand ",
           "quick": {
             "text": "Wie alt ist ihr Haus bzw wann wurde es zu letzt renoviert?",
-            "typ": "slider",
+            "typ": "auswahl",
             "replies": [
               "vor 1978",
               "1978-1994",

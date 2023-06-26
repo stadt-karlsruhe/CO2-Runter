@@ -12,7 +12,6 @@ import {
   ListItemIcon,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -139,12 +138,6 @@ const Header = (props) => {
                   <SettingsIcon fontSize="small" />
                 </ListItemIcon>
                 <ListItemText>Gruppen Informationen</ListItemText>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <AccountCircleIcon fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>Profil</ListItemText>
               </MenuItem>
               <MenuItem onClick={handleLogout}>
                 <ListItemIcon>

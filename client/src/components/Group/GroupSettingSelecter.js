@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Card, Button } from "@mui/material";
+import { Card, Button, Typography } from "@mui/material";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import GroupSuccessful from "./GroupSuccesfull";
@@ -34,44 +34,6 @@ const GroupSettingsSelector = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const existingGroupCodeInLocalStorage = localStorage.getItem("groupCode");
-
-    const fetchGroupByCode = async (groupCode) => {
-      try {
-        const response = await axios.get("/api/groups/get", {
-          params: {
-            groupcode: groupCode,
-          },
-        });
-        if (response.status === 200) {
-          const newGroup = response.data;
-          const groupExists = groups.some(
-            (group) => group.groupcode === newGroup.groupcode
-          );
-          if (groupExists) {
-            return;
-          }
-          setGroups((prevGroups) => [...prevGroups, newGroup]);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    if (existingGroupCodeInLocalStorage) {
-      fetchGroupByCode(existingGroupCodeInLocalStorage);
-    }
-  }, []);
-
-  useEffect(() => {
-    const uniqueGroups = groups.filter(
-      (group, index, self) =>
-        index === self.findIndex((t) => t.groupcode === group.groupcode)
-    );
-    setGroups(uniqueGroups);
-  }, [groups]);
-  
   const handleGroupClick = (groupCode, groupName) => {
     setGroupCode(groupCode);
     setGroupName(groupName);
@@ -85,20 +47,26 @@ const GroupSettingsSelector = () => {
         style={{
           width: "90%",
           marginBottom: "10px",
+          marginTop: "10px",
+          marginLeft: "5%",
+          marginRight: "5%",
           padding: "25px",
           backgroundColor: "#f7f9f5",
         }}
       >
-        {console.log("Test: "+groups)}
         {showGroupSuccess ? (
           <GroupSuccessful groupCode={groupCode} groupName={groupName} />
         ) : (
+          <>
+          <Typography>Willkommen auf deiner Gruppenübersichtsseite! 
+            Hier findest du eine praktische Zusammenfassung der Gruppen, in denen du als Administrator tätig bist. 
+            Du kannst hier jederzeit die Links und QR-Codes abrufen, um sie mit deinen Freunden, Familie, Sportkollegen, Kollegen und anderen zu teilen.</Typography>
           <ul>
             {groups.map((group) => (
               <li key={group.groupcode}>
                 {group.groupname}
                 <Button
-                  onClick={() => handleGroupClick(group)}
+                  onClick={() => handleGroupClick(group.groupcode, group.groupname)}
                   style={{ marginLeft: "10px" }}
                   endIcon={<SettingsIcon />}
                 >
@@ -106,7 +74,7 @@ const GroupSettingsSelector = () => {
                 </Button>
               </li>
             ))}
-          </ul>
+          </ul></>
         )}
       </Card>
       <Footer />
