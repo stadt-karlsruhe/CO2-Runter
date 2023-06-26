@@ -41,7 +41,7 @@ const FinishScreen = () => {
   cx={200}
   cy={200}
   labelLine={false}
-  label={({ name, value }) => `${name}: ${value}`}
+  label={({ name, value }) => `${name}: ${truncate(value, 2)}`}
   outerRadius={80}
   fill="#8884d8"
   dataKey="value"
