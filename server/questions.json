@@ -196,7 +196,7 @@
             "unit": "m²",
             "maxInput": 500,
             "defaultValue": 0.5,
-            "formula": "function (value) { return (0,07+ (0.0236*value-1.235)); }"
+            "formula": "function (value) { return (0.07+ (0.0236*value-1.235)); }"
           },
           "detailed": {
             "questions": [],
