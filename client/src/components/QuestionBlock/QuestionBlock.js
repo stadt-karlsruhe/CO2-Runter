@@ -26,16 +26,16 @@ const QuestionBlock = (props) => {
 
   useEffect(() => {
     co2InputRef.current = co2Values;
-  }, [co2Values]);
+  }, [co2Values, co2InputRef]);
 
   const handleSwitchChange = (event) => {
     props.onSwitchChange(event);
     setCo2Values(co2InputRef.current);
   };
 
-  const handleQuick = (value) => {
+  const handleQuick = (value, selectedValue) => {
     setQuickInputValue(value);
-    setQuickInputReminder(value);
+    setQuickInputReminder(selectedValue);
   };
 
   const calculateDetailedCo2 = useCallback(() => {
@@ -43,14 +43,14 @@ const QuestionBlock = (props) => {
     const formula = eval(`(${formulaString})`);
     return formula(co2Values);
   }, [co2Values, props.questions.detailed.formula]);
-
+  
   useEffect(() => {
     if (isDetailed) {
       onCo2ValuesChange(calculateDetailedCo2());
     } else {
       onCo2ValuesChange(quickInputValue);
     }
-  }, [quickInputValue, calculateDetailedCo2, onCo2ValuesChange, isDetailed]);
+  }, [quickInputValue, calculateDetailedCo2, onCo2ValuesChange, isDetailed]);  
 
   const handleCo2ValuesChange = (index, value, inputValue) => {
     const newCo2Values = [...co2Values];
@@ -71,10 +71,12 @@ const QuestionBlock = (props) => {
             <Box key={index}>
               <Question
                 question={question}
-                co2Value={inputValues[index]}
+                selectedValue={inputValues[index]}
                 onCo2ValuesChange={(value, inputValue) =>
                   handleCo2ValuesChange(index, value, inputValue)
                 }
+                rememberValue={[...props.rememberValue, index]}
+                detailed={isDetailed}
               />
               <Divider sx={{ my: 1 }} />
             </Box>
@@ -82,8 +84,10 @@ const QuestionBlock = (props) => {
         ) : (
           <Question
             question={props.questions.quick}
-            co2Value={quickInputReminder}
+            selectedValue={quickInputReminder}
             onCo2ValuesChange={handleQuick}
+            rememberValue={props.rememberValue}
+            detailed={isDetailed}
           />
         )}
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>

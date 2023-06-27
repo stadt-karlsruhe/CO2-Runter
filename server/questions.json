@@ -174,17 +174,26 @@
       "name": "Wohnen",
       "questions": [
         {
-          "name": "Anzahl der Personen",
+          "name": "Quadratmeter pro Person",
           "quick": {
-            "text": "Wie viele Personen leben in ihrem Haushalt?",
+            "text": "Wie viel Quadratmeter hat eine Person in ihrem Haushalt?",
             "typ": "input",
-            "unit": "Personen",
+            "unit": "qm/Personen",
             "maxInput": 10,
             "defaultValue": 0.5,
             "formula": "function (value) { return (0.7 + (-0.20705*value*value + 2.725*value - 1.5175)); }"
           },
           "detailed": {
-            "questions": [],
+            "questions": [
+              {
+                "text": "Wie viele Personen wohnen Sie zusammen?",
+                "typ": "input",
+                "unit": "Personen",
+                "maxInput": 10,
+                "defaultValue": 0.5,
+                "formula": "function (value) { return (0.7 + (-0.20705*value*value + 2.725*value - 1.5175)); }"
+              }
+            ],
             "formula": ""
           }
         },

@@ -25,21 +25,22 @@ const Question = (props) => {
   return (
     <Container>
       <Box sx={{ my: 2 }}>
-        {" "}
         <Box sx={{ mb: 2 }}>
           <Typography variant="h6" component="div">
             {text}
-          </Typography>{" "}
+          </Typography>
         </Box>
         {Component && (
           <Component
-            value={props.co2Value}
+            value={props.selectedValue}
             replies={replies}
             values={values}
             unit={unit}
             maxInput={maxInput}
             formula={formula}
             onCo2ValuesChange={props.onCo2ValuesChange}
+            rememberValue={props.rememberValue}
+            detailed={props.detailed}
           />
         )}
       </Box>

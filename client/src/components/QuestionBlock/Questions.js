@@ -7,6 +7,7 @@ const Questions = ({
   isDetailed,
   onSwitchChange,
   onCo2ValuesChange,
+  rememberCategory
 }) => (
   <Box
     sx={{
@@ -24,6 +25,7 @@ const Questions = ({
         isDetailed={isDetailed[categoryQuestions.name]}
         onSwitchChange={() => onSwitchChange(categoryQuestions.name)}
         onCo2ValuesChange={(value) => onCo2ValuesChange(index, value)}
+        rememberValue={[rememberCategory, index]}
       />
     ))}
   </Box>
