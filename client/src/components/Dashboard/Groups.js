@@ -1,10 +1,10 @@
-import Chart_groups from "./Chart_groups";
+import ChartGroups from "./ChartGroups";
 
 export default function Charts() {  
    
     return (
       <div>
-            <Chart_groups />
+            <ChartGroups />
       </div>
     );
   }

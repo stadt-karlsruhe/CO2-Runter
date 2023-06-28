@@ -56,6 +56,7 @@ const QuestionCategory = (props) => {
             isDetailed={isDetailed}
             onSwitchChange={handleSwitchChange}
             onCo2ValuesChange={handleCo2ValuesChange}
+            rememberCategory={activeStep}
           />
           <CalculationSum
             values={co2ValuesPerCategory}

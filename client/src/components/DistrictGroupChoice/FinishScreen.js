@@ -1,7 +1,7 @@
 import React from "react";
 import { PieChart, Pie, Cell } from "recharts";
 import { Typography, Button } from "@mui/material";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link} from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
@@ -13,7 +13,7 @@ const FinishScreen = () => {
   const co2ValuesPerCategory = location.state.co2ValuesPerCategory;
   const categories = location.state.categories;
   const dataSent = location.state.dataSent;
-  const baseCO2 = 3.5;
+  const baseCO2 = 1.15;
 
   const co2SumPerCategory = co2ValuesPerCategory.map((category) =>
     category.reduce((a, b) => a + b, 0)
@@ -41,7 +41,7 @@ const FinishScreen = () => {
   cx={200}
   cy={200}
   labelLine={false}
-  label={({ name, value }) => `${name}: ${value}`}
+  label={({ name, value }) => `${name}: ${truncate(value, 2)}`}
   outerRadius={80}
   fill="#8884d8"
   dataKey="value"
@@ -58,9 +58,11 @@ const FinishScreen = () => {
           : "Schade das Sie ihre Daten nicht mit uns und den anderen Nutzern teilen wollen."}
       </Typography>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <Button variant="contained" onClick={() => navigate("/")} style={{ width: "100%", marginBottom: "10px", marginTop: "10px" }}>
-          Zum Dashboard
-        </Button>
+        <Link to="/Dashboard" style={{ textDecoration: "none", width: "100%", marginBottom: "10px" }}>
+          <Button variant="contained" style={{ width: "100%", marginBottom: "10px", marginTop: "10px" }}>
+            Zum Dashboard
+          </Button>
+        </Link>
         <Button variant="outlined" onClick={() => navigate("/")} style={{ width: "100%", marginBottom: "10px" }}>
           Home
         </Button>

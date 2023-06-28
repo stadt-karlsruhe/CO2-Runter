@@ -8,17 +8,15 @@ export default function Contribution_Total() {
         const fetchCo2Footprint = async () => {
             const response = await fetch("/api/foodprint/total");
             const data = await response.json();
-            console.log(data);
             setCo2Footprint(data[0].total);
         };
         fetchCo2Footprint();
     }, []);
     
-    console.log(co2Footprint);
     
   return (
     <div style={{ margin: "20px"}}>
-    <Card>
+    <Card style={{ width: "90%", marginBottom: "10px", padding: "25px", backgroundColor: "#f7f9f5" }}>
       <CardContent>
         <Typography variant="h2" align="center"  style={{color: '#5470c6'}}>
           {co2Footprint}

@@ -32,10 +32,8 @@ const RegisterForm = () => {
       } else {
         try {
           const response = await axios.post('/api/register', { username, email, password });
-          console.log("Registrierung antwort Status: "+response.status);
           if (response.status === 201) {
             localStorage.setItem('CO2Token', response.data.token);  
-            console.log("Neuer Token: "+response.data.token);   
             navigate("/");    
           }
         } catch (error) {

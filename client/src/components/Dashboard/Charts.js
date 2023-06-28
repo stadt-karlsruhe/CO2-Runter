@@ -1,10 +1,10 @@
-import Chart_avg from "./Chart_avg";
+import ChartAvg from "./ChartAvg";
 
 export default function Charts() {  
    
     return (
       <div>
-            <Chart_avg />
+            <ChartAvg/>
       </div>
     );
   }

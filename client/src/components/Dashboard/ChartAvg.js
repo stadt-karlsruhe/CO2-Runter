@@ -4,9 +4,10 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
+import Card from "@mui/material/Card";
 import axios from "axios";
 
-const Chart_avg = () => {
+const ChartAvg = () => {
   const [footprints, setFootprints] = useState([]);
   const [average, setAverage] = useState([]);
   const [selectedFootprints, setSelectedFootprints] = useState([]);
@@ -18,12 +19,8 @@ const Chart_avg = () => {
       try {
         const averageResponse = await axios.get("/api/dashboard/footprints/average");
         setAverage(averageResponse.data);
-        console.log(averageResponse.data);
-
         const footprintsResponse = await axios.get("/api/dashboard/comparisonprints");
         setFootprints(footprintsResponse.data);
-        console.log(footprintsResponse.data);
-
         setIsLoading(false);
       } catch (error) {
         setError(error.message);
@@ -107,7 +104,7 @@ data: selectedData.map((selectedData) => selectedData[index].value),
 label: {
 show: true,
 position: "inside",
-formatter: "{c} t CO2e",
+formatter: "{c}t CO2",
 },
 })),
 };
@@ -128,41 +125,42 @@ setSelectedFootprints(event.target.value);
 };
 
 return (
-  <div>
+  <Card style={{ width: "90%", marginBottom: "10px", padding: "25px", backgroundColor: "#f7f9f5" }}>
     {isLoading ? (
-      <div>Loading...</div>
+      <div style={{ textAlign: "center" }}>Daten werden geladen ...</div>
     ) : error ? (
-      <div>Error: {error}</div>
+      <div style={{ textAlign: "center" }}>Es ist ein Fehler aufgetreten: {error}</div>
     ) : (
       <>
         {footprints && average && footprints.length > 0 && average.length > 0 ? (
           <ReactEcharts option={getOption()} style={{ height: "500px" }} />
         ) : (
-          <div>Data not available.</div>
+          <div style={{ textAlign: "center" }}>Keine Daten verfügbar</div>
         )}
         <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-        <FormControl>
+          <FormControl>
             <InputLabel id="demo-multiple-name-label">Angezeigte Fußabdrücke wählen</InputLabel>
-          <Select
-            multiple
-            label="Angezeigte Fußabdrücke wählen"
-            value={selectedFootprints}
-            onChange={handleSelectChange}
-            renderValue={(selected) => selected.join(", ")}
-            style={{ minWidth: "300px" }} // Adjust the width as needed
-          >
-            {footprints.map((footprint) => (
-              <MenuItem key={footprint.name} value={footprint.name}>
-                {footprint.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl> 
+            <Select
+              multiple
+              label="Angezeigte Fußabdrücke wählen"
+              value={selectedFootprints}
+              onChange={handleSelectChange}
+              renderValue={(selected) => selected.join(", ")}
+              style={{ minWidth: "250px" }} // Adjust the width as needed
+            >
+              {footprints.map((footprint) => (
+                <MenuItem key={footprint.name} value={footprint.name}>
+                  {footprint.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl> 
         </div>
       </>
     )}
-  </div>
+  </Card>
 );
+
 };	
 
-export default Chart_avg;
+export default ChartAvg;

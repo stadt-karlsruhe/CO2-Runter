@@ -12,7 +12,6 @@ import {
   ListItemIcon,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -40,7 +39,6 @@ const Header = (props) => {
         console.log('Token is valid');
         setIsLoggedIn(true);
       }
-      console.log(response.status);
     } catch (error) {
       if (error.response && error.response.status === 401) {
         console.log('Token is invalid or expired');
@@ -52,7 +50,6 @@ const Header = (props) => {
   };
 
   useEffect(() => {
-    console.log("Token überprüfen: " + co2Token);
     if (co2Token) {
       checkTokenValidity();
     }
@@ -88,6 +85,11 @@ const Header = (props) => {
 
   const handleDashboard = () => {
     navigate("/dashboard");
+    handleClose();
+  };
+
+  const handleGroupSettings = () => {
+    navigate("/groupSettings");
     handleClose();
   };
 
@@ -129,17 +131,11 @@ const Header = (props) => {
               open={open}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={handleGroupSettings}>
                 <ListItemIcon>
                   <SettingsIcon fontSize="small" />
                 </ListItemIcon>
-                <ListItemText>Einstellungen</ListItemText>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <AccountCircleIcon fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>Profil</ListItemText>
+                <ListItemText>Gruppen Informationen</ListItemText>
               </MenuItem>
               <MenuItem onClick={handleLogout}>
                 <ListItemIcon>

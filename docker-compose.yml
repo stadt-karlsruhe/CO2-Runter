@@ -48,8 +48,9 @@ services:
   client:
     stdin_open: true
     environment:
+      - WDS_SOCKET_PORT=3050
+      - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true 
-      - FAST_REFRESH=false
     build:
       dockerfile: Dockerfile
       context: ./client

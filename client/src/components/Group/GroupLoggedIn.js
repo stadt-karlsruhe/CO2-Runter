@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -39,7 +39,7 @@ const GroupLoggedIn = () => {
           <GroupSuccesfull groupCode={groupCode} groupName={groupName} />
         ) : (
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "5px"}}>
-            <Typography variant="h4">Neue Gruppe erstellen</Typography>
+            <Typography variant="h4" style={{ marginTop: "5px", marginBottom: "16px" }}>Neue Gruppe erstellen</Typography>
             <Typography>
               Geben Sie einen Gruppenname ein. Anschließend wird Ihnen von uns
               einmal der Gruppenbeitrittscode, sowie ein Link und QR-Code
@@ -49,7 +49,7 @@ const GroupLoggedIn = () => {
               label="Gruppenname"
               value={groupName}
               onChange={(e) => setGroupName(e.target.value)}
-              style={{ width: "70%" }}
+              style={{ width: "70%", marginBottom: "16px" }}
             />
             <Button disabled={!groupName} onClick={handleCreateGroup} variant="contained">
               Gruppe erstellen

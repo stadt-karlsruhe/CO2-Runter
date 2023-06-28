@@ -12,6 +12,7 @@ import Dashboard from "./components/Dashboard/Dashboard"
 import GroupLoggedOut from "./components/Group/GroupLoggedOut";
 import GroupLoggedIn from "./components/Group/GroupLoggedIn";
 import FinishScreen from "./components/DistrictGroupChoice/FinishScreen";
+import GroupSettingsSelector from "./components/Group/GroupSettingSelecter";
 import "./styles/fonts.css";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/NewGroup/loggedOut" element={<GroupLoggedOut />} />
           <Route path="/NewGroup/loggedIn" element={<GroupLoggedIn />} />
           <Route path="/CO2Rechner/finish" element={<FinishScreen />} />
+          <Route path="/groupSettings" element={<GroupSettingsSelector />} />
         </Routes>
       </Router>
     </ThemeProvider>

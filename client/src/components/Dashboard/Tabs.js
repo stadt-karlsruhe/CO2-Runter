@@ -8,10 +8,38 @@ import Map from "./Map";
 import Co2Card from "./Contribution";
 import Charts from "./Charts";
 import Groups from "./Groups";
+import CheckAuth from "../CheckAuth";
+import axios from "axios";
 
 
 const MyTabs = () => {
   const [value, setValue] = useState(0);
+  const isLoggedIn = CheckAuth();
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const groupCode = urlParams.get("groupcode");
+    if (groupCode) {
+      localStorage.setItem("groupCode", groupCode);
+    }
+    if(isLoggedIn){
+      addUserToGroup(groupCode);
+      console.log("add user")
+    }
+  }, []);
+
+  const addUserToGroup = async (groupCode) => {
+    const co2Token = localStorage.getItem("CO2Token");
+    try {
+      await axios.post(`/api/groups/add_user`,{
+          co2token: co2Token,
+          groupcode: groupCode
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   useEffect(() => {
     const storedValue = localStorage.getItem("selectedTab");

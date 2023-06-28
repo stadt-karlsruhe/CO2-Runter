@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Tab, Tabs, Typography, Button } from "@mui/material";
 import CityDistrictChoice from "./CityDistrictChoice";
@@ -6,17 +6,23 @@ import GroupChoice from "./GroupChoice";
 import Login from "./Login";
 import { useNavigate } from "react-router-dom";
 
+
 const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const [tabValue, setTabValue] = useState(0);
   const [selectedDistricts, setSelectedDistricts] = useState();
   const [selectedGroups, setSelectedGroups] = useState([]);
-  const [sentData, setSentData] = useState(false);
   const navigate = useNavigate();
   const CO2Token = localStorage.getItem('CO2Token');
 
-  function updateSelectedGroups(newSelection) {
-    setState(newSelection);
-  };
+  useEffect(() => {
+  
+  }, [selectedGroups])
+
+  function updateSelectedGroups(prevSelectedGroups) {
+    setSelectedGroups(prevSelectedGroups);
+    return;
+  }
+  
   
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
@@ -34,19 +40,17 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const handleSubmitData = async () => {
     try {
       const districtId = selectedDistricts ? selectedDistricts.district_ID : 0;
-      console.log(districtId+" : "+ selectedDistricts)
       const response = await axios.post("/api/footprint", {
         groups: selectedGroups,
         district: districtId,
         data: co2SumPerCategory,
       });
       if (response.status === 200) {
-        setSentData(true);
         navigate("/CO2Rechner/finish", {
           state: {
             co2ValuesPerCategory: co2ValuesPerCategory,
             categories: categories,
-            dataSent: sentData,
+            dataSent: true,
           },
         });
       }
@@ -56,12 +60,12 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   };
 
   const handleContinue = () => {
-    setSentData(false);
+
     navigate("/CO2Rechner/finish", {
       state: {
         co2ValuesPerCategory: co2ValuesPerCategory,
         categories: categories,
-        dataSent: sentData,
+        dataSent: false,
         totalCo2: totalCo2,
       },
     });
@@ -105,7 +109,7 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
       )}
       {tabValue === 1 &&
         (CO2Token ? (
-          <GroupChoice  updateSelectedGroups={updateSelectedGroups} />
+          <GroupChoice  updateSelectedGroups={updateSelectedGroups}/>
         ) : (
           <Login setSelectedGroups={setSelectedGroups} />
         ))}

@@ -4,6 +4,7 @@ import * as echarts from "echarts";
 import geoJson from './districts_geo.json';
 import sampleData from './sampleData.json';
 import axios from 'axios';
+import Card from "@mui/material/Card";
 
 echarts.registerMap('Karlsruhe', geoJson);
 
@@ -14,7 +15,6 @@ export default function District_Map() {
   useEffect(() => {
     axios.get('/api/dashboard/footprints')
       .then((res) => {
-        console.log(res.data);
         setData({
           mobility: res.data.mobility,
           nutrition: res.data.nutrition,
@@ -24,7 +24,7 @@ export default function District_Map() {
         setDataLoaded(true);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         setData(sampleData);
         setDataLoaded(true);
 
@@ -115,12 +115,14 @@ export default function District_Map() {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "80vw", height: "80vh" }}>
+    <Card style={{ width: "90%", marginBottom: "10px", padding: "25px", backgroundColor: "#f7f9f5" }}>
+    <div>
       {dataLoaded ? (
-        <ReactEcharts option={mapOption} style={{ width: "100%", height: "100%" }} />
+          <ReactEcharts option={mapOption} style={{ width: "100%", height: "60vh" }} />
       ) : (
-        <div>Loading...</div>
+        <div style={{ textAlign: "center" }}>Daten werden geladen ...</div>
       )}
     </div>
+    </Card>
   );
 };

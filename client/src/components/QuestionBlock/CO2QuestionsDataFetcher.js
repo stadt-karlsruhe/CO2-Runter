@@ -3,9 +3,9 @@ import { Box, Container, Typography } from "@mui/material";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import QuestionCategory from "../QuestionBlock/QuestionCategory";
-import DemoQuestion from "../../DemoQuestion.json"
 import axios from 'axios';
 import CheckAuth from "../CheckAuth";
+import question from "../../questions.json"
 
 const CO2QuestionsDataFetcher = () => {
   const [questions, setQuestions] = useState("");
@@ -16,10 +16,12 @@ const CO2QuestionsDataFetcher = () => {
       try {
         const response = await axios.get('/api/questions');
         const data = response.data;
+        localStorage.setItem("CO2questions", JSON.stringify(data));
         setQuestions(data);
       } catch (error) {
-        //TODO entferne, sowie JSON ausm fronend entfernen; Nur für übungszwecke
-        setQuestions(DemoQuestion);
+        setQuestions(question)
+        localStorage.setItem("CO2questions", JSON.stringify(question));
+        console.log("Fragen nicht gefunden!")
       }
     };
   
@@ -34,7 +36,6 @@ const CO2QuestionsDataFetcher = () => {
     }
     if(isLoggedIn){
       addUserToGroup(groupCode);
-      console.log("add user")
     }
   }, []);
 

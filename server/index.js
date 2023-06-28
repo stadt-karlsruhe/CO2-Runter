@@ -126,69 +126,105 @@ app.get('/districts', (req, res) => {
 
 // route save footprint to db 
 app.post('/footprint', (req, res) => {
-  let sucsses = true;
-  // Get user input
-  const { groups, district, data } = req.body;
-  // Validate user input 
-  if (!(groups && district && data )) {
-      sucsses = false;
+  try {
+    let success = true;
+    // Get user input
+    const { groups, district, data } = req.body;
+    // Validate user input 
+    if (!(groups && data)) {
+      console.log(groups);
+      console.log(district);
+      console.log(data);
+      success = false;
+      res.status(400).send("Groups or data missing");
+      console.log("field missing");
+    } else if (!((groups.length > 0) || (district && data.length === 4))) {
+      console.log(groups.length);
+      success = false;
       res.status(400).send("All input is required");
-      console.log("field missing")
-  }else if(!(((groups.length > 0 )|| (district > 0) && data.length == 4))){ 
-    sucsses = false;
-    res.status(400).send("All input is required");
-    console.log("data in field missing")
-    console.log(groups.length)
-    console.log(district)
-    console.log(data.length)
-  }
-
-
-  else {
-    console.log("data is ok")
-    console.log(groups)
-    console.log(district)
-    console.log(data)
-    const InsertQuery = "INSERT INTO CO2Prints (mobility, housing, consume, nutrition, date) VALUES (?, ?, ?, ?, ?)";
-    db.query(InsertQuery, [data[0], data[1], data[2], data[3], new Date()], (err, result) => {
-      if(err) {
-        console.log(err)
-        sucsses = false;
-        res.status(500).send('Something went wrong')
-      } else {
-        // get the id of the footprint
-        const footprint_id = result.insertId;
-        // if a district is selected add the footprint to the table Prints_In_Districts with this columns: district_ID	and print_ID
-        if(district > 0) {
-          console.log("Addedto :"+ district)
-          const InsertQuery = "INSERT INTO Prints_In_Districts (district_ID, print_ID) VALUES (?, ?)";
-          db.query(InsertQuery, [district, footprint_id], (err, result) => {
-            if(err) {
-              console.log(err)
-              sucsses = false;
-              res.status(500).send('Something went wrong')
-            } 
-          })
+      console.log("data in field missing");
+      console.log(groups.length);
+      console.log(district);
+      console.log(data.length);
+    } else {
+      console.log("data is ok");
+      console.log(groups);
+      console.log(district);
+      console.log(data);
+      const InsertQuery = "INSERT INTO CO2Prints (mobility, housing, consume, nutrition, date) VALUES (?, ?, ?, ?, ?)";
+      db.query(InsertQuery, [data[0], data[1], data[2], data[3], new Date()], (err, result) => {
+        if (err) {
+          console.log(err);
+          success = false;
+          if (err.code === 'ER_DUP_ENTRY') {
+            // Ignore duplicate entry error and proceed
+          } else {
+            res.status(500).send('Something went wrong');
+          }
+        } else {
+          // get the id of the footprint
+          const footprint_id = result.insertId;
+          // if a district is selected, add the footprint to the table Prints_In_Districts with these columns: district_ID and print_ID
+          if (district > 0) {
+            console.log("Added to District: " + district);
+            const InsertQuery = "INSERT INTO Prints_In_Districts (district_ID, print_ID) VALUES (?, ?)";
+            db.query(InsertQuery, [district, footprint_id], (err, result) => {
+              if (err) {
+                console.log(err);
+                success = false;
+                if (err.code === 'ER_DUP_ENTRY') {
+                  // Ignore duplicate entry error and proceed
+                } else {
+                  res.status(500).send('Something went wrong');
+                }
+              }
+            });
+          }
+          // if there are groups selected, add the footprint to all groups in the table Prints_In_Carbon_Footprint_Groups with these columns: group_ID and print_ID
+          if (groups.length > 0) {
+            groups.forEach(group => {
+              // get the id of the group
+              db.query("SELECT group_ID FROM Carbon_Footprint_Groups WHERE groupcode = ?", [group], (err, result) => {
+                console.log("Getting id for group");
+                console.log("groupcode: " + group);
+                console.log(result);
+                if (err) {
+                  console.log(err);
+                  success = false;
+                  if (err.code === 'ER_DUP_ENTRY') {
+                    // Ignore duplicate entry error and proceed
+                  } else {
+                    res.status(500).send('Something went wrong');
+                  }
+                } else {
+                  console.log("Added to Group: " + result[0].group_ID);
+                  const InsertQuery = "INSERT INTO Prints_In_Carbon_Footprint_Groups (group_ID, print_ID) VALUES (?, ?)";
+                  db.query(InsertQuery, [result[0].group_ID, footprint_id], (err, result) => {
+                    if (err) {
+                      console.log(err);
+                      success = false;
+                      if (err.code === 'ER_DUP_ENTRY') {
+                        // Ignore duplicate entry error and proceed
+                      } else {
+                        res.status(500).send('Something went wrong');
+                      }
+                    }
+                  });
+                }
+              });
+            });
+          }
         }
-        // if there are groups selected add the footprint to all groups in the table Prints_In_Carbon_Footprint_Groups with this columns: group_ID and print_ID
-        if(groups.length > 0) {
-          groups.forEach(group => {
-            const InsertQuery = "INSERT INTO Prints_In_Carbon_Footprint_Groups (group_ID, print_ID) VALUES (?, ?)";
-            db.query(InsertQuery, [group, footprint_id], (err, result) => {
-              if(err) {
-                console.log(err)
-                sucsses = false;
-                res.status(500).send('Something went wrong')
-              } 
-            })
-          });
+        if (success) {
+          res.status(200).send('Footprint saved');
         }
-      }
-    })
-    if (sucsses) {
-      res.status(200).send('Footprint saved')
+      });
     }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Something went wrong');
   }
+  
 })
 
 // route get total number of foodprints	
