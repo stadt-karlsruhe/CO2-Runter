@@ -13,7 +13,8 @@ const Selection = (props) => {
     let selectedValue = "";
  
     if(props.detailed){
-      selectedValue = jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].detailed.questions[2].selectedValue;
+      console.log(selectedValue+" an stelle bei detailed= "+ props.rememberValue[2])
+      selectedValue = jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].detailed.questions[props.rememberValue[2]].selectedValue;
     }else{
       selectedValue = jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].quick.selectedValue;
     }
@@ -32,7 +33,7 @@ const Selection = (props) => {
     const selectedValue = event.target.value;
     
     if(props.detailed){
-      jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].detailed.questions[2].selectedValue = selectedValue;
+      jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].detailed.questions[props.rememberValue[2]].selectedValue = selectedValue;
     }else{
       jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].quick.selectedValue = selectedValue;
     }
@@ -48,7 +49,6 @@ const Selection = (props) => {
           Wählen Sie eine Option
         </InputLabel>
       )}
-      {console.log("1"+calculateSelectedValue())}
       <Select
         labelId="simple-select-label"
         id="simple-select"
