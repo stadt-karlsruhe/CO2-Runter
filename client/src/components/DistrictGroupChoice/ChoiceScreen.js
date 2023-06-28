@@ -11,7 +11,6 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   const [tabValue, setTabValue] = useState(0);
   const [selectedDistricts, setSelectedDistricts] = useState();
   const [selectedGroups, setSelectedGroups] = useState([]);
-  const [sentData, setSentData] = useState(false);
   const navigate = useNavigate();
   const CO2Token = localStorage.getItem('CO2Token');
 
@@ -47,7 +46,6 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
         data: co2SumPerCategory,
       });
       if (response.status === 200) {
-        setSentData(true);
         navigate("/CO2Rechner/finish", {
           state: {
             co2ValuesPerCategory: co2ValuesPerCategory,
@@ -62,12 +60,12 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
   };
 
   const handleContinue = () => {
-    setSentData(false);
+
     navigate("/CO2Rechner/finish", {
       state: {
         co2ValuesPerCategory: co2ValuesPerCategory,
         categories: categories,
-        dataSent: sentData,
+        dataSent: false,
         totalCo2: totalCo2,
       },
     });
