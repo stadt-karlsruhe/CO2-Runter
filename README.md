@@ -20,4 +20,16 @@ An innovative web app that allows users to calculate and compare their personal 
     To start interacting with the application, open `http://localhost:3050/` on a browser.
 
     To load data into the database copy the contents of `loader.sql` and paste it into the SQL query box in Adminer and click `Execute`.
- 
+
+
+## Build Instructions for Production\
+
+    Change DB Password and Token Key to something new 
+
+    Run docker-compose up --build -f docker-compose-prod.yml
+
+    o log in, use `mysql_db` as the server Username as `root` and password as the new Password.
+
+    To start interacting with the application, open `http://localhost:3050/` on a browser.
+
+    If you want you can remove the Adminer service from the docker-compose-prod.yml file

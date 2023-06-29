@@ -69,3 +69,31 @@ ALTER TABLE `Prints_In_Carbon_Footprint_Groups`
 ALTER TABLE `Groupmemberships` ADD FOREIGN KEY (`user_ID`) REFERENCES `Users`(`user_ID`) ON DELETE CASCADE;
 ALTER TABLE `Groupmemberships` ADD FOREIGN KEY (`group_ID`) REFERENCES `Carbon_Footprint_Groups`(`group_ID`) ON DELETE CASCADE;
 
+--Load Districts of Karlsruhe into Districts table
+Insert into Districts (name) Values ("Knielingen");
+Insert into Districts (name) Values ("Daxlanden");
+Insert into Districts (name) Values ("Innenstadt-West");
+Insert into Districts (name) Values ("Innenstadt-Ost");
+Insert into Districts (name) Values ("Südstadt");
+Insert into Districts (name) Values ("Palmbach");
+Insert into Districts (name) Values ("Grünwettersbach");
+Insert into Districts (name) Values ("Hohenwettersbach");
+Insert into Districts (name) Values ("Wolfartsweier");
+Insert into Districts (name) Values ("Rintheim");
+Insert into Districts (name) Values ("Neureut");
+Insert into Districts (name) Values ("Waldstadt");
+Insert into Districts (name) Values ("Stupferich");
+Insert into Districts (name) Values ("Durlach");
+Insert into Districts (name) Values ("Grünwinkel");
+Insert into Districts (name) Values ("Mühlburg");
+Insert into Districts (name) Values ("Oberreut");
+Insert into Districts (name) Values ("Grötzingen");
+Insert into Districts (name) Values ("Hagsfeld");
+Insert into Districts (name) Values ("Weiherfeld-Dammerstock");
+Insert into Districts (name) Values ("Beiertheim-Bulach");
+Insert into Districts (name) Values ("Südweststadt");
+Insert into Districts (name) Values ("Weststadt");
+Insert into Districts (name) Values ("Nordweststadt");
+Insert into Districts (name) Values ("Nordstadt");
+Insert into Districts (name) Values ("Oststadt");
+Insert into Districts (name) Values ("Rüppurr");
