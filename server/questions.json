@@ -75,7 +75,7 @@
                 "unit": "km",
                 "maxInput": 100000,
                 "defaultValue": 0.12,
-                "formula": "function (value) { return value * -0.000049 * 52; }",
+                "formula": "function (value) { return value * 0.000049 * 52; }",
                 "selectedValue": ""
               }
             ],
