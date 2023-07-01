@@ -13,7 +13,6 @@ const Selection = (props) => {
     let selectedValue = "";
  
     if(props.detailed){
-      console.log(selectedValue+" an stelle bei detailed= "+ props.rememberValue[2])
       selectedValue = jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].detailed.questions[props.rememberValue[2]].selectedValue;
     }else{
       selectedValue = jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].quick.selectedValue;
