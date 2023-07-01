@@ -193,9 +193,9 @@
             "text": "Wie viel Quadratmeter hat eine Person in ihrem Haushalt?",
             "typ": "input",
             "unit": "qm/Personen",
-            "maxInput": 10,
-            "defaultValue": 0.5,
-            "formula": "function (value) { return (0.7 + (-0.20705*value*value + 2.725*value - 1.5175)); }",
+            "maxInput": 200,
+            "defaultValue": 0.14,
+            "formula": "function (value) { return (0.7 * (0.0236*value - 1.235)); }",
             "selectedValue": ""
           },
           "detailed": {
@@ -205,13 +205,22 @@
                 "typ": "input",
                 "unit": "Personen",
                 "maxInput": 10,
-                "defaultValue": 0.5,
-                "formula": "function (value) { return (0.7 + (-0.20705*value*value + 2.725*value - 1.5175)); }",
+                "defaultValue": 0.07,
+                "formula": "function (value) { return value; }",
+                "selectedValue": ""
+              },
+              {
+                "text": "Wie viele qm hat ihre Wohnung?",
+                "typ": "input",
+                "unit": "qm",
+                "maxInput": 500,
+                "defaultValue": 0.07,
+                "formula": "function (value) { return value; }",
                 "selectedValue": ""
               }
             ],
-            "formula": ""
-          }
+            "formula": "function (values) { return 0.7 + (-0.20705*(values[1]/values[0])*(values[1]/values[0]) + 2.725*(values[1]/values[0]) - 1.5175); }"
+          }          
         },
         {
           "name": "Fläche",

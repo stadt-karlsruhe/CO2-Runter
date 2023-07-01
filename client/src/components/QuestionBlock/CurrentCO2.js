@@ -23,7 +23,7 @@ const CurrentCO2 = ({ co2Value }) => {
     return Math.floor(num * factor) / factor;
   };
 
-  const variant = isSmallScreen ? "h8" : "h6";
+  const variant = "h6";
 
   return (
     <Card
@@ -39,12 +39,9 @@ const CurrentCO2 = ({ co2Value }) => {
     >
       <CardContent>
         <Box display="flex" justifyContent="center" alignItems="center">
-          <Typography variant={variant} component="h8" >
+          <Typography variant={variant} component="h6" >
             Ihr aktueller CO2 Fußabdruck beträgt: {truncate(co2Value, 2)}t
           </Typography>
-          <IconButton onClick={handleInformation}>
-            <InfoIcon />
-          </IconButton>
         </Box>
       </CardContent>
     </Card>
