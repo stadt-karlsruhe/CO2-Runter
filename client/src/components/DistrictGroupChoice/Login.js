@@ -37,7 +37,7 @@ const Login = (setSelectedGroups) => {
           <Tab label="Login" value="1" />
         </Tabs>
         <TabPanel value="0">
-          <GroupChoice setSelectedGroups={setSelectedGroups}/>
+          <GroupChoice updateSelectedGroups={setSelectedGroups}/>
         </TabPanel>
         <TabPanel value="1">
           <div

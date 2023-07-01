@@ -111,7 +111,7 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
         (CO2Token ? (
           <GroupChoice  updateSelectedGroups={updateSelectedGroups}/>
         ) : (
-          <Login setSelectedGroups={setSelectedGroups} />
+          <Login setSelectedGroups={updateSelectedGroups} />
         ))}
       <Button
         onClick={handleSubmitData}
