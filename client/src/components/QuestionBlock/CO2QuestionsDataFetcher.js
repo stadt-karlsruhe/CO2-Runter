@@ -18,7 +18,6 @@ const CO2QuestionsDataFetcher = () => {
         localStorage.setItem("CO2questions", JSON.stringify(data));
         setQuestions(data);
       } catch (error) {
-        localStorage.setItem("CO2questions", JSON.stringify(question));
         console.log("Fragen nicht gefunden!")
       }
     };
