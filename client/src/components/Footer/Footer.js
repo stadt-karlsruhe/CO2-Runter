@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="footer">
       <Divider className="footer-divider" />
       <Container maxWidth="lg" className="footer-container">
-        <Typography variant="h10" className="footer-title">
+        <Typography variant="h6" className="footer-title">
           In Zusammenarbeit:
         </Typography>
         <Grid
