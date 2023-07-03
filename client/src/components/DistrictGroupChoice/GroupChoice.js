@@ -138,11 +138,10 @@ const GroupChoice = ({ updateSelectedGroups  }) => {
       const newGroups = selectedGroups.filter(
         (group) => !prevSelectedGroups.includes(group)
       );
-  
       // Combine existing and new group codes
       return [...prevSelectedGroups, ...newGroups];
     });
-  }, [selectedRows, updateSelectedGroups]);
+  }, [selectedRows]);
   
 
   const handleSelectionChange = (newSelection) => {
