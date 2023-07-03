@@ -4,5 +4,5 @@ RUN npm install -g nodemon
 COPY package.json ./
 COPY package-lock.json ./
 COPY ./ ./
-RUN npm ci
+RUN npm i
 CMD ["npm", "run", "watch"]
