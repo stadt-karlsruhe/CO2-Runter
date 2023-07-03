@@ -89,7 +89,7 @@
             "typ": "input",
             "unit": "Stunden",
             "maxInput": 1000,
-            "defaultValue": 0.61,
+            "defaultValue": 0,
             "formula": "function (value) { return value * 0.15; }",
             "selectedValue": ""
           },
@@ -99,8 +99,8 @@
                 "text": "Wie viele Stunden Kurzstrecke fliegen Sie pro Jahr?",
                 "typ": "input",
                 "unit": "Stunden",
-                "maxInput": 1000000,
-                "defaultValue": 0.305,
+                "maxInput": 1000,
+                "defaultValue": 0,
                 "formula": "function (value) { return value * 0.1328; }",
                 "selectedValue": ""
               },
@@ -108,8 +108,8 @@
                 "text": "Wie viele Stunden Langstrecke fliegen Sie pro Jahr?",
                 "typ": "input",
                 "unit": "Stunden",
-                "maxInput": 1000000,
-                "defaultValue": 0.305,
+                "maxInput": 1000,
+                "defaultValue": 0,
                 "formula": "function (value) { return value * 0.1717; }",
                 "selectedValue": ""
               }
