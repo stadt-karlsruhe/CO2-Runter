@@ -42,7 +42,11 @@ export default function District_Map() {
     },
     tooltip: {
       trigger: 'item',
-      formatter: '{b}<br/>{c} (kg CO2)'
+      formatter: function (params) {
+        // Round the value to a specific number of decimal places
+        var roundedValue = parseFloat(params.value).toFixed(2);
+        return params.name + '<br/>' + roundedValue + ' (kg CO2)';
+      },
     },
     grid :
     {
