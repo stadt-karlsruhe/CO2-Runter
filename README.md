@@ -24,12 +24,10 @@ An innovative web app that allows users to calculate and compare their personal 
 
 ## Build Instructions for Production\
 
-    Change DB Password and Token Key to something new 
+    Change DB Password and Token Key in `docker-compose-pord.yml` to something new 
 
-    Run docker-compose up --build -f docker-compose-prod.yml
+    Run `docker compose -f docker-compose-prod.yml up --build` inside the main project directory
 
-    o log in, use `mysql_db` as the server Username as `root` and password as the new Password.
+    To log in, use `mysql_db` as the server Username as `root` and password as the new Password.
 
-    To start interacting with the application, open `http://localhost:3050/` on a browser.
-
-    If you want you can remove the Adminer service from the docker-compose-prod.yml file
+    To start interacting with the application, open `http://localhost:9001/` on a browser.
