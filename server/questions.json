@@ -214,7 +214,7 @@
                 "typ": "input",
                 "unit": "qm",
                 "maxInput": 500,
-                "defaultValue": 9.7138,
+                "defaultValue": 61,
                 "formula": "function (value) { return value; }",
                 "selectedValue": ""
               }
@@ -285,7 +285,7 @@
             "text": "Woher beziehen Sie ihren Strom?",
             "typ": "auswahl",
             "replies": ["Ökostrom", "Strommix"],
-            "values": [0.49,0.03],
+            "values": [0.03,0.49],
             "defaultValue": 0.49,
             "selectedValue": ""
           },
