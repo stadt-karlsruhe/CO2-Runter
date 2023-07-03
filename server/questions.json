@@ -205,7 +205,7 @@
                 "typ": "input",
                 "unit": "Personen",
                 "maxInput": 10,
-                "defaultValue": 0.07,
+                "defaultValue": 1,
                 "formula": "function (value) { return value; }",
                 "selectedValue": ""
               },
@@ -214,29 +214,13 @@
                 "typ": "input",
                 "unit": "qm",
                 "maxInput": 500,
-                "defaultValue": 0.07,
+                "defaultValue": 9.7138,
                 "formula": "function (value) { return value; }",
                 "selectedValue": ""
               }
             ],
             "formula": "function (values) { return (0.7 * (0.0236*(values[1]/values[0]) - 1.235)); }"
           }          
-        },
-        {
-          "name": "Fläche",
-          "quick": {
-            "text": "Wie groß ist ihre Wohnung?",
-            "typ": "input",
-            "unit": "m²",
-            "maxInput": 500,
-            "defaultValue": 0.5,
-            "formula": "function (value) { return (0.07+ (0.0236*value-1.235)); }",
-            "selectedValue": ""
-          },
-          "detailed": {
-            "questions": [],
-            "formula": ""
-          }
         },
         {
           "name": "Baujahr/Renovierungsstand ",
