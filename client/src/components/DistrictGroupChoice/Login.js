@@ -5,10 +5,10 @@ import { TabContext, TabPanel } from "@mui/lab";
 import GroupChoice from "./GroupChoice";
 
 const Login = ({updateSelectedGroups}) => {
-  const [value, setValue] = React.useState("0");
+  const [tabValue, setTabValue] = React.useState("0");
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setTabValue(newValue);
   };
   return (
     <div
@@ -23,26 +23,22 @@ const Login = ({updateSelectedGroups}) => {
         Melden Sie sich an! So können sie alle Gruppen sehen in denen Sie
         Mitglied sind.
       </Typography>
-      <TabContext value={value}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: "10px",
-          }}
-        >
-          <Tab label="Ohne Login" value="0" />
-          <Tab label="Login" value="1" />
-        </Tabs>
-        <TabPanel value="0" style={{with: "40%"}}>
-          <GroupChoice updateSelectedGroups={updateSelectedGroups}/>
-        </TabPanel>
-        <TabPanel value="1">       
-            <LoginForm />
-        </TabPanel>
-      </TabContext>
+      <Tabs
+        value={tabValue}
+        onChange={handleChange}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "10px",
+        }}
+      >
+        <Tab label="Ohne Login" value="0" />
+        <Tab label="Login" value="1" />
+      </Tabs>
+      {tabValue === 0 && (
+        <GroupChoice updateSelectedGroups={updateSelectedGroups} />)
+      }
+      {tabValue === 1 && (<LoginForm />)}
     </div>
   );
 };
