@@ -276,7 +276,7 @@
                 "selectedValue": ""
               }
             ],
-            "formula": "function (values) { return values[0] + values[1]; }"
+            "formula": "function (values) { return values[0]; }"
           }
         },
         {
