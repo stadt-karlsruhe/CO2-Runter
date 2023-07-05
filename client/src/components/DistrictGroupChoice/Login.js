@@ -36,7 +36,7 @@ const Login = ({updateSelectedGroups}) => {
           <Tab label="Ohne Login" value="0" />
           <Tab label="Login" value="1" />
         </Tabs>
-        <TabPanel value="0" style={{with: "40%"}}>
+        <TabPanel value="0" style={{width: '80vw' }}>
           <GroupChoice updateSelectedGroups={updateSelectedGroups}/>
         </TabPanel>
         <TabPanel value="1">       
