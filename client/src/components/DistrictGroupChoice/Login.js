@@ -32,8 +32,8 @@ const Login = ({updateSelectedGroups}) => {
           marginBottom: "10px",
         }}
       >
-        <Tab label="Ohne Login" value="0" />
-        <Tab label="Login" value="1" />
+        <Tab label="Ohne Login" />
+        <Tab label="Login" />
       </Tabs>
       {tabValue === 0 && (
         <GroupChoice updateSelectedGroups={updateSelectedGroups} />)
