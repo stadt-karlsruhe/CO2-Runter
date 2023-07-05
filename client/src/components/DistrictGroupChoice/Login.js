@@ -19,7 +19,7 @@ const Login = ({updateSelectedGroups}) => {
         alignItems: "center",
       }}
     >
-      <Typography variant="body1">
+      <Typography variant="body1" style={{width: "80vw"}}>
         Melden Sie sich an! So können sie alle Gruppen sehen in denen Sie
         Mitglied sind.
       </Typography>
@@ -36,17 +36,11 @@ const Login = ({updateSelectedGroups}) => {
           <Tab label="Ohne Login" value="0" />
           <Tab label="Login" value="1" />
         </Tabs>
-        <TabPanel value="0">
+        <TabPanel value="0" style={{with: "40%"}}>
           <GroupChoice updateSelectedGroups={updateSelectedGroups}/>
         </TabPanel>
-        <TabPanel value="1">
-          <div
-            style={{
-              width: "60vw",
-            }}
-          >
+        <TabPanel value="1">       
             <LoginForm />
-          </div>
         </TabPanel>
       </TabContext>
     </div>
