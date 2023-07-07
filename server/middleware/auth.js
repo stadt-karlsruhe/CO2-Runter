@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
-
-const config = process.env;
+const config = require('../config.js');
 
 const auth = (req, res, next) => {
   const token = req.body.co2token || req.query.co2token || req.headers['co2token'];
@@ -9,7 +8,7 @@ const auth = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, config.TOKEN_KEY);
+    const decoded = jwt.verify(token, config.auth.token_key);
     req.user = decoded;
     next();
   } catch (err) {

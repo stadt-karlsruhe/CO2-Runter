@@ -1,6 +1,7 @@
 version: '3.8'
 
 x-common-variables: &common-variables
+  DOCKER: true
   MYSQL_DATABASE: db_co2runter
   MYSQL_USER: MYSQL_USER
   MYSQL_PASSWORD: MYSQL_PASSWORD

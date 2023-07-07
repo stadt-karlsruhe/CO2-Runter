@@ -11,6 +11,8 @@ const user_routes = require("./routes/user_routes");
 const {db} = require('./services/db');
 const dashboard_routes = require("./routes/dashboard_routes");
 
+const config = require('./config.js');
+
 
 // read questions from json file 
 const fs = require('fs');
@@ -58,7 +60,7 @@ app.post('/register', async (req, res) => {
             // create token
             const token = jwt.sign(
               { user_id: result.insertId, email_low },
-              process.env.TOKEN_KEY,
+              config.auth.token_key,
               {
                 expiresIn: "2h",
               }
@@ -95,7 +97,7 @@ app.post('/login', async (req, res) => {
         // create token
         const token = jwt.sign(
           { user_id: result[0].user_ID, email_low },
-          process.env.TOKEN_KEY,
+          config.auth.token_key,
           {
             expiresIn: "2h",
           }

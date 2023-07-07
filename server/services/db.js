@@ -1,10 +1,12 @@
 const mysql = require('mysql2');
+const config = require('../config.js');
+
 
 const db = mysql.createPool({
-    host: 'mysql_db', // the host name MYSQL_DATABASE: node_mysql
-    user: 'MYSQL_USER', // database user MYSQL_USER: MYSQL_USER
-    password: 'MYSQL_PASSWORD', // database user password MYSQL_PASSWORD: MYSQL_PASSWORD
-    database: 'db_co2runter' // database name MYSQL_HOST_IP: mysql_db
+    host: config.database.db_host, 
+    user: config.database.db_user, 
+    password: config.database.db_pwd, 
+    database: config.database.db_name
   })
 
 async function query(sql, params) {
