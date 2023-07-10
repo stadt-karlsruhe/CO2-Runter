@@ -54,7 +54,7 @@
         {
           "name": "ÖPNV",
           "quick": {
-            "text": "Wie oft fahren Sie mit öffentlichen Verkehrsmittel?",
+            "text": "Wie oft fahren Sie mit öffentlichen Verkehrsmitteln?",
             "typ": "auswahl",
             "replies": [
               "Nie",
