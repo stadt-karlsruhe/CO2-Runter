@@ -123,11 +123,6 @@ const Landingpage = () => {
           </AccordionSummary>
           <AccordionDetails className="accordionDetail">
             <Typography>
-              <!-- 
-            Unser Gruppensystem auf dieser Webseite ermöglicht es dir, 
-            gemeinsam mit anderen Nutzern CO2-Fußabdrücke zu erfassen und dich 
-            gegenseitig zu animieren, mehr CO2 einzusparen.
-            -->
             Über das Gruppensystem auf dieser Webseite können Sie gemeinsam mit 
             anderen Nutzern CO2-Fußabdrücke erfassen. So können Sie sich gegenseitig zu weiteren CO2 Einsparungen anregen.
             </Typography>
