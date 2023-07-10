@@ -59,8 +59,8 @@ const GroupSettingsSelector = () => {
         ) : (
           <>
           <Typography>Willkommen auf deiner Gruppenübersichtsseite! 
-            Hier findest du eine praktische Zusammenfassung der Gruppen, in denen du als Administrator tätig bist. 
-            Du kannst hier jederzeit die Links und QR-Codes abrufen, um sie mit deinen Freunden, Familie, Sportkollegen, Kollegen und anderen zu teilen.</Typography>
+            Hier finden Sie eine praktische Zusammenfassung der Gruppen, in denen Sie als Administrator tätig sind. 
+            Sie können hier jederzeit die Links und QR-Codes abrufen, um sie mit Freunden, Familie, Sportkollegen, Kollegen und anderen zu teilen.</Typography>
           <ul>
             {groups.map((group) => (
               <li key={group.groupcode}>

@@ -56,7 +56,7 @@ const CO2QuestionsDataFetcher = () => {
           <QuestionCategory category={questions.category}></QuestionCategory>
         ) : (
           <Typography>
-            Fehler beim Laden der Fragen. Bitte versuchen sie es später erneut.
+            Fehler beim Laden der Fragen. Bitte versuchen Sie es später erneut.
           </Typography>
         )}
       </Container>

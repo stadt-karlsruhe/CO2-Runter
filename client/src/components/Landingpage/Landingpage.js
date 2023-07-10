@@ -90,10 +90,10 @@ const Landingpage = () => {
           </AccordionSummary>
           <AccordionDetails className="accordionDetail">
             <Typography>
-              Persönliche Maßnahmen für den Klimaschutz werden umso
-              erfolgreicher, wenn wir auch andere Menschen davon überzeugen.
-              Geben Sie Ihren Stadtteil an und die Anzahl der Personen, die sie
-              dort als Mitstreiter:Innen gewinnen können und nehmen Sie so an
+              Persönliche Maßnahmen für den Klimaschutz werden
+              erfolgreicher, wenn wir auch andere Menschen von ihnen überzeugen.
+              Geben Sie Ihren Stadtteil an und die Anzahl der Personen, die Sie
+              dort als Mitstreiterinnen und Mitstreiter gewinnen können und nehmen Sie so an
               der Klima-Challenge teil. Die aktuellen Ergebnisse sind auf
               unserem{" "}
               <Link className="text-link" href="/Dashboard" target="_blank">
@@ -123,19 +123,33 @@ const Landingpage = () => {
           </AccordionSummary>
           <AccordionDetails className="accordionDetail">
             <Typography>
-            Unser Gruppensystem auf dieser Webseite ermöglicht es dir, gemeinsam mit anderen Nutzern CO2-Fußabdrücke zu erfassen und dich gegenseitig zu animieren, mehr CO2 einzusparen.
+              <!-- 
+            Unser Gruppensystem auf dieser Webseite ermöglicht es dir, 
+            gemeinsam mit anderen Nutzern CO2-Fußabdrücke zu erfassen und dich 
+            gegenseitig zu animieren, mehr CO2 einzusparen.
+            -->
+            Über das Gruppensystem auf dieser Webseite können Sie gemeinsam mit 
+            anderen Nutzern CO2-Fußabdrücke erfassen. So können Sie sich gegenseitig zu weiteren CO2 Einsparungen anregen.
             </Typography>
             <Typography>
-Als eingeloggter Nutzer hast du die Möglichkeit, Gruppen zu erstellen und den Link oder QR-Code an deine Freunde, Familie, Sportkollegen, Kollegen und andere zu verteilen. Mit diesem System können alle Teilnehmer ohne Anmeldung ihre CO2-Fußabdrücke der Gruppe zuweisen.
+Als eingeloggter Nutzer haben Sie die Möglichkeit, Gruppen zu erstellen und den Link oder QR-Code an 
+Freunde, Familie, Sportkollegen, Kollegen und andere zu verteilen. Mit diesem System können alle Teilnehmer ohne Anmeldung ihre CO2-Fußabdrücke der Gruppe zuweisen.
 </Typography>
             <Typography>
-Der Zweck des Gruppensystems besteht darin, eine motivierende Umgebung zu schaffen, in der sich die Teilnehmer gegenseitig inspirieren können, CO2-Einsparungen zu erreichen. Indem ihr eure Fortschritte innerhalb der Gruppe teilt, könnt ihr gemeinsam Ziele setzen, Wettbewerbe veranstalten oder euch einfach gegenseitig ermutigen, bewusste Entscheidungen zu treffen, um eure CO2-Bilanz zu verbessern.
+Der Zweck des Gruppensystems besteht darin, eine motivierende Umgebung zu schaffen, 
+in der sich die Teilnehmer gegenseitig inspirieren können, CO2-Einsparungen zu erreichen. 
+Indem Sie ihre Fortschritte innerhalb der Gruppe teilt, 
+könnt ihr gemeinsam Ziele setzen, Wettbewerbe veranstalten oder euch einfach gegenseitig ermutigen, 
+bewusste Entscheidungen zu treffen, um eure CO2-Bilanz zu verbessern.
 </Typography>
             <Typography>
-Wir legen großen Wert auf den Schutz deiner Daten. Innerhalb der Gruppe bleiben alle Daten anonym, sodass du deine CO2-Fußabdrücke sicher teilen kannst, ohne deine Privatsphäre zu gefährden. Deine Informationen werden vertraulich behandelt und nicht mit anderen Gruppenmitgliedern geteilt.
+Wir legen großen Wert auf den Schutz Ihrer Daten. Innerhalb der Gruppe bleiben alle Daten anonym, 
+sodass Sie Ihre CO2-Fußabdrücke sicher teilen können, ohne Ihre Privatsphäre zu gefährden. 
+Ihre Informationen werden vertraulich behandelt und nicht mit anderen Gruppenmitgliedern geteilt.
 </Typography>
             <Typography>
-Nutze unser benutzerfreundliches Gruppensystem, um Teil einer aktiven Gemeinschaft zu werden, die gemeinsam daran arbeitet, den CO2-Ausstoß zu verringern. Gemeinsam können wir einen positiven Beitrag zum Umweltschutz leisten und uns gegenseitig dazu inspirieren, nachhaltigere Lebensstile anzunehmen.
+Nutzen Sie unser benutzerfreundliches Gruppensystem, um Teil einer aktiven Gemeinschaft zu werden, die gemeinsam daran arbeitet, den CO2-Ausstoß zu verringern. 
+Gemeinsam können wir einen positiven Beitrag zum Umweltschutz leisten und uns gegenseitig dazu inspirieren, nachhaltigere Lebensstile anzunehmen.
             </Typography>
             <Button
               variant="contained"

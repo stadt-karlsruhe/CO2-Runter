@@ -20,7 +20,7 @@ const Login = ({updateSelectedGroups}) => {
       }}
     >
       <Typography variant="body1" style={{width: "80vw"}}>
-        Melden Sie sich an! So können sie alle Gruppen sehen in denen Sie
+        Melden Sie sich an! So können Sie alle Gruppen sehen, in denen Sie
         Mitglied sind.
       </Typography>
       <TabContext value={value}>

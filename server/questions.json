@@ -54,7 +54,7 @@
         {
           "name": "ÖPNV",
           "quick": {
-            "text": "Wie oft fahren Sie mit öffentlichen Verkersmittel?",
+            "text": "Wie oft fahren Sie mit öffentlichen Verkehrsmittel?",
             "typ": "auswahl",
             "replies": [
               "Nie",
@@ -155,7 +155,7 @@
                 "selectedValue": ""
               },
               {
-                "text": "Wie oft kaufen sie regionale Produkte?",
+                "text": "Wie oft kaufen Sie regionale Produkte?",
                 "typ": "auswahl",
                 "replies": ["Nie","Selten","Teilweise", "Vorwiegend", "Ausschließlich"],
                 "values": [0.05, 0.02, 0, -0.02, -0.05],
@@ -163,7 +163,7 @@
                 "selectedValue": ""
               },
               {
-                "text": "Wie oft kaufen sie saisonale Produkte?",
+                "text": "Wie oft kaufen Sie saisonale Produkte?",
                 "typ": "auswahl",
                 "replies": ["Nie","Selten","Teilweise", "Vorwiegend", "Ausschließlich"],
                 "values": [0.05, 0.02, 0, -0.02, -0.05],
@@ -171,7 +171,7 @@
                 "selectedValue": ""
               },
               {
-                "text": "Wie oft kaufen sie Bio-Produkte?",
+                "text": "Wie oft kaufen Sie Bio-Produkte?",
                 "typ": "auswahl",
                 "replies": ["Nie", "Teilweise", "Hauptsächlich"],
                 "values": [0, -0.03 , -0.06],
@@ -210,7 +210,7 @@
                 "selectedValue": ""
               },
               {
-                "text": "Wie viele qm hat ihre Wohnung?",
+                "text": "Wie viele qm hat Ihre Wohnung?",
                 "typ": "input",
                 "unit": "qm",
                 "maxInput": 500,
@@ -302,7 +302,7 @@
         {
           "name": "Konsum",
           "quick": {
-            "text": "Wie würden sie ihr Kaufverhalten beschreiben?",
+            "text": "Wie würden Sie ihr Kaufverhalten beschreiben?",
             "typ": "auswahl",
             "replies": ["sparsam", "normal", "großzügig"],
             "values": [2.48, 2.9, 3.35],
@@ -312,7 +312,7 @@
           "detailed": {
             "questions": [
               {
-                "text": "Wie würden sie ihr Kaufverhalten beschreiben?",
+                "text": "Wie würden Sie ihr Kaufverhalten beschreiben?",
                 "typ": "auswahl",
                 "replies": ["sparsam", "normal", "großzügig"],
                 "values": [-0.05, 0, 0.05],
@@ -320,7 +320,7 @@
                 "selectedValue": ""
               },
               {
-                "text": "Was sind ihre Kaufkriterien?",
+                "text": "Was sind Ihre Kaufkriterien?",
                 "typ": "auswahl",
                 "replies": ["Langlebigkeit", "Funktionalität", "Günstiger Preis"],
                 "values": [-0.05, 0, 0.05],
@@ -328,7 +328,7 @@
                 "selectedValue": ""
               },
               {
-                "text": "Wie oft kaufen sie gebrauchte/secondhand Produkte?",
+                "text": "Wie oft kaufen Sie gebrauchte/secondhand Produkte?",
                 "typ": "auswahl",
                 "replies": ["Oft", "Manchmal", "Nie"],
                 "values": [-0.05, 0, 0.05],
@@ -336,7 +336,7 @@
                 "selectedValue": ""
               },
               {
-                "text": "Was sind ihr sonstigen Ausgaben pro Kopf und Monat?",
+                "text": "Wie hoch sind Ihre sonstigen Ausgaben pro Kopf und Monat?",
                 "typ": "input",
                 "unit": "€",
                 "maxInput": 1000,
