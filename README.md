@@ -104,6 +104,12 @@ Edit the configuration in config.js
    * Set database parameters according to your setup
    * Set token key, e.g. 16 character random string
 
+Initialize database
+
+   * Load setup.sql
+   * Load defaults.sql to get the comparison values for "Deutschland"  and "Karlsruhe"
+
+
 Start the service
 
 > npm run start
