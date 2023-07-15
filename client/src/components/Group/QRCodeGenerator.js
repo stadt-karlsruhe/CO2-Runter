@@ -38,7 +38,7 @@ const QRCodeGenerator = ({ text }) => {
         textAlign: "center"
       }}>
         <div ref={qrCodeRef}>
-          <QRCode value={text} />
+          <QRCode value={text} includeMargin="true" />
         </div>
         <Button variant="contained" style={{ marginTop: "10px" }} onClick={handlePrint}>Print</Button>
         <Button variant="contained" style={{ marginTop: "10px" }} onClick={handleDownloadImage}>Download as Image</Button>
