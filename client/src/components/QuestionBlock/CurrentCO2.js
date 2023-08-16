@@ -14,11 +14,14 @@ const CurrentCO2 = ({ co2Value }) => {
   const navigate = useNavigate();
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
+  console.log("DBG - current co2:",co2Value)
+
   const handleInformation = () => {
     navigate("/information");
   };
 
   const truncate = (num, decimalPlaces) => {
+    console.log("DBG - truncate co2:",num)
     const factor = Math.pow(10, decimalPlaces);
     return Math.floor(num * factor) / factor;
   };
