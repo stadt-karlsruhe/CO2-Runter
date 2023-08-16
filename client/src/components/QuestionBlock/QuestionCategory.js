@@ -31,9 +31,8 @@ const QuestionCategory = (props) => {
     setCo2ValuesPerCategory((prevValues) => {
       const newValues = [...prevValues];
       newValues[activeStep][index] = value;
-      console.log("DBG - co2 change:",activeStep, index, value, prevValues,newValues )
-      if (activeStep == 3)
-        debugger
+
+      console.log("DBG - co2 change:",index, value, prevValues,newValues )
       
       return newValues;
     });
