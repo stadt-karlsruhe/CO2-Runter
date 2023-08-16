@@ -6,6 +6,10 @@ import QuestionStepper from "./QuestionStepper";
 import BottomStepper from "./BottomStepper";
 import ChoiceScreen from "../DistrictGroupChoice/ChoiceScreen";
 
+import { updateItem } from '../../features/Store';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+
 const QuestionCategory = (props) => {
   const [finish, setFinish] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
@@ -16,12 +20,45 @@ const QuestionCategory = (props) => {
   );
   const [totalCo2, setTotalCo2] = useState(0);
 
-  const handleCo2ValuesChange = (index, value) => {
+  const dispatch = useDispatch();
+
+  const storeCats = useSelector(state => state.categories); // Replace 'categories' with your state slice name
+  const categories = storeCats.categories
+  console.log("cats: ",categories)
+
+  const delayedUpdate = (index, value) => {
+    console.log("abcd:",index, value)
     setCo2ValuesPerCategory((prevValues) => {
       const newValues = [...prevValues];
       newValues[activeStep][index] = value;
+      console.log("DBG - co2 change:",activeStep, index, value, prevValues,newValues )
+      if (activeStep == 3)
+        debugger
+      
       return newValues;
     });
+  }
+
+  const handleCo2ValuesChange = (index, value) => {
+    console.log("valuechange:",index, value,co2ValuesPerCategory)
+
+    //store.dispatch(updateItem({ category: activeStep, index: index, value: value }));
+    dispatch(updateItem({ category: activeStep, index: index, value: value }));
+    //const categories = store.getState().categories.categories;
+  
+    //setTotalCo2(totalCo2 + 1)
+    //setTimeout(setTotalCo2(totalCo2 + 1),1000)
+    /*
+    setCo2ValuesPerCategory((prevValues) => {
+      const newValues = [...prevValues];
+      newValues[activeStep][index] = value;
+      console.log("DBG - co2 change:",activeStep, index, value, prevValues,newValues )
+      if (activeStep == 3)
+        debugger
+
+      return newValues;
+    });
+    */
   };
 
   const getCategoryNames = () => {
@@ -30,6 +67,7 @@ const QuestionCategory = (props) => {
   };
 
   const handleStepChange = (step) => {
+    console.log("Set active step:",step)
     setActiveStep(step);
   };
 
@@ -39,6 +77,22 @@ const QuestionCategory = (props) => {
       [name]: !prevIsDetailed[name],
     }));
   };
+
+
+  // const categories = useSelector((store) => store.categories);
+  //const categories = store.getState().categories.categories;
+  //console.log("cats: ",categories)
+
+  // Calculate the summary based on your logic
+  const summary = [
+    categories[0].reduce((acc, val) => acc + val, 0),
+    categories[1].reduce((acc, val) => acc + val, 0),
+    categories[2].reduce((acc, val) => acc + val, 0),
+    categories[3].reduce((acc, val) => acc + val, 0)
+  ]
+  console.log("sums: ",summary,summary.reduce((acc, val) => acc + val, 0))
+
+  
 
   return (
     <Container maxWidth="lg">
@@ -74,6 +128,7 @@ const QuestionCategory = (props) => {
         <ChoiceScreen totalCo2={totalCo2} co2ValuesPerCategory={co2ValuesPerCategory} categories={getCategoryNames()} />
       )}
     </Container>
+    
   );
 };
 

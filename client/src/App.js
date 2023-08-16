@@ -15,6 +15,8 @@ import FinishScreen from "./components/DistrictGroupChoice/FinishScreen";
 import GroupSettingsSelector from "./components/Group/GroupSettingSelecter";
 import "./styles/fonts.css";
 
+
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -33,7 +35,10 @@ function App() {
           <Route path="/groupSettings" element={<GroupSettingsSelector />} />
         </Routes>
       </Router>
+
     </ThemeProvider>
+
+
   );
 }
 

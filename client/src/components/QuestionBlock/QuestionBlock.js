@@ -46,8 +46,10 @@ const QuestionBlock = (props) => {
   
   useEffect(() => {
     if (isDetailed) {
+      console.log("Detailed")
       onCo2ValuesChange(calculateDetailedCo2());
     } else {
+      console.log("Coarse")
       onCo2ValuesChange(quickInputValue);
     }
   }, [quickInputValue, calculateDetailedCo2, onCo2ValuesChange, isDetailed]);  
@@ -59,6 +61,7 @@ const QuestionBlock = (props) => {
     const newInputValues = [...inputValues];
     newInputValues[index] = inputValue;
     setInputValues(newInputValues);
+    console.log("DBG - question block - handleco2valueschange:",index, value, inputValue )
   };
 
   return (

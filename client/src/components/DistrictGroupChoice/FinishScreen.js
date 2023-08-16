@@ -15,11 +15,13 @@ const FinishScreen = () => {
   const dataSent = location.state.dataSent;
   const baseCO2 = 1.15;
 
+  console.log("DBG - co2values:",co2ValuesPerCategory)
+
   const co2SumPerCategory = co2ValuesPerCategory.map((category) =>
     category.reduce((a, b) => a + b, 0)
   );
   const totalCo2Sum = co2SumPerCategory.reduce((a, b) => a + b, 0);
-
+  
   const truncate = (num, decimalPlaces) => {
     const factor = Math.pow(10, decimalPlaces);
     return Math.floor(num * factor) / factor;
