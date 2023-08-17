@@ -37,7 +37,7 @@ const Footer = () => {
           </Grid>
           <Grid item>
             <Link
-              href="https://codefor.de/karlsruhe/"
+              href="https://ok-lab-karlsruhe.de/"
               target="_blank"
               rel="noopener"
               className="footer-link"
@@ -76,6 +76,9 @@ const Footer = () => {
           </Link>
           <Link href="https://www.karlsruhe.de/impressum" color="inherit">
             Impressum
+          </Link>
+          <Link href="https://github.com/stadt-karlsruhe/CO2-Runter" color="inherit">
+            Quellcode
           </Link>
         </div>
       </Container>
