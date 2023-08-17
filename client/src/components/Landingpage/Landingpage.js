@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import "../../css/components/Landingpage/landingpage.css";
 import CheckAuth from "../CheckAuth";
 
-import { setLoading } from '../../features/Store';
+import { resetItems, setLoading } from '../../features/Store';
 import { useDispatch } from 'react-redux';
 
 
@@ -23,11 +23,12 @@ const Landingpage = () => {
   const navigate = useNavigate();
   const isLoggedIn = CheckAuth();
 
+  // reset the store
   const dispatch = useDispatch();
+  dispatch(resetItems())
   
 
   const handleCO2 = () => {
-    dispatch(setLoading(false))
     navigate("/CO2Rechner");
   };
 

@@ -7,12 +7,22 @@ import Login from "./Login";
 import { useNavigate } from "react-router-dom";
 
 
-const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
+import ComputeTotalCo2 from "../QuestionBlock/Calculation/ComputeTotalCo2"
+import { useSelector } from 'react-redux';
+
+
+const ChoiceScreen = ({ co2ValuesPerCategory, categories }) => {
   const [tabValue, setTabValue] = useState(0);
   const [selectedDistricts, setSelectedDistricts] = useState();
   const [selectedGroups, setSelectedGroups] = useState([]);
   const navigate = useNavigate();
   const CO2Token = localStorage.getItem('CO2Token');
+
+
+  const storeCats = useSelector(state => state.categories); // Replace 'categories' with your state slice name
+  const co2vals = ComputeTotalCo2(storeCats.categories)
+  const totalCo2 = co2vals.sum
+  
 
   useEffect(() => {
   
@@ -27,10 +37,6 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
     setTabValue(newValue);
   };
 
-  const co2SumPerCategory = co2ValuesPerCategory.map((category) =>
-    category.reduce((a, b) => a + b, 0)
-  );
-
   const truncate = (num, decimalPlaces) => {
     const factor = Math.pow(10, decimalPlaces);
     return Math.floor(num * factor) / factor;
@@ -42,12 +48,12 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
       const response = await axios.post("/api/footprint", {
         groups: selectedGroups,
         district: districtId,
-        data: co2SumPerCategory,
+        data: co2vals.cats,
       });
       if (response.status === 200) {
         navigate("/CO2Rechner/finish", {
           state: {
-            co2ValuesPerCategory: co2ValuesPerCategory,
+            co2ValuesPerCategory: storeCats, // co2ValuesPerCategory,
             categories: categories,
             dataSent: true,
           },
@@ -62,7 +68,7 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories, totalCo2 }) => {
 
     navigate("/CO2Rechner/finish", {
       state: {
-        co2ValuesPerCategory: co2ValuesPerCategory,
+        co2ValuesPerCategory: storeCats, // co2ValuesPerCategory,
         categories: categories,
         dataSent: false,
         totalCo2: totalCo2,

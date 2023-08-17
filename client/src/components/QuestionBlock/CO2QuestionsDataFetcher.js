@@ -34,7 +34,7 @@ const CO2QuestionsDataFetcher = () => {
         localStorage.setItem("CO2questions", JSON.stringify(data));
         setQuestions(data);
         console.log(data,data.category[0].questions[0].quick.defaultValue)
-        // initialize store
+        // initialize store defaults
         data.category.forEach((cval,cat)=> {
           console.log(cval)
           cval.questions.forEach((qval,q) => {
@@ -42,6 +42,7 @@ const CO2QuestionsDataFetcher = () => {
             dispatch(addItem({ category: cat, value: qval.quick.defaultValue }));
           })
         })
+
         //const categories = storeCats.categories
         //console.log("cats: ",categories)
       

@@ -15,22 +15,33 @@ const categoriesSlice = createSlice({
   name: 'categories',
   initialState,
   reducers: {
-      addItem: (state, action) => {
-        const { category, value } = action.payload;
-        state.categories[category].push(value);
-      },
-      updateItem: (state, action) => {
+    addItem: (state, action) => {
+      const { category, value } = action.payload;
+      state.categories[category].push(value);
+    },
+    updateItem: (state, action) => {
       const { category, index, value } = action.payload;
-      console.log("Update:",category, index, value )
+      console.log("Update item:", category, index, value)
       state.categories[category][index] = value;
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
+      console.log("Loading: ",action.payload)
+    },
+    resetItems: (state) => {
+      console.log("Reset items")
+      state.loading = false
+      state.categories = [
+        [], // Fixed size of 4
+        [], // Fixed size of 4
+        [],    // Fixed size of 3
+        [], // Fixed size of 4
+      ]     
     }
   },
 });
 
-export const { addItem, updateItem, setLoading } = categoriesSlice.actions;
+export const { addItem, updateItem, setLoading, resetItems } = categoriesSlice.actions;
 export const store = configureStore({
   reducer: {
     categories: categoriesSlice.reducer,

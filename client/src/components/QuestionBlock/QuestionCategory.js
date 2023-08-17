@@ -6,7 +6,6 @@ import QuestionStepper from "./QuestionStepper";
 import BottomStepper from "./BottomStepper";
 import ChoiceScreen from "../DistrictGroupChoice/ChoiceScreen";
 
-import { updateItem } from '../../features/Store';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
@@ -26,23 +25,11 @@ const QuestionCategory = (props) => {
   const categories = storeCats.categories
   console.log("cats: ",categories)
 
-  const delayedUpdate = (index, value) => {
-    console.log("abcd:",index, value)
-    setCo2ValuesPerCategory((prevValues) => {
-      const newValues = [...prevValues];
-      newValues[activeStep][index] = value;
-
-      console.log("DBG - co2 change:",index, value, prevValues,newValues )
-      
-      return newValues;
-    });
-  }
-
   const handleCo2ValuesChange = (index, value) => {
-    console.log("valuechange:",index, value,co2ValuesPerCategory)
+    console.log("valuechange:",index, value, co2ValuesPerCategory)
 
     //store.dispatch(updateItem({ category: activeStep, index: index, value: value }));
-    dispatch(updateItem({ category: activeStep, index: index, value: value }));
+    //dispatch(updateItem({ category: activeStep, index: index, value: value }));
     //const categories = store.getState().categories.categories;
   
     //setTotalCo2(totalCo2 + 1)
@@ -78,20 +65,6 @@ const QuestionCategory = (props) => {
   };
 
 
-  // const categories = useSelector((store) => store.categories);
-  //const categories = store.getState().categories.categories;
-  //console.log("cats: ",categories)
-
-  // Calculate the summary based on your logic
-  const summary = [
-    categories[0].reduce((acc, val) => acc + val, 0),
-    categories[1].reduce((acc, val) => acc + val, 0),
-    categories[2].reduce((acc, val) => acc + val, 0),
-    categories[3].reduce((acc, val) => acc + val, 0)
-  ]
-  console.log("sums: ",summary,summary.reduce((acc, val) => acc + val, 0))
-
-  
 
   return (
     <Container maxWidth="lg">

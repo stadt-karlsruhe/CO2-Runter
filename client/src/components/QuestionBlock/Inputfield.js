@@ -4,9 +4,14 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Box, Container } from "@mui/material";
 
+import { updateItem } from '../../features/Store';
+import { useDispatch } from 'react-redux';
+
 const Inputfield = (props) => {
   const storedData = localStorage.getItem("CO2questions");
   const jsonData = JSON.parse(storedData);
+
+  const dispatch = useDispatch();
 
   const calculateSelectedValue = () => {
     let selectedValue = "";
@@ -42,17 +47,25 @@ const Inputfield = (props) => {
 
   const handleChange = (event) => {
     const valueAsNumber = parseFloat(event.target.value);
+    let value = calculateCO2(props.maxInput)
     if (!isNaN(valueAsNumber)) {
       if (valueAsNumber > props.maxInput) {
         setValue(props.maxInput);
         saveSelectedValue(props.maxInput)
-        props.onCo2ValuesChange(calculateCO2(props.maxInput), event.target.value);
       } else {
         setValue(valueAsNumber);
         saveSelectedValue(valueAsNumber)
-        props.onCo2ValuesChange(calculateCO2(valueAsNumber), event.target.value);
+        value = calculateCO2(valueAsNumber)
       }
     }
+    //props.onCo2ValuesChange(value, event.target.value);
+    const activeStep = props.rememberValue[0] // 0
+    const index = props.rememberValue[1]// 0
+    dispatch(updateItem({ category: activeStep, index: index, value: value }));
+
+    console.log("Input - value: ",value)
+    console.log("Input - cat/idx: ",activeStep,index)
+
   };
 
   useEffect(() => {

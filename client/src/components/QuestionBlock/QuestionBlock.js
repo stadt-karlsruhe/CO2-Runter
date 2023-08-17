@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 
 const QuestionBlock = (props) => {
+  console.log("DBG - QuestionNlock: props: ",props)
   const defaultValues = props.questions.detailed.questions.map(
     (question) => question.defaultValue
   );
