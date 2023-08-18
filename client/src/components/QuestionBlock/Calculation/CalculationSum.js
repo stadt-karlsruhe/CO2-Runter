@@ -8,8 +8,6 @@ import { useSelector } from 'react-redux';
 
 const CalculationSum = () => {
 
-  const baseCO2 = 1.15;
-
   const categories = useSelector(state => state.categories); // Replace 'categories' with your state slice name
   console.log("co2 cats:",categories)
 
@@ -24,7 +22,8 @@ const CalculationSum = () => {
     categories.categories[3].reduce((acc, val) => acc + val, 0)
   ].reduce((acc,val) => acc + val,0)
   */
-  console.log("New sum: ",co2vals.sum)
+ const total = co2vals.sum + co2vals.base
+  console.log("New sum: ",total)
 
 /*
   useEffect(() => {
@@ -39,7 +38,7 @@ const CalculationSum = () => {
   }, [props.values, setTotalCo2]);
 */
 //return <CurrentCO2 co2Value={totalCo2} />;
-  return <CurrentCO2 co2Value={co2vals.sum} />;
+  return <CurrentCO2 co2Value={total} />;
 };
 
 export default CalculationSum;

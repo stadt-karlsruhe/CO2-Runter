@@ -21,7 +21,8 @@ const ChoiceScreen = ({ co2ValuesPerCategory, categories }) => {
 
   const storeCats = useSelector(state => state.categories); // Replace 'categories' with your state slice name
   const co2vals = ComputeTotalCo2(storeCats.categories)
-  const totalCo2 = co2vals.sum
+  const totalCo2 =  co2vals.sum + co2vals.base
+
   
 
   useEffect(() => {
