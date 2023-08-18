@@ -66,7 +66,7 @@ const ChartAvg = () => {
 
     // Add the average values to the selectedData and selectedCategories arrays
     selectedData.push(average.map((valueObj) => ({ category: valueObj.category, value: valueObj.value })));
-    selectedCategories.push("Durchschnitt");
+    selectedCategories.push("Durchschnitt aller Beiträge");
 
     return {
       tooltip: {
