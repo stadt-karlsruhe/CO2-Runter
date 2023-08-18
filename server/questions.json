@@ -196,7 +196,7 @@
             "maxInput": 200,
             "defaultValue": 0.14,
             "formula": "function (value) { return (0.7 * (0.0236*value - 1.235)); }",
-            "selectedValue": ""
+            "selectedValue": "61"
           },
           "detailed": {
             "questions": [
@@ -207,7 +207,7 @@
                 "maxInput": 10,
                 "defaultValue": 1,
                 "formula": "function (value) { return value; }",
-                "selectedValue": ""
+                "selectedValue": "1"
               },
               {
                 "text": "Wie viele qm hat Ihre Wohnung?",
@@ -216,7 +216,7 @@
                 "maxInput": 500,
                 "defaultValue": 61,
                 "formula": "function (value) { return value; }",
-                "selectedValue": ""
+                "selectedValue": "61"
               }
             ],
             "formula": "function (values) { return (0.7 * (0.0236*(values[1]/values[0]) - 1.235)); }"

@@ -15,11 +15,17 @@ const Inputfield = (props) => {
 
   const calculateSelectedValue = () => {
     let selectedValue = "";
- 
-    if(props.detailed){
+
+    if (props.detailed) {
       selectedValue = jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].detailed.questions[props.rememberValue[2]].selectedValue;
-    }else{
+      if ((selectedValue == "") || (selectedValue == 0)) {
+        selectedValue = jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].detailed.questions[props.rememberValue[2]].defaultValue
+      }
+    } else {
       selectedValue = jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].quick.selectedValue;
+      if ((selectedValue == "") || (selectedValue == 0)) {
+        selectedValue = jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].quick.defaultValue
+      }
     }
     return selectedValue || 0;
   }
@@ -31,15 +37,41 @@ const Inputfield = (props) => {
     }
   };
   const calculateCO2 = (number) => {
-    const formulaString = props.formula;
-    const formula = eval(`(${formulaString})`);
-    return formula(number);
+    if (!props.detailed) {
+      const formulaString = props.formula;
+      console.log("DBG - Input: formula ", formulaString)
+      const formula = eval(`(${formulaString})`);
+      return formula(number);
+    } else {
+      const formulaString = jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].detailed.formula
+      console.log("DBG - Input: formula ", formulaString)
+      const formula = eval(`(${formulaString})`);
+      const values = []
+      jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].detailed.questions.forEach((v,i)=> {
+        console.log(v,i)
+        const detFormString =  jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].detailed.questions[i].formula
+        console.log(detFormString)
+        const detFormula = eval(`(${detFormString})`);
+        if (v.selectedValue == "") {
+          values.push(detFormula(v.defaultValue))
+        } else {
+          values.push(detFormula(v.selectedValue))
+        }
+      })
+      console.log("DBG - Input: values ", values)
+      const result = formula(values)
+      console.log("DBG - Input: result ", result)
+      return result
+
+    }
   };
 
   const saveSelectedValue = (selectedValue) => {
-    if(props.detailed){
+    if (props.detailed) {
       jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].detailed.questions[props.rememberValue[2]].selectedValue = selectedValue;
-    }else{
+      console.log("DBG input detailed: ", jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].detailed.questions)
+      console.log("DBG input detailed: ", jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].detailed.formula)
+    } else {
       jsonData.category[props.rememberValue[0]].questions[props.rememberValue[1]].quick.selectedValue = selectedValue;
     }
     localStorage.setItem("CO2questions", JSON.stringify(jsonData));
@@ -63,8 +95,8 @@ const Inputfield = (props) => {
     const index = props.rememberValue[1]// 0
     dispatch(updateItem({ category: activeStep, index: index, value: value }));
 
-    console.log("Input - value: ",value)
-    console.log("Input - cat/idx: ",activeStep,index)
+    console.log("Input - value: ", value)
+    console.log("Input - cat/idx: ", activeStep, index)
 
   };
 
