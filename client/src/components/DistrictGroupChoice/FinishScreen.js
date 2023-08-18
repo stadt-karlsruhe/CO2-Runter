@@ -59,7 +59,7 @@ const FinishScreen = () => {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <Header />
-      <Typography variant="h6" style={{ marginBottom: "15px", marginTop: "25px" }}>Dein Aktueller Fußabdruck beträgt: {truncate(totalCo2Sum+baseCO2, 2)} t CO2</Typography>
+      <Typography variant="h6" style={{ marginBottom: "15px", marginTop: "25px" }}>Ihr Aktueller Fußabdruck beträgt: {truncate(totalCo2Sum+baseCO2, 2)} t CO2</Typography>
       <PieChart width={400} height={400}>
       <Pie
   data={chartData}

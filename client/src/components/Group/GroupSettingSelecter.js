@@ -58,9 +58,10 @@ const GroupSettingsSelector = () => {
           <GroupSuccessful groupCode={groupCode} groupName={groupName} />
         ) : (
           <>
-          <Typography>Willkommen auf deiner Gruppenübersichtsseite! 
+          <Typography>Willkommen auf der Gruppenübersichtsseite! 
             Hier finden Sie eine praktische Zusammenfassung der Gruppen, in denen Sie als Administrator tätig sind. 
-            Sie können hier jederzeit die Links und QR-Codes abrufen, um sie mit Freunden, Familie, Sportkollegen, Kollegen und anderen zu teilen.</Typography>
+            Sie können hier jederzeit die Links und QR-Codes abrufen, um sie mit Freunden, Familie, 
+            Sportkollegen, Kollegen und anderen zu teilen.</Typography>
           <ul>
             {groups.map((group) => (
               <li key={group.groupcode}>
