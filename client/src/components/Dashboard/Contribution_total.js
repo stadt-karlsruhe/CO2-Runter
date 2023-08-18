@@ -22,7 +22,7 @@ export default function Contribution_Total() {
           {co2Footprint}
         </Typography>
         <Typography variant="subtitle1" align="center">
-          Abgegebene Co2-Fussabdrücke
+          Abgegebene CO2-Fussabdrücke
         </Typography>
       </CardContent>
     </Card>

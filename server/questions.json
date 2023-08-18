@@ -30,7 +30,7 @@
                 "selectedValue": ""
               },
               {
-                "text": "Was ist ihr Verbrauch?",
+                "text": "Wie hoch ist ihr Verbrauch?",
                 "typ": "input",
                 "unit": " pro 100km",
                 "maxInput": 50,
@@ -39,7 +39,7 @@
                 "selectedValue": ""
               },
               {
-                "text": "Wie viele Kilometer fahren Sie pro Jahr?",
+                "text": "Wie viele Kilometer fahren Sie mit dem Auto pro Jahr?",
                 "typ": "input",
                 "unit": "km",
                 "maxInput": 1000000,
@@ -70,7 +70,7 @@
           "detailed": {
             "questions": [
               {
-                "text": "Wie viele Kilometer fahren Sie mit Öffentlichen Verkehrmittel pro Woche?",
+                "text": "Wie viele Kilometer fahren Sie mit öffentlichen Verkehrmitteln pro Woche?",
                 "typ": "input",
                 "unit": "km",
                 "maxInput": 100000,
@@ -125,7 +125,7 @@
         {
           "name": "Ernährung",
           "quick": {
-            "text": "Wie ist ihr Ernährungsverhalten?",
+            "text": "Wie ist Ihr Ernährungsverhalten?",
             "typ": "auswahl",
             "replies": [
               "Vegan",
@@ -173,8 +173,8 @@
               {
                 "text": "Wie oft kaufen Sie Bio-Produkte?",
                 "typ": "auswahl",
-                "replies": ["Nie", "Teilweise", "Hauptsächlich"],
-                "values": [0, -0.03 , -0.06],
+                "replies": ["Nie","Selten","Teilweise", "Vorwiegend", "Ausschließlich"],
+                "values": [0, -0.015, -0.03 , -0.045, -0.06],
                 "defaultValue": 0,
                 "selectedValue": ""
               }
@@ -201,7 +201,7 @@
           "detailed": {
             "questions": [
               {
-                "text": "Wie viele Personen wohnen Sie zusammen?",
+                "text": "Wie viele Personen wohnen in Ihrem Haushalt?",
                 "typ": "input",
                 "unit": "Personen",
                 "maxInput": 10,
@@ -225,7 +225,7 @@
         {
           "name": "Baujahr/Renovierungsstand ",
           "quick": {
-            "text": "Wie alt ist ihr Haus bzw wann wurde es zu letzt renoviert?",
+            "text": "Wie alt ist Ihr Haus bzw wann wurde es zuletzt renoviert?",
             "typ": "auswahl",
             "replies": [
               "vor 1978",
@@ -246,7 +246,7 @@
         {
           "name": "Heizung",
           "quick": {
-            "text": "Wie wird ihr Haus beheizt?",
+            "text": "Wie wird Ihr Haus beheizt?",
             "typ": "auswahl",
             "replies": [
               "fossil",
@@ -259,7 +259,7 @@
           "detailed": {
             "questions": [
               {
-                "text": "Wie wird ihr Haus beheizt?",
+                "text": "Wie wird Ihr Haus beheizt?",
                 "typ": "auswahl",
                 "replies": [
                   "Erdgas",
@@ -282,7 +282,7 @@
         {
           "name": "Strom",
           "quick": {
-            "text": "Woher beziehen Sie ihren Strom?",
+            "text": "Woher beziehen Sie Ihren Strom?",
             "typ": "auswahl",
             "replies": ["Ökostrom", "Strommix"],
             "values": [0.03,0.49],
@@ -312,7 +312,7 @@
           "detailed": {
             "questions": [
               {
-                "text": "Wie würden Sie ihr Kaufverhalten beschreiben?",
+                "text": "Wie würden Sie Ihr Kaufverhalten beschreiben?",
                 "typ": "auswahl",
                 "replies": ["sparsam", "normal", "großzügig"],
                 "values": [-0.05, 0, 0.05],
