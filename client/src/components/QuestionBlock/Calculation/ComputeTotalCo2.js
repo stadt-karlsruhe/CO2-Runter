@@ -1,6 +1,6 @@
 const ComputeTotalCo2 = (categories) => {
 
-  const baseCO2 = 1.15;
+  const baseCO2 = 1.7 // 1.15;
 
   console.log("co2 cats:",categories)
 

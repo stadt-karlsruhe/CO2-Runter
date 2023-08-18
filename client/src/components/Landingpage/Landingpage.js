@@ -63,26 +63,29 @@ const Landingpage = () => {
             <Typography>
               Laut Energiebilanz Karlsruhe 2019 liegt der CO2 Ausstoß bei 7,8t
               jährlich pro Kopf. Die Effekte durch privaten Konsum sind dabei
-              nicht enthalten. Addiert man hier den Grundwert (3,5t) gemäß
-              unserer Vereinfachung des UBA-Modells, dann erhält man 11,3t CO2.
-              Dies entspricht ungefähr der Grundwert-Summe der CO2APP (11t CO2).
+              nicht enthalten. Addiert man hier den Grundwert (2,5t) gemäß
+              unserer Vereinfachung des UBA-Modells, dann erhält man 10,3t CO2.
               Diese Grundwert-Summe bildet sich aus 4 "Sektoren", die wir durch
-              unseren Lebensstil beinflussen können plus einer festen Zugabe für
-              öffentliche Infrastruktur. Wohnen (Heizung und Strom) Mobilität
-              Ernährung Allgemeiner Konsum Die verwendeten Daten und
-              Berechnungsmodelle sind an den CO2-Rechner des Umweltbundesamts
-              angeleht und wollen die Effekte zeigen, die wir durch sparsamen
-              oder weniger sparsamen Lebensstil erreichen können. Eine exaktere
+              unseren Lebensstil beeinflussen können, plus einer festen Zugabe für
+              öffentliche Infrastruktur. Im CO2-Rechner können individuelle Angaben
+              für die Sektoren Wohnen (Heizung und Strom), 
+              Mobilität, Ernährung und allgemeiner Konsum gemacht werden.
+              Die Auswahlmöglichkeiten und Berechnungsmodelle 
+              sind an den CO2-Rechner des Umweltbundesamts
+              angelehnt. So lassen sich die Effekte zeigen, die wir durch einen sparsamen
+              oder weniger sparsamen Lebensstil erzielen können. Eine exaktere
               Berechnung ist ohne weitere Informationen über die persönliche
               Situation im Einzelfall nicht möglich. Weitere Informationen zum
-              UBA-Modell und den Einsparpotentialen finden sich{" "}
+              UBA-Modell und den Einsparpotentialen finden sich in dieser  
+              
               <Link
                 className="text-link"
                 href="https://www.umweltbundesamt.de/publikationen/klimaneutral-leben"
                 target="_blank"
               >
-                hier.
+              &nbsp; Publikation &nbsp;
               </Link>
+               des UBA.
             </Typography>
           </AccordionDetails>
         </Accordion>
