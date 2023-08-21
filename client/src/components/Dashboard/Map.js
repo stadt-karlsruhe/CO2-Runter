@@ -6,20 +6,37 @@ import sampleData from './sampleData.json';
 import axios from 'axios';
 import Card from "@mui/material/Card";
 
+
+import { useSelector } from 'react-redux';
+
+
 echarts.registerMap('Karlsruhe', geoJson);
 
 export default function District_Map() {
   const [data, setData] = useState(null);
   const [dataLoaded, setDataLoaded] = useState(false);
 
+  // store not neccessarily initialized here. Need to load questions first to get baseline!!!!
+  const storeCats = useSelector(state => state.categories); // Replace 'categories' with your state slice name
+  const baseCO2 = 0 // storeCats.baseline;
+
   useEffect(() => {
     axios.get('/api/dashboard/footprints')
       .then((res) => {
+        // add baseline to all footprints
+        res.data.baseline = new Array()
+        res.data.mobility.forEach((v,i) => {
+          console.log("Push baseline",i)
+          v.value = baseCO2
+          res.data.baseline.push(v)
+        })
+        console.log("res:",res.data)
         setData({
           mobility: res.data.mobility,
           nutrition: res.data.nutrition,
           consume: res.data.consume,
-          housing: res.data.housing
+          housing: res.data.housing,
+          baseline: baseCO2
         });
         setDataLoaded(true);
       })

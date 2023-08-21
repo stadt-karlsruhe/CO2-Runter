@@ -78,7 +78,7 @@ const Footer = () => {
             Impressum
           </Link>
           <Link href="https://github.com/stadt-karlsruhe/CO2-Runter" color="inherit">
-            Quellcode
+            Quelltext
           </Link>
         </div>
       </Container>
