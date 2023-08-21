@@ -8,6 +8,7 @@ const initialState = {
     [],    // Fixed size of 3
     [], // Fixed size of 4
   ],
+  baseline:0.0,
   loading: false,
 };
 
@@ -15,6 +16,10 @@ const categoriesSlice = createSlice({
   name: 'categories',
   initialState,
   reducers: {
+    setBase: (state, action) => {
+      state.baseline = action.payload
+      console.log("Baseline: ",action.payload)
+    },
     addItem: (state, action) => {
       const { category, value } = action.payload;
       state.categories[category].push(value);
@@ -41,7 +46,7 @@ const categoriesSlice = createSlice({
   },
 });
 
-export const { addItem, updateItem, setLoading, resetItems } = categoriesSlice.actions;
+export const { addItem, updateItem, setLoading, setBase, resetItems } = categoriesSlice.actions;
 export const store = configureStore({
   reducer: {
     categories: categoriesSlice.reducer,

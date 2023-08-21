@@ -1,6 +1,10 @@
+import { useSelector } from 'react-redux';
+
 const ComputeTotalCo2 = (categories) => {
 
-  const baseCO2 = 1.7 // 1.15;
+  const storeCats = useSelector(state => state.categories); // Replace 'categories' with your state slice name
+  const baseCO2 = storeCats.baseline;
+  console.log("baseline:",baseCO2)
 
   console.log("co2 cats:",categories)
 

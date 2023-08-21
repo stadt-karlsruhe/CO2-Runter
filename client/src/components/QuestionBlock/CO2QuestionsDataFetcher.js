@@ -6,7 +6,7 @@ import QuestionCategory from "../QuestionBlock/QuestionCategory";
 import axios from 'axios';
 import CheckAuth from "../CheckAuth";
 
-import { addItem, updateItem, setLoading } from '../../features/Store';
+import { addItem, setBase, setLoading } from '../../features/Store';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
@@ -35,6 +35,9 @@ const CO2QuestionsDataFetcher = () => {
         setQuestions(data);
         console.log(data,data.category[0].questions[0].quick.defaultValue)
         // initialize store defaults
+        // baseline
+        dispatch(setBase(data.baseline));
+        // categories
         data.category.forEach((cval,cat)=> {
           console.log(cval)
           cval.questions.forEach((qval,q) => {
