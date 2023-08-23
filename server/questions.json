@@ -1,5 +1,5 @@
 {
-  "baseline": 1.0,
+  "baseline": 1.12,
   "category": [
     {
       "name": "Mobilität",
@@ -16,8 +16,8 @@
               "Viel",
               "Sehr viel"
             ],
-            "values": [0, 0.67, 1.34, 2.15, 3.58],
-            "defaultValue": 1.34,
+            "values": [0, 0.67, 1.75, 2.15, 3.58],
+            "defaultValue": 1.75,
             "selectedValue": ""
           },
           "detailed": {
@@ -34,6 +34,7 @@
                 "text": "Wie hoch ist ihr Verbrauch?",
                 "typ": "input",
                 "unit": " pro 100km",
+                "minInput": 0,
                 "maxInput": 50,
                 "defaultValue": 6.7,
                 "formula": "function (value) { return value }",
@@ -43,6 +44,7 @@
                 "text": "Wie viele Kilometer fahren Sie mit dem Auto pro Jahr?",
                 "typ": "input",
                 "unit": "km",
+                "minInput": 0,
                 "maxInput": 1000000,
                 "defaultValue": 0,
                 "formula": "function (value) { return value/100 }",
@@ -64,8 +66,8 @@
               "Häufig",
               "Sehr häufig"
             ],
-            "values": [0, 0.06, 0.12, 0.2, 0.32],
-            "defaultValue": 0.12,
+            "values": [0, 0.06, 0.14, 0.2, 0.32],
+            "defaultValue": 0.14,
             "selectedValue": ""
           },
           "detailed": {
@@ -74,6 +76,7 @@
                 "text": "Wie viele Kilometer fahren Sie mit öffentlichen Verkehrmitteln pro Woche?",
                 "typ": "input",
                 "unit": "km",
+                "minInput": 0,
                 "maxInput": 100000,
                 "defaultValue": 0.12,
                 "formula": "function (value) { return value * 0.000049 * 52; }",
@@ -89,6 +92,7 @@
             "text": "Wie viele Stunden fliegen Sie pro Jahr?",
             "typ": "input",
             "unit": "Stunden",
+            "minInput": 0,
             "maxInput": 1000,
             "defaultValue": 0,
             "formula": "function (value) { return value * 0.15; }",
@@ -100,6 +104,7 @@
                 "text": "Wie viele Stunden Kurzstrecke fliegen Sie pro Jahr?",
                 "typ": "input",
                 "unit": "Stunden",
+                "minInput": 0,
                 "maxInput": 1000,
                 "defaultValue": 0,
                 "formula": "function (value) { return value * 0.1328; }",
@@ -109,6 +114,7 @@
                 "text": "Wie viele Stunden Langstrecke fliegen Sie pro Jahr?",
                 "typ": "input",
                 "unit": "Stunden",
+                "minInput": 0,
                 "maxInput": 1000,
                 "defaultValue": 0,
                 "formula": "function (value) { return value * 0.1717; }",
@@ -135,8 +141,8 @@
               "Mischkost",
               "Fleischbetont"
             ],
-            "values": [1.05, 1.30, 1.66, 1.75, 2.19],
-            "defaultValue": 1.75,
+            "values": [1.05, 1.30, 1.66, 2.2, 2.55],
+            "defaultValue": 2.2,
             "selectedValue": ""
           },
           "detailed": {
@@ -151,8 +157,8 @@
                   "Mischkost",
                   "Fleischbetont"
                 ],
-                "values": [1.05, 1.30, 1.66, 1.75, 2.19],
-                "defaultValue": 1.75,
+                "values": [1.05, 1.30, 1.66, 2.2, 2.55],
+                "defaultValue": 2.2,
                 "selectedValue": ""
               },
               {
@@ -194,6 +200,7 @@
             "text": "Wie viel Quadratmeter hat eine Person in ihrem Haushalt?",
             "typ": "input",
             "unit": "qm/Personen",
+            "minInput": 0,
             "maxInput": 200,
             "defaultValue": 0.14,
             "formula": "function (value) { return (0.7 * (0.0236*value - 1.235)); }",
@@ -205,6 +212,7 @@
                 "text": "Wie viele Personen wohnen in Ihrem Haushalt?",
                 "typ": "input",
                 "unit": "Personen",
+                "minInput": 1,
                 "maxInput": 10,
                 "defaultValue": 1,
                 "formula": "function (value) { return value; }",
@@ -214,6 +222,7 @@
                 "text": "Wie viele qm hat Ihre Wohnung?",
                 "typ": "input",
                 "unit": "qm",
+                "minInput": 0,
                 "maxInput": 500,
                 "defaultValue": 61,
                 "formula": "function (value) { return value; }",

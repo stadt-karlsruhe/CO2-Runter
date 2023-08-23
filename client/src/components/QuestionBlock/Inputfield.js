@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useEffect } from "react";
+import Input from "@mui/material/Input";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Box, Container } from "@mui/material";
@@ -39,7 +40,7 @@ const Inputfield = (props) => {
   const calculateCO2 = (number) => {
     if (!props.detailed) {
       const formulaString = props.formula;
-      console.log("DBG - Input: formula ", formulaString)
+      console.log("DBG - Input: ", number, ", formula ", formulaString)
       const formula = eval(`(${formulaString})`);
       return formula(number);
     } else {
@@ -78,8 +79,12 @@ const Inputfield = (props) => {
   }
 
   const handleChange = (event) => {
-    const valueAsNumber = parseFloat(event.target.value);
-    let value = calculateCO2(props.maxInput)
+    const inputValue = event.target.value
+    console.log("Input value: ",inputValue)
+    const valueAsNumber = parseFloat(inputValue);
+    console.log("Input number: ",valueAsNumber)
+
+    let co2value = calculateCO2(0) //props.minInput)
     if (!isNaN(valueAsNumber)) {
       if (valueAsNumber > props.maxInput) {
         setValue(props.maxInput);
@@ -87,15 +92,15 @@ const Inputfield = (props) => {
       } else {
         setValue(valueAsNumber);
         saveSelectedValue(valueAsNumber)
-        value = calculateCO2(valueAsNumber)
+        co2value = calculateCO2(valueAsNumber)
       }
     }
     //props.onCo2ValuesChange(value, event.target.value);
     const activeStep = props.rememberValue[0] // 0
     const index = props.rememberValue[1]// 0
-    dispatch(updateItem({ category: activeStep, index: index, value: value }));
+    dispatch(updateItem({ category: activeStep, index: index, value: co2value }));
 
-    console.log("Input - value: ", value)
+    console.log("Input - value: ", co2value)
     console.log("Input - cat/idx: ", activeStep, index)
 
   };
@@ -104,6 +109,9 @@ const Inputfield = (props) => {
     const newSelectedValue = calculateSelectedValue();
     setValue(newSelectedValue);
   }, [props.detailed]);
+
+  // <OutlinedInput
+  //
 
   return (
     <Container>
