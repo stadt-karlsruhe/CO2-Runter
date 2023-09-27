@@ -164,6 +164,26 @@ const ChartGroups= () => {
       series: available_Categories.map((data, index) => ({
         name: data,
         type: "bar",
+// markline
+markLine: {
+  label: {
+      show: true,
+      position: "insideStart", //["10%","10%"], //"insideLeft", //'end',
+      formatter: 'Ziel 2030:\n4,1 Tonnen\n\n\n', // Change this to your desired text
+  },
+  lineStyle: {
+      width: 3,
+      type: 'solid', // You can change the line style if needed
+      color: 'gray', // You can change the line color
+  },
+  symbol: 'none',
+  data: [
+      { yAxis: 4.1 } // Change the yAxis value to set the position of the line
+  ]
+},
+
+
+
         stack: "stack",
         barWidth: "60%",
         data: selectedData.map((selectedData) => selectedData[index].value),

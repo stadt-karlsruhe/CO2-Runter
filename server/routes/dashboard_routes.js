@@ -203,6 +203,10 @@ router.get('/groupfootprint', (req, res) => {
         SELECT 'Ernährung' AS category, ROUND(AVG(nutrition), 2) AS value
         FROM CO2Prints
         WHERE print_ID IN (?)
+        UNION
+        SELECT 'baseline' AS category,
+         baseline FROM ComparisonPrints AS Value
+    
       `;
 
       db.query(footprintQuery, [printIDs, printIDs, printIDs, printIDs], (error, footprintResults) => {
