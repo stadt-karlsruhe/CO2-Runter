@@ -61,9 +61,9 @@ const Landingpage = () => {
           </AccordionSummary>
           <AccordionDetails className="accordionDetail">
             <Typography>
-              Laut Energiebilanz Karlsruhe 2019 liegt der CO2 Ausstoß bei 7,8t
+              Laut Energiebilanz Karlsruhe 2020 liegt der CO2 Ausstoß bei 7,4t
               jährlich pro Kopf. Die Effekte durch privaten Konsum sind dabei
-              nicht enthalten. Addiert man hier den Grundwert (2,5t) gemäß
+              nicht enthalten. Addiert man hier den Grundwert (2,9t) gemäß
               unserer Vereinfachung des UBA-Modells, dann erhält man 10,3t CO2.
               Diese Grundwert-Summe bildet sich aus 4 "Sektoren", die wir durch
               unseren Lebensstil beeinflussen können, plus einer festen Zugabe für

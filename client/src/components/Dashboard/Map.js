@@ -18,7 +18,7 @@ export default function District_Map() {
 
   // store not neccessarily initialized here. Need to load questions first to get baseline!!!!
   const storeCats = useSelector(state => state.categories); // Replace 'categories' with your state slice name
-  const baseCO2 = 0 // storeCats.baseline;
+  const baseCO2 = 1.12 // storeCats.baseline;
 
   useEffect(() => {
     axios.get('/api/dashboard/footprints')
@@ -128,8 +128,13 @@ export default function District_Map() {
         type: 'map',
         map: 'Karlsruhe',
         showLegendSymbol : false,
+        emphasis: {
+          label: {
+            show: true
+          }
+        },
         data: data.housing
-      }
+      },
     ] : [],
   
 

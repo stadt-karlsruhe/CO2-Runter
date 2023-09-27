@@ -81,6 +81,11 @@ router.get('/footprints/average', async (req, res) => {
     SELECT 'nutrition' AS category,
       ROUND(AVG(nutrition), 2) AS value
     FROM CO2Prints
+    UNION
+    SELECT 'baseline' AS category,
+     baseline FROM ComparisonPrints AS Value
+    
+
   `;
 
   // Execute the query
@@ -103,7 +108,7 @@ router.get('/footprints/average', async (req, res) => {
 
 router.get('/comparisonprints', async (req, res) => {
   const query = `
-    SELECT name, mobility AS 'Mobilität', housing AS 'Wohnen', consume AS 'Konsum', nutrition AS 'Ernährung'
+    SELECT name, mobility AS 'Mobilität', housing AS 'Wohnen', consume AS 'Konsum', nutrition AS 'Ernährung', baseline AS "Infrastruktur" 
     FROM ComparisonPrints
   `;
 
