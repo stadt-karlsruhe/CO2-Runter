@@ -24,3 +24,10 @@ MariaDB [db_co2runter]> select * from ComparisonPrints;
 MariaDB [db_co2runter]>
 
 
+
+modified:   src/components/Dashboard/ChartAvg.js
+modified:   src/components/Dashboard/Map.js
+modified:   src/components/Landingpage/Landingpage.js
+
+modified:   ../server/routes/dashboard_routes.js
+

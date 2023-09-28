@@ -115,8 +115,8 @@ const Header = (props) => {
           onClick={handleClick}
         >
           {location.pathname === "/Dashboard"
-            ? "CO2 Runter: Dashboard"
-            : "CO2 Runter: App"}
+            ? "CO2runter: Dashboard"
+            : "CO2runter: App"}
         </Typography>
         {isLoggedIn ? (
           <>
@@ -155,7 +155,7 @@ const Header = (props) => {
                 <ListItemIcon>
                   <LineAxisIcon fontSize="small" />
                 </ListItemIcon>
-                <ListItemText>CO2 Runter Dashboard</ListItemText>
+                <ListItemText>CO2runter Dashboard</ListItemText>
               </MenuItem>
             </Menu>
           </>
@@ -176,7 +176,7 @@ const Header = (props) => {
                 <ListItemIcon>
                   <LineAxisIcon fontSize="small" />
                 </ListItemIcon>
-                <ListItemText>CO2 Runter Dashboard</ListItemText>
+                <ListItemText>CO2runter Dashboard</ListItemText>
               </MenuItem>
               <Divider />
               <MenuItem onClick={handleLogin}>

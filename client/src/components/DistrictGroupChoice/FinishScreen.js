@@ -79,7 +79,7 @@ const FinishScreen = () => {
       </PieChart>
       <Typography variant="body1" style={{ marginTop: "20px", marginBottom: "20px" }}>
         {dataSent
-          ? "Danke für das Mitmachen bei der CO2 Runter-App. Ihre Daten wurden an das Dashboard übermittelt."
+          ? "Danke für das Mitmachen bei der CO2runter-App. Ihre Daten wurden an das Dashboard übermittelt."
           : "Schade das Sie ihre Daten nicht mit uns und den anderen Nutzern teilen wollen."}
       </Typography>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
