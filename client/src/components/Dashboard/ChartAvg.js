@@ -39,7 +39,7 @@ const ChartAvg = () => {
     }
   }, [footprints, average]);
 
-  
+
   const getOption = () => {
     if (
       isLoading ||
@@ -90,96 +90,96 @@ const ChartAvg = () => {
         data: selectedCategories,
         //selectedData[0].map((data) => data.category), // Use the categories from the first selectedData array
       },
-      
+
       yAxis
-: {
-type: "value",
-boundaryGap: [0, 0.01],
-},
-series: available_Categories.map((data, index) => ({
-name: data,
-type: "bar",
-// markline
-markLine: {
-  label: {
-      show: true,
-      position: "insideStart", //["10%","10%"], //"insideLeft", //'end',
-      formatter: 'Ziel 2030:\n4,1 Tonnen\n\n\n', // Change this to your desired text
-  },
-  lineStyle: {
-      width: 3,
-      type: 'solid', // You can change the line style if needed
-      color: 'gray', // You can change the line color
-  },
-  symbol: 'none',
-  data: [
-      { yAxis: 4.1 } // Change the yAxis value to set the position of the line
-  ]
-},
-//
-stack: "stack",
-barWidth: "60%",
-data: selectedData.map((selectedData) => selectedData[index].value),
-label: {
-show: true,
-position: "inside",
-formatter: "{c}t CO2",
-},
-})),
-};
-};
+        : {
+        type: "value",
+        boundaryGap: [0, 0.01],
+      },
+      series: available_Categories.map((data, index) => ({
+        name: data,
+        type: "bar",
+        // markline
+        markLine: {
+          label: {
+            show: true,
+            position: "insideStart", //["10%","10%"], //"insideLeft", //'end',
+            formatter: 'Ziel 2030:\n4,1 Tonnen\n\n\n', // Change this to your desired text
+          },
+          lineStyle: {
+            width: 3,
+            type: 'solid', // You can change the line style if needed
+            color: 'gray', // You can change the line color
+          },
+          symbol: 'none',
+          data: [
+            { yAxis: 4.1 } // Change the yAxis value to set the position of the line
+          ]
+        },
+        //
+        stack: "stack",
+        barWidth: "60%",
+        data: selectedData.map((selectedData) => selectedData[index].value),
+        label: {
+          show: true,
+          position: "inside",
+          formatter: "{c}t CO2",
+        },
+      })),
+    };
+  };
 
-const handleFootprintClick = (footprint) => {
-if (selectedFootprints.includes(footprint.name)) {
-setSelectedFootprints(selectedFootprints.filter((fp) => fp !== footprint.name));
-} else {
-if (selectedFootprints.length < 4) {
-setSelectedFootprints([...selectedFootprints, footprint.name]);
-}
-}
+  const handleFootprintClick = (footprint) => {
+    if (selectedFootprints.includes(footprint.name)) {
+      setSelectedFootprints(selectedFootprints.filter((fp) => fp !== footprint.name));
+    } else {
+      if (selectedFootprints.length < 4) {
+        setSelectedFootprints([...selectedFootprints, footprint.name]);
+      }
+    }
+  };
+
+  const handleSelectChange = (event) => {
+    setSelectedFootprints(event.target.value);
+  };
+
+  return (
+    <Card style={{ width: "90%", marginBottom: "10px", padding: "25px", backgroundColor: "#f7f9f5" }}>
+      {isLoading ? (
+        <div style={{ textAlign: "center" }}>Daten werden geladen ...</div>
+      ) : error ? (
+        <div style={{ textAlign: "center" }}>Es ist ein Fehler aufgetreten: {error}</div>
+      ) : (
+        <>
+          {footprints && average && footprints.length > 0 && average.length > 0 ? (
+            <ReactEcharts option={getOption()} style={{ height: "500px" }} />
+          ) : (
+            <div style={{ textAlign: "center" }}>Keine Daten verfügbar</div>
+          )}
+          <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+            <FormControl>
+              <InputLabel id="demo-multiple-name-label">Angezeigte Fußabdrücke wählen</InputLabel>
+              <Select
+                multiple
+                label="Angezeigte Fußabdrücke wählen"
+                value={selectedFootprints}
+                onChange={handleSelectChange}
+                renderValue={(selected) => selected.join(", ")}
+                style={{ minWidth: "250px" }} // Adjust the width as needed
+              >
+                {footprints.map((footprint) => (
+                  <MenuItem key={footprint.name} value={footprint.name}>
+                    {footprint.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+        </>
+      )}
+    </Card>
+  );
+
 };
-
-const handleSelectChange = (event) => {
-setSelectedFootprints(event.target.value);
-};
-
-return (
-  <Card style={{ width: "90%", marginBottom: "10px", padding: "25px", backgroundColor: "#f7f9f5" }}>
-    {isLoading ? (
-      <div style={{ textAlign: "center" }}>Daten werden geladen ...</div>
-    ) : error ? (
-      <div style={{ textAlign: "center" }}>Es ist ein Fehler aufgetreten: {error}</div>
-    ) : (
-      <>
-        {footprints && average && footprints.length > 0 && average.length > 0 ? (
-          <ReactEcharts option={getOption()} style={{ height: "500px" }} />
-        ) : (
-          <div style={{ textAlign: "center" }}>Keine Daten verfügbar</div>
-        )}
-        <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-          <FormControl>
-            <InputLabel id="demo-multiple-name-label">Angezeigte Fußabdrücke wählen</InputLabel>
-            <Select
-              multiple
-              label="Angezeigte Fußabdrücke wählen"
-              value={selectedFootprints}
-              onChange={handleSelectChange}
-              renderValue={(selected) => selected.join(", ")}
-              style={{ minWidth: "250px" }} // Adjust the width as needed
-            >
-              {footprints.map((footprint) => (
-                <MenuItem key={footprint.name} value={footprint.name}>
-                  {footprint.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl> 
-        </div>
-      </>
-    )}
-  </Card>
-);
-
-};	
 
 export default ChartAvg;

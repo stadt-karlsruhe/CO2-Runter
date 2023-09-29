@@ -11,3 +11,16 @@
     max-width: 100%;
     text-align: center;
   }
+
+@media only screen and (max-width: 960px) {
+  .container h1 {
+    font-size: 5rem;
+  }
+}
+  
+@media only screen and (max-width: 600px) {
+  .container h1 {
+    word-wrap:break-word;
+    font-size: 3.5rem;
+  }
+}
