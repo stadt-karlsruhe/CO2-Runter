@@ -1,6 +1,7 @@
 # CO2 Runter
 
-An innovative web app that allows users to calculate and compare their personal carbon footprint, motivating them to live more environmentally conscious and reduce their energy consumption.
+An innovative web app that allows users to calculate and compare their personal carbon footprint, motivating them to
+live more environmentally conscious and reduce their energy consumption.
 
 ## Prerequisites
 
@@ -11,7 +12,8 @@ An innovative web app that allows users to calculate and compare their personal 
 
 If you are using it is quite simple to set everything up.
 
-First you need to install all the require Node modules. To do this, run `npm i` inside the client and server directories.
+First you need to install all the require Node modules. To do this, run `npm i` inside the client and server
+directories.
 
 ```bash
 cd client
@@ -21,13 +23,15 @@ cd server
 npm i
 ```
 
-After installing the Node moduls you can start the Docker containers. To do this, run `docker-compose up --build` inside the main project directory. Then afterwards all of the containers should be running.
+After installing the Node moduls you can start the Docker containers. To do this, run `docker-compose up --build` inside
+the main project directory. Then afterward all the containers should be running.
 
 The client should be accessible via `http://localhost:3050/` via nginx.
 
 The Adminer should be accessible via `http://localhost:8000/`.
 
-Before everything works you need to load the data into the database. To do this you first need to log into the Adminer using the following credentials:
+Before everything works you need to load the data into the database. To do this you first need to log into the Adminer
+using the following credentials:
 
 Database System: `mysql_db`
 
@@ -37,9 +41,15 @@ Password: `12345`
 
 Database you want to access: `db_co2runter`
 
-After logging in, copy the contents of `loader-new.sql` and paste it into the `SQL Command` query box in Adminer and click `Execute`. Now you see in the tabler overview that all the tables have been filled with data. Now you just need to create a `config.js` file in the `server` directory and past the contents of `config-template.js` into the newly created `config.js`. Now everything is setup and should work.
+After logging in, copy the contents of `loader-new.sql` and paste it into the `SQL Command` query box in Adminer and
+click `Execute`. Now you see in the tabler overview that all the tables have been filled with data. Now you just need to
+create a `config.js` file in the `server` directory and past the contents of `config-template.js` into the newly
+created `config.js`. Now everything is setup and should work.
 
-Note: If you are using the Webstorm IDE from JetBrains, the configurations to start everything are already set up. You just need to select the `Complete Repository Setup` configuration and then run it. Additionally, there are configurations for starting the Docker containers and the client and server in development mode or production mode. But you still need to create the `config.js` file.
+Note: If you are using the Webstorm IDE from JetBrains, the configurations to start everything are already set up. You
+just need to select the `Complete Repository Setup` configuration and then run it. Additionally, there are
+configurations for starting the Docker containers and the client and server in development mode or production mode. But
+you still need to create the `config.js` file.
 
 ## Build Instructions for Production
 
