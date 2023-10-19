@@ -1,6 +1,5 @@
 # CO2 Runter 
 
-
 An innovative web app that allows users to calculate and compare their personal carbon footprint, motivating them to live more environmentally conscious and reduce their energy consumption.
 
 
