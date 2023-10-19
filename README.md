@@ -13,13 +13,13 @@ If you are using it is quite simple to set everything up.
 
 First you need to install all the require Node modules. To do this, run `npm i` inside the client and server directories.
 
-````bash
+```bash
 cd client
 npm i
 
 cd server
 npm i
-````
+```
 
 After installing the Node moduls you can start the Docker containers. To do this, run `docker-compose up --build` inside the main project directory. Then afterwards all of the containers should be running.
 
@@ -43,7 +43,7 @@ Note: If you are using the Webstorm IDE from JetBrains, the configurations to st
 
 ## Build Instructions for Production
 
-    Change DB Password and Token Key in `docker-compose-pord.yml` to something new 
+    Change DB Password and Token Key in `docker-compose-pord.yml` to something new
 
     Run `docker compose -f docker-compose-prod.yml up --build` inside the main project directory
 
@@ -97,8 +97,7 @@ Build and install the frontend client like so:
 >
 > npm run build
 >
-> cp -r build/* /var/www/html/co2runter/app/
->
+> cp -r build/\* /var/www/html/co2runter/app/
 
 Install the backend server like so:
 
@@ -106,32 +105,28 @@ Install the backend server like so:
 >
 > npm i
 >
-> cp -r server/* /var/www/html/co2runter/api/
->
+> cp -r server/\* /var/www/html/co2runter/api/
 
 Create the config file:
 
 > cd /var/www/html/co2runter/api/
 >
 > cp config_template.js config.js
->
 
 Edit the configuration in config.js
 
-* Set database parameters according to your setup
-* Set token key, e.g. 16 character random string
+- Set database parameters according to your setup
+- Set token key, e.g. 16 character random string
 
 Initialize database
 
-* Load setup.sql
-* Load defaults.sql to get the comparison values for "Deutschland"  and "Karlsruhe"
+- Load setup.sql
+- Load defaults.sql to get the comparison values for "Deutschland" and "Karlsruhe"
 
 Start the service
 
 > npm run start
->
 
 ### Setup process monitoring and autostart
 
 ... to be done ....
-
