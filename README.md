@@ -1,4 +1,4 @@
-# CO2 Runter
+# CO2 Runter Web Application
 
 An innovative web app that allows users to calculate and compare their personal carbon footprint, motivating them to
 live more environmentally conscious and reduce their energy consumption.
@@ -17,10 +17,10 @@ directories.
 
 ```bash
 cd client
-npm i
+npm ci
 
 cd server
-npm i
+npm ic
 ```
 
 After installing the Node moduls you can start the Docker containers. To do this, run `docker-compose up --build` inside
@@ -44,7 +44,7 @@ Database you want to access: `db_co2runter`
 After logging in, copy the contents of `loader-new.sql` and paste it into the `SQL Command` query box in Adminer and
 click `Execute`. Now you see in the tabler overview that all the tables have been filled with data. Now you just need to
 create a `config.js` file in the `server` directory and past the contents of `config-template.js` into the newly
-created `config.js`. Now everything is setup and should work.
+created `config.js`. Now everything is set up and should work.
 
 Note: If you are using the Webstorm IDE from JetBrains, the configurations to start everything are already set up. You
 just need to select the `Complete Repository Setup` configuration and then run it. Additionally, there are
