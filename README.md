@@ -15,10 +15,22 @@ If you are using it is quite simple to set everything up.
 First you need to install all the require Node modules. To do this, run `npm i` inside the client and server
 directories.
 
+For the client directory.
+
 ```bash
 cd client
 npm ci
+```
 
+Go back to the main directory
+
+```bash
+cd ..
+```
+
+Install the moduls in the server directory.
+
+```bash
 cd server
 npm ic
 ```
