@@ -15,10 +15,22 @@ If you are using it is quite simple to set everything up.
 First you need to install all the require Node modules. To do this, run `npm i` inside the client and server
 directories.
 
+For the client directory.
+
 ```bash
 cd client
 npm ci
+```
 
+Go back to the main directory
+
+```bash
+cd ..
+```
+
+Install the moduls in the server directory.
+
+```bash
 cd server
 npm ic
 ```
@@ -140,3 +152,28 @@ Start the service
 ### Setup process monitoring and autostart
 
 ... to be done ....
+
+## Contribution Workflow
+
+Contributing to the CO2 Runter Web Application is a straightforward process. Follow these steps for each feature, bug
+fix, or other changes:
+
+1. **Create a New Branch**: Start by creating a new branch for your feature or bug fix. Use the naming convention
+   recommended by [Conventional Commits](https://www.conventionalcommits.org/):
+
+   - For a new feature: `feat/your-feature-name`
+   - For a bug fix: `fix/your-bug-name`
+   - For a documentation update: `docs/your-documentation-update`
+
+2. **Making Commits**: After creating the branch, make commits to it that encapsulate your work. Please ensure that each
+   commit has a clear and descriptive message.
+
+3. **Push Your Branch**: Once you've made your commits, push your branch to the remote repository.
+
+4. **Create a Pull Request (PR)**: On GitHub, create a pull request from your branch. Follow the instructions provided
+   in the pull request template.
+
+5. **Review and Merge**: Your pull request will be reviewed by a team member or maintainer. Once it's approved, your
+   changes will be merged into the main repository.
+
+This workflow ensures a clean commit history and makes it easy for others to understand and review your contributions.
