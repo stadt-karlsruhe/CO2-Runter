@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
 import ViteFonts from 'unplugin-fonts/vite';
 import eslintPlugin from 'vite-plugin-eslint';
+import { VitePWA } from 'vite-plugin-pwa';
 
 // Utilities
 import { defineConfig } from 'vite';
