@@ -8,6 +8,6 @@
 </template>
 
 <script setup lang="ts">
-import PwaPrompt fro"@/components/PwaPrompt.vue"e';
+import PwaPrompt from '@/components/PwaPrompt.vue';
 import HelloWorld from '@/components/HelloWorld.vue';
 </script>
