@@ -53,12 +53,10 @@ services:
     environment:
       - WDS_SOCKET_PORT=3050
       - CHOKIDAR_USEPOLLING=true
-      - WATCHPACK_POLLING=true 
+      - WATCHPACK_POLLING=true
     build:
       dockerfile: Dockerfile-Prod
       context: ./client
     volumes:
       - /app/node_modules
       - ./client:/app
-
-        

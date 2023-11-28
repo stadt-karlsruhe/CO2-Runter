@@ -68,14 +68,11 @@ if (!self.define) {
         });
     };
 }
-define(['./workbox-16108a29'], function (workbox) {
+define(['./workbox-5357ef54'], function (workbox) {
     'use strict';
 
-    self.addEventListener('message', (event) => {
-        if (event.data && event.data.type === 'SKIP_WAITING') {
-            self.skipWaiting();
-        }
-    });
+    self.skipWaiting();
+    workbox.clientsClaim();
 
     /**
      * The precacheAndRoute() method efficiently caches and responds to
@@ -86,11 +83,11 @@ define(['./workbox-16108a29'], function (workbox) {
         [
             {
                 url: 'registerSW.js',
-                revision: '3ca0b8505b4bec776b69afdba2768812',
+                revision: 'b7d173c45cbb3ea57bd163d7ad95bca2',
             },
             {
                 url: 'index.html',
-                revision: '0.hto3m5bags8',
+                revision: '0.m80c8kgg41',
             },
         ],
         {}

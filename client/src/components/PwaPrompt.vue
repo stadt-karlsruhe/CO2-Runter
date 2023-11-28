@@ -1,29 +1,35 @@
-<script>
-export default {
-    name: 'App',
-    data() {
-        return {
-            deferredPrompt: null,
-        };
-    },
-    created() {
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            // Stash the event so it can be triggered later.
-            this.deferredPrompt = e;
-        });
-        window.addEventListener('appinstalled', () => {
-            this.deferredPrompt = null;
-        });
-    },
-    methods: {
-        async dismiss() {
-            this.deferredPrompt = null;
-        },
-        async install() {
-            this.deferredPrompt.prompt();
-        },
-    },
+<script setup lang="ts">
+import { onBeforeMount, ref } from 'vue';
+
+// Define reactive property
+const deferredPrompt = ref<any>(null);
+
+// Event listeners
+const beforeInstallPromptHandler = (e: Event) => {
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    deferredPrompt.value = e;
+};
+
+const appInstalledHandler = () => {
+    deferredPrompt.value = null;
+};
+
+// Attach event listeners on component setup
+onBeforeMount(() => {
+    window.addEventListener('beforeinstallprompt', beforeInstallPromptHandler);
+    window.addEventListener('appinstalled', appInstalledHandler);
+});
+
+// Define methods
+const dismiss = () => {
+    deferredPrompt.value = null;
+};
+
+const install = () => {
+    if (deferredPrompt.value) {
+        deferredPrompt.value.prompt();
+    }
 };
 </script>
 
