@@ -134,3 +134,8 @@ dist
 
 # ignore react build
 build
+
+
+# Ignore dev-dist folder which is genrated by Vite-plugin-pwa
+
+client/dev-dist/
