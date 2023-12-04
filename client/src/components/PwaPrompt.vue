@@ -45,6 +45,22 @@ const install = () => {
         <v-btn @click="dismiss">Dismiss</v-btn>
         <v-btn @click="install">Install</v-btn>
     </v-alert>
+
+    <v-banner
+        v-if="deferredPrompt"
+        lines="one"
+        icon="mdi-download"
+        color="info"
+    >
+        <template v-slot:text>
+            Willst du diese Webseite auf deinem Gerät installieren?
+        </template>
+
+        <template v-slot:actions>
+            <v-btn @click="dismiss">Nein</v-btn>
+            <v-btn @click="install">Ja, installieren</v-btn>
+        </template>
+    </v-banner>
 </template>
 
 <style scoped></style>

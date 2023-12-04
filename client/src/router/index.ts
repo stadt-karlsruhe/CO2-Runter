@@ -16,6 +16,28 @@ const routes = [
             },
         ],
     },
+    {
+        path: '/calculator',
+        component: () => import('@/layouts/default/Default.vue'),
+        children: [
+            {
+                path: '/calculator',
+                name: 'Calculator',
+                component: () => import('@/views/Calculator.vue'),
+            },
+        ],
+    },
+    {
+        path: '/dashboard',
+        component: () => import('@/layouts/default/Default.vue'),
+        children: [
+            {
+                path: '/dashboard',
+                name: 'Dashboard',
+                component: () => import('@/views/Dashboard.vue'),
+            },
+        ],
+    },
 ];
 
 const router = createRouter({
