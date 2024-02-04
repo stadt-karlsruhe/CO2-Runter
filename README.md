@@ -63,6 +63,19 @@ just need to select the `Complete Repository Setup` configuration and then run i
 configurations for starting the Docker containers and the client and server in development mode or production mode. But
 you still need to create the `config.js` file.
 
+### Developing the Client with Docker
+
+To develop the client but still be able to get the data from backend and access the API, you just need to do a few
+things.
+
+Exacly for this reason there is a `docker-compose-client-development.yml` file. To start the client in development mode,
+run `docker compose -f docker-compose-client-development.yml up --build` inside the main project directory. Then
+afterward the client should be accessible via `http://localhost:3050/` via nginx.
+
+But because you are developing the client, you need to start the client in development mode. To do this,
+run `npm run dev` inside the client directory. Then afterward the client should be accessible
+via `http://localhost:3000/` and over the nginx server via `http://localhost:3050/`, where you can access the API.
+
 ## Build Instructions for Production
 
     Change DB Password and Token Key in `docker-compose-pord.yml` to something new
