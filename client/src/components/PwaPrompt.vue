@@ -37,7 +37,7 @@ const install = () => {
     <v-alert
         v-if="deferredPrompt"
         icon="mdi-download"
-        color="info"
+        color="primary-darken-1"
         title="Alert title"
         text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!"
     >
@@ -50,7 +50,7 @@ const install = () => {
         v-if="deferredPrompt"
         lines="one"
         icon="mdi-download"
-        color="info"
+        color="primary"
     >
         <template v-slot:text>
             Willst du diese Webseite auf deinem Gerät installieren?
