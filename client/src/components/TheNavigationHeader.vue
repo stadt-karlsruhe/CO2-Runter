@@ -9,7 +9,7 @@
             src="../../public/CO2RunterLogo.ico"
             class="hidden-md-and-down ms-md-3 ms-sm-5 ms-3 text-muted"
         />
-        <v-toolbar-title> CO2Runter </v-toolbar-title>
+        <v-toolbar-title>CO2Runter</v-toolbar-title>
 
         <div class="hidden-sm-and-down">
             <v-btn rounded href="/">Home</v-btn>
@@ -62,10 +62,13 @@
             </v-list-item>
         </v-list>
     </v-navigation-drawer>
+
+    <PWAInstallationDialog />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import PWAInstallationDialog from '@/components/PWAInstallationDialog.vue';
 
 const isDrawerOpen = ref(false);
 </script>

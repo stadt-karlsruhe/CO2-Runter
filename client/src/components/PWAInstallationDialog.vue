@@ -1,6 +1,6 @@
 <template>
     <v-dialog
-        v-model="model"
+        v-model="dialogVisible"
         :close-on-content-click="false"
         transition="dialog-bottom-transition"
         width="600px"
@@ -59,7 +59,7 @@
                         color="primary-darken-1"
                         prepend-icon="mdi-close"
                         variant="plain"
-                        @click="close()"
+                        @click.capture="closeDialog()"
                         >Nein, danke
                     </v-btn>
                     <v-btn
@@ -67,6 +67,7 @@
                         class="px-8 py-4 d-flex align-center justify-center rounded-lg"
                         color="primary-darken-1"
                         variant="tonal"
+                        @click.capture="install()"
                     >
                         Installieren
                     </v-btn>
@@ -77,12 +78,51 @@
 </template>
 
 <script lang="ts" setup>
-import { defineModel } from 'vue';
+import { onBeforeMount, onMounted, ref } from 'vue';
 
-const model = defineModel<boolean>({ required: true });
+// reactive states
+const deferredPrompt = ref<any>(null);
+const dialogVisible = ref(true);
 
-const close = () => {
-    model.value = false;
+// handle 'beforeinstallprompt' and 'appinstalled' event in a single function
+const installPromptHandler = (e: Event) => {
+    if (e.type === 'beforeinstallprompt') {
+        e.preventDefault();
+        deferredPrompt.value = e; // stash the event for later
+    } else if (e.type === 'appinstalled') {
+        deferredPrompt.value = null; // clear the stashed installation prompt event
+    }
+};
+
+// Attach event handlers on component setup
+onBeforeMount(() => {
+    window.addEventListener('beforeinstallprompt', installPromptHandler);
+    window.addEventListener('appinstalled', installPromptHandler);
+});
+
+onMounted(() => {
+    // PWA is installed on iOS
+    if ('standalone' in window.navigator && window.navigator.standalone) {
+        dialogVisible.value = false;
+    }
+
+    // PWA is installed on Android or desktop
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        dialogVisible.value = false;
+    }
+});
+
+// event to handle closing the dialog
+const closeDialog = () => {
+    dialogVisible.value = false;
+};
+
+// function for the installation button click event
+const install = () => {
+    if (deferredPrompt.value) {
+        deferredPrompt.value.prompt();
+        dialogVisible.value = false;
+    }
 };
 </script>
 
