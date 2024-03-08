@@ -21,10 +21,10 @@
     <div class="hidden-sm-and-down">
       <v-list class="d-flex">
         <v-list-item
-          to="/calculator"
+          to="/co2Rechner"
           title="CO2 Rechner"
           prepend-icon="mdi-calculator-variant-outline"
-          class="rounded-lg"
+          class="mx-1 rounded-lg"
           color="primary-darken-1"
         />
 
@@ -32,7 +32,7 @@
           to="/dashboard"
           title="Dashboard"
           prepend-icon="mdi-view-dashboard-outline"
-          class="rounded-lg"
+          class="mx-1 rounded-lg"
           color="primary-darken-1"
         />
 
@@ -40,7 +40,7 @@
           to="/faq"
           title="FAQ"
           prepend-icon="mdi-frequently-asked-questions"
-          class="rounded-lg"
+          class="mx-1 rounded-lg"
           color="primary-darken-1"
         />
 
@@ -48,7 +48,7 @@
           to="/gruppensystem"
           title="Gruppensysten"
           prepend-icon="mdi-account-group-outline"
-          class="rounded-lg"
+          class="mx-1 rounded-lg"
           color="primary-darken-1"
         />
 
@@ -58,7 +58,7 @@
           to="/login"
           title="Login"
           prepend-icon="mdi-login-variant"
-          class="rounded-lg mr-1"
+          class="mr-4 rounded-lg mr-1"
           color="primary-darken-1"
         />
       </v-list>
@@ -72,7 +72,7 @@
       <v-list-subheader>Navigation</v-list-subheader>
 
       <v-list-item
-        to="/calculator"
+        to="/co2Rechner"
         title="CO2 Rechner"
         prepend-icon="mdi-calculator-variant-outline"
         class="mb-1 rounded-lg"

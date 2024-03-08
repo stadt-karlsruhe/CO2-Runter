@@ -1,14 +1,12 @@
 <template>
     <v-app>
         <v-main>
-            <TheNavigationHeader />
             <router-view />
         </v-main>
     </v-app>
 </template>
 
 <script setup lang="ts">
-import TheNavigationHeader from '@/components/TheNavigationHeader.vue';
 import { ref, onMounted } from 'vue';
 
 const loading = ref(false);

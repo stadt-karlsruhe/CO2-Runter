@@ -24,7 +24,7 @@ const myCustomLightTheme = {
         'on-surface-variant': '#EEEEEE',
         primary: '#D0ECDE',
         'primary-darken-1': '#01502D',
-        secondary: '#48A9A6',
+        secondary: '#004725',
         'secondary-darken-1': '#018786',
         error: '#B00020',
         info: '#2196F3',
