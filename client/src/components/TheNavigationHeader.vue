@@ -1,73 +1,123 @@
 <template>
-    <v-app-bar rounded>
-        <v-app-bar-nav-icon
-            class="hidden-md-and-up ms-md-3 ms-sm-5 ms-3 text-muted"
-            @click.capture="isDrawerOpen = !isDrawerOpen"
-        ></v-app-bar-nav-icon>
+  <v-app-bar :border="true" :elevation="0">
+    <v-app-bar-nav-icon
+      class="hidden-md-and-up ms-md-3 ms-sm-5 ms-3 text-muted"
+      @click.capture="isDrawerOpen = !isDrawerOpen"
+    ></v-app-bar-nav-icon>
 
-        <img
-            src="../../public/CO2RunterLogo.ico"
-            class="hidden-md-and-down ms-md-3 ms-sm-5 ms-3 text-muted"
+    <v-toolbar-title>
+      <v-list class="d-flex">
+        <v-list-item
+          to="/"
+          :exact="true"
+          title="CO2Runter"
+          class="rounded-lg"
+          prepend-avatar="../../public/apple-touch-icon.png"
+          color="primary-darken-1"
         />
-        <v-toolbar-title>CO2Runter</v-toolbar-title>
+      </v-list>
+    </v-toolbar-title>
 
-        <div class="hidden-sm-and-down">
-            <v-btn rounded href="/">Home</v-btn>
-            <v-btn rounded href="/calculator">CO2 Rechner</v-btn>
-            <v-btn rounded href="/dashboard">Dashboard</v-btn>
-            <v-btn rounded href="/info">Informationen</v-btn>
-            <v-btn rounded href="/faq">FAQ</v-btn>
+    <div class="hidden-sm-and-down">
+      <v-list class="d-flex">
+        <v-list-item
+          to="/calculator"
+          title="CO2 Rechner"
+          prepend-icon="mdi-calculator-variant-outline"
+          class="rounded-lg"
+          color="primary-darken-1"
+        />
 
-            <v-btn
-                rounded
-                color="primary-darken-1"
-                variant="tonal"
-                href="/gruppensystem"
-                >Gruppensystem
-            </v-btn>
+        <v-list-item
+          to="/dashboard"
+          title="Dashboard"
+          prepend-icon="mdi-view-dashboard-outline"
+          class="rounded-lg"
+          color="primary-darken-1"
+        />
 
-            <v-btn
-                rounded
-                color="primary-darken-1"
-                variant="tonal"
-                href="/login"
-                >Login
-            </v-btn>
-        </div>
-    </v-app-bar>
+        <v-list-item
+          to="/faq"
+          title="FAQ"
+          prepend-icon="mdi-frequently-asked-questions"
+          class="rounded-lg"
+          color="primary-darken-1"
+        />
 
-    <v-navigation-drawer app v-model="isDrawerOpen" class="hidden-md-and-up">
-        <!-- Drawer content -->
-        <v-list>
-            <v-list-item link href="/">
-                <v-list-item-title>Home</v-list-item-title>
-            </v-list-item>
-            <v-list-item link href="/calculator">
-                <v-list-item-title>CO2 Rechner</v-list-item-title>
-            </v-list-item>
-            <v-list-item link href="/dashboard">
-                <v-list-item-title>Dashboard</v-list-item-title>
-            </v-list-item>
-            <v-list-item link href="/info">
-                <v-list-item-title>Informationen</v-list-item-title>
-            </v-list-item>
-            <v-list-item link href="/faq">
-                <v-list-item-title>FAQ</v-list-item-title>
-            </v-list-item>
-            <v-list-item link href="/gruppensystem">
-                <v-list-item-title>Gruppensystem</v-list-item-title>
-            </v-list-item>
-            <v-list-item link href="/login">
-                <v-list-item-title>Login</v-list-item-title>
-            </v-list-item>
-        </v-list>
-    </v-navigation-drawer>
+        <v-list-item
+          to="/gruppensystem"
+          title="Gruppensysten"
+          prepend-icon="mdi-account-group-outline"
+          class="rounded-lg"
+          color="primary-darken-1"
+        />
 
-    <PWAInstallationDialog />
+        <v-divider class="mx-4" :vertical="true"/>
+
+        <v-list-item
+          to="/login"
+          title="Login"
+          prepend-icon="mdi-login-variant"
+          class="rounded-lg mr-1"
+          color="primary-darken-1"
+        />
+      </v-list>
+    </div>
+  </v-app-bar>
+
+  <v-navigation-drawer v-model="isDrawerOpen" class="hidden-md-and-up" left app>
+    <v-divider/>
+
+    <v-list class="pa-4">
+      <v-list-subheader>Navigation</v-list-subheader>
+
+      <v-list-item
+        to="/calculator"
+        title="CO2 Rechner"
+        prepend-icon="mdi-calculator-variant-outline"
+        class="mb-1 rounded-lg"
+        color="primary-darken-1"
+      />
+
+      <v-list-item
+        to="/dashboard"
+        title="Dashboard"
+        prepend-icon="mdi-view-dashboard-outline"
+        class="mb-1 rounded-lg"
+        color="primary-darken-1"
+      />
+
+      <v-list-item
+        to="/faq"
+        title="FAQ"
+        prepend-icon="mdi-frequently-asked-questions"
+        class="mb-1 rounded-lg"
+        color="primary-darken-1"
+      />
+
+      <v-list-item
+        to="/gruppensystem"
+        title="Gruppensysten"
+        prepend-icon="mdi-account-group-outline"
+        class="mb-1 rounded-lg"
+        color="primary-darken-1"
+      />
+
+      <v-list-item
+        to="/login"
+        title="Login"
+        prepend-icon="mdi-login-variant"
+        class="mb-1 rounded-lg"
+        color="primary-darken-1"
+      />
+    </v-list>
+  </v-navigation-drawer>
+
+  <PWAInstallationDialog/>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import {ref} from 'vue';
 import PWAInstallationDialog from '@/components/PWAInstallationDialog.vue';
 
 const isDrawerOpen = ref(false);
