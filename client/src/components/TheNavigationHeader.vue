@@ -52,14 +52,13 @@
                     color="primary-darken-1"
                 />
 
-                <v-divider class="mx-4" :vertical="true" />
-
                 <v-list-item
                     to="/login"
                     title="Login"
                     prepend-icon="mdi-login-variant"
-                    class="mr-4 rounded-lg mr-1"
+                    class="rounded-lg mx-1 mr-3 "
                     color="primary-darken-1"
+                    :active="true"
                 />
             </v-list>
         </div>
@@ -68,8 +67,6 @@
     <v-navigation-drawer
         v-model="isDrawerOpen"
         class="hidden-md-and-up"
-        left
-        app
     >
         <v-divider />
 
@@ -114,6 +111,7 @@
                 prepend-icon="mdi-login-variant"
                 class="mb-1 rounded-lg"
                 color="primary-darken-1"
+                :active="true"
             />
         </v-list>
     </v-navigation-drawer>
@@ -122,10 +120,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import PWAInstallationDialog from '@/components/PWAInstallationDialog.vue';
 
 const isDrawerOpen = ref(false);
+
+watch(isDrawerOpen, (newValue) => {
+    if (newValue) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'hidden';
+    }
+});
 </script>
 
 <style scoped></style>
