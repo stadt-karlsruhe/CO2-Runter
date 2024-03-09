@@ -1,39 +1,30 @@
 <template>
     <v-divider />
 
-    <div class="maxWidth">
+    <div class="">
         <div class="d-flex justify-center align-center mt-16">
             <h1 class="text-primary-darken-1">Erstellt in Kollaboration</h1>
         </div>
 
-        <v-container class="my-16">
-            <v-row align-content="center" :no-gutters="true">
-                <v-col>
-                    <v-img
-                        height="60px"
-                        src="../../public/images/Logos/Stadtkarlsruhe-logo.svg"
-                    />
-                </v-col>
-                <v-col>
-                    <v-img
-                        height="120px"
-                        src="../../public/images/Logos/CodeFor-karlsruhe.svg"
-                    />
-                </v-col>
-                <v-col>
-                    <v-img
-                        height="60px"
-                        src="../../public/images/Logos/dhbw-logo.svg"
-                    />
-                </v-col>
-            </v-row>
-        </v-container>
+      <v-container class="my-16">
+        <v-row class="d-flex flex-column flex-md-row justify-center" align-content="center" no-gutters>
+          <v-col class="d-flex justify-center mb-3 mb-md-0">
+            <v-img height="60px" src="../../public/images/Logos/Stadtkarlsruhe-logo.svg" />
+          </v-col>
+          <v-col class="d-flex justify-center mb-3 mb-md-0">
+            <v-img height="120px" src="../../public/images/Logos/CodeFor-karlsruhe.svg" />
+          </v-col>
+          <v-col class="d-flex justify-center">
+            <v-img height="60px" src="../../public/images/Logos/dhbw-logo.svg" />
+          </v-col>
+        </v-row>
+      </v-container>
 
         <v-divider />
 
         <v-container class="my-16">
-            <v-row align-content="center" :no-gutters="true">
-                <v-col>
+            <v-row justify="center">
+                <v-col cols="12" md="4" order-md="1">
                     <v-list class="d-flex">
                         <v-list-item
                             to="/"
@@ -45,10 +36,10 @@
                         />
                     </v-list>
                 </v-col>
-                <v-col>
+                <v-col cols="12" md="4" order-md="2">
                     <!--TODO: properly add the correct links here-->
                     <v-list class="pa-4">
-                        <v-list-subheader>Informationen</v-list-subheader>
+                        <v-list-subheader>Rechtliche Informationen</v-list-subheader>
 
                         <v-list-item
                             href="/"
@@ -65,16 +56,22 @@
                             class="mb-1 rounded-lg"
                             color="primary-darken-1"
                         />
-
-                        <v-list-item
-                            href="/"
-                            title="Quelltext"
-                            prepend-icon="mdi-file-code-outline"
-                            class="mb-1 rounded-lg"
-                            color="primary-darken-1"
-                        />
                     </v-list>
                 </v-col>
+              <v-col cols="12" md="4" order-md="2">
+                <!--TODO: properly add the correct links here-->
+                <v-list class="pa-4">
+                  <v-list-subheader>Technische Informationen</v-list-subheader>
+
+                  <v-list-item
+                    href="/"
+                    title="Quelltext"
+                    prepend-icon="mdi-file-code-outline"
+                    class="mb-1 rounded-lg"
+                    color="primary-darken-1"
+                  />
+                </v-list>
+              </v-col>
             </v-row>
         </v-container>
     </div>
@@ -89,7 +86,8 @@
     </v-footer>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+</script>
 
 <style scoped>
 .maxWidth {
