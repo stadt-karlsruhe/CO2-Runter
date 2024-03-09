@@ -12,7 +12,7 @@ const routes = [
                 // route level code-splitting
                 // this generates a separate chunk (Home-[hash].js) for this route
                 // which is lazy-loaded when the route is visited.
-                component: () => import('@/views/Home.vue'),
+                component: () => import('@/views/HomeView.vue'),
             },
         ],
     },
@@ -23,7 +23,7 @@ const routes = [
             {
                 path: '/co2rechner',
                 name: 'CO2Rechner',
-                component: () => import('@/views/Calculator.vue'),
+                component: () => import('@/views/CalculatorView.vue'),
             },
         ],
     },
@@ -34,7 +34,7 @@ const routes = [
             {
                 path: '/dashboard',
                 name: 'Dashboard',
-                component: () => import('@/views/Dashboard.vue'),
+                component: () => import('@/views/DashboardView.vue'),
             },
         ],
     },
@@ -45,7 +45,7 @@ const routes = [
             {
                 path: '/faq',
                 name: 'FAQ',
-                component: () => import('@/views/FAQ.vue'),
+                component: () => import('@/views/FAQView.vue'),
             },
         ],
     },
@@ -56,7 +56,7 @@ const routes = [
             {
                 path: '/gruppensystem',
                 name: 'Gruppensystem',
-                component: () => import('@/views/GroupSystem.vue'),
+                component: () => import('@/views/GroupSystemView.vue'),
             },
         ],
     },
@@ -67,7 +67,7 @@ const routes = [
             {
                 path: '/login',
                 name: 'Login',
-                component: () => import('@/views/Login.vue'),
+                component: () => import('@/views/LoginView.vue'),
             },
         ],
     },
