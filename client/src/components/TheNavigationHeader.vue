@@ -12,7 +12,7 @@
                     :exact="true"
                     title="CO2Runter"
                     class="rounded-lg"
-                    prepend-avatar="../../public/apple-touch-icon.png"
+                    prepend-avatar="../assets/co2runter-logo.png"
                     color="primary-darken-1"
                 />
             </v-list>
