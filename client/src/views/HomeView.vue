@@ -37,7 +37,7 @@
                 />
             </v-col>
             <v-col cols="12" md="7" class="text-center text-md-start">
-                <h1 class="text-primary-darker-1">Sie sind dran</h1>
+                <h1 class="text-primary-darken-1">Sie sind dran</h1>
                 <p class="text-secondary my-8">
                     Sich zu engagieren und dafür zu sorgen diese immense Zahl zu
                     reduzieren. Berechnen Sie dafür wie viel Sie verbrauchen
@@ -57,7 +57,7 @@
         <!-- Third Row -->
         <v-row class="d-flex flex-column-reverse flex-md-row my-16">
             <v-col cols="12" md="7" class="text-center text-md-start">
-                <h1 class="text-primary-darker-1">CO2 Fußabdruck</h1>
+                <h1 class="text-primary-darken-1">CO2 Fußabdruck</h1>
                 <p class="text-secondary my-8">
                     Was ist das denn überhaupt und was kann ich darunter
                     verstehen? Wenn dich das interessiert dann Informier dich
