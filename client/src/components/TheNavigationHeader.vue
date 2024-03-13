@@ -46,7 +46,7 @@
 
                 <v-list-item
                     to="/gruppensystem"
-                    title="Gruppensysten"
+                    title="Gruppensystem"
                     prepend-icon="mdi-account-group-outline"
                     class="mx-1 rounded-lg"
                     color="primary-darken-1"
@@ -56,7 +56,7 @@
                     to="/login"
                     title="Login"
                     prepend-icon="mdi-login-variant"
-                    class="rounded-lg mx-1 mr-3 "
+                    class="rounded-lg mx-1 mr-3"
                     color="primary-darken-1"
                     :active="true"
                 />
@@ -64,10 +64,7 @@
         </div>
     </v-app-bar>
 
-    <v-navigation-drawer
-        v-model="isDrawerOpen"
-        class="hidden-md-and-up"
-    >
+    <v-navigation-drawer v-model="isDrawerOpen" class="hidden-md-and-up">
         <v-divider />
 
         <v-list class="pa-4">
