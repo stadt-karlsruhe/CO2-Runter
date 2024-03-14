@@ -21,7 +21,22 @@
                 />
             </v-col>
         </v-row>
+
+        <h1 class="text-primary-darken-1 text-center">Literaturliste</h1>
+
+        <v-card>
+            <v-data-table :items="literatureSources"></v-data-table>
+        </v-card>
     </v-container>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const literatureSources = [
+    {
+        title: 'Test Titel eines Buches',
+        author: 'Test Name',
+        source: 'Quelle des Textes/Internetseite',
+        year: 2019,
+    },
+];
+</script>
