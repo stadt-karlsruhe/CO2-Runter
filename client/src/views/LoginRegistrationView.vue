@@ -4,16 +4,13 @@
             <v-tabs
                 v-model="tab"
                 align-tabs="center"
-                slider-color="primary-darken-1"
+                color="primary-darken-1"
                 :fixed-tabs="true"
-                :stacked="true"
             >
-                <v-tab value="login">
-                    <v-icon>mdi-login-variant</v-icon>
+                <v-tab value="login" prepend-icon="mdi-login-variant">
                     Login
                 </v-tab>
-                <v-tab value="registration">
-                    <v-icon>mdi-account-details-outline</v-icon>
+                <v-tab value="registration" prepend-icon="mdi-account-details-outline">
                     Registration
                 </v-tab>
             </v-tabs>
