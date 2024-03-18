@@ -10,7 +10,10 @@
                 <v-tab value="login" prepend-icon="mdi-login-variant">
                     Login
                 </v-tab>
-                <v-tab value="registration" prepend-icon="mdi-account-details-outline">
+                <v-tab
+                    value="registration"
+                    prepend-icon="mdi-account-details-outline"
+                >
                     Registration
                 </v-tab>
             </v-tabs>

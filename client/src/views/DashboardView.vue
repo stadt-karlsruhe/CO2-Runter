@@ -7,16 +7,17 @@
                 color="primary-darken-1"
                 :fixed-tabs="true"
             >
-                <v-tab value="map" prepend-icon="mdi-map">
-                    Karte
-                </v-tab>
+                <v-tab value="map" prepend-icon="mdi-map"> Karte </v-tab>
                 <v-tab value="charts" prepend-icon="mdi-chart-bar">
                     Charts
                 </v-tab>
                 <v-tab value="groups" prepend-icon="mdi-account-group-outline">
                     Gruppen
                 </v-tab>
-                <v-tab value="co2Footprint" prepend-icon="mdi-chart-box-outline">
+                <v-tab
+                    value="co2Footprint"
+                    prepend-icon="mdi-chart-box-outline"
+                >
                     Beteiligung
                 </v-tab>
             </v-tabs>
@@ -36,7 +37,7 @@
                     </v-window-item>
 
                     <v-window-item value="co2Footprint">
-                        <Co2CardView />
+                        <Co2ContributionView />
                     </v-window-item>
                 </v-window>
             </v-card-text>
@@ -49,7 +50,7 @@ import { ref } from 'vue';
 import Co2MapsView from '@/components/Dashboard/Co2MapsView.vue';
 import Co2ChartsView from '@/components/Dashboard/Co2ChartsView.vue';
 import Co2GroupsView from '@/components/Dashboard/Co2GroupsView.vue';
-import Co2CardView from '@/components/Dashboard/Co2CardView.vue';
+import Co2ContributionView from '@/components/Dashboard/Co2ContributionView.vue';
 
 const tab = ref(null);
 </script>
