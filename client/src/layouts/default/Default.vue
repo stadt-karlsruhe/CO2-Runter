@@ -22,7 +22,6 @@ import TheFooter from '@/components/TheFooter.vue';
 
 <style scoped>
 .page-wrapper {
-    min-height: calc(100vh - 100px);
     padding: 24px;
     padding-bottom: 30px;
 
