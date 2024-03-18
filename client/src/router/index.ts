@@ -61,13 +61,13 @@ const routes = [
         ],
     },
     {
-        path: '/login',
+        path: '/login-registration',
         component: () => import('@/layouts/default/Default.vue'),
         children: [
             {
-                path: '/login',
+                path: '/login-registration',
                 name: 'Login',
-                component: () => import('@/views/LoginView.vue'),
+                component: () => import('@/views/LoginRegistrationView.vue'),
             },
         ],
     },
