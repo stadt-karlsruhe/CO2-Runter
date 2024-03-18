@@ -32,8 +32,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import LoginForm from '../components/LoginForm.vue';
-import RegistrationForm from '../components/RegistrationForm.vue';
+import LoginForm from '../components/LoginRegistrationComponents/LoginForm.vue';
+import RegistrationForm from '../components/LoginRegistrationComponents/RegistrationForm.vue';
 
 const tab = ref(null);
 </script>
