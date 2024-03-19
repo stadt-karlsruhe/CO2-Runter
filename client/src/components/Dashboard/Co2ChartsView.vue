@@ -1,122 +1,88 @@
-<template>Charts</template>
+<template>Chart</template>
+
 <!--<template>-->
-<!--    <div v-if="isLoading" style="text-align: center;">Daten werden geladen ...-->
+<!--    <div v-if="isLoading" style="text-align: center">-->
+<!--        Daten werden geladen ...-->
 <!--    </div>-->
-<!--    <div v-else-if="error" style="text-align: center;">Es ist ein Fehler-->
-<!--        aufgetreten: {{ error }}-->
-<!--    </div>-->
+<!--    &lt;!&ndash;    <div v-else-if="averageError.value || footprintsError.value" style="text-align: center;">Es ist ein Fehler&ndash;&gt;-->
+<!--    &lt;!&ndash;        aufgetreten: {{ averageError ? averageError.message : footprintsError.message }}&ndash;&gt;-->
+<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
 <!--    <div v-else>-->
 <!--        <v-chart-->
-<!--            v-if="footPrints && average && footPrints.length > 0 && average.length > 0"-->
+<!--            v-if="-->
+<!--                footPrints.value &&-->
+<!--                average.value &&-->
+<!--                footPrints.value.length > 0 &&-->
+<!--                average.value.length > 0-->
+<!--            "-->
 <!--            :options="getOption()"-->
 <!--            class="chart"-->
-<!--            auto-resize />-->
-<!--        <div v-else style="text-align: center;">Keine Daten verfügbar</div>-->
+<!--            auto-resize-->
+<!--        />-->
+<!--        <div v-else style="text-align: center">Keine Daten verfügbar</div>-->
 <!--        <v-select-->
 <!--            :items="footPrintItems"-->
-<!--            v-if="!isLoading && !error"-->
+<!--            v-if="!isLoading && !averageError.value && !footprintsError.value"-->
 <!--            v-model="selectedFootprints"-->
 <!--            label="Angezeigte Fußabdrücke wählen"-->
 <!--            :multiple="true"-->
-<!--            style="width: 250px; margin: auto;"-->
+<!--            style="width: 250px; margin: auto"-->
 <!--        />-->
 <!--    </div>-->
 <!--</template>-->
 
-
 <!--<script lang="ts" setup>-->
-<!--import { ref, computed, onMounted } from 'vue';-->
+<!--import { ref, computed, watchEffect } from 'vue';-->
 <!--import { use } from 'echarts/core';-->
 <!--import { BarChart } from 'echarts/charts';-->
 <!--import {-->
-<!--    TitleComponent, TooltipComponent, GridComponent, LegendComponent,-->
+<!--    TitleComponent,-->
+<!--    TooltipComponent,-->
+<!--    GridComponent,-->
+<!--    LegendComponent,-->
 <!--} from 'echarts/components';-->
 <!--import VChart from 'vue-echarts';-->
 <!--import 'echarts/theme/dark';-->
+<!--import { useFetch } from '@vueuse/core';-->
 
 <!--use([-->
-<!--    BarChart, TitleComponent, TooltipComponent, GridComponent, LegendComponent,-->
+<!--    BarChart,-->
+<!--    TitleComponent,-->
+<!--    TooltipComponent,-->
+<!--    GridComponent,-->
+<!--    LegendComponent,-->
 <!--]);-->
 
 <!--let isLoading = ref(true);-->
-<!--let error = ref(null);-->
-<!--let footPrints = ref([]);-->
-<!--let average = ref([]);-->
 <!--let selectedFootprints = ref([]);-->
+<!--let footPrintItems = ref([]);-->
 
-<!--const footPrintItems = computed(() => footPrints.value.map(fp => fp.name));-->
+<!--const {-->
+<!--    isFinished: isAverageFinished,-->
+<!--    error: averageError,-->
+<!--    data: average,-->
+<!--} = useFetch('/api/dashboard/footprints/average');-->
+<!--console.log(average);-->
+<!--const {-->
+<!--    isFinished: isFootprintsFinished,-->
+<!--    error: footprintsError,-->
+<!--    data: footPrints,-->
+<!--} = useFetch('/api/dashboard/comparisonprints');-->
+<!--console.log(footPrints);-->
 
-<!--const fetchData = async () => {-->
-<!--    try {-->
-<!--        const [averageResponse, footprintsResponse] = await Promise.all([-->
-<!--            fetch('/api/dashboard/footprints/average'),-->
-<!--            fetch('/api/dashboard/comparisonprints')-->
-<!--        ]);-->
-
-<!--        if (averageResponse.ok && footprintsResponse.ok) {-->
-<!--            average.value = await averageResponse.json();-->
-<!--            footPrints.value = await footprintsResponse.json();-->
-<!--        } else {-->
-<!--            console.log("Error Status: ", averageResponse.status, footprintsResponse.status);-->
-<!--            throw new Error("Server response was not ok.");-->
+<!--watchEffect(() => {-->
+<!--    if (isAverageFinished.value && isFootprintsFinished.value) {-->
+<!--        if (!(averageError.value || footprintsError.value)) {-->
+<!--            isLoading.value = false;-->
 <!--        }-->
-
-<!--        isLoading.value = false;-->
-<!--    } catch (err) {-->
-<!--        error.value = err.message;-->
-<!--        isLoading.value = false;-->
+<!--        footPrintItems.value = footPrints.value-->
+<!--            ? footPrints.value.map((fp: any) => fp.name)-->
+<!--            : [];-->
 <!--    }-->
-<!--};-->
-
-<!--onMounted(fetchData);-->
+<!--});-->
 
 <!--const getOption = () => ({-->
-<!--    tooltip: {-->
-<!--        trigger: 'axis',-->
-<!--        axisPointer: {-->
-<!--            type: 'shadow',-->
-<!--        },-->
-<!--    },-->
-<!--    legend: {-->
-<!--        data: ['Durchschnitt aller Beiträge', 'YourData1', 'YourData2'],-->
-<!--        // Update these according to your needs-->
-<!--    },-->
-<!--    xAxis: {-->
-<!--        data: ['Line1', 'Line2', 'Line3'],-->
-<!--        // Update these according to your needs-->
-<!--    },-->
-<!--    yAxis: {},-->
-<!--    series: [-->
-<!--        {-->
-<!--            name: 'Durchschnitt aller Beiträge',-->
-<!--            type: 'bar',-->
-<!--            data: average.value,-->
-<!--            markLine: {-->
-<!--                lineStyle: {-->
-<!--                    type: 'dashed',-->
-<!--                },-->
-<!--                data: [[{-->
-<!--                    type: 'min',-->
-<!--                }, {-->
-<!--                    type: 'max',-->
-<!--                }]],-->
-<!--            },-->
-<!--        },-->
-<!--        {-->
-<!--            name: 'YourData1',-->
-<!--            type: 'bar',-->
-<!--            barGap: '-100%',-->
-<!--            data: footPrints.value,-->
-<!--            animation: false,-->
-<!--        },-->
-<!--        {-->
-<!--            name: 'YourData2',-->
-<!--            type: 'bar',-->
-<!--            barGap: '-100%',-->
-<!--            data: footPrints.value,-->
-<!--            animation: false,-->
-<!--        },-->
-<!--    ],-->
+<!--    // configurations for ECharts-->
 <!--});-->
 <!--</script>-->
 
@@ -125,3 +91,4 @@
 <!--    height: 100vh;-->
 <!--}-->
 <!--</style>-->
+<script setup lang="ts"></script>
