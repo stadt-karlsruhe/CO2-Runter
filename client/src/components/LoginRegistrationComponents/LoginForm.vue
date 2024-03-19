@@ -73,13 +73,15 @@ const handleSubmit = async (event: Event) => {
         if (response.ok) {
             const data = await response.json();
             localStorage.setItem('CO2Token', data.token);
-            await router.push('/destination'); // Replace with your destination route
+            await router.push('/');
         } else {
             error.value = 'Anmeldung fehlgeschlagen';
         }
     } catch (e) {
         error.value = 'Ein Serverfehler ist aufgetreten';
     }
+
+    location.reload();
 };
 </script>
 

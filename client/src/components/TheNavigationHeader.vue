@@ -46,6 +46,7 @@
 
                 <v-list-item
                     to="/gruppensystem"
+                    :exact="true"
                     title="Gruppensystem"
                     prepend-icon="mdi-account-group-outline"
                     class="mx-1 rounded-lg"
@@ -53,13 +54,58 @@
                 />
 
                 <v-list-item
+                    v-if="!isLoggedIn"
                     to="/login-registration"
+                    :exact="true"
                     title="Login"
                     prepend-icon="mdi-login-variant"
                     class="rounded-lg mx-1 mr-3"
                     color="primary-darken-1"
                     :active="true"
                 />
+
+                <v-menu v-else :close-on-content-click="false">
+                    <template v-slot:activator="{ props }">
+                        <v-list-item
+                            v-bind="props"
+                            class="rounded-lg mx-1 mr-3"
+                            color="primary-darken-1"
+                            :active="true"
+                        >
+                            <template v-slot:prepend>
+                                <v-icon>mdi-account</v-icon>
+                            </template>
+
+                            <v-list-item-title>Konto </v-list-item-title>
+
+                            <template v-slot:append>
+                                <v-icon>mdi-unfold-more-horizontal</v-icon>
+                            </template>
+                        </v-list-item>
+                    </template>
+
+                    <v-sheet rounded="lg" elevation="10" class="mt-2">
+                        <v-list class="pa-4">
+                            <v-list-subheader>Konto Aktionen </v-list-subheader>
+
+                            <v-list-item
+                                title="Gruppen Infos"
+                                prepend-icon="mdi-information-outline"
+                                class="mb-1 rounded-lg"
+                                color="primary-darken-1"
+                                to="/gruppensystem/gruppen-informationen"
+                            />
+
+                            <v-list-item
+                                title="Logout"
+                                prepend-icon="mdi-logout"
+                                class="mb-1 rounded-lg"
+                                color="primary-darken-1"
+                                @click="handleLogout()"
+                            />
+                        </v-list>
+                    </v-sheet>
+                </v-menu>
             </v-list>
         </div>
     </v-app-bar>
@@ -96,6 +142,7 @@
 
             <v-list-item
                 to="/gruppensystem"
+                :exact="true"
                 title="Gruppensysten"
                 prepend-icon="mdi-account-group-outline"
                 class="mb-1 rounded-lg"
@@ -103,13 +150,58 @@
             />
 
             <v-list-item
+                v-if="!isLoggedIn"
                 to="/login-registration"
+                :exact="true"
                 title="Login"
                 prepend-icon="mdi-login-variant"
                 class="mb-1 rounded-lg"
                 color="primary-darken-1"
                 :active="true"
             />
+
+            <v-menu v-else :close-on-content-click="false">
+                <template v-slot:activator="{ props }">
+                    <v-list-item
+                        v-bind="props"
+                        class="rounded-lg"
+                        color="primary-darken-1"
+                        :active="true"
+                    >
+                        <template v-slot:prepend>
+                            <v-icon>mdi-account</v-icon>
+                        </template>
+
+                        <v-list-item-title>Konto </v-list-item-title>
+
+                        <template v-slot:append>
+                            <v-icon>mdi-unfold-more-horizontal</v-icon>
+                        </template>
+                    </v-list-item>
+                </template>
+
+                <v-sheet rounded="lg" elevation="10" class="mt-2">
+                    <v-list class="pa-4">
+                        <v-list-subheader>Konto Aktionen </v-list-subheader>
+
+                        <v-list-item
+                            title="Gruppen Infos"
+                            prepend-icon="mdi-information-outline"
+                            class="mb-1 rounded-lg"
+                            color="primary-darken-1"
+                            to="/gruppensystem/gruppen-informationen"
+                        />
+
+                        <v-list-item
+                            title="Logout"
+                            prepend-icon="mdi-logout"
+                            class="mb-1 rounded-lg"
+                            color="primary-darken-1"
+                            @click="handleLogout()"
+                        />
+                    </v-list>
+                </v-sheet>
+            </v-menu>
         </v-list>
     </v-navigation-drawer>
 
@@ -117,8 +209,67 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import PWAInstallationDialog from '@/components/PWAInstallationDialog.vue';
+import { useFetch } from '@vueuse/core';
+import { useRouter } from 'vue-router';
+
+let my_cookie_value = localStorage.getItem('CO2Token');
+const isLoggedIn = ref(false);
+const router = useRouter();
+
+const checkTokenValidity = useFetch('/api/isUserAuth', {
+    headers: {
+        co2token: `${my_cookie_value}`,
+    },
+});
+
+function executeFetch() {
+    if (my_cookie_value) {
+        checkTokenValidity.execute().catch((err) => {
+            // Add your error handling logic here
+            console.error(err);
+            isLoggedIn.value = false;
+        });
+        isLoggedIn.value = true;
+    }
+}
+
+// On component mount and every-time the LocalStorage changes
+watch(
+    () => localStorage.getItem('CO2Token'),
+    (newToken) => {
+        my_cookie_value = newToken;
+        executeFetch();
+    },
+    { immediate: true }
+);
+
+onMounted(() => {
+    //Check the Token every 5 minutes
+    setInterval(() => {
+        executeFetch();
+    }, 300000);
+});
+
+watch(
+    () => checkTokenValidity.isFinished,
+    (finished) => {
+        console.log(checkTokenValidity.response.value);
+        if (finished && checkTokenValidity.response.value!.status <= 299) {
+            isLoggedIn.value = true;
+        } else {
+            isLoggedIn.value = false;
+        }
+    }
+);
+
+const handleLogout = () => {
+    localStorage.removeItem('CO2Token');
+    localStorage.removeItem('groupCode');
+    executeFetch();
+    location.reload();
+};
 
 const isDrawerOpen = ref(false);
 
