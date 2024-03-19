@@ -54,9 +54,14 @@ const routes = [
         component: () => import('@/layouts/default/Default.vue'),
         children: [
             {
-                path: '/gruppensystem',
+                path: '', // This will match '/gruppensystem'
                 name: 'Gruppensystem',
                 component: () => import('@/views/GroupSystemView.vue'),
+            },
+            {
+                path: 'neue-gruppe', // This will match '/gruppensystem/neue-gruppe'
+                name: 'Neue Gruppe erstellen',
+                component: () => import('@/views/GroupSystemNewGroupView.vue'),
             },
         ],
     },
