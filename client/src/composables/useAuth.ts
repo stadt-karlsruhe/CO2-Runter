@@ -47,8 +47,8 @@ export default function useAuth() {
         localStorage.removeItem('CO2Token');
         localStorage.removeItem('groupCode');
         isLoggedIn.value = false;
-        // executeFetch();
-        // location.reload();
+        executeFetch();
+        location.reload();
     };
 
     const login = async (email: string, password: string) => {
