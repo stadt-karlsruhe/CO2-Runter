@@ -1,8 +1,10 @@
 <template>
     <v-app>
-        <v-container class="mt-5" v-if="groupCode">
-            <GroupSuccesfull :group-code="groupCode" :group-name="groupName" />
-            <v-btn color="primary" @click="$router.go(-1)">Zurück</v-btn>
+        <v-container class="mt-5" v-if="groupCode && groupCode.groupcode">
+            <GroupSuccesfull
+                :group-code="groupCode.groupcode"
+                :group-name="groupName"
+            />
         </v-container>
 
         <v-container v-else class="mt-5">
@@ -10,7 +12,7 @@
                 <v-col cols="12" sm="6" md="4">
                     <v-text-field
                         v-model="groupName"
-                        clearable
+                        :clearable="true"
                         outlined
                         label="Gruppenname"
                         :disabled="isFetching"
@@ -22,7 +24,7 @@
                 <v-col cols="12" sm="6" md="4">
                     <v-btn
                         :disabled="isFetching || !groupName"
-                        @click="handleCreateGroup"
+                        @click="CreateGroup()"
                     >
                         Gruppe erstellen
                     </v-btn>
@@ -41,41 +43,40 @@
 </template>
 
 <script setup lang="ts">
+//TODO: IMPROVE DESIGN
+
 import { ref } from 'vue';
 import { useFetch } from '@vueuse/core';
 import GroupSuccesfull from '@/components/GroupSystem/GroupSuccesfull.vue';
 import { GroupCreatedResponse } from '@/types/GroupCreatedResponse';
 
-let groupName = ref('');
-let groupCode = ref<string | null | undefined>(null);
-let error = ref<string | null>(null);
+const groupName = ref('');
+const groupCode = ref<GroupCreatedResponse>();
+const error = ref<string | null>(null);
 
-let headers = new Headers();
-headers.append('Content-Type', 'application/json');
-headers.append('Authorization', `Bearer ${localStorage.getItem('CO2Token')}`);
-
-let requestOptions = {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify({
-        co2token: localStorage.getItem('CO2Token'),
-        groupname: groupName.value,
-    }),
-};
-
-let {
+const {
     isFetching,
     execute,
     data,
     error: fetchError,
-} = useFetch<GroupCreatedResponse>('/api/groups/create', requestOptions);
+} = useFetch<GroupCreatedResponse>('/api/groups/create', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        co2token: localStorage.getItem('CO2Token'),
+        groupname: groupName.value,
+    }),
+}).json();
 
-let handleCreateGroup = async () => {
+const CreateGroup = async () => {
     await execute();
+
     if (fetchError.value) {
         error.value = 'A server error occurred.';
-    } else {
-        groupCode.value = data.value?.groupCode;
+    } else if (data.value) {
+        groupCode.value = data.value;
     }
 };
 </script>

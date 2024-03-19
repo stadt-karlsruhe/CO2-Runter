@@ -1,6 +1,8 @@
 <template>QRCode Generator</template>
 
 <script setup lang="ts">
+//TODO: Add QRCode Generator
+
 import { defineProps } from 'vue';
 
 defineProps({

@@ -101,7 +101,7 @@
                                 prepend-icon="mdi-logout"
                                 class="mb-1 rounded-lg"
                                 color="primary-darken-1"
-                                @click="handleLogout()"
+                                @click="logout()"
                             />
                         </v-list>
                     </v-sheet>
@@ -197,7 +197,7 @@
                             prepend-icon="mdi-logout"
                             class="mb-1 rounded-lg"
                             color="primary-darken-1"
-                            @click="handleLogout()"
+                            @click="logout()"
                         />
                     </v-list>
                 </v-sheet>
@@ -214,7 +214,7 @@ import useAuth from '@/composables/useAuth';
 import PWAInstallationDialog from '@/components/PWAInstallationDialog.vue';
 
 // Use the composable
-const { isLoggedIn, handleLogout } = useAuth();
+const { isLoggedIn, logout } = useAuth();
 
 // Your remaining code stays the same
 const isDrawerOpen = ref(false);

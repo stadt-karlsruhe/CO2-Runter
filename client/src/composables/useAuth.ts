@@ -45,7 +45,7 @@ export default function useAuth() {
         }
     );
 
-    const handleLogout = () => {
+    const logout = () => {
         localStorage.removeItem('CO2Token');
         localStorage.removeItem('groupCode');
         isLoggedIn.value = false;
@@ -66,7 +66,7 @@ export default function useAuth() {
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.error); // Change this line if the server responds with a different error object
+                throw new Error(data.error);
             }
 
             localStorage.setItem('CO2Token', data.token);
@@ -74,9 +74,9 @@ export default function useAuth() {
             executeFetch();
             router.go(-1);
         } catch (e) {
-            throw e; // Rethrow error to be caught in the component
+            throw e;
         }
     };
 
-    return { isLoggedIn, handleLogout, login };
+    return { isLoggedIn, logout, login };
 }

@@ -1,17 +1,42 @@
 <template>
-    <div class="group">
-        <h1>Ihre neue Gruppe {{ groupName }}</h1>
-        <p>wurde erstellt</p>
-        <p>
+    <div>
+        <h1 class="text-primary-darken-1">
+            Ihre neue Gruppe {{ groupName }} wurde erstellt
+        </h1>
+
+        <p class="text-secondary my-8">
             Teilen Sie den Beitrittslink oder QR-Code mit ihren Freunden und
             fangen Sie an gemeinsam ihren CO2-Fußabdruck zu berechnen.
         </p>
-        <p>Beitrittslink:</p>
-        <button @click="copyToClipboard(joinLink)">{{ joinLink }}</button>
-        <p>Dashboardlink:</p>
-        <button @click="copyToClipboard(dashLink)">{{ dashLink }}</button>
-        <p>Gruppen Code:</p>
-        <button @click="copyToClipboard(groupCode)">{{ groupCode }}</button>
+
+        <div class="my-8">
+            <v-text-field
+                v-model="dashLink"
+                label="Dashboardlink"
+                :readonly="true"
+                variant="outlined"
+                append-inner-icon="mdi-content-copy"
+                @click:append-inner="copyToClipboard(dashLink)"
+            />
+
+            <v-text-field
+                v-model="joinLink"
+                label="Joinlink"
+                :readonly="true"
+                variant="outlined"
+                append-inner-icon="mdi-content-copy"
+                @click:append-inner="copyToClipboard(joinLink)"
+            />
+
+            <v-text-field
+                v-model="localGroupCode"
+                label="Gruppen Code"
+                :readonly="true"
+                variant="outlined"
+                append-inner-icon="mdi-content-copy"
+                @click:append-inner="copyToClipboard(localGroupCode)"
+            />
+        </div>
 
         <QRCodeGenerator :text="joinLink" />
     </div>
@@ -31,6 +56,8 @@ const props = defineProps({
         required: true,
     },
 });
+
+const localGroupCode = computed(() => props.groupCode);
 
 const rootUrl = window.location.origin;
 const joinLink = computed(

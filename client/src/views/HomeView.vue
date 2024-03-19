@@ -14,6 +14,7 @@
                     :rounded="true"
                     color="primary-darken-1"
                     append-icon="mdi-chevron-right"
+                    size="large"
                 >
                     Messen Sie ihren Co2-Fußabdruck
                 </v-btn>
@@ -48,6 +49,7 @@
                     :rounded="true"
                     color="primary-darken-1"
                     append-icon="mdi-chevron-right"
+                    size="large"
                 >
                     Wie kann ich das Klima schützen
                 </v-btn>
@@ -68,6 +70,7 @@
                     :rounded="true"
                     color="primary-darken-1"
                     append-icon="mdi-chevron-right"
+                    size="large"
                 >
                     Mach dich schlau
                 </v-btn>
@@ -84,3 +87,5 @@
 </template>
 
 <script lang="ts" setup></script>
+
+<style scoped></style>

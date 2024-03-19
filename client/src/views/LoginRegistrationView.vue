@@ -1,6 +1,6 @@
 <template>
     <v-alert
-        v-if="cameFromGruppenSystemPage"
+        v-if="showIfCameFromGruppenSystemPage"
         text="Um ihre eigene Gruppe zu erstellen müssen Sie sich entweder mit ihrem Account einloggen oder
             sich kostenlos einen Account errstellen!"
         title="Gruppen erstellen"
@@ -49,12 +49,10 @@ import RegistrationForm from '@/components/LoginRegistrationComponents/Registrat
 
 const tab = ref(null);
 
-// get the previous path from sessionStorage
 const previousRoutePath =
     window.sessionStorage.getItem('previousRoutePath') || null;
 
-// check if the previous route is '/gruppensystem/neue-gruppe'
-const cameFromGruppenSystemPage = computed(
+const showIfCameFromGruppenSystemPage = computed(
     () => previousRoutePath === '/gruppensystem'
 );
 </script>
