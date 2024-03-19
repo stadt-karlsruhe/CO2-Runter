@@ -103,7 +103,7 @@
             />
 
             <v-list-item
-                to="/login"
+                to="/login-registration"
                 title="Login"
                 prepend-icon="mdi-login-variant"
                 class="mb-1 rounded-lg"
