@@ -35,10 +35,11 @@ cd server
 npm ic
 ```
 
-After installing the Node moduls you can start the Docker containers. To do this, run `docker-compose up --build` inside
+After installing the Node modules you can start the Docker containers. To do this, run `docker-compose up --build`
+inside
 the main project directory. Then afterward all the containers should be running.
 
-The client should be accessible via `http://localhost:3050/` via nginx.
+The client (with access to the API) should be accessible via `http://localhost:3050/` (NGINX)
 
 The Adminer should be accessible via `http://localhost:8000/`.
 
@@ -54,27 +55,33 @@ Password: `12345`
 Database you want to access: `db_co2runter`
 
 After logging in, copy the contents of `loader-new.sql` and paste it into the `SQL Command` query box in Adminer and
-click `Execute`. Now you see in the tabler overview that all the tables have been filled with data. Now you just need to
+click `Execute`. Now you see in the table overview that all the tables have been filled with data. Now you just need to
 create a `config.js` file in the `server` directory and past the contents of `config-template.js` into the newly
 created `config.js`. Now everything is set up and should work.
 
-Note: If you are using the Webstorm IDE from JetBrains, the configurations to start everything are already set up. You
-just need to select the `Complete Repository Setup` configuration and then run it. Additionally, there are
+Important: If you are using the Webstorm IDE from JetBrains, the configurations to start everything is already set up.
+You just need to select the `Complete Repository Setup` configuration and then run it. Additionally, there are
 configurations for starting the Docker containers and the client and server in development mode or production mode. But
 you still need to create the `config.js` file.
 
-### Developing the Client with Docker
+### Developing the Frontend with Docker
 
 To develop the client but still be able to get the data from backend and access the API, you just need to do a few
 things.
 
-Exacly for this reason there is a `docker-compose-client-development.yml` file. To start the client in development mode,
+Exactly for this reason there is a `docker-compose-client-development.yml` file. To start the client in development
+mode,
 run `docker compose -f docker-compose-client-development.yml up --build` inside the main project directory. Then
 afterward the client should be accessible via `http://localhost:3050/` via nginx.
 
 But because you are developing the client, you need to start the client in development mode. To do this,
 run `npm run dev` inside the client directory. Then afterward the client should be accessible
 via `http://localhost:3000/` and over the nginx server via `http://localhost:3050/`, where you can access the API.
+
+### Popular Problems you might encounter
+
+- If you forgot to insert data into the database, you will get an error message (probably a 500 error), therefore
+  use the `loader-new.sql` and paste it into the `SQL Command` query box in Adminer
 
 ## Build Instructions for Production
 
@@ -86,86 +93,6 @@ via `http://localhost:3000/` and over the nginx server via `http://localhost:305
 
     To start interacting with the application, open `http://localhost:9001/` on a browser.
 
-## Install without Docker
-
-With an existing mysql/mariadb server you can deploy client and server directly without docker.
-
-Database config expects your mysql ro run on the standard port 3306.
-
-Assume the following directory setup with nginx
-
-    * Client in /var/www/html/co2runter/app
-    * Server in  /var/www/html/co2runter/api
-
-Nginx config:
-
-```
-server {
-    listen 80;
-    server_name co2runter.<your domain>;
-    return 301 https://$host$request_uri;
-}
-
-server {
-        listen 443 ssl;
-        server_name co2runter.<your domain>;
-        location /api {
-        rewrite /api/(.*) /$1 break;
-        proxy_pass http://localhost:3001;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        }
-        location / {
-        root /var/www/html/co2runter/app;  #client/build;
-        index index.html;
-        try_files $uri /index.html;
-        }
-}
-
-```
-
-Build and install the frontend client like so:
-
-> cd client
->
-> npm i
->
-> npm run build
->
-> cp -r build/\* /var/www/html/co2runter/app/
-
-Install the backend server like so:
-
-> cd server
->
-> npm i
->
-> cp -r server/\* /var/www/html/co2runter/api/
-
-Create the config file:
-
-> cd /var/www/html/co2runter/api/
->
-> cp config_template.js config.js
-
-Edit the configuration in config.js
-
-- Set database parameters according to your setup
-- Set token key, e.g. 16 character random string
-
-Initialize database
-
-- Load setup.sql
-- Load defaults.sql to get the comparison values for "Deutschland" and "Karlsruhe"
-
-Start the service
-
-> npm run start
-
-### Setup process monitoring and autostart
-
-... to be done ....
-
 ## Contribution Workflow
 
 Contributing to the CO2 Runter Web Application is a straightforward process. Follow these steps for each feature, bug
@@ -174,9 +101,9 @@ fix, or other changes:
 1. **Create a New Branch**: Start by creating a new branch for your feature or bug fix. Use the naming convention
    recommended by [Conventional Commits](https://www.conventionalcommits.org/):
 
-   - For a new feature: `feat/your-feature-name`
-   - For a bug fix: `fix/your-bug-name`
-   - For a documentation update: `docs/your-documentation-update`
+    - For a new feature: `feat/your-feature-name`
+    - For a bug fix: `fix/your-bug-name`
+    - For a documentation update: `docs/your-documentation-update`
 
 2. **Making Commits**: After creating the branch, make commits to it that encapsulate your work. Please ensure that each
    commit has a clear and descriptive message.
@@ -190,3 +117,18 @@ fix, or other changes:
    changes will be merged into the main repository.
 
 This workflow ensures a clean commit history and makes it easy for others to understand and review your contributions.
+
+## License
+
+Creative Commons Legal Code
+
+CC0 1.0 Universal
+
+CREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE
+LEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN
+ATTORNEY-CLIENT RELATIONSHIP. CREATIVE COMMONS PROVIDES THIS
+INFORMATION ON AN "AS-IS" BASIS. CREATIVE COMMONS MAKES NO WARRANTIES
+REGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS
+PROVIDED HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM
+THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED
+HEREUNDER.
