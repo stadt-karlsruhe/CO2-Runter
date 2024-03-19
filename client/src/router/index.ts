@@ -63,6 +63,19 @@ const routes = [
                 path: 'neue-gruppe',
                 name: 'Neue Gruppe erstellen',
                 component: () => import('@/views/GroupSystemNewGroupView.vue'),
+                // Login Protection Guard
+                beforeEnter: (to: any, from: any, next: any) => {
+                    window.sessionStorage.setItem(
+                        'previousRoutePath',
+                        from.path
+                    );
+                    const { isLoggedIn } = useAuth();
+                    if (!isLoggedIn.value) {
+                        next('/login-registration');
+                    } else {
+                        next();
+                    }
+                },
             },
             {
                 path: 'gruppen-informationen',

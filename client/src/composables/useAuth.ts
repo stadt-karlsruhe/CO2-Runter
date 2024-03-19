@@ -1,9 +1,11 @@
 import { ref, watch } from 'vue';
 import { useFetch } from '@vueuse/core';
+import { useRouter } from 'vue-router';
 
 export default function useAuth() {
     let my_cookie_value = localStorage.getItem('CO2Token');
     const isLoggedIn = ref(false);
+    const router = useRouter();
 
     const checkTokenValidity = useFetch('/api/isUserAuth', {
         headers: {
@@ -49,6 +51,7 @@ export default function useAuth() {
         isLoggedIn.value = false;
         executeFetch();
         location.reload();
+        router.push('/');
     };
 
     const login = async (email: string, password: string) => {
@@ -69,6 +72,7 @@ export default function useAuth() {
             localStorage.setItem('CO2Token', data.token);
             isLoggedIn.value = true;
             executeFetch();
+            router.go(-1);
         } catch (e) {
             throw e; // Rethrow error to be caught in the component
         }

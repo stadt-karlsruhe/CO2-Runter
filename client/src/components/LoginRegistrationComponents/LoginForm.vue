@@ -45,7 +45,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import useAuth from '@/composables/useAuth';
 
-const { isLoggedIn, handleLogout, login } = useAuth();
+const { login } = useAuth();
 const router = useRouter();
 const email = ref('');
 const password = ref('');
