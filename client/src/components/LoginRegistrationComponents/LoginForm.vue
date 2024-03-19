@@ -43,14 +43,16 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import useAuth from '@/composables/useAuth';
 
+const { isLoggedIn, handleLogout, login } = useAuth();
 const router = useRouter();
 const email = ref('');
 const password = ref('');
 const error = ref<string | null>(null);
 const showPassword = ref(false);
-
 const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
 const isEmailValid = () => email.value && emailRegex.test(email.value);
 const isPasswordValid = () => password.value && password.value.length >= 4;
 const isFormComplete = () => isEmailValid() && isPasswordValid();
@@ -61,24 +63,11 @@ const handleSubmit = async (event: Event) => {
     if (!isFormComplete()) return;
 
     try {
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email: email.value,
-                password: password.value,
-            }),
-        });
+        await login(email.value, password.value);
 
-        if (response.ok) {
-            const data = await response.json();
-            localStorage.setItem('CO2Token', data.token);
-            await router.push('/');
-        } else {
-            error.value = 'Anmeldung fehlgeschlagen';
-        }
-    } catch (e) {
-        error.value = 'Ein Serverfehler ist aufgetreten';
+        await router.push('/');
+    } catch (e: any) {
+        error.value = e.message;
     }
 
     location.reload();

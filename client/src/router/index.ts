@@ -1,5 +1,6 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router';
+import useAuth from '@/composables/useAuth';
 
 const routes = [
     {
@@ -66,7 +67,17 @@ const routes = [
             {
                 path: 'gruppen-informationen',
                 name: 'Gruppen Informationen',
-                component: () => import('@/views/GroupSystemGroupInformation.vue'),
+                component: () =>
+                    import('@/views/GroupSystemGroupInformation.vue'),
+                // Login Protection Guard
+                beforeEnter: (to: any, from: any, next: any) => {
+                    const { isLoggedIn } = useAuth();
+                    if (!isLoggedIn.value) {
+                        next('/login-registration');
+                    } else {
+                        next();
+                    }
+                },
             },
         ],
     },

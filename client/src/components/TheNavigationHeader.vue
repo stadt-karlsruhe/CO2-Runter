@@ -209,75 +209,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
+import { ref, watch } from 'vue';
+import useAuth from '@/composables/useAuth';
 import PWAInstallationDialog from '@/components/PWAInstallationDialog.vue';
-import { useFetch } from '@vueuse/core';
-import { useRouter } from 'vue-router';
 
-let my_cookie_value = localStorage.getItem('CO2Token');
-const isLoggedIn = ref(false);
-const router = useRouter();
+// Use the composable
+const { isLoggedIn, handleLogout } = useAuth();
 
-const checkTokenValidity = useFetch('/api/isUserAuth', {
-    headers: {
-        co2token: `${my_cookie_value}`,
-    },
-});
-
-function executeFetch() {
-    if (my_cookie_value) {
-        checkTokenValidity.execute().catch((err) => {
-            // Add your error handling logic here
-            console.error(err);
-            isLoggedIn.value = false;
-        });
-        isLoggedIn.value = true;
-    }
-}
-
-// On component mount and every-time the LocalStorage changes
-watch(
-    () => localStorage.getItem('CO2Token'),
-    (newToken) => {
-        my_cookie_value = newToken;
-        executeFetch();
-    },
-    { immediate: true }
-);
-
-onMounted(() => {
-    //Check the Token every 5 minutes
-    setInterval(() => {
-        executeFetch();
-    }, 300000);
-});
-
-watch(
-    () => checkTokenValidity.isFinished,
-    (finished) => {
-        console.log(checkTokenValidity.response.value);
-        if (finished && checkTokenValidity.response.value!.status <= 299) {
-            isLoggedIn.value = true;
-        } else {
-            isLoggedIn.value = false;
-        }
-    }
-);
-
-const handleLogout = () => {
-    localStorage.removeItem('CO2Token');
-    localStorage.removeItem('groupCode');
-    executeFetch();
-    location.reload();
-};
-
+// Your remaining code stays the same
 const isDrawerOpen = ref(false);
 
 watch(isDrawerOpen, (newValue) => {
     if (newValue) {
         document.body.style.overflow = 'hidden';
     } else {
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = 'visible';
     }
 });
 </script>
