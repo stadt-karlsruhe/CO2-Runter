@@ -97,9 +97,17 @@ const routes = [
     {
         path: '/login-registration',
         component: () => import('@/layouts/default/Default.vue'),
+        beforeEnter: async (to: any, from: any, next: any) => {
+            const { isLoggedIn } = useAuth();
+            if (isLoggedIn.value) {
+                next('/');
+            } else {
+                next();
+            }
+        },
         children: [
             {
-                path: '/login-registration',
+                path: '',
                 name: 'Login',
                 component: () => import('@/views/LoginRegistrationView.vue'),
             },
