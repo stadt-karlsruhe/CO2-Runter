@@ -15,8 +15,10 @@
                 label="Dashboardlink"
                 :readonly="true"
                 variant="outlined"
+                prepend-inner-icon="mdi-open-in-new"
                 append-inner-icon="mdi-content-copy"
                 @click:append-inner="copyToClipboard(dashLink)"
+                @click:prepend-inner="openLink(dashLink)"
             />
 
             <v-text-field
@@ -24,8 +26,10 @@
                 label="Joinlink"
                 :readonly="true"
                 variant="outlined"
+                prepend-inner-icon="mdi-open-in-new"
                 append-inner-icon="mdi-content-copy"
                 @click:append-inner="copyToClipboard(joinLink)"
+                @click:prepend-inner="openLink(joinLink)"
             />
 
             <v-text-field
@@ -67,6 +71,9 @@ const dashLink = computed(
     () => `${rootUrl}/Dashboard?groupcode=${props.groupCode}`
 );
 
+const openLink = (link: string) => {
+    window.open(link, '_blank');
+};
 const copyToClipboard = (text: string) => {
     navigator.clipboard
         .writeText(text)
