@@ -1,61 +1,85 @@
 <template>
     <v-form @submit.prevent="submitAccountRegistrationRequest">
-        <v-alert v-if="error" type="error"> {{ error }}</v-alert>
-        <v-text-field
-            v-model="username"
-            label="Benutzername"
-            prepend-inner-icon="mdi-account"
-            class="mb-4 mt-4"
-            variant="outlined"
-        />
-        <v-text-field
-            v-model="email"
-            label="Email"
-            :rules="[
-                (v) => !!v || emailRegex.test(v) || 'E-mail must be valid',
-            ]"
-            prepend-inner-icon="mdi-email"
-            variant="outlined"
-            class="mb-4"
-        />
-        <v-text-field
-            v-model="password"
-            label="Passwort"
-            :type="showPassword ? 'text' : 'password'"
-            :rules="passwordRules"
-            prepend-inner-icon="mdi-lock"
-            :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-            @click:append-inner="showPassword = !showPassword"
-            variant="outlined"
-            class="mb-4"
-        >
-        </v-text-field>
-        <v-messages
-            :value="[
-                'Password must be at least 8 characters',
-                'Must contain at least one number',
-                'Must contain at least one special character',
-            ]"
-        />
-        <v-text-field
-            v-model="confirmPassword"
-            label="Passwort bestätigen"
-            :type="showConfirmPassword ? 'text' : 'password'"
-            :rules="[(v) => !!v || v === password || 'Passwords must match']"
-            prepend-inner-icon="mdi-lock"
-            :append-inner-icon="showConfirmPassword ? 'mdi-eye-off' : 'mdi-eye'"
-            class="mb-4"
-            variant="outlined"
-            @click:append-inner="showConfirmPassword = !showConfirmPassword"
-        />
-        <v-btn
-            color="primary-darken-1"
-            variant="tonal"
-            size="x-large"
-            type="submit"
-            :disabled="!isFormValid()"
-            >Registrieren
-        </v-btn>
+        <v-container justify="center">
+            <v-row v-if="error">
+                <v-col>
+                    <v-alert v-if="error" icon="mdi-alert" type="error">
+                        {{ error }}</v-alert
+                    >
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col>
+                    <v-text-field
+                        v-model="username"
+                        label="Benutzername"
+                        prepend-inner-icon="mdi-account"
+                        class="mb-4 mt-4"
+                        variant="outlined"
+                    />
+                    <v-text-field
+                        v-model="email"
+                        label="Email"
+                        :rules="[
+                            (v) =>
+                                !!v ||
+                                emailRegex.test(v) ||
+                                'E-mail must be valid',
+                        ]"
+                        prepend-inner-icon="mdi-email"
+                        variant="outlined"
+                        class="mb-4"
+                    />
+                    <v-text-field
+                        v-model="password"
+                        label="Passwort"
+                        :type="showPassword ? 'text' : 'password'"
+                        :rules="passwordRules"
+                        prepend-inner-icon="mdi-lock"
+                        :append-inner-icon="
+                            showPassword ? 'mdi-eye-off' : 'mdi-eye'
+                        "
+                        @click:append-inner="showPassword = !showPassword"
+                        variant="outlined"
+                        class="mb-4"
+                    >
+                    </v-text-field>
+                    <v-messages
+                        :value="[
+                            'Password must be at least 8 characters',
+                            'Must contain at least one number',
+                            'Must contain at least one special character',
+                        ]"
+                    />
+                    <v-text-field
+                        v-model="confirmPassword"
+                        label="Passwort bestätigen"
+                        :type="showConfirmPassword ? 'text' : 'password'"
+                        :rules="[
+                            (v) =>
+                                !!v || v === password || 'Passwords must match',
+                        ]"
+                        prepend-inner-icon="mdi-lock"
+                        :append-inner-icon="
+                            showConfirmPassword ? 'mdi-eye-off' : 'mdi-eye'
+                        "
+                        class="mb-4"
+                        variant="outlined"
+                        @click:append-inner="
+                            showConfirmPassword = !showConfirmPassword
+                        "
+                    />
+                    <v-btn
+                        color="primary-darken-1"
+                        variant="tonal"
+                        size="x-large"
+                        type="submit"
+                        :disabled="!isFormValid()"
+                        >Registrieren
+                    </v-btn>
+                </v-col>
+            </v-row>
+        </v-container>
     </v-form>
 </template>
 

@@ -1,12 +1,15 @@
 <template>
-    <v-alert
-        v-if="showIfCameFromGruppenSystemPage"
-        text="Um ihre eigene Gruppe zu erstellen müssen Sie sich entweder mit ihrem Account einloggen oder
-            sich kostenlos einen Account errstellen!"
-        title="Gruppen erstellen"
-        type="info"
-        variant="tonal"
-    ></v-alert>
+    <v-container v-if="showIfCameFromGruppenSystemPage" justify="center">
+        <v-row>
+            <v-col>
+                <v-alert
+                    title="Gruppen erstellen"
+                    text="Um ihre eigene Gruppe zu erstellen müssen Sie sich entweder mit ihrem Account einloggen odersich kostenlos einen Account errstellen!"
+                    type="info"
+                ></v-alert>
+            </v-col>
+        </v-row>
+    </v-container>
 
     <div class="min-page-height d-flex align-center justify-center">
         <v-card width="100%" elevation="0">

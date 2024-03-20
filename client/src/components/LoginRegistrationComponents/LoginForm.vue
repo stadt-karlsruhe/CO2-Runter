@@ -1,48 +1,61 @@
 <template>
     <v-form @submit.prevent="submitAccountLoginRequest">
-        <v-alert v-if="error" type="error">
-            {{ error }}
-        </v-alert>
-        <v-text-field
-            variant="outlined"
-            label="Email"
-            v-model="email"
-            :rules="[
-                (val) => emailRegex.test(val) || 'Ungültige E-Mail-Adresse',
-            ]"
-            prepend-inner-icon="mdi-email"
-            class="mb-4 mt-4"
-        />
-        <v-text-field
-            variant="outlined"
-            label="Passwort"
-            :type="showPassword ? 'text' : 'password'"
-            v-model="password"
-            :rules="[
-                (val) =>
-                    (val && val.length >= 4) ||
-                    'Das Passwort muss mindestens 4 Zeichen lang sein',
-            ]"
-            prepend-inner-icon="mdi-lock"
-            class="mb-4"
-            :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-            @click:append-inner="showPassword = !showPassword"
-        >
-        </v-text-field>
-        <v-btn
-            color="primary-darken-1"
-            variant="tonal"
-            size="x-large"
-            type="submit"
-            :disabled="!isFormComplete()"
-            >Anmelden
-        </v-btn>
+        <v-container justify="center">
+            <v-row v-if="error">
+                <v-col>
+                    <v-alert icon="mdi-alert" type="error">
+                        {{ error }}Alert
+                    </v-alert>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col>
+                    <v-text-field
+                        variant="outlined"
+                        label="Email"
+                        v-model="email"
+                        :rules="[
+                            (val) =>
+                                emailRegex.test(val) ||
+                                'Ungültige E-Mail-Adresse',
+                        ]"
+                        prepend-inner-icon="mdi-email"
+                        class="mb-4 mt-4"
+                    />
+                    <v-text-field
+                        variant="outlined"
+                        label="Passwort"
+                        :type="showPassword ? 'text' : 'password'"
+                        v-model="password"
+                        :rules="[
+                            (val) =>
+                                (val && val.length >= 4) ||
+                                'Das Passwort muss mindestens 4 Zeichen lang sein',
+                        ]"
+                        prepend-inner-icon="mdi-lock"
+                        class="mb-4"
+                        :append-inner-icon="
+                            showPassword ? 'mdi-eye-off' : 'mdi-eye'
+                        "
+                        @click:append-inner="showPassword = !showPassword"
+                    >
+                    </v-text-field>
+                    <v-btn
+                        color="primary-darken-1"
+                        variant="tonal"
+                        size="x-large"
+                        type="submit"
+                        :disabled="!isFormComplete()"
+                        >Anmelden
+                    </v-btn>
+                </v-col>
+            </v-row>
+        </v-container>
     </v-form>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import useAuth from '@/composables/useAuth';
 
 const { login } = useAuth();
