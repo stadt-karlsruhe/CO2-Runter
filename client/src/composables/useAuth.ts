@@ -9,12 +9,12 @@ export default function useAuth() {
 
     const getCo2Token = () => {
         co2Token.value = localStorage.getItem('CO2Token');
-    }
+    };
 
     const setCo2Token = (token: string) => {
         localStorage.setItem('CO2Token', token);
         co2Token.value = token;
-    }
+    };
 
     const checkTokenValidity = useFetch('/api/isUserAuth', {
         headers: {
@@ -60,7 +60,6 @@ export default function useAuth() {
         isLoggedIn.value = false;
         executeFetch();
         location.reload();
-        await router.push('/');
     };
 
     const login = async (email: string, password: string) => {

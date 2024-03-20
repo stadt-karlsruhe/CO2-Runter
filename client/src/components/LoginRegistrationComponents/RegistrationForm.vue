@@ -145,8 +145,8 @@ const submitAccountRegistrationRequest = async () => {
 
         const data: JwtToken = await response.json();
         setCo2Token(data.token);
-        location.reload();
         await router.push('/');
+        location.reload();
     } catch (e) {
         error.value = 'Ein Serverfehler ist aufgetreten';
     }
