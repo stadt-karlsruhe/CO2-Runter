@@ -33,7 +33,11 @@
                         height="60px"
                         class="clickable-image"
                         src="../../public/images/Logos/dhbw-logo.svg"
-                        @click="navigate('https://www.karlsruhe.dhbw.de/startseite.html')"
+                        @click="
+                            navigate(
+                                'https://www.karlsruhe.dhbw.de/startseite.html'
+                            )
+                        "
                     />
                 </v-col>
             </v-row>
@@ -58,9 +62,8 @@
                 <v-col cols="12" md="4" order-md="2">
                     <v-list class="pa-4">
                         <v-list-subheader
-                        >Rechtliche Informationen
-                        </v-list-subheader
-                        >
+                            >Rechtliche Informationen
+                        </v-list-subheader>
 
                         <v-list-item
                             href="https://www.karlsruhe.de/datenschutz"
@@ -82,9 +85,8 @@
                 <v-col cols="12" md="4" order-md="2">
                     <v-list class="pa-4">
                         <v-list-subheader
-                        >Technische Informationen
-                        </v-list-subheader
-                        >
+                            >Technische Informationen
+                        </v-list-subheader>
 
                         <v-list-item
                             href="https://github.com/stadt-karlsruhe/CO2-Runter"
