@@ -1,5 +1,5 @@
 <template>
-    <v-form @submit.prevent="handleSubmit">
+    <v-form @submit.prevent="submitAccountLoginRequest">
         <v-alert v-if="error" type="error">
             {{ error }}
         </v-alert>
@@ -46,7 +46,6 @@ import { useRouter } from 'vue-router';
 import useAuth from '@/composables/useAuth';
 
 const { login } = useAuth();
-const router = useRouter();
 const email = ref('');
 const password = ref('');
 const error = ref<string | null>(null);
@@ -57,7 +56,7 @@ const isEmailValid = () => email.value && emailRegex.test(email.value);
 const isPasswordValid = () => password.value && password.value.length >= 4;
 const isFormComplete = () => isEmailValid() && isPasswordValid();
 
-const handleSubmit = async (event: Event) => {
+const submitAccountLoginRequest = async (event: Event) => {
     event.preventDefault();
 
     if (!isFormComplete()) return;

@@ -3,18 +3,27 @@ import { useFetch } from '@vueuse/core';
 import { useRouter } from 'vue-router';
 
 export default function useAuth() {
-    let my_cookie_value = localStorage.getItem('CO2Token');
     const isLoggedIn = ref(false);
     const router = useRouter();
+    const co2Token = ref(localStorage.getItem('CO2Token'));
+
+    const getCo2Token = () => {
+        co2Token.value = localStorage.getItem('CO2Token');
+    };
+
+    const setCo2Token = (token: string) => {
+        localStorage.setItem('CO2Token', token);
+        co2Token.value = token;
+    };
 
     const checkTokenValidity = useFetch('/api/isUserAuth', {
         headers: {
-            co2token: `${my_cookie_value}`,
+            co2token: `${co2Token.value}`,
         },
     });
 
     function executeFetch() {
-        if (my_cookie_value) {
+        if (co2Token.value) {
             checkTokenValidity.execute().catch((err) => {
                 // Add your error handling logic here
                 console.error(err);
@@ -27,7 +36,7 @@ export default function useAuth() {
     watch(
         () => localStorage.getItem('CO2Token'),
         (newToken) => {
-            my_cookie_value = newToken;
+            co2Token.value = newToken;
             executeFetch();
         },
         { immediate: true }
@@ -45,13 +54,12 @@ export default function useAuth() {
         }
     );
 
-    const logout = () => {
+    const logout = async () => {
         localStorage.removeItem('CO2Token');
         localStorage.removeItem('groupCode');
         isLoggedIn.value = false;
         executeFetch();
         location.reload();
-        router.push('/');
     };
 
     const login = async (email: string, password: string) => {
@@ -78,5 +86,5 @@ export default function useAuth() {
         }
     };
 
-    return { isLoggedIn, logout, login };
+    return { isLoggedIn, logout, login, getCo2Token, setCo2Token };
 }

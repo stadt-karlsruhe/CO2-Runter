@@ -1,5 +1,5 @@
 <template>
-    <v-form @submit.prevent="handleSubmit">
+    <v-form @submit.prevent="submitAccountRegistrationRequest">
         <v-alert v-if="error" type="error"> {{ error }}</v-alert>
         <v-text-field
             v-model="username"
@@ -62,7 +62,10 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
+import { JwtToken } from '@/types/JwtToken';
+import useAuth from '@/composables/useAuth';
 
+const { setCo2Token } = useAuth();
 const router = useRouter();
 const username = ref('');
 const email = ref('');
@@ -102,7 +105,7 @@ const isFormValid = () => {
     );
 };
 
-const handleSubmit = async () => {
+const submitAccountRegistrationRequest = async () => {
     if (password.value !== confirmPassword.value) {
         error.value = 'Die Passwörter stimmen nicht überein';
         return;
@@ -122,7 +125,6 @@ const handleSubmit = async () => {
         });
 
         if (!response.ok) {
-            const responseData = await response.json();
             switch (response.status) {
                 case 400:
                     error.value =
@@ -141,9 +143,10 @@ const handleSubmit = async () => {
             return;
         }
 
-        const data = await response.json();
-        localStorage.setItem('CO2Token', data.token);
+        const data: JwtToken = await response.json();
+        setCo2Token(data.token);
         await router.push('/');
+        location.reload();
     } catch (e) {
         error.value = 'Ein Serverfehler ist aufgetreten';
     }
