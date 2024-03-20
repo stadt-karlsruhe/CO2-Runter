@@ -19,7 +19,7 @@
                     Messen Sie ihren Co2-Fußabdruck
                 </v-btn>
             </v-col>
-            <v-col class="d-flex align-center  justify-center" cols="12" md="5">
+            <v-col class="d-flex align-center justify-center" cols="12" md="5">
                 <v-img
                     width="360px"
                     height="200px"
@@ -30,7 +30,7 @@
 
         <!-- Second Row -->
         <v-row class="d-flex flex-column flex-md-row my-16">
-            <v-col class="d-flex align-center  justify-center" cols="12" md="5">
+            <v-col class="d-flex align-center justify-center" cols="12" md="5">
                 <v-img
                     width="360px"
                     height="200px"
@@ -75,7 +75,7 @@
                     Mach dich schlau
                 </v-btn>
             </v-col>
-            <v-col class="d-flex align-center  justify-center" cols="12" md="5">
+            <v-col class="d-flex align-center justify-center" cols="12" md="5">
                 <v-img
                     width="360px"
                     height="200px"

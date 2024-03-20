@@ -8,6 +8,13 @@
         </v-container>
 
         <v-container v-else justify="center">
+            <v-row v-if="error">
+                <v-col>
+                    <v-alert icon="mdi-alert" type="error">
+                        {{ error }}Alert
+                    </v-alert>
+                </v-col>
+            </v-row>
             <v-row class="d-flex flex-column-reverse flex-md-row my-16">
                 <v-col cols="12" md="7" class="text-center text-md-start">
                     <h1 class="text-primary-darken-1">
@@ -44,19 +51,16 @@
                         Gruppe erstellen
                     </v-btn>
                 </v-col>
-                <v-col class="d-flex align-center justify-center" cols="12" md="5">
+                <v-col
+                    class="d-flex align-center justify-center"
+                    cols="12"
+                    md="5"
+                >
                     <v-img
                         width="360px"
                         height="200px"
                         src="../assets/undraw_selecting_team_re_ndkb.svg"
                     />
-                </v-col>
-            </v-row>
-            <v-row v-if="error">
-                <v-col>
-                    <v-alert icon="mdi-alert" type="error">
-                        {{ error }}Alert
-                    </v-alert>
                 </v-col>
             </v-row>
         </v-container>
