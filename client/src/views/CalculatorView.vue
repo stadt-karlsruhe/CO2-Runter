@@ -1,32 +1,3 @@
-<script setup lang="ts">
-import { ref, computed } from 'vue';
-
-const shipping = ref(0);
-const step = ref(1);
-const items = ref(['Review Order', 'Select Shipping', 'Submit']);
-const products = ref([
-    {
-        name: 'Product 1',
-        price: 10,
-        quantity: 2,
-    },
-    {
-        name: 'Product 2',
-        price: 15,
-        quantity: 10,
-    },
-]);
-
-const subtotal = computed(() =>
-    products.value.reduce(
-        (acc, product) => acc + product.quantity * product.price,
-        0
-    )
-);
-
-const total = computed(() => subtotal.value + Number(shipping.value ?? 0));
-</script>
-
 <template>
     Calculator
     <v-stepper v-model="step" :items="items" show-actions>
@@ -119,5 +90,34 @@ const total = computed(() => subtotal.value + Number(shipping.value ?? 0));
         </template>
     </v-stepper>
 </template>
+
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+
+const shipping = ref(0);
+const step = ref(1);
+const items = ref(['Review Order', 'Select Shipping', 'Submit']);
+const products = ref([
+    {
+        name: 'Product 1',
+        price: 10,
+        quantity: 2,
+    },
+    {
+        name: 'Product 2',
+        price: 15,
+        quantity: 10,
+    },
+]);
+
+const subtotal = computed(() =>
+    products.value.reduce(
+        (acc, product) => acc + product.quantity * product.price,
+        0
+    )
+);
+
+const total = computed(() => subtotal.value + Number(shipping.value ?? 0));
+</script>
 
 <style scoped></style>

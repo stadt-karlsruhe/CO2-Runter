@@ -1,5 +1,5 @@
 <script setup lang="ts"></script>
 
-<template>Login</template>
+<template>Gruppen</template>
 
 <style scoped></style>

@@ -46,6 +46,7 @@
 
                 <v-list-item
                     to="/gruppensystem"
+                    :exact="true"
                     title="Gruppensystem"
                     prepend-icon="mdi-account-group-outline"
                     class="mx-1 rounded-lg"
@@ -53,13 +54,58 @@
                 />
 
                 <v-list-item
-                    to="/login"
+                    v-if="!isLoggedIn"
+                    to="/login-registration"
+                    :exact="true"
                     title="Login"
                     prepend-icon="mdi-login-variant"
                     class="rounded-lg mx-1 mr-3"
                     color="primary-darken-1"
                     :active="true"
                 />
+
+                <v-menu v-else :close-on-content-click="false">
+                    <template v-slot:activator="{ props }">
+                        <v-list-item
+                            v-bind="props"
+                            class="rounded-lg mx-1 mr-3"
+                            color="primary-darken-1"
+                            :active="true"
+                        >
+                            <template v-slot:prepend>
+                                <v-icon>mdi-account</v-icon>
+                            </template>
+
+                            <v-list-item-title>Konto </v-list-item-title>
+
+                            <template v-slot:append>
+                                <v-icon>mdi-unfold-more-horizontal</v-icon>
+                            </template>
+                        </v-list-item>
+                    </template>
+
+                    <v-sheet rounded="lg" elevation="10" class="mt-2">
+                        <v-list class="pa-4">
+                            <v-list-subheader>Konto Aktionen </v-list-subheader>
+
+                            <v-list-item
+                                title="Gruppen Infos"
+                                prepend-icon="mdi-information-outline"
+                                class="mb-1 rounded-lg"
+                                color="primary-darken-1"
+                                to="/gruppensystem/gruppen-informationen"
+                            />
+
+                            <v-list-item
+                                title="Logout"
+                                prepend-icon="mdi-logout"
+                                class="mb-1 rounded-lg"
+                                color="primary-darken-1"
+                                @click="logout()"
+                            />
+                        </v-list>
+                    </v-sheet>
+                </v-menu>
             </v-list>
         </div>
     </v-app-bar>
@@ -96,6 +142,7 @@
 
             <v-list-item
                 to="/gruppensystem"
+                :exact="true"
                 title="Gruppensysten"
                 prepend-icon="mdi-account-group-outline"
                 class="mb-1 rounded-lg"
@@ -103,13 +150,58 @@
             />
 
             <v-list-item
-                to="/login"
+                v-if="!isLoggedIn"
+                to="/login-registration"
+                :exact="true"
                 title="Login"
                 prepend-icon="mdi-login-variant"
                 class="mb-1 rounded-lg"
                 color="primary-darken-1"
                 :active="true"
             />
+
+            <v-menu v-else :close-on-content-click="false">
+                <template v-slot:activator="{ props }">
+                    <v-list-item
+                        v-bind="props"
+                        class="rounded-lg"
+                        color="primary-darken-1"
+                        :active="true"
+                    >
+                        <template v-slot:prepend>
+                            <v-icon>mdi-account</v-icon>
+                        </template>
+
+                        <v-list-item-title>Konto </v-list-item-title>
+
+                        <template v-slot:append>
+                            <v-icon>mdi-unfold-more-horizontal</v-icon>
+                        </template>
+                    </v-list-item>
+                </template>
+
+                <v-sheet rounded="lg" elevation="10" class="mt-2">
+                    <v-list class="pa-4">
+                        <v-list-subheader>Konto Aktionen </v-list-subheader>
+
+                        <v-list-item
+                            title="Gruppen Infos"
+                            prepend-icon="mdi-information-outline"
+                            class="mb-1 rounded-lg"
+                            color="primary-darken-1"
+                            to="/gruppensystem/gruppen-informationen"
+                        />
+
+                        <v-list-item
+                            title="Logout"
+                            prepend-icon="mdi-logout"
+                            class="mb-1 rounded-lg"
+                            color="primary-darken-1"
+                            @click="logout()"
+                        />
+                    </v-list>
+                </v-sheet>
+            </v-menu>
         </v-list>
     </v-navigation-drawer>
 
@@ -118,15 +210,20 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import useAuth from '@/composables/useAuth';
 import PWAInstallationDialog from '@/components/PWAInstallationDialog.vue';
 
+// Use the composable
+const { isLoggedIn, logout } = useAuth();
+
+// Your remaining code stays the same
 const isDrawerOpen = ref(false);
 
 watch(isDrawerOpen, (newValue) => {
     if (newValue) {
         document.body.style.overflow = 'hidden';
     } else {
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = 'visible';
     }
 });
 </script>

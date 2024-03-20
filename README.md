@@ -1,192 +1,105 @@
+# Table of Contents
+
+- [CO2 Runter Web Application](#co2-runter-web-application)
+    - [Prerequisites](#prerequisites)
+    - [Development Setup with Docker](#development-setup-with-docker)
+        - [Setting Up Dependencies](#setting-up-dependencies)
+        - [Starting Docker Containers](#starting-docker-containers)
+        - [Using Webstorm IDE](#using-webstorm-ide)
+        - [Developing the Frontend with Docker](#developing-the-frontend-with-docker)
+        - [Common Issues](#common-issues)
+    - [Build Instructions for Production](#build-instructions-for-production)
+    - [Contribution Workflow](#contribution-workflow)
+    - [License](#license)
+
 # CO2 Runter Web Application
 
-An innovative web app that allows users to calculate and compare their personal carbon footprint, motivating them to
-live more environmentally conscious and reduce their energy consumption.
+CO2 Runter Web Application is an innovative platform that empowers users to calculate and compare their personal carbon
+footprint. By providing insights into energy consumption, it motivates users to adopt more environmentally conscious
+lifestyles.
 
 ## Prerequisites
 
+Before using the application, ensure you have the following installed:
+
 - [Node.js](https://nodejs.org/en/)
-- [Docker](https://www.docker.com/) (recommended for easy setup)
+- [Docker](https://www.docker.com/)
 
 ## Development Setup with Docker
 
-If you are using it is quite simple to set everything up.
+For all the development setup, you have to start Docker before running any commands.
 
-First you need to install all the require Node modules. To do this, run `npm i` inside the client and server
-directories.
+### Using Webstorm IDE
 
-For the client directory.
+If you're using Webstorm IDE, follow these steps:
+
+1. Select the `Complete Repository Setup` configuration.
+2. Run the configuration.
+
+### Setting Up Dependencies
+
+To set up the development environment, follow these steps:
+
+1. Install Node modules:
+    ```bash
+    cd client
+    npm ci
+    cd ..
+    cd server
+    npm ci
+    ```
+
+### Starting Docker Containers
+
+To start Docker containers, run the following command in the main project directory:
 
 ```bash
-cd client
-npm ci
+docker-compose up --build
 ```
 
-Go back to the main directory
+### Developing the Frontend with Docker
 
-```bash
-cd ..
-```
+To develop the client and access the API, use the following steps:
 
-Install the moduls in the server directory.
+1. Start the client in development mode (start server, DB, NGINX, Adminer over Docker):
+    ```bash
+    docker compose -f docker-compose-client-development.yml up --build
+    ```
 
-```bash
-cd server
-npm ic
-```
+2. Start the client:
+    ```bash
+    cd client
+    npm run dev
+    ```
 
-After installing the Node moduls you can start the Docker containers. To do this, run `docker-compose up --build` inside
-the main project directory. Then afterward all the containers should be running.
+### Common Issues
 
-The client should be accessible via `http://localhost:3050/` via nginx.
-
-The Adminer should be accessible via `http://localhost:8000/`.
-
-Before everything works you need to load the data into the database. To do this you first need to log into the Adminer
-using the following credentials:
-
-Database System: `mysql_db`
-
-Username: `root`
-
-Password: `12345`
-
-Database you want to access: `db_co2runter`
-
-After logging in, copy the contents of `loader-new.sql` and paste it into the `SQL Command` query box in Adminer and
-click `Execute`. Now you see in the tabler overview that all the tables have been filled with data. Now you just need to
-create a `config.js` file in the `server` directory and past the contents of `config-template.js` into the newly
-created `config.js`. Now everything is set up and should work.
-
-Note: If you are using the Webstorm IDE from JetBrains, the configurations to start everything are already set up. You
-just need to select the `Complete Repository Setup` configuration and then run it. Additionally, there are
-configurations for starting the Docker containers and the client and server in development mode or production mode. But
-you still need to create the `config.js` file.
-
-### Developing the Client with Docker
-
-To develop the client but still be able to get the data from backend and access the API, you just need to do a few
-things.
-
-Exacly for this reason there is a `docker-compose-client-development.yml` file. To start the client in development mode,
-run `docker compose -f docker-compose-client-development.yml up --build` inside the main project directory. Then
-afterward the client should be accessible via `http://localhost:3050/` via nginx.
-
-But because you are developing the client, you need to start the client in development mode. To do this,
-run `npm run dev` inside the client directory. Then afterward the client should be accessible
-via `http://localhost:3000/` and over the nginx server via `http://localhost:3050/`, where you can access the API.
+If you encounter errors, ensure you've loaded data into the database. Use `loader-new.sql` and paste it into the SQL
+command query box in Adminer.
 
 ## Build Instructions for Production
 
-    Change DB Password and Token Key in `docker-compose-pord.yml` to something new
+Follow these steps to build the application for production:
 
-    Run `docker compose -f docker-compose-prod.yml up --build` inside the main project directory
-
-    To log in, use `mysql_db` as the server Username as `root` and password as the new Password.
-
-    To start interacting with the application, open `http://localhost:9001/` on a browser.
-
-## Install without Docker
-
-With an existing mysql/mariadb server you can deploy client and server directly without docker.
-
-Database config expects your mysql ro run on the standard port 3306.
-
-Assume the following directory setup with nginx
-
-    * Client in /var/www/html/co2runter/app
-    * Server in  /var/www/html/co2runter/api
-
-Nginx config:
-
-```
-server {
-    listen 80;
-    server_name co2runter.<your domain>;
-    return 301 https://$host$request_uri;
-}
-
-server {
-        listen 443 ssl;
-        server_name co2runter.<your domain>;
-        location /api {
-        rewrite /api/(.*) /$1 break;
-        proxy_pass http://localhost:3001;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        }
-        location / {
-        root /var/www/html/co2runter/app;  #client/build;
-        index index.html;
-        try_files $uri /index.html;
-        }
-}
-
-```
-
-Build and install the frontend client like so:
-
-> cd client
->
-> npm i
->
-> npm run build
->
-> cp -r build/\* /var/www/html/co2runter/app/
-
-Install the backend server like so:
-
-> cd server
->
-> npm i
->
-> cp -r server/\* /var/www/html/co2runter/api/
-
-Create the config file:
-
-> cd /var/www/html/co2runter/api/
->
-> cp config_template.js config.js
-
-Edit the configuration in config.js
-
-- Set database parameters according to your setup
-- Set token key, e.g. 16 character random string
-
-Initialize database
-
-- Load setup.sql
-- Load defaults.sql to get the comparison values for "Deutschland" and "Karlsruhe"
-
-Start the service
-
-> npm run start
-
-### Setup process monitoring and autostart
-
-... to be done ....
+1. Change DB Password and Token Key in `docker-compose-pord.yml` to something new.
+2. Run:
+    ```bash
+    docker compose -f docker-compose-prod.yml up --build
+    ```
+3. To log in, use `mysql_db` as the server, `root` as the username, and the new password.
+4. Access the application at `http://localhost:9001/`.
 
 ## Contribution Workflow
 
-Contributing to the CO2 Runter Web Application is a straightforward process. Follow these steps for each feature, bug
-fix, or other changes:
+Contributing to CO2 Runter Web Application is easy:
 
-1. **Create a New Branch**: Start by creating a new branch for your feature or bug fix. Use the naming convention
-   recommended by [Conventional Commits](https://www.conventionalcommits.org/):
+1. **Create a New Branch**: Start a new branch for your feature, bug fix, or documentation update.
+2. **Make Commits**: Make descriptive commits on your branch.
+3. **Push Your Branch**: Push your branch to the remote repository.
+4. **Create a Pull Request (PR)**: Create a PR on GitHub from your branch.
+5. **Review and Merge**: Your PR will be reviewed and merged into the main repository.
 
-   - For a new feature: `feat/your-feature-name`
-   - For a bug fix: `fix/your-bug-name`
-   - For a documentation update: `docs/your-documentation-update`
+## License
 
-2. **Making Commits**: After creating the branch, make commits to it that encapsulate your work. Please ensure that each
-   commit has a clear and descriptive message.
-
-3. **Push Your Branch**: Once you've made your commits, push your branch to the remote repository.
-
-4. **Create a Pull Request (PR)**: On GitHub, create a pull request from your branch. Follow the instructions provided
-   in the pull request template.
-
-5. **Review and Merge**: Your pull request will be reviewed by a team member or maintainer. Once it's approved, your
-   changes will be merged into the main repository.
-
-This workflow ensures a clean commit history and makes it easy for others to understand and review your contributions.
+This project is licensed under the Creative Commons CC0 1.0 Universal License. For more details, see
+the [LICENSE](https://github.com/stadt-karlsruhe/CO2-Runter?tab=CC0-1.0-1-ov-file) file.

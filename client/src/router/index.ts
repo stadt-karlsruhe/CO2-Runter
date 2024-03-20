@@ -1,5 +1,6 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router';
+import useAuth from '@/composables/useAuth';
 
 const routes = [
     {
@@ -54,20 +55,61 @@ const routes = [
         component: () => import('@/layouts/default/Default.vue'),
         children: [
             {
-                path: '/gruppensystem',
+                path: '',
                 name: 'Gruppensystem',
                 component: () => import('@/views/GroupSystemView.vue'),
+            },
+            {
+                path: 'neue-gruppe',
+                name: 'Neue Gruppe erstellen',
+                component: () => import('@/views/GroupSystemNewGroupView.vue'),
+                // Login Protection Guard
+                beforeEnter: (to: any, from: any, next: any) => {
+                    window.sessionStorage.setItem(
+                        'previousRoutePath',
+                        from.path
+                    );
+                    const { isLoggedIn } = useAuth();
+                    if (!isLoggedIn.value) {
+                        next('/login-registration');
+                    } else {
+                        next();
+                    }
+                },
+            },
+            {
+                path: 'gruppen-informationen',
+                name: 'Gruppen Informationen',
+                component: () =>
+                    import('@/views/GroupSystemGroupInformation.vue'),
+                // Login Protection Guard
+                beforeEnter: (to: any, from: any, next: any) => {
+                    const { isLoggedIn } = useAuth();
+                    if (!isLoggedIn.value) {
+                        next('/login-registration');
+                    } else {
+                        next();
+                    }
+                },
             },
         ],
     },
     {
-        path: '/login',
+        path: '/login-registration',
         component: () => import('@/layouts/default/Default.vue'),
+        beforeEnter: async (to: any, from: any, next: any) => {
+            const { isLoggedIn } = useAuth();
+            if (isLoggedIn.value) {
+                next('/');
+            } else {
+                next();
+            }
+        },
         children: [
             {
-                path: '/login',
+                path: '',
                 name: 'Login',
-                component: () => import('@/views/LoginView.vue'),
+                component: () => import('@/views/LoginRegistrationView.vue'),
             },
         ],
     },
