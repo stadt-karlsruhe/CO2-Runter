@@ -52,7 +52,7 @@
                 <v-img
                     width="360px"
                     height="200px"
-                    src="../assets/undraw_question_for_faq.svg"
+                    src="../assets/undraw_up_to_date_re_nqid.svg"
                 />
             </v-col>
             <v-col cols="12" md="7" class="text-center text-md-start">
