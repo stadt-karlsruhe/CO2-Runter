@@ -1,5 +1,217 @@
-<template>FAQ</template>
+<template>
+    <v-container justify="center">
+        <!-- First Row -->
+        <v-row
+            class="d-flex flex-column-reverse align-center flex-md-row my-16"
+        >
+            <v-col cols="12" md="7" class="text-center text-md-start">
+                <h1 class="text-primary-darken-1">
+                    Sie haben Fragen zum Klimaschutz oder zur Webseite??
+                </h1>
+                <p class="text-secondary my-8">
+                    Hier finden Sie weitere Infos rund um die CO2Runter
+                    Webseite. Zusätzlich finden Sie hier Antworten und
+                    Erklärungen rund um das Thema Klimaschutz.
+                </p>
+            </v-col>
+            <v-col class="d-flex justify-center" cols="12" md="5">
+                <v-img
+                    width="360px"
+                    height="200px"
+                    src="../assets/undraw_question_for_faq.svg"
+                />
+            </v-col>
+        </v-row>
 
-<script setup lang="ts"></script>
+        <!-- Second Row -->
+        <v-row class="d-flex align-center justify-center flex-md-row my-16">
+            <v-col>
+                <h1 class="text-primary-darken-1 text-center mb-4">Frequently Asked Questions</h1>
 
-<style scoped></style>
+                <v-expansion-panels variant="popout">
+                    <v-expansion-panel
+                        title="Wie funktionert der CO2 Rechner?"
+                        class="text-secondary"
+                    >
+                        <v-expansion-panel-text>
+                            Laut Energiebilanz Karlsruhe 2020 liegt der CO2
+                            Ausstoß bei 7,4t jährlich pro Kopf. Die Effekte
+                            durch privaten Konsum sind dabei nicht enthalten.
+                            Addiert man hier den Grundwert (2,9t) gemäß unserer
+                            Vereinfachung des UBA-Modells, dann erhält man 10,3t
+                            CO2. Diese Grundwert-Summe bildet sich aus 4
+                            "Sektoren", die wir durch unseren Lebensstil
+                            beeinflussen können, plus einer festen Zugabe für
+                            öffentliche Infrastruktur. Im CO2-Rechner können
+                            individuelle Angaben für die Sektoren Wohnen
+                            (Heizung und Strom), Mobilität, Ernährung und
+                            allgemeiner Konsum gemacht werden. Die
+                            Auswahlmöglichkeiten und Berechnungsmodelle sind an
+                            den CO2-Rechner des Umweltbundesamts angelehnt. So
+                            lassen sich die Effekte zeigen, die wir durch einen
+                            sparsamen oder weniger sparsamen Lebensstil erzielen
+                            können. Eine exaktere Berechnung ist ohne weitere
+                            Informationen über die persönliche Situation im
+                            Einzelfall nicht möglich. Weitere Informationen zum
+                            UBA-Modell und den Einsparpotentialen finden sich in
+                            dieser
+                            <a
+                                href="https://www.umweltbundesamt.de/publikationen/klimaneutral-leben"
+                                >Publikation</a
+                            >
+                            des UBA.
+                        </v-expansion-panel-text>
+                    </v-expansion-panel>
+
+                    <v-expansion-panel
+                        title="Wo kann ich die Ergebnisse vom CO2 Rechner einsehen?"
+                        class="text-secondary"
+                    >
+                        <v-expansion-panel-text>
+                            Persönliche Maßnahmen für den Klimaschutz werden
+                            erfolgreicher, wenn wir auch andere Menschen von
+                            ihnen überzeugen. Geben Sie Ihren Stadtteil an und
+                            die Anzahl der Personen, die Sie dort als
+                            Mitstreiterinnen und Mitstreiter gewinnen können und
+                            nehmen Sie so an der Klima-Challenge teil. Die
+                            aktuellen Ergebnisse sind auf unserem
+                            <a href="/Dashboard">CO2-Dashboard</a> sichtbar. Im
+                            Kanal "Grüne Stadt" der
+                            <a
+                                href="https://www.karlsruhe.de/stadt-rathaus/so-ist-karlsruhe/digital-smart/karlsruheapp"
+                                >Karlsruhe-App</a
+                            >
+                            wird das Umweltamt das Projekt weiter verfolgen.
+                        </v-expansion-panel-text>
+                    </v-expansion-panel>
+
+                    <v-expansion-panel
+                        title="Warum sollte ich das Klima schützen?"
+                        text="Lorem ipsum..."
+                        class="text-secondary"
+                    ></v-expansion-panel>
+
+                    <v-expansion-panel
+                        title="Was ist der CO2 Fußabdruck und wieso ist er so wichtig?"
+                        text="Lorem ipsum..."
+                        class="text-secondary"
+                    ></v-expansion-panel>
+
+                    <v-expansion-panel
+                        title="Wie kann ich den Klimaschutz in meinen Alltag integrieren?"
+                        text="Lorem ipsum..."
+                        class="text-secondary"
+                    ></v-expansion-panel>
+
+                    <v-expansion-panel
+                        title="Wo kann ich mich weiter informieren?"
+                        text="Lorem ipsum..."
+                        class="text-secondary"
+                    ></v-expansion-panel>
+                </v-expansion-panels>
+            </v-col>
+        </v-row>
+
+        <!-- Third Row -->
+        <v-row class="d-flex flex-column-reverse flex-md-row my-16">
+            <v-col
+                class="d-flex align-center justify-center my"
+                cols="12"
+                md="5"
+            >
+                <v-img
+                    width="360px"
+                    height="200px"
+                    src="../assets/undraw_up_to_date_re_nqid.svg"
+                />
+            </v-col>
+
+            <v-col cols="12" md="7" class="text-center text-md-start">
+                <h1 class="text-primary-darken-1">
+                    Sie möchten sich selbst ein wenig tiefer in den Klimaschutz
+                    einlesen oder unsere Quellen sehen?
+                </h1>
+
+                <p class="text-secondary my-8">
+                    Dann finden Sie hier unsere Literaturliste. Anbei sind alle
+                    Informationen aufgelistet, die auf der CO2Runter Webseite
+                    präsentiert werden. Zusätzlich sind weitere interessante
+                    Artikel zum Thema Klimaschutz enthalten. Schauen Sie
+                    unbedingt rein!
+                </p>
+            </v-col>
+        </v-row>
+
+        <!-- Fourth Row -->
+        <v-row class="d-flex flex-md-row my-16">
+            <v-col>
+                <v-container>
+                    <h1 class="text-primary-darken-1 text-center mb-4">
+                        Literaturliste
+                    </h1>
+
+                    <v-data-table :items="literatureSources"></v-data-table>
+                </v-container>
+            </v-col>
+        </v-row>
+    </v-container>
+</template>
+
+<script setup lang="ts">
+const literatureSources = [
+    {
+        titel: 'Test Titel eines Buches',
+        autor: 'Test Name',
+        jahr: 'Quelle des Textes/Internetseite',
+        quelle: 2019,
+    },
+    {
+        titel: 'Test Titel eines Buches',
+        autor: 'Test Name',
+        jahr: 'Quelle des Textes/Internetseite',
+        quelle: 2019,
+    },
+    {
+        titel: 'Test Titel eines Buches',
+        autor: 'Test Name',
+        jahr: 'Quelle des Textes/Internetseite',
+        quelle: 2019,
+    },
+    {
+        titel: 'Test Titel eines Buches',
+        autor: 'Test Name',
+        jahr: 'Quelle des Textes/Internetseite',
+        quelle: 2019,
+    },
+    {
+        titel: 'Test Titel eines Buches',
+        autor: 'Test Name',
+        jahr: 'Quelle des Textes/Internetseite',
+        quelle: 2019,
+    },
+    {
+        titel: 'Test Titel eines Buches',
+        autor: 'Test Name',
+        jahr: 'Quelle des Textes/Internetseite',
+        quelle: 2019,
+    },
+    {
+        titel: 'Test Titel eines Buches',
+        autor: 'Test Name',
+        jahr: 'Quelle des Textes/Internetseite',
+        quelle: 2019,
+    },
+    {
+        titel: 'Test Titel eines Buches',
+        autor: 'Test Name',
+        jahr: 'Quelle des Textes/Internetseite',
+        quelle: 2019,
+    },
+    {
+        titel: 'Test Titel eines Buches',
+        autor: 'Test Name',
+        jahr: 'Quelle des Textes/Internetseite',
+        quelle: 2019,
+    },
+];
+</script>
