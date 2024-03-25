@@ -26,7 +26,9 @@
         <!-- Second Row -->
         <v-row class="d-flex align-center justify-center flex-md-row my-16">
             <v-col>
-                <h1 class="text-primary-darken-1 text-center mb-4">Frequently Asked Questions</h1>
+                <h1 class="text-primary-darken-1 text-center mb-4">
+                    Frequently Asked Questions
+                </h1>
 
                 <v-expansion-panels variant="popout">
                     <v-expansion-panel
