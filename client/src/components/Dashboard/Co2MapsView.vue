@@ -30,7 +30,7 @@ import {
     VisualMapComponent,
 } from 'echarts/components';
 import VChart from 'vue-echarts';
-import { MapChart } from 'echarts/charts'
+import { MapChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { registerMap } from 'echarts';
 import geoJson from './districts_geo.json';
@@ -46,7 +46,7 @@ use([
     TooltipComponent,
     CanvasRenderer,
     VisualMapComponent,
-    MapChart
+    MapChart,
 ]);
 
 registerMap('Karlsruhe', geoJson as GeoJSONSourceInput);
