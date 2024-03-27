@@ -48,6 +48,14 @@ To set up the development environment, follow these steps:
     cd server
     npm ci
     ```
+2. Load the database schema:
+    - Open Adminer at `http://localhost:8080/`.
+    - Use `mysql_db` as the server, `root` as the username, and `12345` as the password.
+    - and use `db_co2runter` as the database.
+    - Import the `loader-new.sql` file into the database over the SQL command query box.
+3. Create server config file
+    - Create a new file named `config.json` in the `server` directory.
+    - paste the content form the `config-template.js` into the `config.json` file.
 
 ### Starting Docker Containers
 

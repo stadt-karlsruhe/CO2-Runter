@@ -1,7 +1,8 @@
 <template>
     <v-app>
         <v-container class="mt-5" v-if="groupCode && groupCode.groupcode">
-            <GroupSuccesfull
+            <GroupSuccessful
+                v-if="groupCode"
                 :group-code="groupCode.groupcode"
                 :group-name="groupName"
             />
@@ -11,7 +12,7 @@
             <v-row v-if="error">
                 <v-col>
                     <v-alert icon="mdi-alert" type="error">
-                        {{ error }}Alert
+                        {{ error }}
                     </v-alert>
                 </v-col>
             </v-row>
@@ -69,37 +70,38 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useFetch } from '@vueuse/core';
-import GroupSuccesfull from '@/components/GroupSystem/GroupSuccesfull.vue';
+import GroupSuccessful from '@/components/GroupSystem/GroupSuccessful.vue';
 import { GroupCreatedResponse } from '@/types/GroupCreatedResponse';
 
 const groupName = ref('');
-const groupCode = ref<GroupCreatedResponse>();
+const groupCode = ref<GroupCreatedResponse | null>(null);
 const error = ref<string | null>(null);
-
-const {
-    isFetching,
-    execute,
-    data,
-    error: fetchError,
-} = useFetch<GroupCreatedResponse>('/api/groups/create', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-        co2token: localStorage.getItem('CO2Token'),
-        groupname: groupName.value,
-    }),
-}).json();
+const isFetching = ref(false);
 
 const CreateGroup = async () => {
-    await execute();
+    isFetching.value = true;
 
-    if (fetchError.value) {
+    const response = await fetch('/api/groups/create', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            co2token: localStorage.getItem('CO2Token'),
+            groupname: groupName.value,
+        }),
+    });
+
+    isFetching.value = false;
+
+    if (!response.ok) {
         error.value = 'A server error occurred.';
-    } else if (data.value) {
-        groupCode.value = data.value;
+        return;
     }
+
+    const data = await response.json();
+    groupCode.value = data as GroupCreatedResponse;
 };
 </script>
+
+<style scoped></style>

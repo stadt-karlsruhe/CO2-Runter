@@ -13,7 +13,7 @@ import { createVuetify } from 'vuetify';
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 
-const myCustomLightTheme = {
+const customLightTheme = {
     dark: false,
     colors: {
         background: '#FFFFFF',
@@ -52,9 +52,9 @@ const myCustomLightTheme = {
 };
 export default createVuetify({
     theme: {
-        defaultTheme: 'myCustomLightTheme',
+        defaultTheme: 'customLightTheme',
         themes: {
-            myCustomLightTheme,
+            customLightTheme,
         },
     },
 });
