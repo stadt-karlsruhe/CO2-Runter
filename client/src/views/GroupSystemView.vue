@@ -40,7 +40,6 @@
                             Gruppe Hinzufügen
                         </v-btn>
                     </div>
-
                 </div>
 
                 <div class="my-8">
@@ -94,7 +93,7 @@ const groupCode = ref('');
 const error = ref('');
 
 // TODO: this is not working currently
-const joinGroup = async() => {
+const joinGroup = async () => {
     try {
         const response = await fetch('/add_user', {
             method: 'POST',
@@ -114,7 +113,7 @@ const joinGroup = async() => {
         groupCode.value = '';
     } catch (err) {
         console.error(err);
-        error.value = 'Fehler beim Hinzufügen zur Gruppe';;
+        error.value = 'Fehler beim Hinzufügen zur Gruppe';
     }
 };
 </script>
