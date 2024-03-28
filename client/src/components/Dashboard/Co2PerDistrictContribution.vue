@@ -20,13 +20,9 @@ import { BarChart } from 'echarts/charts';
 import { DatasetComponent, GridComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import VChart from 'vue-echarts';
+import { DistrictFootprint } from '@/components/Dashboard/DistrictFootprint';
 
 use([BarChart, DatasetComponent, GridComponent, CanvasRenderer]);
-
-interface DistrictFootprint {
-    name: string;
-    total: number;
-}
 
 const footprints_in_districts = ref<DistrictFootprint[]>([]);
 const chartOptions = shallowRef(getData());
