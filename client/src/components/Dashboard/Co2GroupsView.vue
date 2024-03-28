@@ -2,6 +2,7 @@
     <v-card>
         <v-card-title>Gruppen</v-card-title>
         <v-card-text>
+            <v-progress-circular class="mx-auto"></v-progress-circular>
             <v-chart
                 :option="chartOptions"
                 autoresize
@@ -9,6 +10,13 @@
                 :loadingOptions="loadingOptions"
                 style="height: 600px; width: 100%"
             />
+
+            <div style="text-align: center">
+                Keine Daten verfügbar: Wähle eine Gruppe aus oder füge eine Neue
+                hinzu
+            </div>
+
+            <v-select label="Angezeigte Gruppen wählen"></v-select>
         </v-card-text>
     </v-card>
 </template>
