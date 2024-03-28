@@ -1,6 +1,5 @@
 <template>
     <v-container justify="center">
-        <!-- First Row -->
         <v-row
             class="d-flex flex-column-reverse align-center flex-md-row my-16"
         >
@@ -23,7 +22,6 @@
             </v-col>
         </v-row>
 
-        <!-- Second Row -->
         <v-row class="d-flex align-center justify-center flex-md-row my-16">
             <v-col>
                 <h1 class="text-primary-darken-1 text-center mb-4">
@@ -86,35 +84,10 @@
                             wird das Umweltamt das Projekt weiter verfolgen.
                         </v-expansion-panel-text>
                     </v-expansion-panel>
-
-                    <v-expansion-panel
-                        title="Warum sollte ich das Klima schützen?"
-                        text="Lorem ipsum..."
-                        class="text-secondary"
-                    ></v-expansion-panel>
-
-                    <v-expansion-panel
-                        title="Was ist der CO2 Fußabdruck und wieso ist er so wichtig?"
-                        text="Lorem ipsum..."
-                        class="text-secondary"
-                    ></v-expansion-panel>
-
-                    <v-expansion-panel
-                        title="Wie kann ich den Klimaschutz in meinen Alltag integrieren?"
-                        text="Lorem ipsum..."
-                        class="text-secondary"
-                    ></v-expansion-panel>
-
-                    <v-expansion-panel
-                        title="Wo kann ich mich weiter informieren?"
-                        text="Lorem ipsum..."
-                        class="text-secondary"
-                    ></v-expansion-panel>
                 </v-expansion-panels>
             </v-col>
         </v-row>
 
-        <!-- Third Row -->
         <v-row class="d-flex flex-column-reverse flex-md-row my-16">
             <v-col
                 class="d-flex align-center justify-center my"
@@ -144,7 +117,6 @@
             </v-col>
         </v-row>
 
-        <!-- Fourth Row -->
         <v-row class="d-flex flex-md-row my-16">
             <v-col>
                 <v-container>
@@ -152,7 +124,40 @@
                         Literaturliste
                     </h1>
 
-                    <v-data-table :items="literatureSources"></v-data-table>
+                    <v-text-field
+                        v-model="search"
+                        label="Suchen"
+                        prepend-inner-icon="mdi-magnify"
+                        variant="outlined"
+                        hide-details
+                    ></v-text-field>
+
+                    <v-data-table
+                        v-model:page="page"
+                        :headers="headers"
+                        :items="literatureSources"
+                        :search="search"
+                    >
+                        <template v-slot:[`item.actions`]="props">
+                            <v-btn
+                                :href="props.item.url"
+                                target="_blank"
+                                icon="mdi-open-in-new"
+                                elevation="0"
+                                color="primary-darken-1"
+                                variant="text"
+                                size="small"
+                            />
+                        </template>
+                        <template v-slot:bottom>
+                            <div class="text-center pt-2">
+                                <v-pagination
+                                    v-model="page"
+                                    :length="pageCount"
+                                ></v-pagination>
+                            </div>
+                        </template>
+                    </v-data-table>
                 </v-container>
             </v-col>
         </v-row>
@@ -160,60 +165,39 @@
 </template>
 
 <script setup lang="ts">
-const literatureSources = [
+import { ref } from 'vue';
+import literatureSources from '@/constants/literatureSources';
+
+const search = ref('');
+const page = ref(1);
+const pageCount = Math.ceil(literatureSources.length / 10);
+
+const headers = [
     {
-        titel: 'Test Titel eines Buches',
-        autor: 'Test Name',
-        jahr: 'Quelle des Textes/Internetseite',
-        quelle: 2019,
+        title: 'Titel',
+        key: 'title',
     },
     {
-        titel: 'Test Titel eines Buches',
-        autor: 'Test Name',
-        jahr: 'Quelle des Textes/Internetseite',
-        quelle: 2019,
+        title: 'Author',
+        key: 'author',
     },
     {
-        titel: 'Test Titel eines Buches',
-        autor: 'Test Name',
-        jahr: 'Quelle des Textes/Internetseite',
-        quelle: 2019,
+        title: 'Publisher',
+        key: 'publisher',
+        optional: true,
     },
     {
-        titel: 'Test Titel eines Buches',
-        autor: 'Test Name',
-        jahr: 'Quelle des Textes/Internetseite',
-        quelle: 2019,
+        title: 'Veröffentlichung',
+        key: 'publicationYear',
     },
     {
-        titel: 'Test Titel eines Buches',
-        autor: 'Test Name',
-        jahr: 'Quelle des Textes/Internetseite',
-        quelle: 2019,
+        title: 'URL',
+        key: 'url',
     },
     {
-        titel: 'Test Titel eines Buches',
-        autor: 'Test Name',
-        jahr: 'Quelle des Textes/Internetseite',
-        quelle: 2019,
-    },
-    {
-        titel: 'Test Titel eines Buches',
-        autor: 'Test Name',
-        jahr: 'Quelle des Textes/Internetseite',
-        quelle: 2019,
-    },
-    {
-        titel: 'Test Titel eines Buches',
-        autor: 'Test Name',
-        jahr: 'Quelle des Textes/Internetseite',
-        quelle: 2019,
-    },
-    {
-        titel: 'Test Titel eines Buches',
-        autor: 'Test Name',
-        jahr: 'Quelle des Textes/Internetseite',
-        quelle: 2019,
+        title: '',
+        key: 'actions',
+        sortable: false,
     },
 ];
 </script>

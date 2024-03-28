@@ -7,7 +7,12 @@
             <div v-if="error">Es ist ein fehler aufgetreten: error</div>
 
             <v-chart
-                v-if="footprints && average && footprints.length > 0 && average.length > 0"
+                v-if="
+                    footprints &&
+                    average &&
+                    footprints.length > 0 &&
+                    average.length > 0
+                "
                 :option="chartOptions"
                 autoresize
                 :loading="loading"
@@ -16,7 +21,12 @@
             />
 
             <v-select
-                v-if="footprints && average && footprints.length > 0 && average.length > 0"
+                v-if="
+                    footprints &&
+                    average &&
+                    footprints.length > 0 &&
+                    average.length > 0
+                "
                 v-model="selectedFootprints"
                 :items="
                     footprints.map(
