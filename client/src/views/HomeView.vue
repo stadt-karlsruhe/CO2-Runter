@@ -15,6 +15,7 @@
                     color="primary-darken-1"
                     append-icon="mdi-chevron-right"
                     size="large"
+                    to="/rechner"
                 >
                     Messen Sie ihren Co2-Fußabdruck
                 </v-btn>

@@ -21,7 +21,7 @@
         <div class="hidden-sm-and-down">
             <v-list class="d-flex">
                 <v-list-item
-                    to="/co2Rechner"
+                    to="/rechner"
                     title="CO2 Rechner"
                     prepend-icon="mdi-calculator-variant-outline"
                     class="mx-1 rounded-lg"
@@ -117,7 +117,7 @@
             <v-list-subheader>Navigation</v-list-subheader>
 
             <v-list-item
-                to="/co2Rechner"
+                to="/rechner"
                 title="CO2 Rechner"
                 prepend-icon="mdi-calculator-variant-outline"
                 class="mb-1 rounded-lg"

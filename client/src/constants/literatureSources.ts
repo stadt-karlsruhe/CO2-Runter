@@ -8,7 +8,6 @@ const literatureSources: LiteratureSource[] = [
         publicationYear: '2019',
         url: 'http://example.com/test-title-of-a-book',
     },
-
 ];
 
 export default literatureSources;

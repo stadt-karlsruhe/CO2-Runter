@@ -18,11 +18,11 @@ const routes = [
         ],
     },
     {
-        path: '/co2rechner',
+        path: '/rechner',
         component: () => import('@/layouts/default/Default.vue'),
         children: [
             {
-                path: '/co2rechner',
+                path: '/rechner',
                 name: 'CO2Rechner',
                 component: () => import('@/views/CalculatorView.vue'),
             },
