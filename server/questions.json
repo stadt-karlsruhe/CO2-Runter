@@ -6,61 +6,128 @@
         {
           "text" : "Wie häufig fahren Sie mit dem Auto in der Woche?",
           "replies" : [
-            "Nie (< 20km)",
-            "Wenig (20km - 50km)",
-            "Durchschnittlich (50km - 75km)",
-            "Viel (75km - 100km)",
-            "Sehr Viel (> 100km)"
+            {
+              "text" : "Nie (< 20km)",
+              "value" : 0.0
+            },
+            {
+              "text" : "Wenig (20km - 50km)",
+              "value" : 0.67
+            },
+            {
+              "text" : "Durchschnittlich (50km - 75km)",
+              "value" : 1.75
+            },
+            {
+              "text" : "Viel (75km - 100km)",
+              "value" : 2.15
+            },
+            {
+              "text" : "Sehr Viel (> 100km)",
+              "value" : 3.58
+            }
           ],
-          "values" : [0, 0.67, 1.75, 2.15, 3.58],
           "selectedValue" : 1.75
         },
         {
           "text" : "Welchen Kraftstoff nutzen Sie?",
           "replies" : [
-            "Diesel",
-            "Benzin",
-            "Erdgas",
-            "Elektro"
+            {
+              "text" : "Diesel",
+              "value" : 0.003
+            },
+            {
+              "text" : "Benzin",
+              "value" : 0.0027
+            },
+            {
+              "text" : "Erdgas",
+              "value" : 0.0026
+            },
+            {
+              "text" : "Elektro",
+              "value" : 0.0004
+            }
           ],
-          "values" : [0.003, 0.0027, 0.0026, 0.0004],
           "selectedValue" : 0.0027
         },
         {
           "text" : "Wie hoch ist ihr Verbrauch in Liter pro Kilometer?",
           "replies" : [
-            "Sehr gering (< 3 l/km)",
-            "Gering (3-5 l/km)",
-            "Durchschnittlich (5-7 l/km)",
-            "Hoch (7-12 l/km)",
-            "Sehr hoch (> 12 l/km)"
+            {
+              "text" : "Sehr gering (< 3 l/km)",
+              "value" : 0.0
+            },
+            {
+              "text" : "Gering (3-5 l/km)",
+              "value" : 0.67
+            },
+            {
+              "text" : "Durchschnittlich (5-7 l/km)",
+              "value" : 1.75
+            },
+            {
+              "text" : "Hoch (7-12 l/km)",
+              "value" : 2.15
+            },
+            {
+              "text" : "Sehr hoch (> 12 l/km)",
+              "value" : 3.58
+            }
           ],
-          "values" : [0, 0.67, 1.75, 2.15, 3.58],
           "selectedValue" : 1.75
         },
         {
           "text" : "Wie häufig nutzen Sie öffentliche Verkehrsmittel in der Woche?",
           "replies" : [
-            "Sehr selten (< 30km)",
-            "Selten (30-50km)",
-            "Durchschnittlich (50-70km)",
-            "Häufig(70-100km)",
-            "Sehr häufig(> 100km)"
+            {
+              "text" : "Sehr selten (< 30km)",
+              "value" : 0.0
+            },
+            {
+              "text" : "Selten (30-50km)",
+              "value" : 0.06
+            },
+            {
+              "text" : "Durchschnittlich (50-70km)",
+              "value" : 0.12
+            },
+            {
+              "text" : "Häufig(70-100km)",
+              "value" : 0.18
+            },
+            {
+              "text" : "Sehr häufig(> 100km)",
+              "value" : 0.24
+            }
           ],
-          "values" : [0, 0.06, 0.12, 0.18, 0.24],
           "selectedValue" : 0.12,
           "formula" : "function (value) { value * 0.000049 * 52; }"
         },
         {
           "text" : "Wie viele Stunden pro Jahr verbringen Sie mit dem fliegen?",
           "replies" : [
-            "Sehr selten (< 0h)",
-            "Selten (0 - 250h)",
-            "Durchschnittlich (250 - 500h)",
-            "Häufig (500 - 750h)",
-            "Sehr häufig(> 750h)"
+            {
+              "text" : "Sehr selten (< 0h)",
+              "value" : 0.0
+            },
+            {
+              "text" : "Selten (0 - 250h)",
+              "value" : 250.0
+            },
+            {
+              "text" : "Durchschnittlich (250 - 500h)",
+              "value" : 500.0
+            },
+            {
+              "text" : "Häufig (500 - 750h)",
+              "value" : 750.0
+            },
+            {
+              "text" : "Sehr häufig(> 750h)",
+              "value" : 1000.0
+            }
           ],
-          "values" : [0, 250, 500, 750, 1000],
           "selectedValue" : 0,
           "formula" : "function (value) { value * 0.15; }"
         }
@@ -73,49 +140,105 @@
         {
           "text" : "Wie ist Ihr Ernährungsverhalten?",
           "replies" : [
-            "Vegan",
-            "Vegetarisch",
-            "Fleischreduziert",
-            "Mischkost",
-            "Fleischbetont"
+            {
+              "text" : "Vegan",
+              "value" : 1.05
+            },
+            {
+              "text" : "Vegetarisch",
+              "value" : 1.30
+            },
+            {
+              "text" : "Fleischreduziert",
+              "value" : 1.66
+            },
+            {
+              "text" : "Mischkost",
+              "value" : 2.2
+            },
+            {
+              "text" : "Fleischbetont",
+              "value" : 2.55
+            }
           ],
-          "values" : [1.05, 1.30, 1.66, 2.2, 2.55],
           "selectedValue" : 2.2
         },
         {
           "text" : "Wie häufig kaufen Sie regionale Produkte?",
           "replies" : [
-            "Nie",
-            "Selten",
-            "Teilweise",
-            "Vorwiegend",
-            "Ausschließlich"
+            {
+              "text": "Nie",
+              "value" : 0.05
+            },
+            {
+              "text": "Selten",
+              "value" : 0.02
+            },
+            {
+              "text": "Teilweise",
+              "value" : 0
+            },
+            {
+              "text": "Vorwiegend",
+              "value" : -0.02
+            },
+            {
+              "text": "Ausschließlich",
+              "value" : -0.05
+            }
           ],
-          "values" : [0.05, 0.02, 0, -0.02, -0.05],
           "selectedValue" : 0
         },
         {
           "text": "Wie oft kaufen Sie saisonale Produkte?",
           "replies": [
-            "Nie",
-            "Selten",
-            "Teilweise",
-            "Vorwiegend",
-            "Ausschließlich"
+            {
+              "text": "Nie",
+              "value" : 0.05
+            },
+            {
+              "text": "Selten",
+              "value" : 0.02
+            },
+            {
+              "text": "Teilweise",
+              "value" : 0
+            },
+            {
+              "text": "Vorwiegend",
+              "value" : -0.02
+            },
+            {
+              "text": "Ausschließlich",
+              "value" : -0.05
+            }
           ],
-          "values": [0.05, 0.02, 0, -0.02, -0.05],
           "selectedValue": 0
         },
         {
           "text": "Wie oft kaufen Sie Bio-Produkte?",
           "replies": [
-            "Nie",
-            "Selten",
-            "Teilweise",
-            "Vorwiegend",
-            "Ausschließlich"
+            {
+              "text": "Nie",
+              "value" : 0.0
+            },
+            {
+              "text": "Selten",
+              "value" : -0.015
+            },
+            {
+              "text": "Teilweise",
+              "value" : -0.03
+            },
+            {
+              "text": "Vorwiegend",
+              "value" : -0.045
+            },
+            {
+              "text": "Ausschließlich",
+              "value" : -0.06
+            }
           ],
-          "values": [0, -0.015, -0.03 , -0.045, -0.06],
           "selectedValue": 0
         }
       ],
@@ -127,61 +250,125 @@
         {
           "text": "Wie viele qm hat ihre Wohnung/Haus?",
           "replies": [
-            "Wenig (< 20qm)",
-            "Durchschnittlich (20 - 70qm)",
-            "Viel (70 - 200qm)",
-            "Sehr viel (>200 qm)"
+            {
+              "text": "Wenig (< 20qm)",
+              "value" : 0.0
+            },
+            {
+              "text": "Durchschnittlich (20 - 70qm)",
+              "value" : 61.0
+            },
+            {
+              "text": "Viel (70 - 200qm)",
+              "value" : 145.0
+            },
+            {
+              "text": "Sehr viel (>200 qm)",
+              "value" : 200.0
+            }
           ],
-          "values": [0, 61, 145, 200],
           "selectedValue": 61,
           "formula" : "function (value) { return value; }"
         },
         {
           "text": "Wie viele Personen wohnen in Ihrem Haushalt?",
           "replies": [
-            "Nur ich",
-            "Kleinfamilie (2-3 Personen)",
-            "Familie (3-6 Personen)",
-            "WG oder Sonstiges (6+ Personen)"
+            {
+              "text" : "Nur ich",
+              "value" : 1
+            },
+            {
+              "text" : "Kleinfamilie (3-6 Personen)",
+              "value" : 3
+            },
+            {
+              "text" : "Familie (3-6 Personen)",
+              "value" : 5
+            },
+            {
+              "text" : "WG oder Großfamilie (6+ Personen)",
+              "value" : 8
+            }
           ],
-          "values": [1, 3, 5, 8],
           "selectedValue": 1,
           "formula" : "function (value) { return value; }"
         },
         {
           "text": "Wie alt ist Ihr Haus bzw wann wurde es zuletzt renoviert?",
           "replies": [
-            "vor 1978",
-            "1978-1994",
-            "1995-2011",
-            "ab 2011",
-            "unbekannt"
+            {
+              "text" : "vor 1978",
+              "value" : 0.64
+            },
+            {
+              "text" : "1978-1994",
+              "value" : 0.53
+            },
+            {
+              "text" : "1995-2011",
+              "value" : 0.08
+            },
+            {
+              "text" : "ab 2011",
+              "value" : -0.22
+            },
+            {
+              "text" : "unbekannt",
+              "value" : 0.6
+            }
           ],
-          "values": [0.64, 0.53, 0.08, -0.22, 0.6],
           "selectedValue": 0.5
         },
         {
           "text": "Wie wird Ihr Haus beheizt?",
           "replies": [
-            "Erdgas",
-            "erneuerbar",
-            "Wärmepumpe",
-            "Fernwärme",
-            "Fossil",
-            "Solarthermie",
-            "Strom (Strommix)",
-            "Grünstrom"
+            {
+              "text" : "Erdgas",
+              "value" : 1.36
+            },
+            {
+              "text" : "erneuerbar",
+              "value" : 0.38
+            },
+            {
+              "text" : "Wärmepumpe",
+              "value" : 0.17
+            },
+            {
+              "text" : "Fernwärme",
+              "value" : 1.49
+            },
+            {
+              "text" : "Fossil",
+              "value" : 1.73
+            },
+            {
+              "text" : "Solarthermie",
+              "value" : 0.14
+            },
+            {
+              "text" : "Strom (Strommix)",
+              "value" : 2.45
+            },
+            {
+              "text" : "Grünstrom",
+              "value" : 0.17
+            }
           ],
-          "values": [1.36, 0.38, 0.17, 1.49, 1.73, 0.14, 2.45, 0.17],
           "selectedValue": 1.73
         },
         {
           "text": "Woher beziehen Sie Ihren Strom?",
           "replies": [
-            "Ökostrom",
-            "Strommix"
+            {
+              "text" : "Ökostrom",
+              "value" : 0.03
+            },
+            {
+              "text" : "Strommix",
+              "value" : 0.49
+            }
           ],
-          "values": [0.03, 0.49],
           "selectedValue": 0.49
         }
       ],
@@ -193,42 +380,77 @@
         {
           "text": "Wie würden Sie ihr Kaufverhalten beschreiben?",
           "replies": [
-            "sparsam",
-            "normal",
-            "großzügig"
+            {
+              "text" : "sparsam",
+              "value" : 2.48
+            },
+            {
+              "text" : "normal",
+              "value" : 2.9
+            },
+            {
+              "text" : "großzügig",
+              "value" : 3.35
+            }
           ],
-          "values": [2.48, 2.9, 3.35],
           "selectedValue": 2.9
         },
         {
           "text": "Was sind Ihre Kaufkriterien?",
           "replies": [
-            "Langlebigkeit",
-            "Funktionalität",
-            "Günstiger Preis"
+            {
+              "text" : "Langlebigkeit",
+              "value" : -0.05
+            },
+            {
+              "text" : "Funktionalität",
+              "value" : 0
+            },
+            {
+              "text" : "Günstigster Preis",
+              "value" : 0.05
+            }
           ],
-          "values": [-0.05, 0, 0.05],
           "selectedValue": 0
         },
         {
           "text": "Wie oft kaufen Sie gebrauchte/secondhand Produkte?",
           "replies": [
-            "Oft",
-            "Manchmal",
-            "Nie"
+            {
+              "text" : "Oft",
+              "value" : -0.05
+            },
+            {
+              "text" : "Manchmal",
+              "value" : 0
+            },
+            {
+              "text" : "Nie",
+              "value" : 0.05
+            }
           ],
-          "values": [-0.05, 0, 0.05],
           "selectedValue": 0
         },
         {
           "text": "Wie hoch sind Ihre sonstigen Ausgaben pro Kopf und Monat?",
-          "replies" : ["Niedrig (< 250€)", "Durchschnittlich (250 - 700€)", "Hoch (> 700€)"],
-          "values" : [100, 500, 750],
-          "selectedValue" : 100,
+          "replies" : [
+            {
+              "text" : "Niedrig (< 250€)",
+              "value" : 100.0
+            },
+            {
+              "text" : "Durchschnittlich (250 - 700€)",
+              "value" : 500
+            },
+            {
+              "text" : "Hoch (> 700€)",
+              "value" : 750
+            }
+          ],
           "formula": "function (value) { return value; }"
         }
       ],
-      "formula" : "function (value) { return (value[0] * value [1] * value[2] * value[3]); }"
+      "endFormula" : "function (value) { return (value[0] * value [1] * value[2] * value[3]); }"
     }
   ]
 }
