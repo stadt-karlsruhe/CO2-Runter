@@ -1,365 +1,234 @@
 {
-  "baseline": 1.12,
-  "category": [
+  "categories" : [
     {
-      "name": "Mobilität",
-      "questions": [
+      "name" : "Mobilität",
+      "questions" : [
         {
-          "name": "Auto",
-          "quick": {
-            "text": "Wie viel fahren Sie mit dem Auto?",
-            "typ": "auswahl",
-            "replies": [
-              "Nie",
-              "Wenig",
-              "Durchschnittlich",
-              "Viel",
-              "Sehr viel"
-            ],
-            "values": [0, 0.67, 1.75, 2.15, 3.58],
-            "defaultValue": 1.75,
-            "selectedValue": ""
-          },
-          "detailed": {
-            "questions": [
-              {
-                "text": "Welchen Kraftstoff nutzen Sie?",
-                "typ": "auswahl",
-                "replies": ["Diesel", "Benzin", "Erdgas", "Elektro"],
-                "values": [0.003, 0.0027, 0.0026, 0.0004],
-                "defaultValue": 0.0027,
-                "selectedValue": ""
-              },
-              {
-                "text": "Wie hoch ist ihr Verbrauch?",
-                "typ": "input",
-                "unit": " pro 100km",
-                "minInput": 0,
-                "maxInput": 50,
-                "defaultValue": 6.7,
-                "formula": "function (value) { return value }",
-                "selectedValue": ""
-              },
-              {
-                "text": "Wie viele Kilometer fahren Sie mit dem Auto pro Jahr?",
-                "typ": "input",
-                "unit": "km",
-                "minInput": 0,
-                "maxInput": 1000000,
-                "defaultValue": 0,
-                "formula": "function (value) { return value/100 }",
-                "selectedValue": ""
-              }
-            ],
-            "formula": "function (values) { return values[0] * values[1] * values[2]; }"
-          }
+          "text" : "Wie häufig fahren Sie mit dem Auto in der Woche?",
+          "replies" : [
+            "Nie (< 20km)",
+            "Wenig (20km - 50km)",
+            "Durchschnittlich (50km - 75km)",
+            "Viel (75km - 100km)",
+            "Sehr Viel (> 100km)"
+          ],
+          "values" : [0, 0.67, 1.75, 2.15, 3.58],
+          "selectedValue" : 1.75
         },
         {
-          "name": "ÖPNV",
-          "quick": {
-            "text": "Wie oft fahren Sie mit öffentlichen Verkehrsmitteln?",
-            "typ": "auswahl",
-            "replies": [
-              "Nie",
-              "Selten",
-              "Gelegentlich",
-              "Häufig",
-              "Sehr häufig"
-            ],
-            "values": [0, 0.06, 0.14, 0.2, 0.32],
-            "defaultValue": 0.14,
-            "selectedValue": ""
-          },
-          "detailed": {
-            "questions": [
-              {
-                "text": "Wie viele Kilometer fahren Sie mit öffentlichen Verkehrmitteln pro Woche?",
-                "typ": "input",
-                "unit": "km",
-                "minInput": 0,
-                "maxInput": 100000,
-                "defaultValue": 0.12,
-                "formula": "function (value) { return value * 0.000049 * 52; }",
-                "selectedValue": ""
-              }
-            ],
-            "formula": "function (values) { return values[0]; }"
-          }
+          "text" : "Welchen Kraftstoff nutzen Sie?",
+          "replies" : [
+            "Diesel",
+            "Benzin",
+            "Erdgas",
+            "Elektro"
+          ],
+          "values" : [0.003, 0.0027, 0.0026, 0.0004],
+          "selectedValue" : 0.0027
         },
         {
-          "name": "Flugzeug",
-          "quick": {
-            "text": "Wie viele Stunden fliegen Sie pro Jahr?",
-            "typ": "input",
-            "unit": "Stunden",
-            "minInput": 0,
-            "maxInput": 1000,
-            "defaultValue": 0,
-            "formula": "function (value) { return value * 0.15; }",
-            "selectedValue": ""
-          },
-          "detailed": {
-            "questions": [
-              {
-                "text": "Wie viele Stunden Kurzstrecke fliegen Sie pro Jahr?",
-                "typ": "input",
-                "unit": "Stunden",
-                "minInput": 0,
-                "maxInput": 1000,
-                "defaultValue": 0,
-                "formula": "function (value) { return value * 0.1328; }",
-                "selectedValue": ""
-              },
-              {
-                "text": "Wie viele Stunden Langstrecke fliegen Sie pro Jahr?",
-                "typ": "input",
-                "unit": "Stunden",
-                "minInput": 0,
-                "maxInput": 1000,
-                "defaultValue": 0,
-                "formula": "function (value) { return value * 0.1717; }",
-                "selectedValue": ""
-              }
-            ],
-            "formula": "function (values) { return values[0] + values[1]; }"
-          }
+          "text" : "Wie hoch ist ihr Verbrauch in Liter pro Kilometer?",
+          "replies" : [
+            "Sehr gering (< 3 l/km)",
+            "Gering (3-5 l/km)",
+            "Durchschnittlich (5-7 l/km)",
+            "Hoch (7-12 l/km)",
+            "Sehr hoch (> 12 l/km)"
+          ],
+          "values" : [0, 0.67, 1.75, 2.15, 3.58],
+          "selectedValue" : 1.75
+        },
+        {
+          "text" : "Wie häufig nutzen Sie öffentliche Verkehrsmittel in der Woche?",
+          "replies" : [
+            "Sehr selten (< 30km)",
+            "Selten (30-50km)",
+            "Durchschnittlich (50-70km)",
+            "Häufig(70-100km)",
+            "Sehr häufig(> 100km)"
+          ],
+          "values" : [0, 0.06, 0.12, 0.18, 0.24],
+          "selectedValue" : 0.12,
+          "formula" : "function (value) { value * 0.000049 * 52; }"
+        },
+        {
+          "text" : "Wie viele Stunden pro Jahr verbringen Sie mit dem fliegen?",
+          "replies" : [
+            "Sehr selten (< 0h)",
+            "Selten (0 - 250h)",
+            "Durchschnittlich (250 - 500h)",
+            "Häufig (500 - 750h)",
+            "Sehr häufig(> 750h)"
+          ],
+          "values" : [0, 250, 500, 750, 1000],
+          "selectedValue" : 0,
+          "formula" : "function (value) { value * 0.15; }"
         }
-      ]
+      ],
+      "formula" : "function (value) { return (value[0] * value[1] * value[2] * value[3] * value[4])"
     },
     {
-      "name": "Ernährung",
-      "questions": [
+      "name" : "Ernährung",
+      "questions" : [
         {
-          "name": "Ernährung",
-          "quick": {
-            "text": "Wie ist Ihr Ernährungsverhalten?",
-            "typ": "auswahl",
-            "replies": [
-              "Vegan",
-              "Vegetarisch",
-              "Fleischreduziert",
-              "Mischkost",
-              "Fleischbetont"
-            ],
-            "values": [1.05, 1.30, 1.66, 2.2, 2.55],
-            "defaultValue": 2.2,
-            "selectedValue": ""
-          },
-          "detailed": {
-            "questions": [
-              {
-                "text": "Wie ist ihr Ernährungsverhalten?",
-                "typ": "auswahl",
-                "replies": [
-                  "Vegan",
-                  "Vegetarisch",
-                  "Fleischreduziert",
-                  "Mischkost",
-                  "Fleischbetont"
-                ],
-                "values": [1.05, 1.30, 1.66, 2.2, 2.55],
-                "defaultValue": 2.2,
-                "selectedValue": ""
-              },
-              {
-                "text": "Wie oft kaufen Sie regionale Produkte?",
-                "typ": "auswahl",
-                "replies": ["Nie","Selten","Teilweise", "Vorwiegend", "Ausschließlich"],
-                "values": [0.05, 0.02, 0, -0.02, -0.05],
-                "defaultValue": 0,
-                "selectedValue": ""
-              },
-              {
-                "text": "Wie oft kaufen Sie saisonale Produkte?",
-                "typ": "auswahl",
-                "replies": ["Nie","Selten","Teilweise", "Vorwiegend", "Ausschließlich"],
-                "values": [0.05, 0.02, 0, -0.02, -0.05],
-                "defaultValue": 0,
-                "selectedValue": ""
-              },
-              {
-                "text": "Wie oft kaufen Sie Bio-Produkte?",
-                "typ": "auswahl",
-                "replies": ["Nie","Selten","Teilweise", "Vorwiegend", "Ausschließlich"],
-                "values": [0, -0.015, -0.03 , -0.045, -0.06],
-                "defaultValue": 0,
-                "selectedValue": ""
-              }
-            ],
-            "formula": "function (values) { return (values[0] + (values[0] * (values[1] + values[2] + values[3]))); }"
-          }
+          "text" : "Wie ist Ihr Ernährungsverhalten?",
+          "replies" : [
+            "Vegan",
+            "Vegetarisch",
+            "Fleischreduziert",
+            "Mischkost",
+            "Fleischbetont"
+          ],
+          "values" : [1.05, 1.30, 1.66, 2.2, 2.55],
+          "selectedValue" : 2.2
+        },
+        {
+          "text" : "Wie häufig kaufen Sie regionale Produkte?",
+          "replies" : [
+            "Nie",
+            "Selten",
+            "Teilweise",
+            "Vorwiegend",
+            "Ausschließlich"
+          ],
+          "values" : [0.05, 0.02, 0, -0.02, -0.05],
+          "selectedValue" : 0
+        },
+        {
+          "text": "Wie oft kaufen Sie saisonale Produkte?",
+          "replies": [
+            "Nie",
+            "Selten",
+            "Teilweise",
+            "Vorwiegend",
+            "Ausschließlich"
+          ],
+          "values": [0.05, 0.02, 0, -0.02, -0.05],
+          "selectedValue": 0
+        },
+        {
+          "text": "Wie oft kaufen Sie Bio-Produkte?",
+          "replies": [
+            "Nie",
+            "Selten",
+            "Teilweise",
+            "Vorwiegend",
+            "Ausschließlich"
+          ],
+          "values": [0, -0.015, -0.03 , -0.045, -0.06],
+          "selectedValue": 0
         }
-      ]
+      ],
+      "formula": "function (values) { return (values[0] + (values[0] * (values[1] + values[2] + values[3]))); }"
     },
     {
-      "name": "Wohnen",
-      "questions": [
+      "name" : "Wohnen",
+      "questions" : [
         {
-          "name": "Quadratmeter pro Person",
-          "quick": {
-            "text": "Wie viel Quadratmeter hat eine Person in ihrem Haushalt?",
-            "typ": "input",
-            "unit": "qm/Personen",
-            "minInput": 0,
-            "maxInput": 200,
-            "defaultValue": 0.14,
-            "formula": "function (value) { return (0.7 * (0.0236*value - 1.235)); }",
-            "selectedValue": "61"
-          },
-          "detailed": {
-            "questions": [
-              {
-                "text": "Wie viele Personen wohnen in Ihrem Haushalt?",
-                "typ": "input",
-                "unit": "Personen",
-                "minInput": 1,
-                "maxInput": 10,
-                "defaultValue": 1,
-                "formula": "function (value) { return value; }",
-                "selectedValue": "1"
-              },
-              {
-                "text": "Wie viele qm hat Ihre Wohnung?",
-                "typ": "input",
-                "unit": "qm",
-                "minInput": 0,
-                "maxInput": 500,
-                "defaultValue": 61,
-                "formula": "function (value) { return value; }",
-                "selectedValue": "61"
-              }
-            ],
-            "formula": "function (values) { return (0.7 * (0.0236*(values[1]/values[0]) - 1.235)); }"
-          }          
+          "text": "Wie viele qm hat ihre Wohnung/Haus?",
+          "replies": [
+            "Wenig (< 20qm)",
+            "Durchschnittlich (20 - 70qm)",
+            "Viel (70 - 200qm)",
+            "Sehr viel (>200 qm)"
+          ],
+          "values": [0, 61, 145, 200],
+          "selectedValue": 61,
+          "formula" : "function (value) { return value; }"
         },
         {
-          "name": "Baujahr/Renovierungsstand ",
-          "quick": {
-            "text": "Wie alt ist Ihr Haus bzw wann wurde es zuletzt renoviert?",
-            "typ": "auswahl",
-            "replies": [
-              "vor 1978",
-              "1978-1994",
-              "1995-2011",
-              "ab 2011",
-              "unbekannt"
-            ],
-            "values": [0.64, 0.53, 0.08, -0.22, 0.6],
-            "defaultValue": 0.5,
-            "selectedValue": ""
-          },
-          "detailed": {
-            "questions": [],
-            "formula": ""
-          }
+          "text": "Wie viele Personen wohnen in Ihrem Haushalt?",
+          "replies": [
+            "Nur ich",
+            "Kleinfamilie (2-3 Personen)",
+            "Familie (3-6 Personen)",
+            "WG oder Sonstiges (6+ Personen)"
+          ],
+          "values": [1, 3, 5, 8],
+          "selectedValue": 1,
+          "formula" : "function (value) { return value; }"
         },
         {
-          "name": "Heizung",
-          "quick": {
-            "text": "Wie wird Ihr Haus beheizt?",
-            "typ": "auswahl",
-            "replies": [
-              "fossil",
-              "erneuerbar"
-            ],
-            "values": [1.36, 0.08],
-            "defaultValue": 1.36,
-            "selectedValue": ""
-          },
-          "detailed": {
-            "questions": [
-              {
-                "text": "Wie wird Ihr Haus beheizt?",
-                "typ": "auswahl",
-                "replies": [
-                  "Erdgas",
-                  "erneuerbar",
-                  "Wärmepumpe",
-                  "Fernwärme",
-                  "Fossil",
-                  "Solarthermie",
-                  "Strom (Strommix)",
-                  "Grünstrom"
-                ],
-                "values": [1.36, 0.38, 0.17, 1.49, 1.73, 0.14, 2.45, 0.17],
-                "defaultValue": 1.73,
-                "selectedValue": ""
-              }
-            ],
-            "formula": "function (values) { return values[0]; }"
-          }
+          "text": "Wie alt ist Ihr Haus bzw wann wurde es zuletzt renoviert?",
+          "replies": [
+            "vor 1978",
+            "1978-1994",
+            "1995-2011",
+            "ab 2011",
+            "unbekannt"
+          ],
+          "values": [0.64, 0.53, 0.08, -0.22, 0.6],
+          "selectedValue": 0.5
         },
         {
-          "name": "Strom",
-          "quick": {
-            "text": "Woher beziehen Sie Ihren Strom?",
-            "typ": "auswahl",
-            "replies": ["Ökostrom", "Strommix"],
-            "values": [0.03,0.49],
-            "defaultValue": 0.49,
-            "selectedValue": ""
-          },
-          "detailed": {
-            "questions": [],
-            "formula": ""
-          }
+          "text": "Wie wird Ihr Haus beheizt?",
+          "replies": [
+            "Erdgas",
+            "erneuerbar",
+            "Wärmepumpe",
+            "Fernwärme",
+            "Fossil",
+            "Solarthermie",
+            "Strom (Strommix)",
+            "Grünstrom"
+          ],
+          "values": [1.36, 0.38, 0.17, 1.49, 1.73, 0.14, 2.45, 0.17],
+          "selectedValue": 1.73
+        },
+        {
+          "text": "Woher beziehen Sie Ihren Strom?",
+          "replies": [
+            "Ökostrom",
+            "Strommix"
+          ],
+          "values": [0.03, 0.49],
+          "selectedValue": 0.49
         }
-      ]
+      ],
+      "formula" : "function (value) { return (value[0] * value[1] * value[2] * value[3] * value[4]); }"
     },
     {
-      "name": "Konsum",
-      "questions": [
+      "name" : "Konsum",
+      "questions" : [
         {
-          "name": "Konsum",
-          "quick": {
-            "text": "Wie würden Sie ihr Kaufverhalten beschreiben?",
-            "typ": "auswahl",
-            "replies": ["sparsam", "normal", "großzügig"],
-            "values": [2.48, 2.9, 3.35],
-            "defaultValue": 2.9,
-            "selectedValue": ""
-          },
-          "detailed": {
-            "questions": [
-              {
-                "text": "Wie würden Sie Ihr Kaufverhalten beschreiben?",
-                "typ": "auswahl",
-                "replies": ["sparsam", "normal", "großzügig"],
-                "values": [-0.05, 0, 0.05],
-                "defaultValue": 0,
-                "selectedValue": ""
-              },
-              {
-                "text": "Was sind Ihre Kaufkriterien?",
-                "typ": "auswahl",
-                "replies": ["Langlebigkeit", "Funktionalität", "Günstiger Preis"],
-                "values": [-0.05, 0, 0.05],
-                "defaultValue": 0,
-                "selectedValue": ""
-              },
-              {
-                "text": "Wie oft kaufen Sie gebrauchte/secondhand Produkte?",
-                "typ": "auswahl",
-                "replies": ["Oft", "Manchmal", "Nie"],
-                "values": [-0.05, 0, 0.05],
-                "defaultValue": 0,
-                "selectedValue": ""
-              },
-              {
-                "text": "Wie hoch sind Ihre sonstigen Ausgaben pro Kopf und Monat?",
-                "typ": "input",
-                "unit": "€",
-                "maxInput": 1000,
-                "defaultValue": 2.9,
-                "formula": "function (value) { return value * 0.0058; }",
-                "selectedValue": ""
-              }
-            ],
-            "formula": "function (values) { return (((values[0] + values[1] + values[2]) * values[3])+ values[3]); }"
-          }
+          "text": "Wie würden Sie ihr Kaufverhalten beschreiben?",
+          "replies": [
+            "sparsam",
+            "normal",
+            "großzügig"
+          ],
+          "values": [2.48, 2.9, 3.35],
+          "selectedValue": 2.9
+        },
+        {
+          "text": "Was sind Ihre Kaufkriterien?",
+          "replies": [
+            "Langlebigkeit",
+            "Funktionalität",
+            "Günstiger Preis"
+          ],
+          "values": [-0.05, 0, 0.05],
+          "selectedValue": 0
+        },
+        {
+          "text": "Wie oft kaufen Sie gebrauchte/secondhand Produkte?",
+          "replies": [
+            "Oft",
+            "Manchmal",
+            "Nie"
+          ],
+          "values": [-0.05, 0, 0.05],
+          "selectedValue": 0
+        },
+        {
+          "text": "Wie hoch sind Ihre sonstigen Ausgaben pro Kopf und Monat?",
+          "replies" : ["Niedrig (< 250€)", "Durchschnittlich (250 - 700€)", "Hoch (> 700€)"],
+          "values" : [100, 500, 750],
+          "selectedValue" : 100,
+          "formula": "function (value) { return value; }"
         }
-      ]
+      ],
+      "formula" : "function (value) { return (value[0] * value [1] * value[2] * value[3]); }"
     }
   ]
 }
-
