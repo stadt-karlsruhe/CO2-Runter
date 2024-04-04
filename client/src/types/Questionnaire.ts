@@ -3,7 +3,7 @@ export interface Questionnaire {
     category: Category[];
 }
 
-interface Category {
+export interface Category {
     name: string;
     questions: Question[];
 }

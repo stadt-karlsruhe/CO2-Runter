@@ -1,21 +1,28 @@
 <template>
     <v-sheet border>
-        <v-card-title> Wie häufig fahren Sie mit dem Auto? </v-card-title>
+        <p v-for="(item, index) in questions.questions" :key="index">
+            {{ item.name }}
+        </p>
         <v-select
-            :items="['Nie', 'Selten', 'Normal', 'Häufig', 'Sehr häufig']"
+            v-model="props.questions.questions[0].quick.replies![0]"
+            :label="props.questions.questions[0].quick.text"
+            :items="props.questions.questions[0].quick.replies"
             variant="outlined"
             rounded
             placeholder="Wählen Sie eine Option"
             class="ma-8"
+            :return-object="false"
         >
         </v-select>
     </v-sheet>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { Category } from '@/types/Questionnaire';
 
-const items = ref(['Nie', 'Selten', 'Normal', 'Häufig', 'Sehr Häufig']);
+const props = defineProps<{
+    questions: Category;
+}>();
 </script>
 
 <style scoped></style>

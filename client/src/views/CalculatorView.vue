@@ -15,17 +15,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
 import QuestionStepper from '@/components/Calculator/QuestionStepper.vue';
 import CurrentCO2 from '@/components/Calculator/CurrentCO2.vue';
-import useQuestions from '@/composables/useQuestions';
-
-const { questions, fetchQuestions } = useQuestions();
-
-onMounted(async () => {
-    await fetchQuestions();
-    console.log(questions.value);
-});
 </script>
 
 <style scoped></style>

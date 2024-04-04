@@ -18,19 +18,31 @@
 
         <v-stepper-window>
             <v-stepper-window-item value="1">
-                <QuestionsBlock />
+                <QuestionsBlock
+                    v-if="data"
+                    :questions="data.category[QuestionsIndices.MOBILITY]"
+                />
             </v-stepper-window-item>
 
             <v-stepper-window-item value="2">
-                <QuestionsBlock />
+                <QuestionsBlock
+                    v-if="data"
+                    :questions="data.category[QuestionsIndices.NUTRITION]"
+                />
             </v-stepper-window-item>
 
             <v-stepper-window-item value="3">
-                <QuestionsBlock />
+                <QuestionsBlock
+                    v-if="data"
+                    :questions="data.category[QuestionsIndices.LIVING]"
+                />
             </v-stepper-window-item>
 
             <v-stepper-window-item value="4">
-                <QuestionsBlock />
+                <QuestionsBlock
+                    v-if="data"
+                    :questions="data.category[QuestionsIndices.CONSUM]"
+                />
             </v-stepper-window-item>
         </v-stepper-window>
 
@@ -47,10 +59,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import QuestionsBlock from '@/components/Calculator/QuestionsBlock.vue';
+import { QuestionsIndices } from '@/constants/QuestionsIndices';
+import useQuestions from '@/composables/useQuestions';
+import { Category, Questionnaire } from '@/types/Questionnaire';
 
+const { questions, fetchQuestions } = useQuestions();
 const step = ref(1);
+const data = ref<Questionnaire>();
+
+onMounted(async () => {
+    await fetchQuestions();
+    console.log(questions.value);
+    data.value = questions.value;
+});
 
 const next = () => {
     if (step.value < 4) {
