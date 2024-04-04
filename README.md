@@ -56,6 +56,9 @@ To set up the development environment, follow these steps:
 3. Create server config file
     - Create a new file named `config.json` in the `server` directory.
     - paste the content form the `config-template.js` into the `config.json` file.
+   ```shell
+   chmod +x setup-config-file.sh && ./setup-config-file.sh
+   ```
 
 ### Starting Docker Containers
 
@@ -79,6 +82,8 @@ To develop the client and access the API, use the following steps:
     cd client
     npm run dev
     ```
+   
+3. Access the NGINX at `http://localhost:3050/`. Only there you have access to the API and login etc.
 
 ### Common Issues
 
