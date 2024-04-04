@@ -92,7 +92,6 @@ import { ref } from 'vue';
 const groupCode = ref('');
 const error = ref('');
 
-// TODO: this is not working currently
 const joinGroup = async () => {
     try {
         const response = await fetch('/api/groups/add_user', {
