@@ -86,6 +86,8 @@ import { ref, onMounted } from 'vue';
 import { Group } from '@/types/Group';
 import GroupSuccessful from '@/components/GroupSystem/GroupSuccessful.vue';
 
+// TODO: User should be able to leave a group
+
 let groups = ref<Array<Group>>([]);
 let groupName = ref('');
 let groupCode = ref('');
