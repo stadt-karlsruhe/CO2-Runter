@@ -1,45 +1,67 @@
-<template v-slot:default="{ prev, next }">
-    <v-stepper
-        v-model="step"
-        :items="items"
-        show-actions
-        color="primary-darken-1"
-    >
-        <template v-slot:[`item.${1}`]>
-            <h3 class="text-h6 text-center text-primary-darken-1">Mobilität</h3>
+<template>
+    <v-stepper v-model="step" :alt-labels="true" elevation="0">
+        <v-stepper-header>
+            <v-stepper-item title="Mobilität" value="1"></v-stepper-item>
 
-            <br />
+            <v-divider></v-divider>
 
-            <!-- hier können die QuestionBlocks rein -->
-        </template>
+            <v-stepper-item title="Ernährung" value="2"></v-stepper-item>
 
-        <template v-slot:[`item.${2}`]>
-            <h3 class="text-h6 text-center text-primary-darken-1">Ernährung</h3>
+            <v-divider></v-divider>
 
-            <br />
-        </template>
+            <v-stepper-item title="Wohnen" value="3"></v-stepper-item>
 
-        <template v-slot:[`item.${3}`]>
-            <h3 class="text-h6 text-center text-primary-darken-1">Wohnen</h3>
+            <v-divider></v-divider>
 
-            <br />
-        </template>
+            <v-stepper-item title="Konsum" value="4"></v-stepper-item>
+        </v-stepper-header>
 
-        <template v-slot:[`item.${4}`]>
-            <h3 class="text-h6 text-center text-primary-darken-1">Konsum</h3>
+        <v-stepper-window>
+            <v-stepper-window-item value="1">
+                <QuestionsBlock />
+            </v-stepper-window-item>
 
-            <br />
-        </template>
+            <v-stepper-window-item value="2">
+                <QuestionsBlock />
+            </v-stepper-window-item>
+
+            <v-stepper-window-item value="3">
+                <QuestionsBlock />
+            </v-stepper-window-item>
+
+            <v-stepper-window-item value="4">
+                <QuestionsBlock />
+            </v-stepper-window-item>
+        </v-stepper-window>
+
+        <v-stepper-actions>
+            <template #prev>
+                <v-btn @click="prev">zurück</v-btn>
+            </template>
+
+            <template #next>
+                <v-btn @click="next">weiter</v-btn>
+            </template>
+        </v-stepper-actions>
     </v-stepper>
 </template>
 
-<script>
-export default {
-    data: () => ({
-        shipping: 0,
-        step: 1,
-        items: ['Mobilität', 'Ernährung', 'Wohnen', 'Konsum'],
-    }),
+<script setup lang="ts">
+import { ref } from 'vue';
+import QuestionsBlock from '@/components/Calculator/QuestionsBlock.vue';
+
+const step = ref(1);
+
+const next = () => {
+    if (step.value < 4) {
+        step.value++;
+    }
+};
+
+const prev = () => {
+    if (step.value > 0) {
+        step.value--;
+    }
 };
 </script>
 

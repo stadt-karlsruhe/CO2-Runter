@@ -12,16 +12,10 @@
     </v-sheet>
 </template>
 
-<script>
-export default {
-    data: () => ({
-        items: ['Nie', 'Selten', 'Normal', 'Häufig', 'Sehr Häufig'],
-    }),
-};
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const items = ref(['Nie', 'Selten', 'Normal', 'Häufig', 'Sehr Häufig']);
 </script>
 
-<style scoped>
-*v-select {
-    width: 70%;
-}
-</style>
+<style scoped></style>
