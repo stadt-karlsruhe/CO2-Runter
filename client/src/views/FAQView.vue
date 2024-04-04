@@ -28,10 +28,11 @@
                     Frequently Asked Questions
                 </h1>
 
-                <v-expansion-panels variant="popout">
+                <v-expansion-panels variant="accordion">
                     <v-expansion-panel
                         title="Wie funktionert der CO2 Rechner?"
                         class="text-secondary"
+                        elevation="0"
                     >
                         <v-expansion-panel-text>
                             Laut Energiebilanz Karlsruhe 2020 liegt der CO2
@@ -66,6 +67,7 @@
                     <v-expansion-panel
                         title="Wo kann ich die Ergebnisse vom CO2 Rechner einsehen?"
                         class="text-secondary"
+                        elevation="0"
                     >
                         <v-expansion-panel-text>
                             Persönliche Maßnahmen für den Klimaschutz werden

@@ -13,47 +13,6 @@
 
                 <div class="my-8">
                     <h2 class="text-secondary my-4">
-                        Zusammen CO2-Fußabdrücke erfassen
-                    </h2>
-                    <p>
-                        Über das Gruppensystem auf dieser Webseite können Sie
-                        gemeinsam mit anderen Nutzern CO2-Fußabdrücke erfassen.
-                        So können Sie sich gegenseitig zu weiteren CO2
-                        Einsparungen anregen.
-                    </p>
-
-                    <div class="d-flex justify-center align-center my-4">
-                        <v-text-field
-                            v-model="groupCode"
-                            label="Gruppen-Code"
-                            variant="outlined"
-                        />
-
-                        <v-btn
-                            variant="tonal"
-                            :rounded="true"
-                            color="primary-darken-1"
-                            append-icon="mdi-chevron-right"
-                            size="large"
-                            @click="joinGroup()"
-                        >
-                            Gruppe Hinzufügen
-                        </v-btn>
-                    </div>
-                </div>
-
-                <div class="my-8">
-                    <h2 class="text-secondary my-4">Teilen ohne Anmeldung</h2>
-                    <p>
-                        Als eingeloggter Nutzer haben Sie die Möglichkeit,
-                        Gruppen zu erstellen und den Link oder QR-Code an
-                        Freunde, Familie, Sportkollegen, Kollegen und andere zu
-                        verteilen.
-                    </p>
-                </div>
-
-                <div class="my-8">
-                    <h2 class="text-secondary my-4">
                         Schaffen Sie eine motivierende Umgebung
                     </h2>
                     <p>
@@ -74,6 +33,55 @@
                 >
                     Erstelle jetzt eine neue Gruppe
                 </v-btn>
+
+                <div class="my-16">
+                    <h2 class="text-secondary my-4">Teilen ohne Anmeldung</h2>
+                    <p>
+                        Als eingeloggter Nutzer haben Sie die Möglichkeit,
+                        Gruppen zu erstellen und den Link oder QR-Code an
+                        Freunde, Familie, Sportkollegen, Kollegen und andere zu
+                        verteilen.
+                    </p>
+                </div>
+
+                <div class="my-8">
+                    <h2 class="text-secondary my-4">
+                        Zusammen CO2-Fußabdrücke erfassen
+                    </h2>
+                    <p>
+                        Über das Gruppensystem auf dieser Webseite können Sie
+                        gemeinsam mit anderen Nutzern CO2-Fußabdrücke erfassen.
+                        So können Sie sich gegenseitig zu weiteren CO2
+                        Einsparungen anregen.
+                    </p>
+
+                    <div class="d-flex justify-center align-center my-8">
+                        <v-text-field
+                            v-model="groupCode"
+                            label="Gruppen-Code"
+                            variant="outlined"
+                            :hide-details="true"
+                            :disabled="!isLoggedIn"
+                            class="mr-4"
+                        />
+
+                        <v-btn
+                            variant="tonal"
+                            :rounded="true"
+                            color="primary-darken-1"
+                            append-icon="mdi-account-plus"
+                            size="large"
+                            @click="joinGroup()"
+                            :disabled="!isLoggedIn"
+                        >
+                            Gruppe teilnehmen
+                        </v-btn>
+                    </div>
+
+                    <v-alert v-if="!isLoggedIn" type="info" variant="tonal">
+                        Sie müssen eingeloggt sein um einer Gruppe beizutreten.
+                    </v-alert>
+                </div>
             </v-col>
             <v-col class="d-flex align-center justify-center" cols="12" md="5">
                 <v-img
@@ -88,7 +96,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import useAuth from '@/composables/useAuth';
 
+const { isLoggedIn } = useAuth();
 const groupCode = ref('');
 const error = ref('');
 
@@ -110,7 +120,8 @@ const joinGroup = async () => {
 
         groupCode.value = '';
     } catch (err) {
-        error.value = 'Fehler beim Hinzufügen zur Gruppe, stellen sie sicher das sie eingeloggt sind und der Gruppen-Code korrekt ist.';
+        error.value =
+            'Fehler beim Hinzufügen zur Gruppe, stellen sie sicher das sie eingeloggt sind und der Gruppen-Code korrekt ist.';
     }
 };
 </script>
