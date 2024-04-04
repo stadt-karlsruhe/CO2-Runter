@@ -2,127 +2,118 @@
     <v-card>
         <v-card-title>Chart</v-card-title>
         <v-card-text>
-            <div v-if="loading">Daten werden geladen...</div>
+            <div v-if="isLoading">Daten werden geladen...</div>
 
             <div v-if="error">Es ist ein fehler aufgetreten: error</div>
 
             <v-chart
-                v-if="
-                    footprints &&
-                    average &&
-                    footprints.length > 0 &&
-                    average.length > 0
-                "
-                :option="chartOptions"
+                v-if="chartOptions"
+                :option="chartOptions!"
                 autoresize
-                :loading="loading"
+                :loading="isLoading"
                 :loadingOptions="loadingOptions"
                 style="height: 600px; width: 100%"
             />
 
             <v-select
-                v-if="
-                    footprints &&
-                    average &&
-                    footprints.length > 0 &&
-                    average.length > 0
-                "
                 v-model="selectedFootprints"
-                :items="
-                    footprints.map(
-                        (districtFootprint) => districtFootprint.name
-                    )
-                "
+                :items="footprintsData.map((footprint) => footprint.name)"
+                :multiple="true"
                 label="Angezeigte Fußabdrücke wählen"
-            />
+                @update:modelValue="updateChartOptions()"
+            >
+            </v-select>
         </v-card-text>
     </v-card>
 </template>
 
 <script setup lang="ts">
-// TODO: https://github.com/stadt-karlsruhe/CO2-Runter/blob/main/client/src/components/Dashboard/ChartAvg.js
-import { shallowRef, onMounted, ref, computed } from 'vue';
+import { ComparisonPrints } from '@/types/ComparisonPrints';
+import { AverageCo2Emissions } from '@/types/AverageCo2Emissions';
+import { onMounted, ref } from 'vue';
 import { use } from 'echarts/core';
 import { BarChart } from 'echarts/charts';
 import { DatasetComponent, GridComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import VChart from 'vue-echarts';
-import { FootprintResponse } from '@/components/Dashboard/FootprintsAverageResponse';
 
 use([BarChart, DatasetComponent, GridComponent, CanvasRenderer]);
 
-const average = ref<FootprintResponse[]>([]);
-const footprints = ref<any[]>([]);
-let selectedFootprints = ref([]);
-let isLoading = ref(true);
-let error = ref(null);
-const chartOptions = shallowRef(getData());
+const selectedFootprints = ref([]);
+const isLoading = ref(true);
+const averageData = ref<AverageCo2Emissions>([]);
+const footprintsData = ref<ComparisonPrints>([]);
+const error = ref('');
 
-// const chartOptions = shallowRef(getData());
-const loading = shallowRef(false);
+const fetchData = async () => {
+    isLoading.value = true;
+    const average = await fetch('/api/dashboard/footprints/average');
+    averageData.value = await average.json();
+    const footprints = await fetch('/api/dashboard/comparisonprints');
+    footprintsData.value = await footprints.json();
+    isLoading.value = false;
+};
+
+onMounted(async () => {
+    await fetchData();
+
+    if (footprintsData.value != null && footprintsData.value.length > 0) {
+        chartOptions.value = getData();
+    }
+});
+
+const updateChartOptions = () => {
+    const data = getData();
+    if (data) {
+        chartOptions.value = data;
+    }
+};
+
 const loadingOptions = {
     text: 'Loading…',
     color: '#4ea397',
     maskColor: 'rgba(255, 255, 255, 0.4)',
 };
 
-const fetchData = async () => {
-    try {
-        const responseFootPrintsAvg = await fetch(
-            '/api/dashboard/footprints/average'
-        );
-        average.value = await responseFootPrintsAvg.json();
-        console.log(responseFootPrintsAvg.json());
+const chartOptions = ref<any>(null);
 
-        const responseComparision = await fetch(
-            '/api/dashboard/footprints/comparisonprints'
-        );
-        footprints.value = await responseComparision.json();
-        console.log(responseComparision);
-
-        isLoading.value = false;
-    } catch (err: any) {
-        error.value = err.message;
-        isLoading.value = false;
+function getData() {
+    if (footprintsData.value.length === 0 || averageData.value.length === 0) {
+        return null;
     }
-};
 
-onMounted(async () => {
-    await fetchData();
-
-    if (footprints.value != null && footprints.value.length > 0) {
-        chartOptions.value = getData();
-    }
-});
-
-const selectedData = computed(() => {
-    return selectedFootprints.value.map((selectedFootprint) => {
-        const footprint = footprints.value.find(
+    const selectedData = selectedFootprints.value.map((selectedFootprint) => {
+        const footprint = footprintsData.value.find(
             (f) => f.name === selectedFootprint
         );
-        return footprint.values.map((valueObj: any) => ({
+        return footprint!.values.map((valueObj) => ({
             category: valueObj.category,
             value: valueObj.value,
         }));
     });
-});
 
-const selectedCategories = computed(() => {
-    return selectedFootprints.value.map((selectedFootprint) => {
-        const footprint = footprints.value.find(
-            (f) => f.name === selectedFootprint
-        );
-        return footprint.value.name;
-    });
-});
-
-let available_Categories = computed(() => {
-    return footprints.value[0]?.values.map(
-        (valueObj: any) => valueObj.category
+    const selectedCategories = selectedFootprints.value.map(
+        (selectedFootprint) => {
+            const footprint = footprintsData.value.find(
+                (f) => f.name === selectedFootprint
+            );
+            return footprint!.name;
+        }
     );
-});
 
-function getData() {
+    const available_Categories = footprintsData.value[0].values.map(
+        (valueObj) => valueObj.category
+    );
+
+    // extras
+    selectedData.push(
+        averageData.value.map((valueObj) => ({
+            category: valueObj.category,
+            value: valueObj.value,
+        }))
+    );
+    selectedCategories.push('Durchschnitt aller Beiträge');
+
     return {
         tooltip: {
             trigger: 'axis',
@@ -152,7 +143,7 @@ function getData() {
             type: 'value',
             boundaryGap: [0, 0.01],
         },
-        series: available_Categories.value.map((data: any, index: any) => ({
+        series: available_Categories.map((data: any, index: any) => ({
             name: data,
             type: 'bar',
             // markline
@@ -175,8 +166,8 @@ function getData() {
             //
             stack: 'stack',
             barWidth: '60%',
-            data: selectedData.value.map(
-                (selectedData) => selectedData[index].value
+            data: selectedData.map(
+                (selectedData: any) => selectedData[index].value
             ),
             label: {
                 show: true,
