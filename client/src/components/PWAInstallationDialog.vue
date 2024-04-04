@@ -1,6 +1,6 @@
 <template>
     <v-dialog
-        v-model="dialogVisible"
+        v-model="model"
         :close-on-content-click="false"
         transition="dialog-bottom-transition"
         width="600px"
@@ -59,7 +59,7 @@
                         color="primary-darken-1"
                         prepend-icon="mdi-close"
                         variant="plain"
-                        @click.capture="closeDialog()"
+                        @click.capture="dismiss()"
                         >Nein, danke
                     </v-btn>
                     <v-btn
@@ -78,52 +78,57 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, onMounted, ref } from 'vue';
+import { onBeforeMount, onUnmounted, defineExpose, ref } from 'vue';
+import { defineModel } from 'vue';
+import Cookies from 'js-cookie';
 
-// reactive states
+const model = defineModel<boolean>({
+    required: true,
+});
+
 const deferredPrompt = ref<any>(null);
-const dialogVisible = ref(true);
 
-// handle 'beforeinstallprompt' and 'appinstalled' event in a single function
-const installPromptHandler = (e: Event) => {
-    if (e.type === 'beforeinstallprompt') {
-        e.preventDefault();
-        deferredPrompt.value = e; // stash the event for later
-    } else if (e.type === 'appinstalled') {
-        deferredPrompt.value = null; // clear the stashed installation prompt event
+const beforeInstallPromptHandler = (e: Event) => {
+    e.preventDefault();
+    if (Cookies.get('add-to-home-screen') === undefined) {
+        deferredPrompt.value = e;
     }
 };
 
-// Attach event handlers on component setup
+const appInstalledHandler = () => {
+    deferredPrompt.value = null;
+};
+
 onBeforeMount(() => {
-    window.addEventListener('beforeinstallprompt', installPromptHandler);
-    window.addEventListener('appinstalled', installPromptHandler);
+    window.addEventListener('beforeinstallprompt', beforeInstallPromptHandler);
+    window.addEventListener('appinstalled', appInstalledHandler);
 });
 
-onMounted(() => {
-    // PWA is installed on iOS
-    if ('standalone' in window.navigator && window.navigator.standalone) {
-        dialogVisible.value = false;
-    }
-
-    // PWA is installed on Android or desktop
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-        dialogVisible.value = false;
-    }
+onUnmounted(() => {
+    window.removeEventListener(
+        'beforeinstallprompt',
+        beforeInstallPromptHandler
+    );
+    window.removeEventListener('appinstalled', appInstalledHandler);
 });
 
-// event to handle closing the dialog
-const closeDialog = () => {
-    dialogVisible.value = false;
+const dismiss = () => {
+    Cookies.remove('add-to-home-screen');
+    deferredPrompt.value = null;
+    model.value = false;
 };
 
-// function for the installation button click event
 const install = () => {
     if (deferredPrompt.value) {
         deferredPrompt.value.prompt();
-        dialogVisible.value = false;
     }
 };
+
+// Expose your values
+defineExpose({
+    dismiss,
+    install,
+});
 </script>
 
 <style scoped lang="scss"></style>

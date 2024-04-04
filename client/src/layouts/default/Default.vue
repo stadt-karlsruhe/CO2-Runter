@@ -11,6 +11,8 @@
                 </v-container>
             </v-main>
             <TheFooter />
+
+            <PWAInstallationDialog v-model="dialogVisible" />
         </v-app>
     </v-locale-provider>
 </template>
@@ -18,6 +20,10 @@
 <script lang="ts" setup>
 import TheNavigationHeader from '@/components/TheNavigationHeader.vue';
 import TheFooter from '@/components/TheFooter.vue';
+import PWAInstallationDialog from '@/components/PWAInstallationDialog.vue';
+import { ref } from 'vue';
+
+const dialogVisible = ref(false);
 </script>
 
 <style scoped>

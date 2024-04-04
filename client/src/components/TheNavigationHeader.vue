@@ -204,14 +204,11 @@
             </v-menu>
         </v-list>
     </v-navigation-drawer>
-
-    <PWAInstallationDialog />
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import useAuth from '@/composables/useAuth';
-import PWAInstallationDialog from '@/components/PWAInstallationDialog.vue';
 
 // Use the composable
 const { isLoggedIn, logout } = useAuth();

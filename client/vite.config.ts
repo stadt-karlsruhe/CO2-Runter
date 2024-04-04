@@ -31,7 +31,7 @@ export default defineConfig({
             },
         }),
         VitePWA({
-            registerType: 'autoUpdate',
+            registerType: 'prompt',
             devOptions: {
                 enabled: true,
             },
@@ -46,6 +46,7 @@ export default defineConfig({
                 description:
                     'CO2 Runter Webseite hilft bei der Reduktion von CO2',
                 theme_color: '#ffffff',
+                start_url: '/',
                 icons: [
                     {
                         src: '/pwa-192x192.png',
