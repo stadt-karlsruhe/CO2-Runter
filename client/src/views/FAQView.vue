@@ -137,7 +137,7 @@
                     <v-data-table
                         v-model:page="page"
                         :headers="headers"
-                        :items="literatureSources"
+                        :items="LiteratureSources"
                         :search="search"
                     >
                         <template v-slot:[`item.actions`]="props">
@@ -168,11 +168,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import literatureSources from '@/constants/literatureSources';
+import LiteratureSources from '@/constants/LiteratureSources';
 
 const search = ref('');
 const page = ref(1);
-const pageCount = Math.ceil(literatureSources.length / 10);
+const pageCount = Math.ceil(LiteratureSources.length / 10);
 
 const headers = [
     {
