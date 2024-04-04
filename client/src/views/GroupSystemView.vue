@@ -95,25 +95,23 @@ const error = ref('');
 // TODO: this is not working currently
 const joinGroup = async () => {
     try {
-        const response = await fetch('/add_user', {
+        const response = await fetch('/api/groups/add_user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                co2token: `${localStorage.getItem('CO2Token')}`,
             },
             body: JSON.stringify({
                 groupcode: groupCode.value,
             }),
         });
-        console.log(response);
+
         if (!response.ok) throw new Error(await response.text());
-        const message = await response.text();
         error.value = '';
 
-        // Reset groupCode
         groupCode.value = '';
     } catch (err) {
-        console.error(err);
-        error.value = 'Fehler beim Hinzufügen zur Gruppe';
+        error.value = 'Fehler beim Hinzufügen zur Gruppe, stellen sie sicher das sie eingeloggt sind und der Gruppen-Code korrekt ist.';
     }
 };
 </script>
