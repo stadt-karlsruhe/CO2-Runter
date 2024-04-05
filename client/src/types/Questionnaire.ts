@@ -1,5 +1,4 @@
 export interface Questionnaire {
-    baseline: number;
     category: Category[];
 }
 
@@ -9,31 +8,12 @@ export interface Category {
 }
 
 interface Question {
-    name: string;
-    quick: Quick;
-    detailed: Detailed;
-}
-
-interface Common {
     text: string;
-    typ: string;
-    defaultValue: number;
-    selectedValue: string;
+    replies: Replies[];
+    selectedValue: number;
 }
 
-interface Quick extends Common {
-    replies?: string[];
-    values: number[];
-}
-
-interface Input extends Common {
-    unit: string;
-    formula: string;
-    minInput?: number;
-    maxInput: number;
-}
-
-interface Detailed {
-    questions: Input[];
-    formula: string;
+interface Replies {
+    text: string;
+    value: number;
 }
