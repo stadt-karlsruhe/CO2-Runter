@@ -1,19 +1,24 @@
 <template>
     <v-sheet border>
-        <p v-for="(item, index) in questions.questions" :key="index">
-            {{ item.name }}
-        </p>
-        <v-select
-            v-model="props.questions.questions[0].quick.replies![0]"
-            :label="props.questions.questions[0].quick.text"
-            :items="props.questions.questions[0].quick.replies"
-            variant="outlined"
-            rounded
-            placeholder="Wählen Sie eine Option"
-            class="ma-8"
-            :return-object="false"
+        <div
+            v-for="(item, index) in questions.questions"
+            :key="index"
+            class="my-16 text-center"
         >
-        </v-select>
+            <h3>{{ item.text }}</h3>
+            <v-select
+                :items="
+                    props.questions.questions[index].replies.map(
+                        (replies) => replies.text
+                    )
+                "
+                :return-object="false"
+                class="ma-16"
+                placeholder="Wählen Sie eine Option"
+                rounded
+                variant="outlined"
+            ></v-select>
+        </div>
     </v-sheet>
 </template>
 
