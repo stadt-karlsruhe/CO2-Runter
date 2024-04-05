@@ -24,7 +24,10 @@
             >
             </v-select>
 
-            <p>Du willst einer Gruppe beitreten, dann geh zum Gruppensysten und tritt mit dem Code bei</p>
+            <p>
+                Du willst einer Gruppe beitreten, dann geh zum Gruppensysten und
+                tritt mit dem Code bei
+            </p>
         </v-card-text>
     </v-card>
 </template>
@@ -38,7 +41,7 @@ import { BarChart } from 'echarts/charts';
 import { DatasetComponent, GridComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import VChart from 'vue-echarts';
-import {Group} from "@/types/Group";
+import { Group } from '@/types/Group';
 
 use([BarChart, DatasetComponent, GridComponent, CanvasRenderer]);
 
@@ -47,7 +50,6 @@ const isLoading = ref(true);
 const averageData = ref<AverageCo2Emissions>([]);
 const footprintsData = ref<ComparisonPrints>([]);
 const error = ref('');
-
 
 const groups = ref<Array<Group>>([]);
 const fetchGroups = async () => {
@@ -87,19 +89,24 @@ const fetchFootprintsForAllAvailableGroups = async () => {
     isLoading.value = true;
     try {
         for (let i = 0; i < groups.value.length; i++) {
-            const response = await fetch(`/api/dashboard/groupfootprint?groupcode=${groups.value[i].groupcode}`, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
+            const response = await fetch(
+                `/api/dashboard/groupfootprint?groupcode=${groups.value[i].groupcode}`,
+                {
+                    method: 'GET',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
                 }
-            });
+            );
             if (response.status === 200) {
                 const data = await response.json();
                 console.log(data);
                 if (data.values && data.values.length > 0) {
-                    const groupExists = footprintsData.value.some((groupFootprint: any) => groupFootprint.name ===
-                        data.name);
+                    const groupExists = footprintsData.value.some(
+                        (groupFootprint: any) =>
+                            groupFootprint.name === data.name
+                    );
                     if (!groupExists) {
                         footprintsData.value = [...footprintsData.value, data];
                     }
@@ -154,14 +161,12 @@ function getData() {
         }));
     });
 
-    const selectedCategories = selectedGroups.value.map(
-        (selectedGroup) => {
-            const footprint = footprintsData.value.find(
-                (f) => f.name === selectedGroup
-            );
-            return footprint!.name;
-        }
-    );
+    const selectedCategories = selectedGroups.value.map((selectedGroup) => {
+        const footprint = footprintsData.value.find(
+            (f) => f.name === selectedGroup
+        );
+        return footprint!.name;
+    });
 
     const available_Categories = footprintsData.value[0].values.map(
         (valueObj) => valueObj.category

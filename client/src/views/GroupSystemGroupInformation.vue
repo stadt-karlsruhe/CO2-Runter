@@ -43,15 +43,25 @@
         </v-row>
     </v-container>
 
-    <v-list>
-        <v-list-item v-for="(group, index) in groups" :key="group.groupcode">
-            <template v-slot:prepend>
+    <v-expansion-panels variant="accordion">
+        <v-expansion-panel
+            v-for="(group, index) in groups"
+            :key="group.groupcode + index"
+            elevation="0"
+        >
+            <v-expansion-panel-title>
                 <v-avatar color="primary-darken-1" variant="tonal">
                     {{ index + 1 }}
                 </v-avatar>
-            </template>
-            {{ group.groupname }}
-            <template v-slot:append>
+                <span class="ml-4"
+                    >Gruppe: {{ group.groupname }}</span
+                ></v-expansion-panel-title
+            >
+            <v-expansion-panel-text>
+                <p>Gruppen Code: {{ group.groupcode }}</p>
+                <p>Gruppen Administrator: {{ group.ownername }}</p>
+                <p>Gruppen Mitgliederanzahl: {{ group.memberCount }}</p>
+
                 <v-btn
                     variant="plain"
                     :rounded="true"
@@ -67,18 +77,19 @@
                 <v-btn
                     variant="tonal"
                     color="error"
-                    icon="mdi-delete"
+                    :rounded="true"
+                    prepend-icon="mdi-delete"
                     @click="deleteGroup(group.groupcode)"
-                />
-            </template>
-        </v-list-item>
-    </v-list>
+                >Gruppe Löschen</v-btn>
 
-    <GroupSuccessful
-        v-if="showGroupSuccess"
-        :groupCode="groupCode"
-        :groupName="groupName"
-    />
+                <GroupSuccessful
+                    v-if="showGroupSuccess"
+                    :groupCode="groupCode"
+                    :groupName="groupName"
+                />
+            </v-expansion-panel-text>
+        </v-expansion-panel>
+    </v-expansion-panels>
 </template>
 
 <script setup lang="ts">
