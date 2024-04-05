@@ -66,7 +66,7 @@ import useQuestions from '@/composables/useQuestions';
 import { Category, Questionnaire } from '@/types/Questionnaire';
 
 const { questions, fetchQuestions } = useQuestions();
-const step = ref(1);
+const step = ref(0);
 const data = ref<Questionnaire>();
 
 onMounted(async () => {
