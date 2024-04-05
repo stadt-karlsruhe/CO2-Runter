@@ -3,7 +3,7 @@
         <v-row
             class="d-flex flex-column-reverse flex-md-row my-16 justify-center"
         >
-            <h1 class="text-primary-darken-1">Co2 Fußabdruck Rechner</h1>
+            <h1 class="text-primary-darken-1">Mein CO₂-Fußabdruck</h1>
         </v-row>
 
         <QuestionStepper />
