@@ -4,40 +4,26 @@ import { Questionnaire } from '@/types/Questionnaire';
 export default function useQuestions() {
     const loading = ref(false);
     const questions = ref<Questionnaire>({
-        baseline: 0,
         category: [
             {
                 name: '',
                 questions: [
                     {
-                        name: '',
-                        quick: {
-                            text: '',
-                            typ: '',
-                            defaultValue: 0,
-                            selectedValue: '',
-                            replies: [],
-                            values: [],
-                        },
-                        detailed: {
-                            questions: [
-                                {
-                                    text: '',
-                                    typ: '',
-                                    defaultValue: 0,
-                                    selectedValue: '',
-                                    unit: '',
-                                    formula: '',
-                                    minInput: 0,
-                                    maxInput: 0,
-                                },
-                            ],
-                            formula: '',
-                        },
+                        text: '',
+                        replies: [
+                            {
+                                text: '',
+                                value: 0.0,
+                            },
+                        ],
+                        selectedValue: 0.0,
+                        formula: '',
                     },
                 ],
+                formula: '',
             },
         ],
+        endFormula: '',
     });
     const error = ref<string | null>(null);
 
