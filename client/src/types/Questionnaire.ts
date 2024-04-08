@@ -17,7 +17,7 @@ interface Question {
     formula: string;
 }
 
-interface Replies {
+export interface Replies {
     text: string;
     value: number;
 }

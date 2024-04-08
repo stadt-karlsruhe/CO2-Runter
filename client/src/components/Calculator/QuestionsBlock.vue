@@ -24,10 +24,11 @@
 
 <script lang="ts" setup>
 import { Category } from '@/types/Questionnaire';
+import useCo2EmissionCalculator from '@/composables/useCo2EmissionCalculator';
 
+const { co2value, calculateCo2Value } = useCo2EmissionCalculator();
 const props = defineProps<{
     questions: Category;
 }>();
 </script>
-
 <style scoped></style>
