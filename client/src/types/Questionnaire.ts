@@ -13,7 +13,7 @@ export interface Category {
 interface Question {
     text: string;
     replies: Replies[];
-    selectedValue: number;
+    selected: Replies;
     formula: string;
 }
 

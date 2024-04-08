@@ -28,7 +28,10 @@
               "value" : 3.58
             }
           ],
-          "selectedValue" : 1.75
+          "selected" : {
+            "text" : "Durchschnittlich (50km - 75km)",
+            "value" : 1.75
+          }
         },
         {
           "text" : "Welchen Kraftstoff nutzen Sie?",
@@ -50,7 +53,10 @@
               "value" : 0.0004
             }
           ],
-          "selectedValue" : 0.0027
+          "selected" : {
+            "text" : "Benzin",
+            "value" : 0.0027
+          }
         },
         {
           "text" : "Wie hoch ist ihr Verbrauch in Liter pro Kilometer?",
@@ -76,7 +82,10 @@
               "value" : 3.58
             }
           ],
-          "selectedValue" : 1.75
+          "selected" : {
+            "text" : "Durchschnittlich (5-7 l/km)",
+            "value" : 1.75
+          }
         },
         {
           "text" : "Wie häufig nutzen Sie öffentliche Verkehrsmittel in der Woche?",
@@ -102,7 +111,10 @@
               "value" : 0.24
             }
           ],
-          "selectedValue" : 0.12,
+          "selected" : {
+            "text" : "Durchschnittlich (50-70km)",
+            "value" : 0.12
+          },
           "formula" : "function (value) { value * 0.000049 * 52; }"
         },
         {
@@ -129,7 +141,10 @@
               "value" : 1000.0
             }
           ],
-          "selectedValue" : 0,
+          "selected" : {
+            "text" : "Sehr selten (< 0h)",
+            "value" : 0.0
+          },
           "formula" : "function (value) { value * 0.15; }"
         }
       ],
@@ -162,7 +177,10 @@
               "value" : 2.55
             }
           ],
-          "selectedValue" : 2.2
+          "selected" : {
+            "text" : "Mischkost",
+            "value" : 2.2
+          }
         },
         {
           "text" : "Wie häufig kaufen Sie regionale Produkte?",
@@ -188,7 +206,10 @@
               "value" : -0.05
             }
           ],
-          "selectedValue" : 0
+          "selected" : {
+            "text": "Nie",
+            "value" : 0.05
+          }
         },
         {
           "text": "Wie oft kaufen Sie saisonale Produkte?",
@@ -214,7 +235,10 @@
               "value" : -0.05
             }
           ],
-          "selectedValue": 0
+          "selected": {
+            "text": "Teilweise",
+            "value" : 0
+          }
         },
         {
           "text": "Wie oft kaufen Sie Bio-Produkte?",
@@ -240,7 +264,10 @@
               "value" : -0.06
             }
           ],
-          "selectedValue": 0
+          "selected": {
+            "text": "Nie",
+            "value" : 0.0
+          }
         }
       ],
       "formula": "function (values) { return (values[0] + (values[0] * (values[1] + values[2] + values[3]))); }"
@@ -268,7 +295,10 @@
               "value" : 200.0
             }
           ],
-          "selectedValue": 61,
+          "selected": {
+            "text": "Durchschnittlich (20 - 70qm)",
+            "value" : 61.0
+          },
           "formula" : "function (value) { return value; }"
         },
         {
@@ -291,7 +321,10 @@
               "value" : 8
             }
           ],
-          "selectedValue": 1,
+          "selected": {
+            "text" : "Nur ich",
+            "value" : 1
+          },
           "formula" : "function (value) { return value; }"
         },
         {
@@ -318,7 +351,10 @@
               "value" : 0.6
             }
           ],
-          "selectedValue": 0.5
+          "selected": {
+            "text" : "1978-1994",
+            "value" : 0.53
+          }
         },
         {
           "text": "Wie wird Ihr Haus beheizt?",
@@ -356,7 +392,10 @@
               "value" : 0.17
             }
           ],
-          "selectedValue": 1.73
+          "selected": {
+            "text" : "Fossil",
+            "value" : 1.73
+          }
         },
         {
           "text": "Woher beziehen Sie Ihren Strom?",
@@ -370,7 +409,10 @@
               "value" : 0.49
             }
           ],
-          "selectedValue": 0.49
+          "selected": {
+            "text" : "Strommix",
+            "value" : 0.49
+          }
         }
       ],
       "formula" : "function (value) { return (value[0] * value[1] * value[2] * value[3] * value[4]); }"
@@ -394,7 +436,10 @@
               "value" : 3.35
             }
           ],
-          "selectedValue": 2.9
+          "selected": {
+            "text" : "normal",
+            "value" : 2.9
+          }
         },
         {
           "text": "Was sind Ihre Kaufkriterien?",
@@ -412,7 +457,10 @@
               "value" : 0.05
             }
           ],
-          "selectedValue": 0
+          "selected": {
+            "text" : "Funktionalität",
+            "value" : 0
+          }
         },
         {
           "text": "Wie oft kaufen Sie gebrauchte/secondhand Produkte?",
@@ -430,7 +478,10 @@
               "value" : 0.05
             }
           ],
-          "selectedValue": 0
+          "selected": {
+            "text" : "Manchmal",
+            "value" : 0
+          }
         },
         {
           "text": "Wie hoch sind Ihre sonstigen Ausgaben pro Kopf und Monat?",
@@ -448,6 +499,10 @@
               "value" : 750
             }
           ],
+          "selected": {
+            "text" : "Niedrig (< 250€)",
+            "value" : 100.0
+          },
           "formula": "function (value) { return value; }"
         }
       ]

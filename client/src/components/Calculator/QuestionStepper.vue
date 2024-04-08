@@ -20,6 +20,7 @@
             <v-stepper-window-item value="1">
                 <QuestionsBlock
                     v-if="data"
+                    :category-index="QuestionsIndices.MOBILITY"
                     :questions="data.category[QuestionsIndices.MOBILITY]"
                 />
             </v-stepper-window-item>
@@ -27,6 +28,7 @@
             <v-stepper-window-item value="2">
                 <QuestionsBlock
                     v-if="data"
+                    :category-index="QuestionsIndices.NUTRITION"
                     :questions="data.category[QuestionsIndices.NUTRITION]"
                 />
             </v-stepper-window-item>
@@ -34,6 +36,7 @@
             <v-stepper-window-item value="3">
                 <QuestionsBlock
                     v-if="data"
+                    :category-index="QuestionsIndices.LIVING"
                     :questions="data.category[QuestionsIndices.LIVING]"
                 />
             </v-stepper-window-item>
@@ -41,6 +44,7 @@
             <v-stepper-window-item value="4">
                 <QuestionsBlock
                     v-if="data"
+                    :category-index="QuestionsIndices.CONSUM"
                     :questions="data.category[QuestionsIndices.CONSUM]"
                 />
             </v-stepper-window-item>

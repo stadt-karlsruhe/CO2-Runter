@@ -1,5 +1,5 @@
 import { ref, onMounted } from 'vue';
-import { Questionnaire } from '@/types/Questionnaire';
+import { Questionnaire, Replies } from '@/types/Questionnaire';
 
 export default function useQuestions() {
     const loading = ref(false);
@@ -17,7 +17,10 @@ export default function useQuestions() {
                                 value: 0.0,
                             },
                         ],
-                        selectedValue: 0.0,
+                        selected: {
+                            text: '',
+                            value: 0.0,
+                        },
                         formula: '',
                     },
                 ],
@@ -48,12 +51,29 @@ export default function useQuestions() {
         }
     };
 
+    const updateSelectedValue = (categoryIndex: number, questionIndex: number, selectedValue: Replies) => {
+        // questions.value.category[categoryIndex].questions[questionIndex].selected.text = selectedValue.text;
+        //
+        // questions.value.category[categoryIndex].questions[questionIndex].selected.value = selectedValue.value;
+        const newText = selectedValue.text;
+        const newValue = selectedValue.value;
+
+        console.log(newText);
+        console.log(newValue);
+
+        questions.value.category[categoryIndex].questions[questionIndex].selected.text = newText;
+        questions.value.category[categoryIndex].questions[questionIndex].selected.value = newValue;
+
+        console.log(questions.value.category[categoryIndex].questions[questionIndex])
+    };
+
     onMounted(async () => {
         await fetchQuestions();
     });
 
     return {
         fetchQuestions,
+        updateSelectedValue,
         loading: loading,
         questions: questions,
         error: error,
