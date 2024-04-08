@@ -4,6 +4,7 @@ import { Questionnaire } from '@/types/Questionnaire';
 export default function useQuestions() {
     const loading = ref(false);
     const questions = ref<Questionnaire>({
+        baseline: 1.12,
         category: [
             {
                 name: '',

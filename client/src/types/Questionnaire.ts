@@ -1,4 +1,5 @@
 export interface Questionnaire {
+    baseline: number;
     category: Category[];
     endFormula: string;
 }
