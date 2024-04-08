@@ -58,12 +58,12 @@
     </v-stepper>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 import QuestionsBlock from '@/components/Calculator/QuestionsBlock.vue';
 import { QuestionsIndices } from '@/constants/QuestionsIndices';
 import useQuestions from '@/composables/useQuestions';
-import { Category, Questionnaire } from '@/types/Questionnaire';
+import { Questionnaire } from '@/types/Questionnaire';
 
 const { questions, fetchQuestions } = useQuestions();
 const step = ref(0);

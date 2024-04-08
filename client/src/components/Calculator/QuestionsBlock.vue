@@ -22,7 +22,7 @@
     </v-sheet>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { Category } from '@/types/Questionnaire';
 
 const props = defineProps<{
