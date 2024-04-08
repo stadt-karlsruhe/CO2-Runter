@@ -51,20 +51,27 @@ export default function useQuestions() {
         }
     };
 
-    const updateSelectedValue = (categoryIndex: number, questionIndex: number, selectedValue: Replies) => {
-        // questions.value.category[categoryIndex].questions[questionIndex].selected.text = selectedValue.text;
-        //
-        // questions.value.category[categoryIndex].questions[questionIndex].selected.value = selectedValue.value;
+    const updateSelectedValue = (
+        categoryIndex: number,
+        questionIndex: number,
+        selectedValue: Replies
+    ) => {
         const newText = selectedValue.text;
         const newValue = selectedValue.value;
 
         console.log(newText);
         console.log(newValue);
 
-        questions.value.category[categoryIndex].questions[questionIndex].selected.text = newText;
-        questions.value.category[categoryIndex].questions[questionIndex].selected.value = newValue;
+        questions.value.category[categoryIndex].questions[
+            questionIndex
+        ].selected.text = newText;
+        questions.value.category[categoryIndex].questions[
+            questionIndex
+        ].selected.value = newValue;
 
-        console.log(questions.value.category[categoryIndex].questions[questionIndex])
+        console.log(
+            questions.value.category[categoryIndex].questions[questionIndex]
+        );
     };
 
     onMounted(async () => {

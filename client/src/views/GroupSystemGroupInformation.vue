@@ -80,7 +80,8 @@
                     :rounded="true"
                     prepend-icon="mdi-delete"
                     @click="deleteGroup(group.groupcode)"
-                >Gruppe Löschen</v-btn>
+                    >Gruppe Löschen</v-btn
+                >
 
                 <GroupSuccessful
                     v-if="showGroupSuccess"
