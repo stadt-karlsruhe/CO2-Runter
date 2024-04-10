@@ -2,9 +2,13 @@
     <v-card>
         <v-card-title>Chart</v-card-title>
         <v-card-text v-if="isLoggedIn">
-            <div v-if="isLoading">Daten werden geladen...</div>
+            <v-alert v-if="isLoading" type="info">
+                Daten werden geladen...
+            </v-alert>
 
-            <div v-if="error">Es ist ein fehler aufgetreten: error</div>
+            <v-alert v-if="error" icon="mdi-alert" type="error">
+                {{ error }}
+            </v-alert>
 
             <v-chart
                 v-if="chartOptions"
@@ -49,27 +53,42 @@
 </template>
 
 <script setup lang="ts">
-import { ComparisonPrints, DataType } from '@/types/ComparisonPrints';
-import { AverageCo2Emissions } from '@/types/AverageCo2Emissions';
+import VChart from 'vue-echarts';
 import { onMounted, ref } from 'vue';
 import { use } from 'echarts/core';
 import { BarChart } from 'echarts/charts';
 import { DatasetComponent, GridComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import VChart from 'vue-echarts';
-import { Group } from '@/types/Group';
 import useAuth from '@/composables/useAuth';
+import { GroupData } from '@/types/Group';
+import {
+    AverageCo2Emissions,
+    Co2ComparisonFootprints,
+    GroupCo2FootprintEmissions,
+} from '@/types/Co2Footprint';
 
 use([BarChart, DatasetComponent, GridComponent, CanvasRenderer]);
 
+const { isLoggedIn } = useAuth();
 const selectedGroups = ref([]);
 const isLoading = ref(true);
 const averageData = ref<AverageCo2Emissions>([]);
-const footprintsData = ref<ComparisonPrints>([]);
+const footprintsData = ref<Co2ComparisonFootprints>([]);
 const error = ref('');
-const { isLoggedIn } = useAuth();
+const groups = ref<Array<GroupData>>([]);
+const chartOptions = ref<any>(null);
+const loadingOptions = {
+    text: 'Loading…',
+    color: '#4ea397',
+    maskColor: 'rgba(255, 255, 255, 0.4)',
+};
 
-const groups = ref<Array<Group>>([]);
+const updateChartOptions = () => {
+    const data = getData();
+    if (data) {
+        chartOptions.value = data;
+    }
+};
 
 const fetchGroups = async () => {
     isLoading.value = true;
@@ -87,11 +106,12 @@ const fetchGroups = async () => {
         }
 
         const data = await response.json();
-        groups.value = data as Array<Group>;
-        console.log(groups.value, 'here i havethe groups ith group codes');
+        groups.value = data as Array<GroupData>;
+        // console.log(groups.value, 'here i havethe groups ith group codes');
         // await postData(groups.value);
     } catch (fetchError) {
-        console.error('Request failed: ', fetchError);
+        error.value =
+            'Probleme beim laden der Gruppen. Bitte versuche es später erneut.';
     }
     isLoading.value = false;
 };
@@ -120,7 +140,9 @@ const fetchFootprintsForAllAvailableGroups = async () => {
                 }
             );
             if (response.status === 200) {
-                const data = ref<DataType>(await response.json());
+                const data = ref<GroupCo2FootprintEmissions>(
+                    await response.json()
+                );
                 // If values is empty array nothing has been set yet
                 // This is what it would return if the group has not set their footprint yet
                 // { name: 'groupname', values: [] }
@@ -147,7 +169,7 @@ const fetchFootprintsForAllAvailableGroups = async () => {
                     ],
                 };
 
-                console.log(data.value, 'group data');
+                // console.log(data.value, 'group data');
 
                 if (data.value.values && data.value.values.length > 0) {
                     const groupExists = footprintsData.value.some(
@@ -163,41 +185,15 @@ const fetchFootprintsForAllAvailableGroups = async () => {
                 }
             }
         }
-    } catch (error) {
-        console.error(error);
+    } catch (err) {
+        error.value = 'Fehler beim Laden der Gruppen CO2-Fußabdrücke';
     } finally {
         isLoading.value = false;
     }
 };
 
-onMounted(async () => {
-    // TODO: add more with this maybe when it is in the params of the url
-    const groupCode = localStorage.getItem('groupCode');
-    await fetchData();
-    await fetchGroups();
-    await fetchFootprintsForAllAvailableGroups();
-    if (footprintsData.value != null && footprintsData.value.length > 0) {
-        chartOptions.value = getData();
-    }
-});
-
-const updateChartOptions = () => {
-    const data = getData();
-    if (data) {
-        chartOptions.value = data;
-    }
-};
-
-const loadingOptions = {
-    text: 'Loading…',
-    color: '#4ea397',
-    maskColor: 'rgba(255, 255, 255, 0.4)',
-};
-
-const chartOptions = ref<any>(null);
-
 function getData() {
-    console.log(footprintsData.value);
+    // console.log(footprintsData.value);
     if (footprintsData.value.length === 0 || averageData.value.length === 0) {
         return null;
     }
@@ -295,6 +291,17 @@ function getData() {
         })),
     };
 }
+
+onMounted(async () => {
+    // TODO: add more with this maybe when it is in the params of the url
+    const groupCode = localStorage.getItem('groupCode');
+    await fetchData();
+    await fetchGroups();
+    await fetchFootprintsForAllAvailableGroups();
+    if (footprintsData.value != null && footprintsData.value.length > 0) {
+        chartOptions.value = getData();
+    }
+});
 </script>
 
 <style scoped></style>

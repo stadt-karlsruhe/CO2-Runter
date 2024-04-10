@@ -1,11 +1,12 @@
 <template>
     <v-card>
+        <v-alert v-if="fetchError" type="error">{{ fetchError }}</v-alert>
         <v-card-text v-if="isLoading" class="text-center">
             <h1 class="text-primary-darken-1">{{ totalCo2Footprint }}</h1>
             <p>Abgegebene CO2-Fussabdrücke</p>
         </v-card-text>
         <v-card-text v-else class="text-center">
-            <p>Daten werden geladen</p>
+            <v-alert type="info"> Daten werden geladen... </v-alert>
         </v-card-text>
     </v-card>
 </template>

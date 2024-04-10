@@ -10,7 +10,7 @@ export interface Category {
     formula: '';
 }
 
-interface Question {
+export interface Question {
     text: string;
     replies: Replies[];
     selected: Replies;

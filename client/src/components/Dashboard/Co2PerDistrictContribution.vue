@@ -1,6 +1,7 @@
 <template>
     <v-card>
         <v-card-title>Beteiligung pro Stadtteil</v-card-title>
+
         <v-card-text>
             <v-chart
                 :option="chartOptions"
@@ -14,13 +15,13 @@
 </template>
 
 <script setup lang="ts">
+import VChart from 'vue-echarts';
 import { shallowRef, onMounted, ref } from 'vue';
 import { use } from 'echarts/core';
 import { BarChart } from 'echarts/charts';
 import { DatasetComponent, GridComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import VChart from 'vue-echarts';
-import { DistrictFootprint } from '@/types/DistrictFootprint';
+import { DistrictFootprint } from '@/types/Co2Footprint';
 
 use([BarChart, DatasetComponent, GridComponent, CanvasRenderer]);
 
@@ -38,11 +39,6 @@ const fetchFootprintsInDistricts = async () => {
     const data: DistrictFootprint[] = await response.json();
     return data;
 };
-
-onMounted(async () => {
-    footprints_in_districts.value = await fetchFootprintsInDistricts();
-    chartOptions.value = getData();
-});
 
 function getData() {
     return {
@@ -64,6 +60,11 @@ function getData() {
         series: [{ type: 'bar' }],
     };
 }
+
+onMounted(async () => {
+    footprints_in_districts.value = await fetchFootprintsInDistricts();
+    chartOptions.value = getData();
+});
 </script>
 
 <style scoped></style>

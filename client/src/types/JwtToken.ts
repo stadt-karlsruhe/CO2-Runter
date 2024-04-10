@@ -1,3 +1,3 @@
-﻿export type JwtToken = {
+﻿export interface JwtToken {
     token: string;
-};
+}

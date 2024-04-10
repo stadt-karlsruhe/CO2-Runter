@@ -3,7 +3,7 @@
         <v-container justify="center">
             <v-row v-if="error">
                 <v-col>
-                    <v-alert v-if="error" icon="mdi-alert" type="error">
+                    <v-alert icon="mdi-alert" type="error">
                         {{ error }}</v-alert
                     >
                 </v-col>

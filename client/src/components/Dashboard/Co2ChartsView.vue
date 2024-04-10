@@ -28,22 +28,37 @@
 </template>
 
 <script setup lang="ts">
-import { ComparisonPrints } from '@/types/ComparisonPrints';
-import { AverageCo2Emissions } from '@/types/AverageCo2Emissions';
+import VChart from 'vue-echarts';
 import { onMounted, ref } from 'vue';
 import { use } from 'echarts/core';
 import { BarChart } from 'echarts/charts';
 import { DatasetComponent, GridComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import VChart from 'vue-echarts';
+import {
+    AverageCo2Emissions,
+    Co2ComparisonFootprints,
+} from '@/types/Co2Footprint';
 
 use([BarChart, DatasetComponent, GridComponent, CanvasRenderer]);
 
 const selectedFootprints = ref([]);
 const isLoading = ref(true);
 const averageData = ref<AverageCo2Emissions>([]);
-const footprintsData = ref<ComparisonPrints>([]);
+const footprintsData = ref<Co2ComparisonFootprints>([]);
 const error = ref('');
+const chartOptions = ref<any>(null);
+const loadingOptions = {
+    text: 'Loading…',
+    color: '#4ea397',
+    maskColor: 'rgba(255, 255, 255, 0.4)',
+};
+
+const updateChartOptions = () => {
+    const data = getData();
+    if (data) {
+        chartOptions.value = data;
+    }
+};
 
 const fetchData = async () => {
     isLoading.value = true;
@@ -53,29 +68,6 @@ const fetchData = async () => {
     footprintsData.value = await footprints.json();
     isLoading.value = false;
 };
-
-onMounted(async () => {
-    await fetchData();
-
-    if (footprintsData.value != null && footprintsData.value.length > 0) {
-        chartOptions.value = getData();
-    }
-});
-
-const updateChartOptions = () => {
-    const data = getData();
-    if (data) {
-        chartOptions.value = data;
-    }
-};
-
-const loadingOptions = {
-    text: 'Loading…',
-    color: '#4ea397',
-    maskColor: 'rgba(255, 255, 255, 0.4)',
-};
-
-const chartOptions = ref<any>(null);
 
 function getData() {
     if (footprintsData.value.length === 0 || averageData.value.length === 0) {
@@ -177,6 +169,14 @@ function getData() {
         })),
     };
 }
+
+onMounted(async () => {
+    await fetchData();
+
+    if (footprintsData.value != null && footprintsData.value.length > 0) {
+        chartOptions.value = getData();
+    }
+});
 </script>
 
 <style scoped></style>

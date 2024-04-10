@@ -79,11 +79,12 @@ const props = defineProps({
 });
 
 const localGroupCode = computed(() => props.groupCode);
-
 const rootUrl = window.location.origin;
+
 const joinLink = computed(
     () => `${rootUrl}/CO2Rechner?groupcode=${props.groupCode}`
 );
+
 const dashLink = computed(
     () => `${rootUrl}/Dashboard?groupcode=${props.groupCode}`
 );
@@ -91,6 +92,7 @@ const dashLink = computed(
 const openLink = (link: string) => {
     window.open(link, '_blank');
 };
+
 const copyToClipboard = (text: string) => {
     navigator.clipboard
         .writeText(text)

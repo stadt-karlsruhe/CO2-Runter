@@ -95,12 +95,12 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { Group } from '@/types/Group';
+import { GroupData } from '@/types/Group';
 import GroupSuccessful from '@/components/GroupSystem/GroupSuccessful.vue';
 
 // TODO: User should be able to leave a group
 
-let groups = ref<Array<Group>>([]);
+let groups = ref<Array<GroupData>>([]);
 let groupName = ref('');
 let groupCode = ref('');
 let showGroupSuccess = ref(false);
@@ -121,7 +121,7 @@ onMounted(async () => {
         }
 
         const data = await response.json();
-        groups.value = data as Array<Group>;
+        groups.value = data as Array<GroupData>;
     } catch (fetchError) {
         console.error('Request failed: ', fetchError);
     }

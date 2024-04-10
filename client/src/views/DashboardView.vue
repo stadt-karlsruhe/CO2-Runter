@@ -51,8 +51,8 @@ import { ref } from 'vue';
 import Co2MapsView from '@/components/Dashboard/Co2MapsView.vue';
 import Co2ChartsView from '@/components/Dashboard/Co2ChartsView.vue';
 import Co2GroupsView from '@/components/Dashboard/Co2GroupsView.vue';
-import Co2TotalContribution from "@/components/Dashboard/Co2TotalContribution.vue";
-import Co2PerDistrictContribution from "@/components/Dashboard/Co2PerDistrictContribution.vue";
+import Co2TotalContribution from '@/components/Dashboard/Co2TotalContribution.vue';
+import Co2PerDistrictContribution from '@/components/Dashboard/Co2PerDistrictContribution.vue';
 
 const tab = ref(null);
 </script>

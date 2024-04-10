@@ -210,10 +210,8 @@
 import { ref, watch } from 'vue';
 import useAuth from '@/composables/useAuth';
 
-// Use the composable
 const { isLoggedIn, logout } = useAuth();
 
-// Your remaining code stays the same
 const isDrawerOpen = ref(false);
 
 watch(isDrawerOpen, (newValue) => {

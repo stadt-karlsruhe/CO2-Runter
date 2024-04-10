@@ -4,7 +4,7 @@
             <v-row v-if="error">
                 <v-col>
                     <v-alert icon="mdi-alert" type="error">
-                        {{ error }}Alert
+                        {{ error }}
                     </v-alert>
                 </v-col>
             </v-row>

@@ -1,24 +1,23 @@
 <template>
-    <div>
-        <v-card>
-            <v-card-text>
-                <v-chart
-                    v-if="!loading"
-                    :option="chartOptions"
-                    autoresize
-                    :loading="loading"
-                    :loadingOptions="loadingOptions"
-                    style="height: 600px; width: 100%"
-                />
-                <div v-else style="text-align: center">
-                    Daten werden geladen ...
-                </div>
-            </v-card-text>
-        </v-card>
-    </div>
+    <v-card>
+        <v-card-text>
+            <v-chart
+                v-if="!loading"
+                :option="chartOptions"
+                autoresize
+                :loading="loading"
+                :loadingOptions="loadingOptions"
+                style="height: 600px; width: 100%"
+            />
+            <div v-else style="text-align: center">
+                Daten werden geladen ...
+            </div>
+        </v-card-text>
+    </v-card>
 </template>
 
 <script setup lang="ts">
+import VChart from 'vue-echarts';
 import { shallowRef, onMounted, ref } from 'vue';
 import { use } from 'echarts/core';
 import { ScatterChart, EffectScatterChart } from 'echarts/charts';
@@ -29,13 +28,12 @@ import {
     TooltipComponent,
     VisualMapComponent,
 } from 'echarts/components';
-import VChart from 'vue-echarts';
 import { MapChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { registerMap } from 'echarts';
-import karlsruheGeoData from '@/constants/karlsruheGeoData.json';
 import { GeoJSONSourceInput } from 'echarts/types/src/coord/geo/geoTypes';
-import { FootprintResponse } from '@/types/FootprintResponse';
+import { FootprintResponse } from '@/types/Co2Footprint';
+import karlsruheGeoData from '@/constants/karlsruheGeoData.json';
 
 use([
     ScatterChart,
@@ -53,8 +51,8 @@ registerMap('Karlsruhe', karlsruheGeoData as GeoJSONSourceInput);
 
 const footprintsData = ref<FootprintResponse>();
 const chartOptions = shallowRef();
-let loading = ref(false);
-let loadingOptions = {
+const loading = ref(false);
+const loadingOptions = {
     text: 'Loading…',
     color: '#4ea397',
     maskColor: 'rgba(255, 255, 255, 0.4)',
@@ -66,12 +64,6 @@ const fetchFootprints = async () => {
     return data;
 };
 
-onMounted(async () => {
-    loading.value = true;
-    footprintsData.value = await fetchFootprints();
-    chartOptions.value = getData();
-    loading.value = false;
-});
 function getData() {
     return {
         title: {
@@ -175,6 +167,13 @@ function getData() {
             : [],
     };
 }
+
+onMounted(async () => {
+    loading.value = true;
+    footprintsData.value = await fetchFootprints();
+    chartOptions.value = getData();
+    loading.value = false;
+});
 </script>
 
 <style scoped></style>

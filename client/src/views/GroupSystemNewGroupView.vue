@@ -73,7 +73,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import GroupSuccessful from '@/components/GroupSystem/GroupSuccessful.vue';
-import { GroupCreatedResponse } from '@/types/GroupCreatedResponse';
+import { GroupCreatedResponse } from '@/types/Group';
 
 const groupName = ref('');
 const groupCode = ref<GroupCreatedResponse | null>(null);
