@@ -30,7 +30,7 @@
                     size="large"
                     to="/gruppensystem/neue-gruppe"
                 >
-                    Neue Gruppe erstellen
+                    Weitere/Neue Gruppe erstellen
                 </v-btn>
             </v-col>
             <v-col class="d-flex align-center justify-center" cols="12" md="5">
