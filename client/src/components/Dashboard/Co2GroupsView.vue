@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import {ComparisonPrints, DataType} from '@/types/ComparisonPrints';
+import { ComparisonPrints, DataType } from '@/types/ComparisonPrints';
 import { AverageCo2Emissions } from '@/types/AverageCo2Emissions';
 import { onMounted, ref } from 'vue';
 import { use } from 'echarts/core';
@@ -58,7 +58,7 @@ import { DatasetComponent, GridComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import VChart from 'vue-echarts';
 import { Group } from '@/types/Group';
-import useAuth from "@/composables/useAuth";
+import useAuth from '@/composables/useAuth';
 
 use([BarChart, DatasetComponent, GridComponent, CanvasRenderer]);
 
@@ -155,7 +155,10 @@ const fetchFootprintsForAllAvailableGroups = async () => {
                             groupFootprint.name === data.value.name
                     );
                     if (!groupExists) {
-                        footprintsData.value = [...footprintsData.value, data.value];
+                        footprintsData.value = [
+                            ...footprintsData.value,
+                            data.value,
+                        ];
                     }
                 }
             }
