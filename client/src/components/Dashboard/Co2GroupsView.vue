@@ -1,7 +1,7 @@
 <template>
     <v-card>
         <v-card-title>Chart</v-card-title>
-        <v-card-text>
+        <v-card-text v-if="isLoggedIn">
             <div v-if="isLoading">Daten werden geladen...</div>
 
             <div v-if="error">Es ist ein fehler aufgetreten: error</div>
@@ -27,13 +27,29 @@
             <p>
                 Du willst einer Gruppe beitreten, dann geh zum Gruppensysten und
                 tritt mit dem Code bei
+                <v-btn
+                    variant="tonal"
+                    :rounded="true"
+                    color="primary-darken-1"
+                    append-icon="mdi-account-group-outline"
+                    size="large"
+                    to="/gruppensystem"
+                >
+                    Geh zum Gruppensystem
+                </v-btn>
+            </p>
+        </v-card-text>
+        <v-card-text v-else>
+            <p>
+                Du bist nicht eingeloggt. Bitte logge dich ein, um die
+                Gruppenübersicht zu sehen.
             </p>
         </v-card-text>
     </v-card>
 </template>
 
 <script setup lang="ts">
-import { ComparisonPrints } from '@/types/ComparisonPrints';
+import {ComparisonPrints, DataType} from '@/types/ComparisonPrints';
 import { AverageCo2Emissions } from '@/types/AverageCo2Emissions';
 import { onMounted, ref } from 'vue';
 import { use } from 'echarts/core';
@@ -42,6 +58,7 @@ import { DatasetComponent, GridComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import VChart from 'vue-echarts';
 import { Group } from '@/types/Group';
+import useAuth from "@/composables/useAuth";
 
 use([BarChart, DatasetComponent, GridComponent, CanvasRenderer]);
 
@@ -50,8 +67,10 @@ const isLoading = ref(true);
 const averageData = ref<AverageCo2Emissions>([]);
 const footprintsData = ref<ComparisonPrints>([]);
 const error = ref('');
+const { isLoggedIn } = useAuth();
 
 const groups = ref<Array<Group>>([]);
+
 const fetchGroups = async () => {
     isLoading.value = true;
     try {
@@ -69,7 +88,8 @@ const fetchGroups = async () => {
 
         const data = await response.json();
         groups.value = data as Array<Group>;
-        console.log(groups.value);
+        console.log(groups.value, 'here i havethe groups ith group codes');
+        // await postData(groups.value);
     } catch (fetchError) {
         console.error('Request failed: ', fetchError);
     }
@@ -100,15 +120,42 @@ const fetchFootprintsForAllAvailableGroups = async () => {
                 }
             );
             if (response.status === 200) {
-                const data = await response.json();
-                console.log(data);
-                if (data.values && data.values.length > 0) {
+                const data = ref<DataType>(await response.json());
+                // If values is empty array nothing has been set yet
+                // This is what it would return if the group has not set their footprint yet
+                // { name: 'groupname', values: [] }
+                // if it is set it would be this
+                // [
+                //     {category: 'Mobilität', value: 1},
+                //     {category: 'Wohnen', value: 1},
+                //     {category: 'Konsum', value: 1},
+                //     {category: 'Ernährung', value: 1},
+                //     {category: 'Infrastruktur', value: 1}
+                // ]
+
+                // Give it some test data
+
+                // TODO: remove this in the future when the co2 calculator works
+                data.value = {
+                    name: groups.value[i].groupname,
+                    values: [
+                        { category: 'Mobilität', value: 1 },
+                        { category: 'Wohnen', value: 1 },
+                        { category: 'Konsum', value: 1 },
+                        { category: 'Ernährung', value: 1 },
+                        { category: 'Infrastruktur', value: 1 },
+                    ],
+                };
+
+                console.log(data.value, 'group data');
+
+                if (data.value.values && data.value.values.length > 0) {
                     const groupExists = footprintsData.value.some(
                         (groupFootprint: any) =>
-                            groupFootprint.name === data.name
+                            groupFootprint.name === data.value.name
                     );
                     if (!groupExists) {
-                        footprintsData.value = [...footprintsData.value, data];
+                        footprintsData.value = [...footprintsData.value, data.value];
                     }
                 }
             }
@@ -121,10 +168,11 @@ const fetchFootprintsForAllAvailableGroups = async () => {
 };
 
 onMounted(async () => {
+    // TODO: add more with this maybe when it is in the params of the url
+    const groupCode = localStorage.getItem('groupCode');
     await fetchData();
     await fetchGroups();
     await fetchFootprintsForAllAvailableGroups();
-
     if (footprintsData.value != null && footprintsData.value.length > 0) {
         chartOptions.value = getData();
     }

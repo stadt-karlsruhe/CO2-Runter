@@ -3,7 +3,7 @@ type ValueType = {
     value: number;
 };
 
-type DataType = {
+export type DataType = {
     name: string;
     values: ValueType[];
 };
