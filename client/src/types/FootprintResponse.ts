@@ -1,4 +1,4 @@
-import { DistrictFootprint } from '@/components/Dashboard/DistrictFootprint';
+import { DistrictFootprint } from '@/types/DistrictFootprint';
 
 export interface FootprintResponse {
     consume: DistrictFootprint[];

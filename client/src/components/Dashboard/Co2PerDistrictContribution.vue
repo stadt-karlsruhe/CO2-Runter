@@ -20,7 +20,7 @@ import { BarChart } from 'echarts/charts';
 import { DatasetComponent, GridComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import VChart from 'vue-echarts';
-import { DistrictFootprint } from '@/components/Dashboard/DistrictFootprint';
+import { DistrictFootprint } from '@/types/DistrictFootprint';
 
 use([BarChart, DatasetComponent, GridComponent, CanvasRenderer]);
 

@@ -33,9 +33,9 @@ import VChart from 'vue-echarts';
 import { MapChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { registerMap } from 'echarts';
-import geoJson from './districts_geo.json';
+import karlsruheGeoData from '@/constants/karlsruheGeoData.json';
 import { GeoJSONSourceInput } from 'echarts/types/src/coord/geo/geoTypes';
-import { FootprintResponse } from '@/components/Dashboard/FootprintResponse';
+import { FootprintResponse } from '@/types/FootprintResponse';
 
 use([
     ScatterChart,
@@ -49,7 +49,7 @@ use([
     MapChart,
 ]);
 
-registerMap('Karlsruhe', geoJson as GeoJSONSourceInput);
+registerMap('Karlsruhe', karlsruheGeoData as GeoJSONSourceInput);
 
 const footprintsData = ref<FootprintResponse>();
 const chartOptions = shallowRef();
