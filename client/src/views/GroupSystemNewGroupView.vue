@@ -16,6 +16,7 @@
                     </v-alert>
                 </v-col>
             </v-row>
+
             <v-row class="d-flex flex-column-reverse flex-md-row my-16">
                 <v-col cols="12" md="7" class="text-center text-md-start">
                     <h1 class="text-primary-darken-1">
@@ -52,6 +53,7 @@
                         Gruppe erstellen
                     </v-btn>
                 </v-col>
+
                 <v-col
                     class="d-flex align-center justify-center"
                     cols="12"

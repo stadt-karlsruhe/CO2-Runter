@@ -29,7 +29,6 @@
             </v-col>
         </v-row>
 
-        <!-- Second Row -->
         <v-row class="d-flex flex-column flex-md-row my-16">
             <v-col class="d-flex align-center justify-center" cols="12" md="5">
                 <v-img
@@ -57,7 +56,6 @@
             </v-col>
         </v-row>
 
-        <!-- Third Row -->
         <v-row class="d-flex flex-column-reverse flex-md-row my-16">
             <v-col cols="12" md="7" class="text-center text-md-start">
                 <h1 class="text-primary-darken-1">CO2 Fußabdruck</h1>
