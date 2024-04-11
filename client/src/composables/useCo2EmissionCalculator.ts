@@ -1,25 +1,24 @@
-import { ref } from 'vue';
-import { Replies } from '@/types/Questionnaire';
+import { ref, watch } from 'vue';
+import useQuestions from '@/composables/useQuestions';
 
 export default function useCo2EmissionCalculator() {
-    const loading = ref(false);
-    const co2value = ref<Replies>({
-        text: '',
-        value: 0.0,
-    });
-    const error = ref<string | null>(null);
+    const { questions } = useQuestions();
+    const totalCo2Emission = ref(0.0);
 
-    /*
-    nimmt ein Array der Werte entgegen, die zu den Antwortmöglichkeiten gehören,
-    bildet daraus die Summe und gibt diese zurück
-    */
-    const calculateCo2Value = async (values: Array<number>) => {
-        return values.reduce((acc, curr) => acc + curr, 0);
+    const calculateCo2Emission = () => {
+        let total = 0.0;
+
+        questions.value.category.forEach((category) => {
+            category.questions.forEach((question) => {
+                total += question.selected.value;
+            });
+        });
+        totalCo2Emission.value = total;
     };
+
+    calculateCo2Emission();
+
     return {
-        calculateCo2Value,
-        co2value: co2value,
-        loading: loading,
-        error: error,
+        totalCo2Emission,
     };
 }
