@@ -1,4 +1,4 @@
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted } from 'vue';
 import { Questionnaire, Replies } from '@/types/Questionnaire';
 
 export default function useQuestions() {
@@ -69,23 +69,22 @@ export default function useQuestions() {
             questionIndex
         ].selected.value = newValue;
 
-        console.log(calculateTotalCo2Emission.value);
-
         console.log(
             questions.value.category[categoryIndex].questions[questionIndex]
         );
     };
 
-    const calculateTotalCo2Emission = computed(() => {
-        let totalCo2Emission = 0;
+    const calculateTotalCo2Emission = () => {
+        let total = 0;
+
         questions.value.category.forEach((category) => {
             category.questions.forEach((question) => {
-                totalCo2Emission += question.selected.value;
+                total += question.selected.value;
             });
         });
-        console.log(totalCo2Emission);
-        return totalCo2Emission;
-    });
+
+        return total;
+    };
 
     onMounted(async () => {
         await fetchQuestions();

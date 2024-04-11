@@ -12,7 +12,7 @@
             class="mt-16"
             placeholder="Wählen Sie eine Option"
             variant="outlined"
-            @update:modelValue="test(index)"
+            @update:modelValue="UpdateEmissions(index)"
         ></v-select>
 
         <v-alert type="info" variant="tonal" tex>
@@ -28,20 +28,24 @@
 <script lang="ts" setup>
 import { Category, Replies } from '@/types/Questionnaire';
 import useQuestions from '@/composables/useQuestions';
+import { useTotalCo2EmissionStore } from '@/store/totalCo2Emission';
 
 const props = defineProps<{
     categoryIndex: number;
     questions: Category;
 }>();
 
-const { updateSelectedValue } = useQuestions();
+const { updateSelectedValue, calculateTotalCo2Emission } = useQuestions();
+const totalCo2EmissionStore = useTotalCo2EmissionStore();
 
-const test = (questionIndex: number) => {
+const UpdateEmissions = (questionIndex: number) => {
     const array = props.questions.questions[questionIndex].replies;
     const textValue = props.questions.questions[questionIndex].selected.text;
 
     const object = findObjectInArray(array, textValue);
     updateSelectedValue(props.categoryIndex, questionIndex, object!);
+
+    totalCo2EmissionStore.calculateTotalCo2Emission(calculateTotalCo2Emission());
 };
 
 function findObjectInArray(
