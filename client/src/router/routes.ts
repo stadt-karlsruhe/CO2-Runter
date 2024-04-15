@@ -20,9 +20,14 @@ export const routes = [
         component: () => import('@/layouts/default/Default.vue'),
         children: [
             {
-                path: '/rechner',
+                path: '',
                 name: 'CO2Rechner',
                 component: () => import('@/views/CalculatorView.vue'),
+            },
+            {
+                path: 'summary',
+                name: 'Summary',
+                component: () => import('@/views/CalculatorSummaryView.vue'),
             },
         ],
     },
