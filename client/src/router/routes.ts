@@ -2,6 +2,17 @@ import useAuth from '@/composables/useAuth';
 
 export const routes = [
     {
+        path: '/:catchAll(.*)',
+        component: () => import('@/layouts/default/Default.vue'),
+        children: [
+            {
+                path: '',
+                name: 'PageNotFound',
+                component: () => import('@/views/PageNotFound.vue'),
+            },
+        ],
+    },
+    {
         path: '/',
         component: () => import('@/layouts/default/Default.vue'),
         children: [
