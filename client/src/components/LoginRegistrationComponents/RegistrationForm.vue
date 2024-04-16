@@ -106,6 +106,7 @@ const passwordSpecialCharRegex = /\W+/; // At least one non-word character (spec
 
 const passwordRules = computed(() => {
     return [
+        (val: string) => !!val || "Password field can't be empty",
         (val: string) =>
             passwordLengthRegex.test(val) ||
             'Password must be at least 8 characters',
