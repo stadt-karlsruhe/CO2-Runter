@@ -23,13 +23,15 @@ export default function useAuth() {
     });
 
     function executeFetch() {
-        if (co2Token.value) {
-            checkTokenValidity.execute().catch((err) => {
-                // Add your error handling logic here
+        if (co2Token.value && !isLoggedIn.value) {
+            const checkToken = checkTokenValidity.execute();
+
+            checkToken.then(() => {
+                isLoggedIn.value = true;
+            }).catch((err) => {
                 console.error(err);
-                isLoggedIn.value = false;
+                (async () => { await logout(); })();
             });
-            isLoggedIn.value = true;
         }
     }
 
@@ -37,7 +39,10 @@ export default function useAuth() {
         () => localStorage.getItem('CO2Token'),
         (newToken) => {
             co2Token.value = newToken;
-            executeFetch();
+
+            if(newToken) {
+                executeFetch();
+            }
         },
         { immediate: true }
     );
