@@ -1,15 +1,13 @@
 <template>
-        <v-expansion-panels>
-            <v-expansion-panel
-                text="Dein Fußabdruck setzt sich wie folgt zusammen:"
-                :title="
-                    'Aktueller CO2-Fußabdruck: ' +
-                    totalCo2EmissionStore.total +
-                    ' kg CO2'
-                "
+    <div class="text-center">
+        <v-card color="#D0ECDE">
+            <v-card-title>Dein aktueller CO2-Wert beträgt:</v-card-title>
+            <v-card-text
+                class="text-h4 font-weight-bold text-primary-darken-1"
+                >{{ totalCo2EmissionStore.total }}</v-card-text
             >
-            </v-expansion-panel>
-        </v-expansion-panels>
+        </v-card>
+    </div>
 </template>
 
 <script lang="ts" setup>

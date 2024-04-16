@@ -12,7 +12,6 @@
             <v-col>
                 <v-card
                     class="mx-auto ma-9 text-center"
-                    color=""
                     max-width="400"
                     outlined
                 >
@@ -22,7 +21,7 @@
                     <v-card-text
                         class="text-center text-primary-darken-1 text-h4 font-weight-bold"
                     >
-                        180.000 kg
+                        {{ totalCo2EmissionStore.total }}
                     </v-card-text>
                 </v-card>
             </v-col>
@@ -74,21 +73,32 @@
 
         <!-- Container für den Gruppen Tab -->
         <v-container v-else-if="tab === 2">
-            Melden Sie sich an! So können Sie alle Gruppen sehen, in denen Sie
-            Mitglied sind.
-            <v-tabs class="mt-4" align-tabs="center" v-model="loginSelection">
+            <p class="mt-4">
+                Melden Sie sich an! So können Sie alle Gruppen sehen, in denen
+                Sie Mitglied sind.
+            </p>
+            <v-tabs class="mt-8" align-tabs="center" v-model="loginSelection">
                 <v-tab :value="1">ohne Login</v-tab>
                 <v-tab :value="2">Login</v-tab>
             </v-tabs>
 
             <!-- Container für Gruppentabelle -->
             <v-container v-if="loginSelection === 1">
-                <!-- TODO: Tabelle mit möglichen Gruppen einfügen-->
+                <v-text-field
+                    class="mt-8"
+                    v-model="search"
+                    label="Suchen"
+                    prepend-inner-icon="mdi-magnify"
+                    variant="outlined"
+                    hide-details
+                ></v-text-field>
+                <v-data-table :headers="headers" :search="search">
+                </v-data-table>
             </v-container>
 
             <!-- Container für Loginform -->
             <v-container v-else-if="loginSelection === 2">
-                <!-- TODO: Loginform einfügen -->
+                <LoginForm />
             </v-container>
         </v-container>
 
@@ -100,7 +110,7 @@
                 color="primary-darken-1"
                 append-icon="mdi-chevron-right"
                 size="large"
-                to="/rechner"
+                to="/"
                 >Daten abschicken
             </v-btn>
         </v-col>
@@ -110,7 +120,7 @@
                 :rounded="true"
                 append-icon="mdi-chevron-right"
                 size="large"
-                to="/rechner"
+                to="/"
                 >Weiter ohne Daten zu senden
             </v-btn>
         </v-col>
@@ -119,10 +129,30 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import LoginForm from '@/components/LoginRegistrationComponents/LoginForm.vue';
+import { useTotalCo2EmissionStore } from '@/store/totalCo2Emission';
 
 const tab = ref(1);
 const loginSelection = ref(1);
-const selectedOption = ref(null);
+const search = ref('');
+const totalCo2EmissionStore = useTotalCo2EmissionStore();
+const headers = [
+    {
+        title: 'Gruppenname',
+        key: 'gruppenname',
+    },
+    {
+        title: 'Gruppencode',
+        key: 'gruppencode',
+    },
+    {
+        title: 'Besitzer',
+        key: 'besitzer',
+    },
+    {
+        title: ':itgliederzahl',
+        key: 'mitgliederzahl',
+    },
+];
 </script>
-
 <style scoped></style>

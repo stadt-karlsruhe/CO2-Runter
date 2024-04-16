@@ -56,10 +56,13 @@
             </template>
 
             <template #next>
-                <v-btn @click="next">weiter</v-btn>
+                <v-btn @click="next">Weiter</v-btn>
             </template>
         </v-stepper-actions>
     </v-stepper>
+    <div class="text-end mr-8">
+        <v-btn @click="ende" :disabled="step !== 3">Ende</v-btn>
+    </div>
 </template>
 
 <script lang="ts" setup>
@@ -68,6 +71,7 @@ import QuestionsBlock from '@/components/Calculator/QuestionsBlock.vue';
 import { QuestionsIndices } from '@/constants/QuestionsIndices';
 import useQuestions from '@/composables/useQuestions';
 import { Questionnaire } from '@/types/Questionnaire';
+import router from '@/router';
 
 const { questions, fetchQuestions } = useQuestions();
 const step = ref(0);
@@ -82,12 +86,20 @@ onMounted(async () => {
 const next = () => {
     if (step.value < 4) {
         step.value++;
+    } else {
+        router.push('/rechner/summary');
     }
 };
 
 const prev = () => {
     if (step.value > 0) {
         step.value--;
+    }
+};
+
+const ende = () => {
+    if (step.value == 3) {
+        router.push('/rechner/summary');
     }
 };
 </script>
