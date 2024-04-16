@@ -22,6 +22,7 @@
                 v-model="selectedFootprints"
                 :items="footprintsData.map((footprint) => footprint.name)"
                 :multiple="true"
+                variant="outlined"
                 label="Angezeigte Fußabdrücke wählen"
                 @update:modelValue="updateChartOptions()"
             >

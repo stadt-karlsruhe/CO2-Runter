@@ -1,12 +1,13 @@
 <template>
-    <v-container justify="center">
-        <v-row v-if="error">
+    <v-container>
+        <v-row v-if="error" class="my-16">
             <v-col>
                 <v-alert icon="mdi-alert" type="error" variant="tonal">
                     {{ error }}
                 </v-alert>
             </v-col>
         </v-row>
+
         <v-row class="d-flex flex-column-reverse flex-md-row my-16">
             <v-col cols="12" md="7" class="text-center text-md-start">
                 <h1 class="text-primary-darken-1">Gruppen Informationen</h1>
@@ -41,56 +42,68 @@
                 />
             </v-col>
         </v-row>
+
+        <v-row>
+            <v-col>
+                <v-expansion-panels variant="accordion">
+                    <v-expansion-panel
+                        v-for="(group, index) in groups"
+                        :key="group.groupcode + index"
+                        elevation="0"
+                    >
+                        <v-expansion-panel-title>
+                            <v-avatar color="primary-darken-1" variant="tonal">
+                                {{ index + 1 }}
+                            </v-avatar>
+                            <span class="ml-4"
+                                >Gruppe: {{ group.groupname }}</span
+                            ></v-expansion-panel-title
+                        >
+                        <v-expansion-panel-text>
+                            <p>Gruppen Code: {{ group.groupcode }}</p>
+                            <p>Gruppen Administrator: {{ group.ownername }}</p>
+                            <p>
+                                Gruppen Mitgliederanzahl:
+                                {{ group.memberCount }}
+                            </p>
+
+                            <v-btn
+                                variant="plain"
+                                :rounded="true"
+                                color="primary-darken-1"
+                                append-icon="mdi-link"
+                                @click="
+                                    handleGroupClick(
+                                        group.groupcode,
+                                        group.groupname
+                                    )
+                                "
+                            >
+                                Links & QR-Code zur Gruppe
+                            </v-btn>
+
+                            <v-divider :vertical="true" class="mx-4" />
+
+                            <v-btn
+                                variant="tonal"
+                                color="error"
+                                :rounded="true"
+                                prepend-icon="mdi-delete"
+                                @click="deleteGroup(group.groupcode)"
+                                >Gruppe Löschen</v-btn
+                            >
+
+                            <GroupSuccessful
+                                v-if="showGroupSuccess"
+                                :groupCode="groupCode"
+                                :groupName="groupName"
+                            />
+                        </v-expansion-panel-text>
+                    </v-expansion-panel>
+                </v-expansion-panels>
+            </v-col>
+        </v-row>
     </v-container>
-
-    <v-expansion-panels variant="accordion">
-        <v-expansion-panel
-            v-for="(group, index) in groups"
-            :key="group.groupcode + index"
-            elevation="0"
-        >
-            <v-expansion-panel-title>
-                <v-avatar color="primary-darken-1" variant="tonal">
-                    {{ index + 1 }}
-                </v-avatar>
-                <span class="ml-4"
-                    >Gruppe: {{ group.groupname }}</span
-                ></v-expansion-panel-title
-            >
-            <v-expansion-panel-text>
-                <p>Gruppen Code: {{ group.groupcode }}</p>
-                <p>Gruppen Administrator: {{ group.ownername }}</p>
-                <p>Gruppen Mitgliederanzahl: {{ group.memberCount }}</p>
-
-                <v-btn
-                    variant="plain"
-                    :rounded="true"
-                    color="primary-darken-1"
-                    append-icon="mdi-link"
-                    @click="handleGroupClick(group.groupcode, group.groupname)"
-                >
-                    Links & QR-Code zur Gruppe
-                </v-btn>
-
-                <v-divider :vertical="true" class="mx-4" />
-
-                <v-btn
-                    variant="tonal"
-                    color="error"
-                    :rounded="true"
-                    prepend-icon="mdi-delete"
-                    @click="deleteGroup(group.groupcode)"
-                    >Gruppe Löschen</v-btn
-                >
-
-                <GroupSuccessful
-                    v-if="showGroupSuccess"
-                    :groupCode="groupCode"
-                    :groupName="groupName"
-                />
-            </v-expansion-panel-text>
-        </v-expansion-panel>
-    </v-expansion-panels>
 </template>
 
 <script setup lang="ts">

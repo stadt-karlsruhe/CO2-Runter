@@ -22,25 +22,32 @@
                 v-model="selectedGroups"
                 :items="groups.map((group) => group.groupname)"
                 :multiple="true"
+                variant="outlined"
                 label="Angezeigte Gruppen wählen"
                 @update:modelValue="updateChartOptions()"
             >
             </v-select>
 
-            <p>
-                Du willst einer Gruppe beitreten, dann geh zum Gruppensysten und
-                tritt mit dem Code bei
+            <v-card class="pa-4" variant="flat">
+                <v-card-title>Du findest eine Gruppe nicht?</v-card-title>
+
+                <v-card-text>
+                    Wenn du nicht nicht die Gruppe siehst zu der du gehörst,
+                    dann kannst du sie erneut hinzufügen, indem du zum
+                    Gruppensystem gehst und dich erneut hinzufügst.
+                </v-card-text>
+
                 <v-btn
                     variant="tonal"
                     :rounded="true"
-                    color="primary-darken-1"
+                    color="info"
                     append-icon="mdi-account-group-outline"
                     size="large"
                     to="/gruppensystem"
                 >
                     Geh zum Gruppensystem
                 </v-btn>
-            </p>
+            </v-card>
         </v-card-text>
         <v-card-text v-else>
             <v-alert type="info" variant="tonal">

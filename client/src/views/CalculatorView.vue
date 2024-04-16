@@ -1,16 +1,24 @@
 <template>
-    <v-container class="justify-center">
+    <v-container>
         <v-row
             class="d-flex flex-column-reverse flex-md-row my-16 justify-center"
         >
-            <h1 class="text-primary-darken-1">Mein CO₂-Fußabdruck</h1>
+            <v-col class="text-center">
+                <h1 class="text-primary-darken-1">Mein CO₂-Fußabdruck</h1>
+            </v-col>
         </v-row>
 
-        <QuestionStepper />
-    </v-container>
+        <v-row class="my-16">
+            <v-col>
+                <QuestionStepper />
+            </v-col>
+        </v-row>
 
-    <v-container class="ma-0">
-        <CurrentCO2 />
+        <v-row class="my-16">
+            <v-col>
+                <CurrentCO2 />
+            </v-col>
+        </v-row>
     </v-container>
 </template>
 

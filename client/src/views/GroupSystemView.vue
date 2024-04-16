@@ -1,6 +1,6 @@
 <template>
-    <v-container justify="center">
-        <v-row v-if="error">
+    <v-container>
+        <v-row v-if="error" class="my-16">
             <v-col>
                 <v-alert
                     v-if="error"

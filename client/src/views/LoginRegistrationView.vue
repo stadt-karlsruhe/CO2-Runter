@@ -1,6 +1,6 @@
 <template>
-    <v-container v-if="showIfCameFromGruppenSystemPage" justify="center">
-        <v-row>
+    <v-container>
+        <v-row v-if="showIfCameFromGruppenSystemPage" class="my-16">
             <v-col>
                 <v-alert
                     title="Gruppen erstellen"
@@ -9,40 +9,41 @@
                 ></v-alert>
             </v-col>
         </v-row>
+        <v-row class="my-16">
+            <v-col>
+                <v-card width="100%" elevation="0">
+                    <v-tabs
+                        v-model="tab"
+                        align-tabs="center"
+                        color="primary-darken-1"
+                        :fixed-tabs="true"
+                    >
+                        <v-tab value="login" prepend-icon="mdi-login-variant">
+                            Login
+                        </v-tab>
+                        <v-tab
+                            value="registration"
+                            prepend-icon="mdi-account-details-outline"
+                        >
+                            Registration
+                        </v-tab>
+                    </v-tabs>
+
+                    <v-card-text>
+                        <v-window v-model="tab">
+                            <v-window-item value="login">
+                                <LoginForm />
+                            </v-window-item>
+
+                            <v-window-item value="registration">
+                                <RegistrationForm />
+                            </v-window-item>
+                        </v-window>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
     </v-container>
-
-    <div class="min-page-height d-flex align-center justify-center">
-        <v-card width="100%" elevation="0">
-            <v-tabs
-                v-model="tab"
-                align-tabs="center"
-                color="primary-darken-1"
-                :fixed-tabs="true"
-            >
-                <v-tab value="login" prepend-icon="mdi-login-variant">
-                    Login
-                </v-tab>
-                <v-tab
-                    value="registration"
-                    prepend-icon="mdi-account-details-outline"
-                >
-                    Registration
-                </v-tab>
-            </v-tabs>
-
-            <v-card-text>
-                <v-window v-model="tab">
-                    <v-window-item value="login">
-                        <LoginForm />
-                    </v-window-item>
-
-                    <v-window-item value="registration">
-                        <RegistrationForm />
-                    </v-window-item>
-                </v-window>
-            </v-card-text>
-        </v-card>
-    </div>
 </template>
 
 <script setup lang="ts">
