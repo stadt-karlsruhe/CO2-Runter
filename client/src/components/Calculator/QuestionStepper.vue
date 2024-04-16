@@ -86,8 +86,6 @@ onMounted(async () => {
 const next = () => {
     if (step.value < 4) {
         step.value++;
-    } else {
-        router.push('/rechner/summary');
     }
 };
 

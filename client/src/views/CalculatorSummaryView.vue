@@ -26,18 +26,17 @@
                 </v-card>
             </v-col>
         </v-row>
-        <v-tabs align-tabs="center" v-model="tab">
+        <v-tabs v-model="tab" align-tabs="center">
             <v-tab :value="1">Stadtteile</v-tab>
             <v-tab :value="2">Gruppen</v-tab>
         </v-tabs>
 
         <!-- Container für den Stadtteile Tab-->
-        <v-container class="my-8" v-if="tab === 1">
+        <v-container v-if="tab === 1" class="my-8">
             <p class="mb-4">
                 Bitte wählen Sie den Stadtteil, in dem Sie ansässig sind.
             </p>
             <v-select
-                label="Bitte wählen Sie einen Stadtteil"
                 :items="[
                     'Knielingen',
                     'Daxlanden',
@@ -67,6 +66,7 @@
                     'Oststadt',
                     'Rüppurr',
                 ]"
+                label="Bitte wählen Sie einen Stadtteil"
                 outlined
             ></v-select>
         </v-container>
@@ -77,7 +77,7 @@
                 Melden Sie sich an! So können Sie alle Gruppen sehen, in denen
                 Sie Mitglied sind.
             </p>
-            <v-tabs class="mt-8" align-tabs="center" v-model="loginSelection">
+            <v-tabs v-model="loginSelection" align-tabs="center" class="mt-8">
                 <v-tab :value="1">ohne Login</v-tab>
                 <v-tab :value="2">Login</v-tab>
             </v-tabs>
@@ -85,12 +85,12 @@
             <!-- Container für Gruppentabelle -->
             <v-container v-if="loginSelection === 1">
                 <v-text-field
-                    class="mt-8"
                     v-model="search"
+                    class="mt-8"
+                    hide-details
                     label="Suchen"
                     prepend-inner-icon="mdi-magnify"
                     variant="outlined"
-                    hide-details
                 ></v-text-field>
                 <v-data-table :headers="headers" :search="search">
                 </v-data-table>
@@ -105,29 +105,29 @@
         <!-- Buttons zum Absenden der Daten/ohne Absenden der Daten-->
         <v-col>
             <v-btn
-                variant="tonal"
                 :rounded="true"
-                color="primary-darken-1"
                 append-icon="mdi-chevron-right"
+                color="primary-darken-1"
                 size="large"
                 to="/"
+                variant="tonal"
                 >Daten abschicken
             </v-btn>
         </v-col>
         <v-col>
             <v-btn
-                variant="tonal"
                 :rounded="true"
                 append-icon="mdi-chevron-right"
                 size="large"
                 to="/"
+                variant="tonal"
                 >Weiter ohne Daten zu senden
             </v-btn>
         </v-col>
     </v-container>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref } from 'vue';
 import LoginForm from '@/components/LoginRegistrationComponents/LoginForm.vue';
 import { useTotalCo2EmissionStore } from '@/store/totalCo2Emission';
