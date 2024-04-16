@@ -25,6 +25,8 @@
                 variant="outlined"
                 label="Angezeigte Gruppen wählen"
                 @update:modelValue="updateChartOptions()"
+                hint="Falls die Gruppe(n) keine Datenanzeigt, bedeutet das lediglich, dass die Gruppe(n) noch keinen CO2-Fußabdruck gesetzt hat."
+                :persistent-hint="true"
             >
             </v-select>
 
