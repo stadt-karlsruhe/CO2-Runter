@@ -7,18 +7,20 @@
                 color="primary-darken-1"
                 :fixed-tabs="true"
             >
-                <v-tab value="map" prepend-icon="mdi-map"> Karte </v-tab>
+                <v-tab value="map" prepend-icon="mdi-map">
+                    Karten Diagramm
+                </v-tab>
                 <v-tab value="charts" prepend-icon="mdi-chart-bar">
-                    Charts
+                    Durchschnitt
                 </v-tab>
                 <v-tab value="groups" prepend-icon="mdi-account-group-outline">
-                    Gruppen
+                    Gruppen Diagramm
                 </v-tab>
                 <v-tab
                     value="co2Footprint"
                     prepend-icon="mdi-chart-box-outline"
                 >
-                    Beteiligung
+                    Beteiligungen
                 </v-tab>
             </v-tabs>
 

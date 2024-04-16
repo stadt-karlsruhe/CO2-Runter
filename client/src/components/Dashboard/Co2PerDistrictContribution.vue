@@ -1,6 +1,8 @@
 <template>
     <v-card>
-        <v-card-title>Beteiligung pro Stadtteil</v-card-title>
+        <v-card-title class="text-center"
+            >Beteiligung pro Karlsruher Stadtteil</v-card-title
+        >
 
         <v-card-text>
             <v-chart

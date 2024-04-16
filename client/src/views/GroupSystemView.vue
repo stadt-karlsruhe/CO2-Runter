@@ -2,7 +2,12 @@
     <v-container justify="center">
         <v-row v-if="error">
             <v-col>
-                <v-alert v-if="error" icon="mdi-alert" type="error">
+                <v-alert
+                    v-if="error"
+                    icon="mdi-alert"
+                    type="error"
+                    variant="tonal"
+                >
                     {{ error }}</v-alert
                 >
             </v-col>

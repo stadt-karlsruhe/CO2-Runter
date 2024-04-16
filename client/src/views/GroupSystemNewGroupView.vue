@@ -11,7 +11,7 @@
         <v-container v-else justify="center">
             <v-row v-if="error">
                 <v-col>
-                    <v-alert icon="mdi-alert" type="error">
+                    <v-alert icon="mdi-alert" type="error" variant="tonal">
                         {{ error }}
                     </v-alert>
                 </v-col>

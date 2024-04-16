@@ -1,6 +1,10 @@
 <template>
     <v-card>
         <v-card-text>
+            <v-alert v-if="loading" type="info" variant="tonal">
+                Daten werden geladen...
+            </v-alert>
+
             <v-chart
                 v-if="!loading"
                 :option="chartOptions"
@@ -9,9 +13,6 @@
                 :loadingOptions="loadingOptions"
                 style="height: 600px; width: 100%"
             />
-            <div v-else style="text-align: center">
-                Daten werden geladen ...
-            </div>
         </v-card-text>
     </v-card>
 </template>
@@ -67,7 +68,7 @@ const fetchFootprints = async () => {
 function getData() {
     return {
         title: {
-            text: 'CO2 Emissionen in Karlsruhe',
+            text: 'CO2 Emissionen in Karlsruhe pro Stadtteil',
             left: 'center',
             padding: 10,
         },

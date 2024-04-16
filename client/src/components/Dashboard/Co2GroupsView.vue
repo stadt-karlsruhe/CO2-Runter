@@ -1,12 +1,11 @@
 <template>
     <v-card>
-        <v-card-title>Chart</v-card-title>
         <v-card-text v-if="isLoggedIn">
-            <v-alert v-if="isLoading" type="info">
+            <v-alert v-if="isLoading" type="info" variant="tonal">
                 Daten werden geladen...
             </v-alert>
 
-            <v-alert v-if="error" icon="mdi-alert" type="error">
+            <v-alert v-if="error" icon="mdi-alert" type="error" variant="tonal">
                 {{ error }}
             </v-alert>
 
@@ -44,10 +43,10 @@
             </p>
         </v-card-text>
         <v-card-text v-else>
-            <p>
+            <v-alert type="info" variant="tonal">
                 Du bist nicht eingeloggt. Bitte logge dich ein, um die
                 Gruppenübersicht zu sehen.
-            </p>
+            </v-alert>
         </v-card-text>
     </v-card>
 </template>

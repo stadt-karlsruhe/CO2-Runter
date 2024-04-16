@@ -1,10 +1,13 @@
 <template>
     <v-card>
-        <v-card-title>Chart</v-card-title>
         <v-card-text>
-            <div v-if="isLoading">Daten werden geladen...</div>
+            <v-alert v-if="isLoading" type="info" variant="tonal">
+                Daten werden geladen...
+            </v-alert>
 
-            <div v-if="error">Es ist ein fehler aufgetreten: error</div>
+            <v-alert v-if="error" icon="mdi-alert" type="error" variant="tonal">
+                {{ error }}
+            </v-alert>
 
             <v-chart
                 v-if="chartOptions"

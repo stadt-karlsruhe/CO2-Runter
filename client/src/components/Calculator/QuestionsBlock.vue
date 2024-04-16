@@ -45,7 +45,9 @@ const UpdateEmissions = (questionIndex: number) => {
     const object = findObjectInArray(array, textValue);
     updateSelectedValue(props.categoryIndex, questionIndex, object!);
 
-    totalCo2EmissionStore.calculateTotalCo2Emission(calculateTotalCo2Emission());
+    totalCo2EmissionStore.calculateTotalCo2Emission(
+        calculateTotalCo2Emission()
+    );
 };
 
 function findObjectInArray(
