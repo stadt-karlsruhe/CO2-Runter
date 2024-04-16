@@ -67,12 +67,15 @@ export const routes = [
                 name: 'Neue Gruppe erstellen',
                 component: () => import('@/views/GroupSystemNewGroupView.vue'),
                 // Login Protection Guard
-                beforeEnter: (to: any, from: any, next: any) => {
+                beforeEnter: async (to: any, from: any, next: any) => {
                     window.sessionStorage.setItem(
                         'previousRoutePath',
                         from.path
                     );
-                    const { isLoggedIn } = useAuth();
+
+                    const { isLoggedIn, checkTokenValidity } = useAuth();
+                    await checkTokenValidity.execute();
+
                     if (!isLoggedIn.value) {
                         next('/login-registration');
                     } else {
@@ -86,8 +89,10 @@ export const routes = [
                 component: () =>
                     import('@/views/GroupSystemGroupInformation.vue'),
                 // Login Protection Guard
-                beforeEnter: (to: any, from: any, next: any) => {
-                    const { isLoggedIn } = useAuth();
+                beforeEnter: async (to: any, from: any, next: any) => {
+                    const { isLoggedIn, checkTokenValidity } = useAuth();
+                    await checkTokenValidity.execute();
+
                     if (!isLoggedIn.value) {
                         next('/login-registration');
                     } else {
@@ -101,7 +106,9 @@ export const routes = [
         path: '/login-registration',
         component: () => import('@/layouts/default/Default.vue'),
         beforeEnter: async (to: any, from: any, next: any) => {
-            const { isLoggedIn } = useAuth();
+            const { isLoggedIn, checkTokenValidity } = useAuth();
+            await checkTokenValidity.execute();
+
             if (isLoggedIn.value) {
                 next('/');
             } else {

@@ -23,23 +23,18 @@
                         class="mb-4 mt-4"
                     />
                     <v-text-field
+                        v-model="password"
                         variant="outlined"
                         label="Passwort"
                         :type="showPassword ? 'text' : 'password'"
-                        v-model="password"
-                        :rules="[
-                            (val) =>
-                                (val && val.length >= 4) ||
-                                'Das Passwort muss mindestens 4 Zeichen lang sein',
-                        ]"
                         prepend-inner-icon="mdi-lock"
                         class="mb-4"
                         :append-inner-icon="
                             showPassword ? 'mdi-eye-off' : 'mdi-eye'
                         "
                         @click:append-inner="showPassword = !showPassword"
-                    >
-                    </v-text-field>
+                    />
+
                     <v-btn
                         color="primary-darken-1"
                         variant="tonal"
@@ -57,6 +52,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import useAuth from '@/composables/useAuth';
+import router from '@/router';
 
 const { login } = useAuth();
 const email = ref('');
@@ -66,7 +62,7 @@ const showPassword = ref(false);
 const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 const isEmailValid = () => email.value && emailRegex.test(email.value);
-const isPasswordValid = () => password.value && password.value.length >= 4;
+const isPasswordValid = () => password.value;
 const isFormComplete = () => isEmailValid() && isPasswordValid();
 
 const submitAccountLoginRequest = async (event: Event) => {

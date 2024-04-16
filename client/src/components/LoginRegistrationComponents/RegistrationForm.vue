@@ -122,10 +122,11 @@ const passwordRules = computed(() => {
 const isFormValid = () => {
     return (
         username.value &&
+        email.value &&
         emailRegex.test(email.value) &&
-        passwordRules.value.every((rule) =>
-            typeof rule === 'function' ? !!rule(password.value) : true
-        ) &&
+        password.value &&
+        confirmPassword.value &&
+        passwordRules.value.every((rule) => rule(password.value) === true) &&
         password.value === confirmPassword.value
     );
 };

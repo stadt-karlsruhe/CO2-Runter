@@ -1,4 +1,4 @@
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useFetch } from '@vueuse/core';
 import { useRouter } from 'vue-router';
 
@@ -23,15 +23,15 @@ export default function useAuth() {
     });
 
     function executeFetch() {
-        if (co2Token.value && !isLoggedIn.value) {
-            const checkToken = checkTokenValidity.execute();
-
-            checkToken.then(() => {
-                isLoggedIn.value = true;
-            }).catch((err) => {
-                console.error(err);
-                (async () => { await logout(); })();
-            });
+        if (co2Token.value) {
+            checkTokenValidity.execute()
+                .then(() => {
+                    isLoggedIn.value = true;
+                })
+                .catch((err) => {
+                    console.error(err);
+                    (async () => { await logout(); })();
+                });
         }
     }
 
@@ -91,5 +91,5 @@ export default function useAuth() {
         }
     };
 
-    return { isLoggedIn, logout, login, getCo2Token, setCo2Token };
+    return { isLoggedIn, checkTokenValidity, logout, login, getCo2Token, setCo2Token };
 }
