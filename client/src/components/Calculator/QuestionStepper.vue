@@ -18,35 +18,203 @@
 
         <v-stepper-window>
             <v-stepper-window-item value="1">
-                <QuestionsBlock
-                    v-if="data"
-                    :category-index="QuestionsIndices.MOBILITY"
-                    :questions="data.category[QuestionsIndices.MOBILITY]"
-                />
+                <v-container>
+                    <v-row class="my-16">
+                        <v-col
+                            cols="12"
+                            md="7"
+                            class="text-center text-md-start"
+                        >
+                            <h1 class="text-primary-darken-1">Mobilität</h1>
+                            <p class="text-secondary my-8">
+                                CO2 werden jährlich allein von Deutschland
+                                freigesetzt. Wie groß ist dein CO2-Fußabdruck?
+                                Berechne ihn jetzt und entdecke, wie du einen
+                                positiven Beitrag zum Klimaschutz leisten
+                                kannst!
+                            </p>
+                        </v-col>
+                        <v-col
+                            class="d-flex align-center justify-center"
+                            cols="12"
+                            md="5"
+                        >
+                            <v-img
+                                width="360px"
+                                height="200px"
+                                src="../../assets/undraw_trip_re_f724.svg"
+                            />
+                        </v-col>
+                    </v-row>
+
+                    <v-row class="my-16">
+                        <v-col>
+                            <v-divider></v-divider>
+                        </v-col>
+                    </v-row>
+
+                    <v-row class="my-16">
+                        <v-col>
+                            <QuestionsBlock
+                                v-if="data"
+                                :category-index="QuestionsIndices.MOBILITY"
+                                :questions="
+                                    data.category[QuestionsIndices.MOBILITY]
+                                "
+                            />
+                        </v-col>
+                    </v-row>
+                </v-container>
             </v-stepper-window-item>
 
             <v-stepper-window-item value="2">
-                <QuestionsBlock
-                    v-if="data"
-                    :category-index="QuestionsIndices.NUTRITION"
-                    :questions="data.category[QuestionsIndices.NUTRITION]"
-                />
+                <v-container>
+                    <v-row class="my-16">
+                        <v-col
+                            cols="12"
+                            md="7"
+                            class="text-center text-md-start"
+                        >
+                            <h1 class="text-primary-darken-1">Ernäherung</h1>
+                            <p class="text-secondary my-8">
+                                CO2 werden jährlich allein von Deutschland
+                                freigesetzt. Wie groß ist dein CO2-Fußabdruck?
+                                Berechne ihn jetzt und entdecke, wie du einen
+                                positiven Beitrag zum Klimaschutz leisten
+                                kannst!
+                            </p>
+                        </v-col>
+                        <v-col
+                            class="d-flex align-center justify-center"
+                            cols="12"
+                            md="5"
+                        >
+                            <v-img
+                                width="360px"
+                                height="200px"
+                                src="../../assets/undraw_breakfast_psiw.svg"
+                            />
+                        </v-col>
+                    </v-row>
+
+                    <v-row class="my-16">
+                        <v-col>
+                            <v-divider></v-divider>
+                        </v-col>
+                    </v-row>
+
+                    <v-row class="my-16">
+                        <v-col>
+                            <QuestionsBlock
+                                v-if="data"
+                                :category-index="QuestionsIndices.NUTRITION"
+                                :questions="
+                                    data.category[QuestionsIndices.NUTRITION]
+                                "
+                            />
+                        </v-col>
+                    </v-row>
+                </v-container>
             </v-stepper-window-item>
 
             <v-stepper-window-item value="3">
-                <QuestionsBlock
-                    v-if="data"
-                    :category-index="QuestionsIndices.LIVING"
-                    :questions="data.category[QuestionsIndices.LIVING]"
-                />
+                <v-container>
+                    <v-row class="my-16">
+                        <v-col
+                            cols="12"
+                            md="7"
+                            class="text-center text-md-start"
+                        >
+                            <h1 class="text-primary-darken-1">Wohnen</h1>
+                            <p class="text-secondary my-8">
+                                CO2 werden jährlich allein von Deutschland
+                                freigesetzt. Wie groß ist dein CO2-Fußabdruck?
+                                Berechne ihn jetzt und entdecke, wie du einen
+                                positiven Beitrag zum Klimaschutz leisten
+                                kannst!
+                            </p>
+                        </v-col>
+                        <v-col
+                            class="d-flex align-center justify-center"
+                            cols="12"
+                            md="5"
+                        >
+                            <v-img
+                                width="360px"
+                                height="200px"
+                                src="../../assets/undraw_relaxing_at_home_re_mror.svg"
+                            />
+                        </v-col>
+                    </v-row>
+
+                    <v-row class="my-16">
+                        <v-col>
+                            <v-divider></v-divider>
+                        </v-col>
+                    </v-row>
+
+                    <v-row class="my-16">
+                        <v-col>
+                            <QuestionsBlock
+                                v-if="data"
+                                :category-index="QuestionsIndices.LIVING"
+                                :questions="
+                                    data.category[QuestionsIndices.LIVING]
+                                "
+                            />
+                        </v-col>
+                    </v-row>
+                </v-container>
             </v-stepper-window-item>
 
             <v-stepper-window-item value="4">
-                <QuestionsBlock
-                    v-if="data"
-                    :category-index="QuestionsIndices.CONSUM"
-                    :questions="data.category[QuestionsIndices.CONSUM]"
-                />
+                <v-container>
+                    <v-row class="my-16">
+                        <v-col
+                            cols="12"
+                            md="7"
+                            class="text-center text-md-start"
+                        >
+                            <h1 class="text-primary-darken-1">Konsum</h1>
+                            <p class="text-secondary my-8">
+                                CO2 werden jährlich allein von Deutschland
+                                freigesetzt. Wie groß ist dein CO2-Fußabdruck?
+                                Berechne ihn jetzt und entdecke, wie du einen
+                                positiven Beitrag zum Klimaschutz leisten
+                                kannst!
+                            </p>
+                        </v-col>
+                        <v-col
+                            class="d-flex align-center justify-center"
+                            cols="12"
+                            md="5"
+                        >
+                            <v-img
+                                width="360px"
+                                height="200px"
+                                src="../../assets/undraw_successful_purchase_re_mpig.svg"
+                            />
+                        </v-col>
+                    </v-row>
+
+                    <v-row class="my-16">
+                        <v-col>
+                            <v-divider></v-divider>
+                        </v-col>
+                    </v-row>
+
+                    <v-row class="my-16">
+                        <v-col>
+                            <QuestionsBlock
+                                v-if="data"
+                                :category-index="QuestionsIndices.CONSUM"
+                                :questions="
+                                    data.category[QuestionsIndices.CONSUM]
+                                "
+                            />
+                        </v-col>
+                    </v-row>
+                </v-container>
             </v-stepper-window-item>
         </v-stepper-window>
 
