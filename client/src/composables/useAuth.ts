@@ -24,13 +24,16 @@ export default function useAuth() {
 
     function executeFetch() {
         if (co2Token.value) {
-            checkTokenValidity.execute()
+            checkTokenValidity
+                .execute()
                 .then(() => {
                     isLoggedIn.value = true;
                 })
                 .catch((err) => {
                     console.error(err);
-                    (async () => { await logout(); })();
+                    (async () => {
+                        await logout();
+                    })();
                 });
         }
     }
@@ -40,7 +43,7 @@ export default function useAuth() {
         (newToken) => {
             co2Token.value = newToken;
 
-            if(newToken) {
+            if (newToken) {
                 executeFetch();
             }
         },
@@ -91,5 +94,12 @@ export default function useAuth() {
         }
     };
 
-    return { isLoggedIn, checkTokenValidity, logout, login, getCo2Token, setCo2Token };
+    return {
+        isLoggedIn,
+        checkTokenValidity,
+        logout,
+        login,
+        getCo2Token,
+        setCo2Token,
+    };
 }
