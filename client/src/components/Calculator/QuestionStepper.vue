@@ -1,6 +1,6 @@
 <template>
-    <v-stepper v-model="step" :alt-labels="true" elevation="0">
-        <v-stepper-header>
+    <v-stepper v-model="step" :alt-labels="true" elevation="0" >
+        <v-stepper-header style="box-shadow: none">
             <v-stepper-item title="Mobilität" value="1"></v-stepper-item>
 
             <v-divider></v-divider>
