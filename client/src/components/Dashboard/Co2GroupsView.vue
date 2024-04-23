@@ -20,12 +20,22 @@
 
             <v-select
                 v-model="selectedGroups"
-                :items="groups.map((group) => group.groupname)"
+                :items="
+                    groups
+                        .filter(
+                            (group) =>
+                                !!footprintsData.find(
+                                    (footprint) =>
+                                        footprint.name === group.groupname
+                                )
+                        )
+                        .map((group) => group.groupname)
+                "
                 :multiple="true"
                 variant="outlined"
                 label="Angezeigte Gruppen wählen"
                 @update:modelValue="updateChartOptions()"
-                hint="Falls die Gruppe(n) keine Datenanzeigt, bedeutet das lediglich, dass die Gruppe(n) noch keinen CO2-Fußabdruck gesetzt hat."
+                hint="Hier werden nur Gruppen angezeigt welche bereits ihren CO2-Fußabdruck gesetzt haben."
                 :persistent-hint="true"
             >
             </v-select>
@@ -153,35 +163,12 @@ const fetchFootprintsForAllAvailableGroups = async () => {
                 const data = ref<GroupCo2FootprintEmissions>(
                     await response.json()
                 );
-                // If values is empty array nothing has been set yet
-                // This is what it would return if the group has not set their footprint yet
-                // { name: 'groupname', values: [] }
-                // if it is set it would be this
-                // [
-                //     {category: 'Mobilität', value: 1},
-                //     {category: 'Wohnen', value: 1},
-                //     {category: 'Konsum', value: 1},
-                //     {category: 'Ernährung', value: 1},
-                //     {category: 'Infrastruktur', value: 1}
-                // ]
 
-                // Give it some test data
-
-                // TODO: remove this in the future when the co2 calculator works
-                data.value = {
-                    name: groups.value[i].groupname,
-                    values: [
-                        { category: 'Mobilität', value: 1 },
-                        { category: 'Wohnen', value: 1 },
-                        { category: 'Konsum', value: 1 },
-                        { category: 'Ernährung', value: 1 },
-                        { category: 'Infrastruktur', value: 1 },
-                    ],
-                };
-
-                // console.log(data.value, 'group data');
-
-                if (data.value.values && data.value.values.length > 0) {
+                if (
+                    data.value &&
+                    data.value.values &&
+                    data.value.values.length > 0
+                ) {
                     const groupExists = footprintsData.value.some(
                         (groupFootprint: any) =>
                             groupFootprint.name === data.value.name
@@ -203,7 +190,6 @@ const fetchFootprintsForAllAvailableGroups = async () => {
 };
 
 function getData() {
-    // console.log(footprintsData.value);
     if (footprintsData.value.length === 0 || averageData.value.length === 0) {
         return null;
     }
@@ -212,7 +198,13 @@ function getData() {
         const footprint = footprintsData.value.find(
             (f) => f.name === selectedGroup
         );
-        return footprint!.values.map((valueObj) => ({
+
+        if (!footprint) {
+            // If footprint doesn't exist, return an empty array
+            return [];
+        }
+
+        return footprint.values.map((valueObj) => ({
             category: valueObj.category,
             value: valueObj.value,
         }));
@@ -222,7 +214,9 @@ function getData() {
         const footprint = footprintsData.value.find(
             (f) => f.name === selectedGroup
         );
-        return footprint!.name;
+
+        // If footprint doesn't exist, return a default string (like 'No Group')
+        return footprint ? footprint.name : 'No Group';
     });
 
     const available_Categories = footprintsData.value[0].values.map(

@@ -37,8 +37,20 @@ export const routes = [
             },
             {
                 path: 'summary',
-                name: 'Summary',
-                component: () => import('@/views/CalculatorSummaryView.vue'),
+                children: [
+                    {
+                        path: '',
+                        name: 'Summary',
+                        component: () =>
+                            import('@/views/CalculatorSummaryView.vue'),
+                    },
+                    {
+                        path: 'submitted',
+                        name: 'Fertig',
+                        component: () =>
+                            import('@/views/CalculatorFinishedView.vue'),
+                    },
+                ],
             },
         ],
     },

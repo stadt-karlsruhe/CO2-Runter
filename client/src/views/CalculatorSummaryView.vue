@@ -29,127 +29,113 @@
 
         <v-row class="my-16">
             <v-col>
-                <v-tabs v-model="tab" align-tabs="center">
-                    <v-tab :value="1">Stadtteile</v-tab>
-                    <v-tab :value="2">Gruppen</v-tab>
+                <v-tabs
+                    v-model="tab"
+                    align-tabs="center"
+                    color="primary-darken-1"
+                    :fixed-tabs="true"
+                >
+                    <v-tab value="district">Stadtteile</v-tab>
+                    <v-tab value="group">Gruppen</v-tab>
                 </v-tabs>
 
-                <!-- Container für den Stadtteile Tab-->
-                <div v-if="tab === 1" class="my-8">
-                    <p class="mb-4">
-                        Bitte wählen Sie den Stadtteil, in dem Sie ansässig
-                        sind.
-                    </p>
-                    <v-select
-                        :items="[
-                            'Knielingen',
-                            'Daxlanden',
-                            'Innenstadt-West',
-                            'Innenstadt-Ost',
-                            'Südstadt',
-                            'Palmbach',
-                            'Grünwettersbach',
-                            'Hohenwettersbach',
-                            'Wolfartsweier',
-                            'Rintheim',
-                            'Neureut',
-                            'Waldstadt',
-                            'Stupferich',
-                            'Durlach',
-                            'Grünwinkel,',
-                            'Mühlbrug',
-                            'Oberreut',
-                            'Grötzingen',
-                            'Hagsfeld',
-                            'Weiherfeld-Dammerstock',
-                            'Beiertheim-Bulach',
-                            'Südweststadt',
-                            'Weststadt',
-                            'Nordweststadt',
-                            'Nordstadt',
-                            'Oststadt',
-                            'Rüppurr',
-                        ]"
-                        label="Bitte wählen Sie einen Stadtteil"
-                        outlined
-                    ></v-select>
-                </div>
-
-                <!-- Container für den Gruppen Tab -->
-                <div v-else-if="tab === 2">
-                    <p class="mt-4">
-                        Melden Sie sich an! So können Sie alle Gruppen sehen, in
-                        denen Sie Mitglied sind.
-                    </p>
-                    <v-tabs
-                        v-model="loginSelection"
-                        align-tabs="center"
-                        class="mt-8"
-                    >
-                        <v-tab :value="1">ohne Login</v-tab>
-                        <v-tab :value="2">Login</v-tab>
-                    </v-tabs>
-
-                    <!-- Container für Gruppentabelle -->
-                    <v-container v-if="loginSelection === 1">
-<!--                        <v-text-field-->
-<!--                            v-model="search"-->
-<!--                            class="mt-8"-->
-<!--                            hide-details-->
-<!--                            label="Suchen"-->
-<!--                            prepend-inner-icon="mdi-magnify"-->
-<!--                            variant="outlined"-->
-<!--                        ></v-text-field>-->
-<!--                        <v-data-table :headers="headers" :search="search">-->
-<!--                        </v-data-table>-->
-
-                        <v-alert v-if="isLoading" type="info" variant="tonal">
+                <v-window v-model="tab">
+                    <v-window-item value="district">
+                        <v-alert
+                            v-if="isLoadingCityDistricts"
+                            type="info"
+                            variant="tonal"
+                        >
                             Gruppen werden geladen...
                         </v-alert>
 
-                        <v-alert v-if="error" icon="mdi-alert" type="error" variant="tonal">
-                            {{ error }}
+                        <v-alert
+                            v-if="errorCityDistricts"
+                            icon="mdi-alert"
+                            type="error"
+                            variant="tonal"
+                        >
+                            {{ errorCityDistricts }}
                         </v-alert>
 
                         <v-select
-                            v-if="!isLoading"
-                            v-model="selectedGroups"
-                            :items="groups.map((group) => group.groupname)"
+                            v-if="!isLoadingCityDistricts"
+                            v-model="selectedCityDistricts"
+                            :items="
+                                cityDistricts.map((district) => district.name)
+                            "
+                            label="Bitte wählen Sie den Stadtteil, in dem Sie ansässig sind."
                             variant="outlined"
-                            label="Angezeigte Gruppen wählen"
-                            :multiple="true"
-                        >
-                        </v-select>
-                    </v-container>
+                            class="my-16"
+                            @update:modelValue="updateSelectedCityDistrictId()"
+                        />
+                    </v-window-item>
 
-                    <!-- Container für Loginform -->
-                    <v-container v-else-if="loginSelection === 2">
-                        <LoginForm />
-                    </v-container>
-                </div>
+                    <v-window-item value="group">
+                        <div v-if="auth.isLoggedIn">
+                            <v-alert
+                                v-if="isLoadingGroups"
+                                type="info"
+                                variant="tonal"
+                            >
+                                Gruppen werden geladen...
+                            </v-alert>
 
-                <!-- Buttons zum Absenden der Daten/ohne Absenden der Daten-->
-                <v-col>
-                    <v-btn
-                        :rounded="true"
-                        append-icon="mdi-chevron-right"
-                        color="primary-darken-1"
-                        size="large"
-                        to="/"
-                        variant="tonal"
-                        >Daten abschicken
-                    </v-btn>
-                </v-col>
-                <v-col>
-                    <v-btn
-                        :rounded="true"
-                        append-icon="mdi-chevron-right"
-                        size="large"
-                        to="/"
-                        variant="tonal"
-                        >Weiter ohne Daten zu senden
-                    </v-btn>
-                </v-col>
+                            <v-alert
+                                v-if="errorGroups"
+                                icon="mdi-alert"
+                                type="error"
+                                variant="tonal"
+                            >
+                                {{ errorGroups }}
+                            </v-alert>
+
+                            <v-select
+                                v-if="!isLoadingGroups"
+                                v-model="selectedGroups"
+                                :items="groups.map((group) => group.groupname)"
+                                variant="outlined"
+                                class="my-16"
+                                label="Angezeigte Gruppen wählen"
+                                :multiple="true"
+                                @update:model-value="updateSelectedGroup()"
+                            />
+                        </div>
+
+                        <div v-else>
+                            <p class="mt-4">
+                                Melden Sie sich an! So können Sie alle Gruppen
+                                sehen, in denen Sie Mitglied sind.
+                            </p>
+
+                            <LoginForm />
+                        </div>
+                    </v-window-item>
+                </v-window>
+            </v-col>
+        </v-row>
+        <v-row class="my-16">
+            <v-col>
+                <v-btn
+                    :rounded="true"
+                    append-icon="mdi-chevron-right"
+                    color="primary-darken-1"
+                    size="large"
+                    to="/"
+                    variant="tonal"
+                    @click="submitCo2EmissionsUpload()"
+                    >Daten abschicken
+                </v-btn>
+
+                <v-btn
+                    :rounded="true"
+                    append-icon="mdi-chevron-right"
+                    size="large"
+                    to="/"
+                    variant="tonal"
+                    @click="continueWithoutUpload()"
+                    >Weiter ohne Daten zu senden
+                </v-btn>
             </v-col>
         </v-row>
     </v-container>
@@ -157,42 +143,118 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
-import LoginForm from '@/components/LoginRegistrationComponents/LoginForm.vue';
 import { useTotalCo2EmissionStore } from '@/store/totalCo2Emission';
 import { useRoute } from 'vue-router';
 import { GroupData } from '@/types/Group';
+import { CityDistrict } from '@/types/District';
+import router from '@/router';
+import useAuth from '@/composables/useAuth';
+import LoginForm from '@/components/LoginRegistrationComponents/LoginForm.vue';
 
+const {
+    categories,
+    updateDataSend,
+    updateCategories,
+    updateCo2ValuesPerCategory,
+} = useTotalCo2EmissionStore();
+const auth = useAuth();
 const route = useRoute();
-// TODO: multiple groups okey or not?
 const selectedGroups = ref<string[]>([]);
+const finalSelectedGroups = ref<string[]>([]);
 const groups = ref<Array<GroupData>>([]);
-const isLoading = ref(false);
-const error = ref('');
-const tab = ref(1);
-const loginSelection = ref(1);
-const search = ref('');
+const selectedCityDistricts = ref();
+const selectedDistricts = ref();
+const cityDistricts = ref<Array<CityDistrict>>([]);
+const isLoadingGroups = ref(false);
+const isLoadingCityDistricts = ref(false);
+const errorGroups = ref('');
+const errorCityDistricts = ref('');
+const tab = ref('district');
 const totalCo2EmissionStore = useTotalCo2EmissionStore();
-const headers = [
-    {
-        title: 'Gruppenname',
-        key: 'gruppenname',
-    },
-    {
-        title: 'Gruppencode',
-        key: 'gruppencode',
-    },
-    {
-        title: 'Besitzer',
-        key: 'besitzer',
-    },
-    {
-        title: 'Mitgliederzahl',
-        key: 'mitgliederzahl',
-    },
-];
+
+const updateSelectedGroup = () => {
+    finalSelectedGroups.value = groups.value
+        .filter((group) => selectedGroups.value.includes(group.groupname))
+        .map((group) => group.groupcode);
+};
+
+const updateSelectedCityDistrictId = () => {
+    selectedDistricts.value = cityDistricts.value.find(
+        (district) => district.name === selectedCityDistricts.value
+    );
+};
+
+const submitCo2EmissionsUpload = async () => {
+    try {
+        const districtId = selectedDistricts.value
+            ? selectedDistricts.value.district_ID
+            : 0;
+
+        const response = await fetch('/api/footprint', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Insert Authentication headers if needed
+            },
+            body: JSON.stringify({
+                groups: finalSelectedGroups.value,
+                district: districtId,
+                // TODO: this is test data, replace with actual data
+                // data: [
+                //     categories.mobility,
+                //     categories.housing,
+                //     categories.consum,
+                //     categories.nutrition
+                // ],
+                data: [1.2, 2.3, 3.4, 4.5], // Test Data
+            }),
+        });
+
+        if (!response.ok) {
+            const message = `An error has occurred: ${response.status}`;
+            throw new Error(message);
+        }
+
+        updateDataSend(true);
+        router.push('/rechner/summary/submitted');
+    } catch (error) {
+        console.error(`Error submitting data: ${error}`);
+    }
+};
+
+const continueWithoutUpload = () => {
+    updateDataSend(false);
+    router.push('/rechner/summary/submitted');
+    // https://github.com/stadt-karlsruhe/CO2-Runter/blob/main/client/src/components/DistrictGroupChoice/ChoiceScreen.js
+    // TODO: Properly implement that you save data for each category!
+};
+
+const fetchCityDistricts = async () => {
+    isLoadingCityDistricts.value = true;
+    try {
+        const response = await fetch('/api/districts', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                co2token: `${localStorage.getItem('CO2Token')}`,
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        cityDistricts.value = data as Array<CityDistrict>;
+    } catch (fetchError) {
+        errorCityDistricts.value =
+            'Probleme beim laden der Stadtteile. Bitte versuche es später erneut.';
+    }
+    isLoadingCityDistricts.value = false;
+};
 
 const fetchGroups = async () => {
-    isLoading.value = true;
+    isLoadingGroups.value = true;
     try {
         const response = await fetch('/api/groups/member', {
             method: 'GET',
@@ -211,10 +273,10 @@ const fetchGroups = async () => {
         // console.log(groups.value, 'here i havethe groups ith group codes');
         // await postData(groups.value);
     } catch (fetchError) {
-        error.value =
+        errorGroups.value =
             'Probleme beim laden der Gruppen. Bitte versuche es später erneut.';
     }
-    isLoading.value = false;
+    isLoadingGroups.value = false;
 };
 
 const checkUrlGroupCode = () => {
@@ -226,7 +288,6 @@ const checkUrlGroupCode = () => {
             .map((group: GroupData) => group.groupname);
 
         if (groupMatches.length > 0) {
-            console.log(groupMatches);
             selectedGroups.value = groupMatches;
         }
     }
@@ -234,6 +295,7 @@ const checkUrlGroupCode = () => {
 
 onMounted(async () => {
     await fetchGroups();
+    await fetchCityDistricts();
     checkUrlGroupCode();
 });
 </script>

@@ -269,7 +269,7 @@ const ende = () => {
     if (step.value == 3) {
         router.push({
             path: '/rechner/summary',
-            query: { ...route.query }
+            query: { ...route.query },
         });
     }
 };
