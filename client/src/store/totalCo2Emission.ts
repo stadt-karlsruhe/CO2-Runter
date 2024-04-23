@@ -10,11 +10,11 @@ export const useTotalCo2EmissionStore = defineStore('totalCo2Emission', {
         total: 0,
         dataSend: false,
         categories: {
-            consume: [],
-            housing: [],
-            mobility: [],
-            nutrition: [],
-        } as FootprintResponse,
+            consume: 2,
+            housing: 3,
+            mobility: 4,
+            nutrition: 5,
+        },
         co2ValuesPerCategory: Array<FootprintEmissionPerCategory>(),
     }),
 
@@ -28,9 +28,9 @@ export const useTotalCo2EmissionStore = defineStore('totalCo2Emission', {
         },
         updateCategories(
             category: keyof FootprintResponse,
-            data: DistrictFootprint[]
+            value: number
         ) {
-            this.categories[category] = data;
+            this.categories[category] = value;
         },
         updateCo2ValuesPerCategory(newValue: FootprintEmissionPerCategory[]) {
             this.co2ValuesPerCategory = newValue;

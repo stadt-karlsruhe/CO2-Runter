@@ -199,14 +199,12 @@ const submitCo2EmissionsUpload = async () => {
             body: JSON.stringify({
                 groups: finalSelectedGroups.value,
                 district: districtId,
-                // TODO: this is test data, replace with actual data
-                // data: [
-                //     categories.mobility,
-                //     categories.housing,
-                //     categories.consum,
-                //     categories.nutrition
-                // ],
-                data: [1.2, 2.3, 3.4, 4.5], // Test Data
+                data: [
+                    categories.mobility,
+                    categories.housing,
+                    categories.consume,
+                    categories.nutrition
+                ],
             }),
         });
 
