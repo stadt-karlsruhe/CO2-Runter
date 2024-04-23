@@ -20,25 +20,14 @@
 
             <v-select
                 v-model="selectedGroups"
-                :items="
-                    groups
-                        .filter(
-                            (group) =>
-                                !!footprintsData.find(
-                                    (footprint) =>
-                                        footprint.name === group.groupname
-                                )
-                        )
-                        .map((group) => group.groupname)
-                "
+                :items="groups.map((group) => group.groupname)"
                 :multiple="true"
                 variant="outlined"
                 label="Angezeigte Gruppen wählen"
                 @update:modelValue="updateChartOptions()"
-                hint="Hier werden nur Gruppen angezeigt welche bereits ihren CO2-Fußabdruck gesetzt haben."
+                hint="Falls die Gruppe(n) keine Datenanzeigt, bedeutet das lediglich, dass die Gruppe(n) noch keinen CO2-Fußabdruck gesetzt hat."
                 :persistent-hint="true"
-            >
-            </v-select>
+            />
 
             <v-card class="pa-4" variant="flat">
                 <v-card-title>Du findest eine Gruppe nicht?</v-card-title>
@@ -215,8 +204,7 @@ function getData() {
             (f) => f.name === selectedGroup
         );
 
-        // If footprint doesn't exist, return a default string (like 'No Group')
-        return footprint ? footprint.name : 'No Group';
+        return footprint ? footprint.name : 'Hat keine Daten';
     });
 
     const available_Categories = footprintsData.value[0].values.map(
@@ -285,7 +273,8 @@ function getData() {
             stack: 'stack',
             barWidth: '60%',
             data: selectedData.map(
-                (selectedData: any) => selectedData[index].value
+                (selectedData: any) => selectedData && selectedData[index]?.value !== undefined ?
+                    selectedData[index].value : 0
             ),
             label: {
                 show: true,
@@ -305,7 +294,6 @@ const checkUrlGroupCode = () => {
             .map((group: GroupData) => group.groupname);
 
         if (groupMatches.length > 0) {
-            console.log(groupMatches);
             selectedGroups.value = groupMatches;
             updateChartOptions();
         }
