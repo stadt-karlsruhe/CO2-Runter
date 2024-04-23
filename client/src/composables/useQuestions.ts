@@ -70,16 +70,16 @@ export default function useQuestions() {
     const calculateEmission = (currentValue: number) => {
         const categoryValues: number[] = [];
         questions.value.category.forEach((category) => {
-
             const questionValues: number[] = [];
 
             category.questions.forEach((question) => {
-
                 let value = question.selected.value;
 
                 // Formel von der Frage berechnen
-                if(question.formula) {
-                    const evalQuestionFormula = new Function('return ' + question.formula)();
+                if (question.formula) {
+                    const evalQuestionFormula = new Function(
+                        'return ' + question.formula
+                    )();
                     value = evalQuestionFormula(value);
                 }
 
@@ -87,14 +87,25 @@ export default function useQuestions() {
             });
 
             // Formel von der Kategorie berechnen
-            const evalCategoryFormula = new Function('return ' + category.formula)();
-            console.log(evalCategoryFormula(questionValues));
+            const evalCategoryFormula = new Function(
+                'return ' + category.formula
+            )();
+            // console.log(evalCategoryFormula(questionValues));
             categoryValues.push(evalCategoryFormula(questionValues));
         });
 
         // console.log(categoryValues)
         // Formel von allem Berechnen
-        return categoryValues[0] * categoryValues[1] * categoryValues[2] * categoryValues[3]
+        console.log('CategoryValue 1: ' + categoryValues[0]);
+        console.log('CategoryValue 2: ' + categoryValues[1]);
+        console.log('CategoryValue 3: ' + categoryValues[2]);
+        console.log('CategoryValue 4: ' + categoryValues[3]);
+        return (
+            categoryValues[0] +
+            categoryValues[1] +
+            categoryValues[2] +
+            categoryValues[3]
+        );
     };
 
     onMounted(async () => {

@@ -59,32 +59,32 @@
           }
         },
         {
-          "text" : "Wie hoch ist ihr Verbrauch in Liter pro Kilometer?",
+          "text" : "Wie hoch ist ihr Verbrauch in Liter pro 100km?",
           "replies" : [
             {
               "text" : "Sehr gering (< 3 l/km)",
-              "value" : 0.0
+              "value" : 3.0
             },
             {
               "text" : "Gering (3-5 l/km)",
-              "value" : 0.67
+              "value" : 4.2
             },
             {
               "text" : "Durchschnittlich (5-7 l/km)",
-              "value" : 1.75
+              "value" : 6.7
             },
             {
               "text" : "Hoch (7-12 l/km)",
-              "value" : 2.15
+              "value" : 8.78
             },
             {
               "text" : "Sehr hoch (> 12 l/km)",
-              "value" : 3.58
+              "value" : 11.75
             }
           ],
           "selected" : {
             "text" : "Durchschnittlich (5-7 l/km)",
-            "value" : 1.75
+            "value" : 6.7
           }
         },
         {
@@ -92,63 +92,63 @@
           "replies" : [
             {
               "text" : "Sehr selten (< 30km)",
-              "value" : 0.0
+              "value" : 0.69
             },
             {
               "text" : "Selten (30-50km)",
-              "value" : 0.06
+              "value" : 0.45
             },
             {
               "text" : "Durchschnittlich (50-70km)",
-              "value" : 0.12
+              "value" : 0.3
             },
             {
               "text" : "Häufig(70-100km)",
-              "value" : 0.18
+              "value" : 0.2
             },
             {
               "text" : "Sehr häufig(> 100km)",
-              "value" : 0.24
+              "value" : 0.06
             }
           ],
           "selected" : {
             "text" : "Durchschnittlich (50-70km)",
             "value" : 0.12
           },
-          "formula" : "function (value) { return value * 0.000049 * 52; }"
+          "formula" : "function (value) { return value ; }"
         },
         {
           "text" : "Wie viele Stunden pro Jahr verbringen Sie mit dem fliegen?",
           "replies" : [
             {
               "text" : "Sehr selten (< 0h)",
-              "value" : 0.0
+              "value" : 15.7
             },
             {
               "text" : "Selten (0 - 250h)",
-              "value" : 250.0
+              "value" : 24.4
             },
             {
               "text" : "Durchschnittlich (250 - 500h)",
-              "value" : 500.0
+              "value" : 36.0
             },
             {
               "text" : "Häufig (500 - 750h)",
-              "value" : 750.0
+              "value" : 52.0
             },
             {
               "text" : "Sehr häufig(> 750h)",
-              "value" : 1000.0
+              "value" : 89.0
             }
           ],
           "selected" : {
             "text" : "Sehr selten (< 0h)",
-            "value" : 0.0
+            "value" : 15.7
           },
-          "formula" : "function (value) { return value * 0.15; }"
+          "formula" : "function (value) { return value; }"
         }
       ],
-      "formula" : "function (value) { return (value[0] * value[1] * value[2] * value[3] * value[4]); }"
+      "formula" : "function (value) { return ((value[0] * value[1] * value[2]) + value[3] + value[4]); }"
     },
     {
       "name" : "Ernährung",
@@ -276,7 +276,7 @@
       "name" : "Wohnen",
       "questions" : [
         {
-          "text": "Wie viele qm hat ihre Wohnung/Haus?",
+          "text": "Wie viele Quadratmeter (qm) hat ihre Wohnung/Haus?",
           "replies": [
             {
               "text": "Wenig (< 20qm)",
@@ -284,20 +284,20 @@
             },
             {
               "text": "Durchschnittlich (20 - 70qm)",
-              "value" : 61.0
+              "value" : 0.14
             },
             {
               "text": "Viel (70 - 200qm)",
-              "value" : 145.0
+              "value" : 1.53
             },
             {
               "text": "Sehr viel (>200 qm)",
-              "value" : 200.0
+              "value" : 2.44
             }
           ],
           "selected": {
             "text": "Durchschnittlich (20 - 70qm)",
-            "value" : 61.0
+            "value" : 0.14
           },
           "formula" : "function (value) { return value; }"
         },
@@ -309,11 +309,11 @@
               "value" : 1
             },
             {
-              "text" : "Kleinfamilie (3-6 Personen)",
+              "text" : "Kleinfamilie (2-4 Personen)",
               "value" : 3
             },
             {
-              "text" : "Familie (3-6 Personen)",
+              "text" : "Familie (4-6 Personen)",
               "value" : 5
             },
             {
@@ -324,8 +324,7 @@
           "selected": {
             "text" : "Nur ich",
             "value" : 1
-          },
-          "formula" : "function (value) { return value; }"
+          }
         },
         {
           "text": "Wie alt ist Ihr Haus bzw wann wurde es zuletzt renoviert?",
@@ -415,7 +414,7 @@
           }
         }
       ],
-      "formula" : "function (value) { return (value[0] * value[1] * value[2] * value[3] * value[4]); }"
+      "formula" : "function (value) { return (value[0] + value[1] + value[2] + value[3] + value[4]); }"
     },
     {
       "name" : "Konsum",
@@ -425,20 +424,20 @@
           "replies": [
             {
               "text" : "sparsam",
-              "value" : 2.48
+              "value" : -0.05
             },
             {
               "text" : "normal",
-              "value" : 2.9
+              "value" : 0.0
             },
             {
               "text" : "großzügig",
-              "value" : 3.35
+              "value" : 0.05
             }
           ],
           "selected": {
             "text" : "normal",
-            "value" : 2.9
+            "value" : 0.0
           }
         },
         {
@@ -502,10 +501,11 @@
           "selected": {
             "text" : "Niedrig (< 250€)",
             "value" : 100.0
-          }
+          },
+          "formula": "function (value) { return value * 0.0058; }"
         }
       ],
-      "formula" : "function (value) { return (value[0] * value[1] * value[2] * value[3]); }"
+      "formula" : "function (value) { return (((value[0] + value[1] + value[2]) * value[3]) + value[3]); }"
     }
   ],
   "endFormula" : "function (value) { return (value[0] * value [1] * value[2] * value[3]); }"
