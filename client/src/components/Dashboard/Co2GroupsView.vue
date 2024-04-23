@@ -272,9 +272,10 @@ function getData() {
             //
             stack: 'stack',
             barWidth: '60%',
-            data: selectedData.map(
-                (selectedData: any) => selectedData && selectedData[index]?.value !== undefined ?
-                    selectedData[index].value : 0
+            data: selectedData.map((selectedData: any) =>
+                selectedData && selectedData[index]?.value !== undefined
+                    ? selectedData[index].value
+                    : 0
             ),
             label: {
                 show: true,

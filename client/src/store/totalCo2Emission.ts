@@ -26,10 +26,7 @@ export const useTotalCo2EmissionStore = defineStore('totalCo2Emission', {
         updateDataSend(newValue: boolean) {
             this.dataSend = newValue;
         },
-        updateCategories(
-            category: keyof FootprintResponse,
-            value: number
-        ) {
+        updateCategories(category: keyof FootprintResponse, value: number) {
             this.categories[category] = value;
         },
         updateCo2ValuesPerCategory(newValue: FootprintEmissionPerCategory[]) {

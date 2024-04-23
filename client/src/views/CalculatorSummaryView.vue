@@ -203,7 +203,7 @@ const submitCo2EmissionsUpload = async () => {
                     categories.mobility,
                     categories.housing,
                     categories.consume,
-                    categories.nutrition
+                    categories.nutrition,
                 ],
             }),
         });
