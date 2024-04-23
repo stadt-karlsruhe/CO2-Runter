@@ -82,11 +82,11 @@ const localGroupCode = computed(() => props.groupCode);
 const rootUrl = window.location.origin;
 
 const joinLink = computed(
-    () => `${rootUrl}/CO2Rechner?groupcode=${props.groupCode}`
+    () => `${rootUrl}/rechner?groupcode=${props.groupCode}`
 );
 
 const dashLink = computed(
-    () => `${rootUrl}/Dashboard?groupcode=${props.groupCode}`
+    () => `${rootUrl}/dashboard?groupcode=${props.groupCode}`
 );
 
 const openLink = (link: string) => {

@@ -1,5 +1,5 @@
 <template>
-    <v-stepper v-model="step" :alt-labels="true" elevation="0" >
+    <v-stepper v-model="step" :alt-labels="true" elevation="0">
         <v-stepper-header style="box-shadow: none">
             <v-stepper-item title="Mobilität" value="1"></v-stepper-item>
 
@@ -229,7 +229,7 @@
         </v-stepper-actions>
     </v-stepper>
     <div class="text-end mr-8">
-        <v-btn @click="ende" :disabled="step !== 3">Ende</v-btn>
+        <v-btn @click="ende()" :disabled="step !== 3">Ende</v-btn>
     </div>
 </template>
 
@@ -240,7 +240,9 @@ import { QuestionsIndices } from '@/constants/QuestionsIndices';
 import useQuestions from '@/composables/useQuestions';
 import { Questionnaire } from '@/types/Questionnaire';
 import router from '@/router';
+import { useRoute } from 'vue-router';
 
+const route = useRoute();
 const { questions, fetchQuestions } = useQuestions();
 const step = ref(0);
 const data = ref<Questionnaire>();
@@ -265,7 +267,10 @@ const prev = () => {
 
 const ende = () => {
     if (step.value == 3) {
-        router.push('/rechner/summary');
+        router.push({
+            path: '/rechner/summary',
+            query: { ...route.query }
+        });
     }
 };
 </script>

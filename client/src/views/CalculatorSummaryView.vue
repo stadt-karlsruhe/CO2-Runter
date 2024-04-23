@@ -92,16 +92,34 @@
 
                     <!-- Container für Gruppentabelle -->
                     <v-container v-if="loginSelection === 1">
-                        <v-text-field
-                            v-model="search"
-                            class="mt-8"
-                            hide-details
-                            label="Suchen"
-                            prepend-inner-icon="mdi-magnify"
+<!--                        <v-text-field-->
+<!--                            v-model="search"-->
+<!--                            class="mt-8"-->
+<!--                            hide-details-->
+<!--                            label="Suchen"-->
+<!--                            prepend-inner-icon="mdi-magnify"-->
+<!--                            variant="outlined"-->
+<!--                        ></v-text-field>-->
+<!--                        <v-data-table :headers="headers" :search="search">-->
+<!--                        </v-data-table>-->
+
+                        <v-alert v-if="isLoading" type="info" variant="tonal">
+                            Gruppen werden geladen...
+                        </v-alert>
+
+                        <v-alert v-if="error" icon="mdi-alert" type="error" variant="tonal">
+                            {{ error }}
+                        </v-alert>
+
+                        <v-select
+                            v-if="!isLoading"
+                            v-model="selectedGroups"
+                            :items="groups.map((group) => group.groupname)"
                             variant="outlined"
-                        ></v-text-field>
-                        <v-data-table :headers="headers" :search="search">
-                        </v-data-table>
+                            label="Angezeigte Gruppen wählen"
+                            :multiple="true"
+                        >
+                        </v-select>
                     </v-container>
 
                     <!-- Container für Loginform -->
@@ -138,10 +156,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import LoginForm from '@/components/LoginRegistrationComponents/LoginForm.vue';
 import { useTotalCo2EmissionStore } from '@/store/totalCo2Emission';
+import { useRoute } from 'vue-router';
+import { GroupData } from '@/types/Group';
 
+const route = useRoute();
+// TODO: multiple groups okey or not?
+const selectedGroups = ref<string[]>([]);
+const groups = ref<Array<GroupData>>([]);
+const isLoading = ref(false);
+const error = ref('');
 const tab = ref(1);
 const loginSelection = ref(1);
 const search = ref('');
@@ -160,9 +186,55 @@ const headers = [
         key: 'besitzer',
     },
     {
-        title: ':itgliederzahl',
+        title: 'Mitgliederzahl',
         key: 'mitgliederzahl',
     },
 ];
+
+const fetchGroups = async () => {
+    isLoading.value = true;
+    try {
+        const response = await fetch('/api/groups/member', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                co2token: `${localStorage.getItem('CO2Token')}`,
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        groups.value = data as Array<GroupData>;
+        // console.log(groups.value, 'here i havethe groups ith group codes');
+        // await postData(groups.value);
+    } catch (fetchError) {
+        error.value =
+            'Probleme beim laden der Gruppen. Bitte versuche es später erneut.';
+    }
+    isLoading.value = false;
+};
+
+const checkUrlGroupCode = () => {
+    if (route.query.groupcode) {
+        const groupCodes = (route.query.groupcode as string).split(',');
+
+        const groupMatches = groups.value
+            .filter((group: GroupData) => groupCodes.includes(group.groupcode))
+            .map((group: GroupData) => group.groupname);
+
+        if (groupMatches.length > 0) {
+            console.log(groupMatches);
+            selectedGroups.value = groupMatches;
+        }
+    }
+};
+
+onMounted(async () => {
+    await fetchGroups();
+    checkUrlGroupCode();
+});
 </script>
 <style scoped></style>

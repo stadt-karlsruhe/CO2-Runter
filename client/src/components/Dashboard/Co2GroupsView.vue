@@ -74,11 +74,13 @@ import {
     Co2ComparisonFootprints,
     GroupCo2FootprintEmissions,
 } from '@/types/Co2Footprint';
+import { useRoute } from 'vue-router';
 
 use([BarChart, DatasetComponent, GridComponent, CanvasRenderer]);
 
+const route = useRoute();
 const { isLoggedIn } = useAuth();
-const selectedGroups = ref([]);
+const selectedGroups = ref<string[]>([]);
 const isLoading = ref(true);
 const averageData = ref<AverageCo2Emissions>([]);
 const footprintsData = ref<Co2ComparisonFootprints>([]);
@@ -300,15 +302,30 @@ function getData() {
     };
 }
 
+const checkUrlGroupCode = () => {
+    if (route.query.groupcode) {
+        const groupCodes = (route.query.groupcode as string).split(',');
+
+        const groupMatches = groups.value
+            .filter((group: GroupData) => groupCodes.includes(group.groupcode))
+            .map((group: GroupData) => group.groupname);
+
+        if (groupMatches.length > 0) {
+            console.log(groupMatches);
+            selectedGroups.value = groupMatches;
+            updateChartOptions();
+        }
+    }
+};
+
 onMounted(async () => {
-    // TODO: add more with this maybe when it is in the params of the url
-    const groupCode = localStorage.getItem('groupCode');
     await fetchData();
     await fetchGroups();
     await fetchFootprintsForAllAvailableGroups();
     if (footprintsData.value != null && footprintsData.value.length > 0) {
         chartOptions.value = getData();
     }
+    checkUrlGroupCode();
 });
 </script>
 
