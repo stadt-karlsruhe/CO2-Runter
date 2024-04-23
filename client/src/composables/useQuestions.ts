@@ -59,31 +59,42 @@ export default function useQuestions() {
         const newText = selectedValue.text;
         const newValue = selectedValue.value;
 
-        console.log(newText);
-        console.log(newValue);
-
         questions.value.category[categoryIndex].questions[
             questionIndex
         ].selected.text = newText;
         questions.value.category[categoryIndex].questions[
             questionIndex
         ].selected.value = newValue;
-
-        console.log(
-            questions.value.category[categoryIndex].questions[questionIndex]
-        );
     };
 
-    const calculateTotalCo2Emission = () => {
-        let total = 0;
-
+    const calculateEmission = (currentValue: number) => {
+        const categoryValues: number[] = [];
         questions.value.category.forEach((category) => {
+
+            const questionValues: number[] = [];
+
             category.questions.forEach((question) => {
-                total += question.selected.value;
+
+                let value = question.selected.value;
+
+                // Formel von der Frage berechnen
+                if(question.formula) {
+                    const evalQuestionFormula = new Function('return ' + question.formula)();
+                    value = evalQuestionFormula(value);
+                }
+
+                questionValues.push(value);
             });
+
+            // Formel von der Kategorie berechnen
+            const evalCategoryFormula = new Function('return ' + category.formula)();
+            console.log(evalCategoryFormula(questionValues));
+            categoryValues.push(evalCategoryFormula(questionValues));
         });
 
-        return total;
+        // console.log(categoryValues)
+        // Formel von allem Berechnen
+        return categoryValues[0] * categoryValues[1] * categoryValues[2] * categoryValues[3]
     };
 
     onMounted(async () => {
@@ -96,6 +107,6 @@ export default function useQuestions() {
         loading: loading,
         questions: questions,
         error: error,
-        calculateTotalCo2Emission,
+        calculateEmission,
     };
 }

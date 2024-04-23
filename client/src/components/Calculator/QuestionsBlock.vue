@@ -35,7 +35,7 @@ const props = defineProps<{
     questions: Category;
 }>();
 
-const { updateSelectedValue, calculateTotalCo2Emission } = useQuestions();
+const { updateSelectedValue, calculateEmission } = useQuestions();
 const totalCo2EmissionStore = useTotalCo2EmissionStore();
 
 const UpdateEmissions = (questionIndex: number) => {
@@ -46,7 +46,7 @@ const UpdateEmissions = (questionIndex: number) => {
     updateSelectedValue(props.categoryIndex, questionIndex, object!);
 
     totalCo2EmissionStore.calculateTotalCo2Emission(
-        calculateTotalCo2Emission()
+        calculateEmission()
     );
 };
 

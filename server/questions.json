@@ -115,7 +115,7 @@
             "text" : "Durchschnittlich (50-70km)",
             "value" : 0.12
           },
-          "formula" : "function (value) { value * 0.000049 * 52; }"
+          "formula" : "function (value) { return value * 0.000049 * 52; }"
         },
         {
           "text" : "Wie viele Stunden pro Jahr verbringen Sie mit dem fliegen?",
@@ -145,10 +145,10 @@
             "text" : "Sehr selten (< 0h)",
             "value" : 0.0
           },
-          "formula" : "function (value) { value * 0.15; }"
+          "formula" : "function (value) { return value * 0.15; }"
         }
       ],
-      "formula" : "function (value) { return (value[0] * value[1] * value[2] * value[3] * value[4])"
+      "formula" : "function (value) { return (value[0] * value[1] * value[2] * value[3] * value[4]); }"
     },
     {
       "name" : "Ernährung",
@@ -502,10 +502,10 @@
           "selected": {
             "text" : "Niedrig (< 250€)",
             "value" : 100.0
-          },
-          "formula": "function (value) { return value; }"
+          }
         }
-      ]
+      ],
+      "formula" : "function (value) { return (value[0] * value[1] * value[2] * value[3]); }"
     }
   ],
   "endFormula" : "function (value) { return (value[0] * value [1] * value[2] * value[3]); }"
