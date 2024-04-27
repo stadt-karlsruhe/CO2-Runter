@@ -32,5 +32,24 @@ export const useTotalCo2EmissionStore = defineStore('totalCo2Emission', {
         updateCo2ValuesPerCategory(newValue: FootprintEmissionPerCategory[]) {
             this.co2ValuesPerCategory = newValue;
         },
+        updateMobilityCategory(newValue: number) {
+            this.categories.mobility = newValue;
+            this.recalculateTotalCo2Emission();
+        },
+        updateNutritionCategory(newValue: number) {
+            this.categories.mobility = newValue;
+            this.recalculateTotalCo2Emission();
+        },
+        updateLivingCategory(newValue: number) {
+            this.categories.mobility = newValue;
+            this.recalculateTotalCo2Emission();
+        },
+        updateConsumCategory(newValue: number) {
+            this.categories.mobility = newValue;
+            this.recalculateTotalCo2Emission();
+        },
+        recalculateTotalCo2Emission() {
+            this.total = this.categories.consume + this.categories.housing + this.categories.mobility + this.categories.nutrition;
+        },
     },
 });

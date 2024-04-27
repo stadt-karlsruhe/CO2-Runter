@@ -67,7 +67,34 @@ export default function useQuestions() {
         ].selected.value = newValue;
     };
 
-    const calculateEmission = (currentValue: number) => {
+    const getSelectedValuesPerCategory = (categoryIndex: number) => {
+        const selectedValues: number[] = [];
+        questions.value.category[categoryIndex].questions.forEach((question) => {
+            // Check if the question has a formula
+            // THings like this is redundant
+            // "function (value) { return value; }"
+            // TODO: remove that from the json
+            if(question.formula) {
+                // If it does, parse it into a function
+                const formula = stringToFunction(question.formula);
+                console.log(formula);
+                // Use that formula to adjust the selected value
+                const value = formula(question.selected.value);
+                selectedValues.push(value);
+            } else {
+                selectedValues.push(question.selected.value);
+            }
+        });
+
+        return selectedValues;
+    }
+
+    const stringToFunction = (func: string) => {
+        const funcBody = func.substring(func.indexOf("{")+1, func.lastIndexOf("}"));
+        return new Function('value', funcBody);
+    }
+
+    const calculateEmission = () => {
         const categoryValues: number[] = [];
         questions.value.category.forEach((category) => {
             const questionValues: number[] = [];
@@ -96,10 +123,10 @@ export default function useQuestions() {
 
         // console.log(categoryValues)
         // Formel von allem Berechnen
-        console.log('CategoryValue 1: ' + categoryValues[0]);
-        console.log('CategoryValue 2: ' + categoryValues[1]);
-        console.log('CategoryValue 3: ' + categoryValues[2]);
-        console.log('CategoryValue 4: ' + categoryValues[3]);
+        console.log('1: ' + categoryValues[0]);
+        console.log('2: ' + categoryValues[1]);
+        console.log('3: ' + categoryValues[2]);
+        console.log('4: ' + categoryValues[3]);
         return (
             categoryValues[0] +
             categoryValues[1] +
@@ -119,5 +146,6 @@ export default function useQuestions() {
         questions: questions,
         error: error,
         calculateEmission,
+        getSelectedValuesPerCategory,
     };
 }

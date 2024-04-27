@@ -29,13 +29,14 @@
 import { Category, Replies } from '@/types/Questionnaire';
 import useQuestions from '@/composables/useQuestions';
 import { useTotalCo2EmissionStore } from '@/store/totalCo2Emission';
+import { ref } from 'vue';
 
 const props = defineProps<{
     categoryIndex: number;
     questions: Category;
 }>();
 
-const { updateSelectedValue, calculateEmission } = useQuestions();
+const { updateSelectedValue, getSelectedValuesPerCategory } = useQuestions();
 const totalCo2EmissionStore = useTotalCo2EmissionStore();
 
 const UpdateEmissions = (questionIndex: number) => {
@@ -45,10 +46,41 @@ const UpdateEmissions = (questionIndex: number) => {
     const object = findObjectInArray(array, textValue);
     updateSelectedValue(props.categoryIndex, questionIndex, object!);
 
-    totalCo2EmissionStore.calculateTotalCo2Emission(
-        calculateEmission()
-    );
+    console.log(props.questions)
+    if(props.questions.name === 'Mobilität') {
+        let newValue = calculateEmissionBetter(props.questions);
+        totalCo2EmissionStore.updateMobilityCategory(newValue);
+    }
+    if(props.questions.name === 'Ernäherung') {
+        let newValue = calculateEmissionBetter(props.questions);
+        totalCo2EmissionStore.updateNutritionCategory(newValue);
+    }
+    if(props.questions.name === 'Wohnen') {
+        let newValue = calculateEmissionBetter(props.questions);
+        totalCo2EmissionStore.updateLivingCategory(newValue);
+    }
+    if(props.questions.name === 'Konsum') {
+        let newValue = calculateEmissionBetter(props.questions);
+        totalCo2EmissionStore.updateConsumCategory(newValue);
+    }
+
+    console.log(totalCo2EmissionStore.categories)
+    console.log(totalCo2EmissionStore.total)
 };
+
+function calculateEmissionBetter(category: Category) {
+    const selectedValues = getSelectedValuesPerCategory(props.categoryIndex);
+
+    const formula = stringToFunction(category.formula);
+    const categoryValue = formula(selectedValues);
+
+    return categoryValue
+}
+
+function stringToFunction(func: string) {
+    const funcBody = func.substring(func.indexOf("{")+1, func.lastIndexOf("}"));
+    return new Function('value', funcBody);
+}
 
 function findObjectInArray(
     array: Replies[],
