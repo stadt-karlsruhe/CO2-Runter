@@ -151,12 +151,7 @@ import router from '@/router';
 import useAuth from '@/composables/useAuth';
 import LoginForm from '@/components/LoginRegistrationComponents/LoginForm.vue';
 
-const {
-    categories,
-    updateDataSend,
-    updateCategories,
-    updateCo2ValuesPerCategory,
-} = useTotalCo2EmissionStore();
+const { categories, updateDataSend } = useTotalCo2EmissionStore();
 const auth = useAuth();
 const route = useRoute();
 const selectedGroups = ref<string[]>([]);

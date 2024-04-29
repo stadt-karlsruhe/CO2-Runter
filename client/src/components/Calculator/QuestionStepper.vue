@@ -56,11 +56,8 @@
                     <v-row class="my-16">
                         <v-col>
                             <QuestionsBlock
-                                v-if="data"
+                                v-if="!isLoading"
                                 :category-index="QuestionsIndices.MOBILITY"
-                                :questions="
-                                    data.category[QuestionsIndices.MOBILITY]
-                                "
                             />
                         </v-col>
                     </v-row>
@@ -106,11 +103,8 @@
                     <v-row class="my-16">
                         <v-col>
                             <QuestionsBlock
-                                v-if="data"
+                                v-if="!isLoading"
                                 :category-index="QuestionsIndices.NUTRITION"
-                                :questions="
-                                    data.category[QuestionsIndices.NUTRITION]
-                                "
                             />
                         </v-col>
                     </v-row>
@@ -156,11 +150,8 @@
                     <v-row class="my-16">
                         <v-col>
                             <QuestionsBlock
-                                v-if="data"
+                                v-if="!isLoading"
                                 :category-index="QuestionsIndices.LIVING"
-                                :questions="
-                                    data.category[QuestionsIndices.LIVING]
-                                "
                             />
                         </v-col>
                     </v-row>
@@ -206,11 +197,8 @@
                     <v-row class="my-16">
                         <v-col>
                             <QuestionsBlock
-                                v-if="data"
+                                v-if="!isLoading"
                                 :category-index="QuestionsIndices.CONSUM"
-                                :questions="
-                                    data.category[QuestionsIndices.CONSUM]
-                                "
                             />
                         </v-col>
                     </v-row>
@@ -238,19 +226,18 @@ import { onMounted, ref } from 'vue';
 import QuestionsBlock from '@/components/Calculator/QuestionsBlock.vue';
 import { QuestionsIndices } from '@/constants/QuestionsIndices';
 import useQuestions from '@/composables/useQuestions';
-import { Questionnaire } from '@/types/Questionnaire';
 import router from '@/router';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
-const { questions, fetchQuestions } = useQuestions();
+const { fetchQuestions } = useQuestions();
 const step = ref(0);
-const data = ref<Questionnaire>();
+const isLoading = ref(false);
 
 onMounted(async () => {
+    isLoading.value = true;
     await fetchQuestions();
-    console.log(questions.value);
-    data.value = questions.value;
+    isLoading.value = false;
 });
 
 const next = () => {
