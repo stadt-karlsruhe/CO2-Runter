@@ -1,6 +1,7 @@
 <template>
     <div
-        v-for="(item, index) in questionStore.category[props.categoryIndex].questions"
+        v-for="(item, index) in questionStore.category[props.categoryIndex]
+            .questions"
         :key="index"
         class="my-16"
     >
