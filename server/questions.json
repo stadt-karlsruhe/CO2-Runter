@@ -1,5 +1,5 @@
 {
-  "baseline": 1.12,
+  "baseline": 8.6,
   "category" : [
     {
       "name" : "Mobilität",
@@ -8,24 +8,24 @@
           "text" : "Wie häufig fahren Sie mit dem Auto in der Woche?",
           "replies" : [
             {
-              "text" : "Nie (< 20km)",
+              "text" : "Sehr selten (< 50km)",
               "value" : 0.0
             },
             {
-              "text" : "Wenig (20km - 50km)",
+              "text" : "Wenig (50km - 100km)",
               "value" : 0.67
             },
             {
-              "text" : "Durchschnittlich (50km - 75km)",
-              "value" : 1.75
+              "text" : "Durchschnittlich (100km - 200km)",
+              "value" : 1.1
             },
             {
-              "text" : "Viel (75km - 100km)",
-              "value" : 2.15
+              "text" : "Viel (200km - 300km)",
+              "value" : 1.9
             },
             {
-              "text" : "Sehr Viel (> 100km)",
-              "value" : 3.58
+              "text" : "Sehr Viel (> 300km)",
+              "value" : 2.23
             }
           ],
           "selected" : {
@@ -104,51 +104,49 @@
             },
             {
               "text" : "Häufig(70-100km)",
-              "value" : 0.2
+              "value" : -0.02
             },
             {
               "text" : "Sehr häufig(> 100km)",
-              "value" : 0.06
+              "value" : -0.08
             }
           ],
           "selected" : {
             "text" : "Wählen Sie eine Antwort",
             "value" : 0.0
-          },
-          "formula" : "function (value) { return value ; }"
+          }
         },
         {
-          "text" : "Wie viele Stunden pro Jahr verbringen Sie mit dem fliegen?",
+          "text" : "Wie häufig fliegen Sie im Jahr?",
           "replies" : [
             {
-              "text" : "Sehr selten (< 0h)",
-              "value" : 1.1
+              "text" : "Durchschnittlich (< 10h)",
+              "value" : 7.6
             },
             {
-              "text" : "Selten (0 - 250h)",
-              "value" : 32.4
+              "text" : "Mehrmals (10 - 30h)",
+              "value" : 10.6
             },
             {
-              "text" : "Durchschnittlich (250 - 500h)",
-              "value" : 36.0
+              "text" : "Oft (30 - 50h)",
+              "value" : 12.8
             },
             {
-              "text" : "Häufig (500 - 750h)",
-              "value" : 52.0
+              "text" : "Regelmäßig (50 - 100h)",
+              "value" : 14.6
             },
             {
-              "text" : "Sehr häufig(> 750h)",
-              "value" : 89.0
+              "text" : "Sehr häufig(> 100h)",
+              "value" : 19.5
             }
           ],
           "selected" : {
             "text" : "Wählen Sie eine Antwort",
             "value" : 0.0
-          },
-          "formula" : "function (value) { return value; }"
+          }
         }
       ],
-      "formula" : "function (value) { return ((value[0] * value[1] * value[2]) + value[3] + value[4]); }"
+      "formula" : "function (value) { return ((value[0] * value[1] * value[2]) + value[3] * (value[4]*0.9)); }"
     },
     {
       "name" : "Ernährung",
@@ -158,23 +156,23 @@
           "replies" : [
             {
               "text" : "Vegan",
-              "value" : 1.05
+              "value" : 1.77
             },
             {
               "text" : "Vegetarisch",
-              "value" : 1.30
+              "value" : 1.54
             },
             {
               "text" : "Fleischreduziert",
-              "value" : 1.66
+              "value" : 1.38
             },
             {
               "text" : "Mischkost",
-              "value" : 2.2
+              "value" : 1.1
             },
             {
               "text" : "Fleischbetont",
-              "value" : 2.55
+              "value" : 1.05
             }
           ],
           "selected" : {
@@ -187,23 +185,23 @@
           "replies" : [
             {
               "text": "Nie",
-              "value" : 0.05
+              "value" : -0.05
             },
             {
               "text": "Selten",
-              "value" : 0.02
-            },
-            {
-              "text": "Teilweise",
-              "value" : 0
-            },
-            {
-              "text": "Vorwiegend",
               "value" : -0.02
             },
             {
+              "text": "Teilweise",
+              "value" : 0.01
+            },
+            {
+              "text": "Vorwiegend",
+              "value" : 0.02
+            },
+            {
               "text": "Ausschließlich",
-              "value" : -0.05
+              "value" : 0.05
             }
           ],
           "selected" : {
@@ -216,23 +214,23 @@
           "replies": [
             {
               "text": "Nie",
-              "value" : 0.05
+              "value" : -0.05
             },
             {
               "text": "Selten",
-              "value" : 0.02
-            },
-            {
-              "text": "Teilweise",
-              "value" : 0
-            },
-            {
-              "text": "Vorwiegend",
               "value" : -0.02
             },
             {
+              "text": "Teilweise",
+              "value" : 0.01
+            },
+            {
+              "text": "Vorwiegend",
+              "value" : 0.02
+            },
+            {
               "text": "Ausschließlich",
-              "value" : -0.05
+              "value" : 0.05
             }
           ],
           "selected": {
@@ -249,19 +247,19 @@
             },
             {
               "text": "Selten",
-              "value" : -0.015
+              "value" : 0.015
             },
             {
               "text": "Teilweise",
-              "value" : -0.03
+              "value" : 0.03
             },
             {
               "text": "Vorwiegend",
-              "value" : -0.045
+              "value" : 0.045
             },
             {
               "text": "Ausschließlich",
-              "value" : -0.06
+              "value" : 0.06
             }
           ],
           "selected": {
@@ -270,7 +268,7 @@
           }
         }
       ],
-      "formula": "function (values) { return (values[0] + (values[0] * (values[1] + values[2] + values[3]))); }"
+      "formula": "function (values) { return - (values[0] + (values[0] * (values[1] + values[2] + values[3]))); }"
     },
     {
       "name" : "Wohnen",
@@ -305,7 +303,7 @@
           "replies": [
             {
               "text" : "Nur ich",
-              "value" : 1
+              "value" : 8
             },
             {
               "text" : "Kleinfamilie (2-4 Personen)",
@@ -317,7 +315,7 @@
             },
             {
               "text" : "WG oder Großfamilie (6+ Personen)",
-              "value" : 8
+              "value" : 1
             }
           ],
           "selected": {
@@ -342,7 +340,7 @@
             },
             {
               "text" : "ab 2011",
-              "value" : -0.22
+              "value" : -0.01
             },
             {
               "text" : "unbekannt",
@@ -375,7 +373,7 @@
             },
             {
               "text" : "Fossil",
-              "value" : 1.73
+              "value" : 1.01
             },
             {
               "text" : "Solarthermie",
@@ -387,7 +385,7 @@
             },
             {
               "text" : "Grünstrom",
-              "value" : 0.17
+              "value" : -6.8
             }
           ],
           "selected": {
@@ -400,11 +398,11 @@
           "replies": [
             {
               "text" : "Ökostrom",
-              "value" : 0.03
+              "value" : -2.89
             },
             {
               "text" : "Strommix",
-              "value" : 0.49
+              "value" : 1.49
             }
           ],
           "selected": {
@@ -413,7 +411,7 @@
           }
         }
       ],
-      "formula" : "function (value) { return (value[0] + value[1] + value[2] + value[3] + value[4]); }"
+      "formula" : "function (value) { return (value[0] + value[1] + value[2] + (value[3]*1.2 - 0.3) + value[4])*0.2; }"
     },
     {
       "name" : "Konsum",
@@ -486,26 +484,24 @@
           "replies" : [
             {
               "text" : "Niedrig (< 250€)",
-              "value" : 100.0
+              "value" : 100
             },
             {
               "text" : "Durchschnittlich (250 - 700€)",
-              "value" : 500
+              "value" : 175
             },
             {
               "text" : "Hoch (> 700€)",
-              "value" : 750
+              "value" : 250
             }
           ],
           "selected": {
             "text" : "Wählen Sie eine Antwort",
             "value" : 0.0
-          },
-          "formula": "function (value) { return value * 0.0058; }"
+          }
         }
       ],
-      "formula" : "function (value) { return (((value[0] + value[1] + value[2]) * value[3]) + value[3]); }"
+      "formula" : "function (value) { return (-2+((value[0] + value[1] + value[2]) * (value[3] * 0.0058)) + value[3]*0.0058); }"
     }
-  ],
-  "endFormula" : "function (value) { return (value[0] * value [1] * value[2] * value[3]); }"
+  ]
 }
