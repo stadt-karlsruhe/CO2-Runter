@@ -189,7 +189,7 @@
 
             <template #next>
                 <v-btn v-if="step !== 3" @click="next">Weiter</v-btn>
-                <v-btn v-if="step === 3" @click="ende()">Ende</v-btn>
+                <v-btn v-if="step === 3" @click="ende()" :disabled="false">Ende</v-btn>
             </template>
         </v-stepper-actions>
     </v-stepper>
@@ -202,8 +202,10 @@ import { QuestionsIndices } from '@/constants/QuestionsIndices';
 import useQuestions from '@/composables/useQuestions';
 import router from '@/router';
 import { useRoute } from 'vue-router';
+import { useTotalCo2EmissionStore } from '@/store/totalCo2Emission';
 
 const route = useRoute();
+const totalCo2EmissionStore = useTotalCo2EmissionStore();
 const { fetchQuestions } = useQuestions();
 const step = ref(0);
 const isLoading = ref(false);
@@ -211,6 +213,7 @@ const isLoading = ref(false);
 onMounted(async () => {
     isLoading.value = true;
     await fetchQuestions();
+    totalCo2EmissionStore.calculateCo2ValuesPerCategory()
     isLoading.value = false;
 });
 
