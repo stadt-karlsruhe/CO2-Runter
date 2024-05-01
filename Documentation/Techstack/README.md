@@ -1,5 +1,6 @@
 The Following Technologies are used in this repository
-* React
+
+* Vue.js
 * Node.js
 * Docker
 * MySQL
