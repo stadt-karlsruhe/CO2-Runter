@@ -1,17 +1,15 @@
 <template>
     <v-container>
         <v-row
-            class="d-flex flex-column-reverse flex-md-row my-16 justify-center"
+            class="d-flex flex-column-reverse flex-md-row mt-16 justify-center"
         >
-            <v-col cols="12" md="7" class="text-center text-md-start">
-                <CurrentCO2 />
-            </v-col>
-            <v-col class="d-flex align-center justify-center" cols="12" md="5">
-                <v-img
-                    width="360px"
-                    height="200px"
-                    src="../assets/undraw_nature_m5ll.svg"
-                />
+            <v-col cols="12" class="text-center text-md-start">
+                <v-card class="text-primary" elevation="0">
+                    <v-card-title class="text-h5 text-primary-darken-1"
+                        >Dein aktueller CO₂-Fußabdruck beträgt:
+                        {{ totalCo2EmissionStore.total }}</v-card-title
+                    >
+                </v-card>
             </v-col>
         </v-row>
 
@@ -25,7 +23,6 @@
 
 <script setup lang="ts">
 import QuestionStepper from '@/components/Calculator/QuestionStepper.vue';
-import CurrentCO2 from '@/components/Calculator/CurrentCO2.vue';
 import { onMounted } from 'vue';
 import useQuestions from '@/composables/useQuestions';
 import { useTotalCo2EmissionStore } from '@/store/totalCo2Emission';

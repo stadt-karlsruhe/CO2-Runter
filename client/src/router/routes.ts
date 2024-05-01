@@ -36,16 +36,10 @@ export const routes = [
                 component: () => import('@/views/CalculatorView.vue'),
             },
             {
-                path: 'summary',
+                path: 'submitted',
                 children: [
                     {
                         path: '',
-                        name: 'Summary',
-                        component: () =>
-                            import('@/views/CalculatorSummaryView.vue'),
-                    },
-                    {
-                        path: 'submitted',
                         name: 'Fertig',
                         component: () =>
                             import('@/views/CalculatorFinishedView.vue'),
