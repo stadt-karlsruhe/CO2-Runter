@@ -26,6 +26,17 @@
 <script setup lang="ts">
 import QuestionStepper from '@/components/Calculator/QuestionStepper.vue';
 import CurrentCO2 from '@/components/Calculator/CurrentCO2.vue';
+import { onMounted } from 'vue';
+import useQuestions from '@/composables/useQuestions';
+import { useTotalCo2EmissionStore } from '@/store/totalCo2Emission';
+
+const { fetchQuestions } = useQuestions();
+const totalCo2EmissionStore = useTotalCo2EmissionStore();
+
+onMounted(async () => {
+    await fetchQuestions();
+    totalCo2EmissionStore.calculateCo2ValuesPerCategory();
+});
 </script>
 
 <style scoped></style>

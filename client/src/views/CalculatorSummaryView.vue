@@ -150,6 +150,7 @@ import { CityDistrict } from '@/types/District';
 import router from '@/router';
 import useAuth from '@/composables/useAuth';
 import LoginForm from '@/components/LoginRegistrationComponents/LoginForm.vue';
+import useQuestions from '@/composables/useQuestions';
 
 const { categories, updateDataSend } = useTotalCo2EmissionStore();
 const auth = useAuth();
@@ -218,8 +219,6 @@ const submitCo2EmissionsUpload = async () => {
 const continueWithoutUpload = () => {
     updateDataSend(false);
     router.push('/rechner/summary/submitted');
-    // https://github.com/stadt-karlsruhe/CO2-Runter/blob/main/client/src/components/DistrictGroupChoice/ChoiceScreen.js
-    // TODO: Properly implement that you save data for each category!
 };
 
 const fetchCityDistricts = async () => {
