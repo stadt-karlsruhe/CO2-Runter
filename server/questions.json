@@ -9,29 +9,30 @@
           "replies" : [
             {
               "text" : "Sehr selten (< 50km)",
-              "value" : 0.0
+              "value" : 25
             },
             {
               "text" : "Wenig (50km - 100km)",
-              "value" : 0.67
+              "value" : 75
             },
             {
               "text" : "Durchschnittlich (100km - 200km)",
-              "value" : 1.1
+              "value" : 150
             },
             {
               "text" : "Viel (200km - 300km)",
-              "value" : 1.9
+              "value" : 250
             },
             {
               "text" : "Sehr Viel (> 300km)",
-              "value" : 2.23
+              "value" : 350
             }
           ],
           "selected" : {
             "text" : "Durchschnittlich (100km - 200km)",
-            "value" : 1.1
-          }
+            "value" : 150
+          },
+          "formula": "function (value) { return value/100 }"
         },
         {
           "text" : "Welchen Kraftstoff nutzen Sie?",
@@ -78,8 +79,8 @@
               "value" : 8.78
             },
             {
-              "text" : "Durchschnittlich (5-7 l/km)",
-              "value" : 6.7
+              "text" : "Sehr hoch (> 12 l/km)",
+              "value" : 13.0
             }
           ],
           "selected" : {
@@ -92,61 +93,63 @@
           "replies" : [
             {
               "text" : "Sehr selten (< 30km)",
-              "value" : 0.69
+              "value" : 15
             },
             {
               "text" : "Selten (30-50km)",
-              "value" : 0.45
+              "value" : 40
             },
             {
               "text" : "Durchschnittlich (50-70km)",
-              "value" : 0.3
+              "value" : 60
             },
             {
               "text" : "Häufig(70-100km)",
-              "value" : -0.02
+              "value" : 85
             },
             {
               "text" : "Sehr häufig(> 100km)",
-              "value" : -0.08
+              "value" : 125
             }
           ],
           "selected" : {
             "text" : "Durchschnittlich (50-70km)",
-            "value" : 0.3
-          }
+            "value" : 60
+          },
+          "formula": "function (value) { return value * 0.000049 * 52; }"
         },
         {
           "text" : "Wie häufig fliegen Sie im Jahr?",
           "replies" : [
             {
               "text" : "Durchschnittlich (< 10h)",
-              "value" : 7.6
+              "value" : 10
             },
             {
               "text" : "Mehrmals (10 - 30h)",
-              "value" : 10.6
+              "value" : 20
             },
             {
               "text" : "Oft (30 - 50h)",
-              "value" : 12.8
+              "value" : 40
             },
             {
               "text" : "Regelmäßig (50 - 100h)",
-              "value" : 14.6
+              "value" : 75
             },
             {
               "text" : "Sehr häufig(> 100h)",
-              "value" : 19.5
+              "value" : 150
             }
           ],
           "selected" : {
             "text" : "Durchschnittlich (< 10h)",
-            "value" : 7.6
-          }
+            "value" : 10
+          },
+          "formula": "function (value) { return value * 0.15; }"
         }
       ],
-      "formula" : "function (value) { return ((value[0] * value[1] * value[2]) + value[3] * (value[4]*0.9)); }"
+      "formula" : "function (value) { return ((value[0] * value[1] * value[2]) + value[3] + value[4]); }"
     },
     {
       "name" : "Ernährung",
@@ -156,28 +159,28 @@
           "replies" : [
             {
               "text" : "Vegan",
-              "value" : 1.77
+              "value" : 1.05
             },
             {
               "text" : "Vegetarisch",
-              "value" : 1.54
+              "value" : 1.30
             },
             {
               "text" : "Fleischreduziert",
-              "value" : 1.38
+              "value" : 1.66
             },
             {
               "text" : "Mischkost",
-              "value" : 1.1
+              "value" : 2.2
             },
             {
               "text" : "Fleischbetont",
-              "value" : 1.05
+              "value" : 2.55
             }
           ],
           "selected" : {
             "text" : "Mischkost",
-            "value" : 1.1
+            "value" : 2.2
           }
         },
         {
@@ -185,28 +188,28 @@
           "replies" : [
             {
               "text": "Nie",
-              "value" : -0.05
+              "value" : 0.05
             },
             {
               "text": "Selten",
-              "value" : -0.02
-            },
-            {
-              "text": "Teilweise",
-              "value" : 0.01
-            },
-            {
-              "text": "Vorwiegend",
               "value" : 0.02
             },
             {
+              "text": "Teilweise",
+              "value" : 0
+            },
+            {
+              "text": "Vorwiegend",
+              "value" : -0.02
+            },
+            {
               "text": "Ausschließlich",
-              "value" : 0.05
+              "value" : -0.05
             }
           ],
           "selected" : {
             "text": "Nie",
-            "value" : -0.05
+            "value" : 0.05
           }
         },
         {
@@ -214,28 +217,28 @@
           "replies": [
             {
               "text": "Nie",
-              "value" : -0.05
+              "value" : 0.05
             },
             {
               "text": "Selten",
-              "value" : -0.02
-            },
-            {
-              "text": "Teilweise",
-              "value" : 0.01
-            },
-            {
-              "text": "Vorwiegend",
               "value" : 0.02
             },
             {
+              "text": "Teilweise",
+              "value" : 0
+            },
+            {
+              "text": "Vorwiegend",
+              "value" : -0.02
+            },
+            {
               "text": "Ausschließlich",
-              "value" : 0.05
+              "value" : -0.05
             }
           ],
           "selected": {
             "text": "Teilweise",
-            "value" : 0.01
+            "value" : 0
           }
         },
         {
@@ -247,19 +250,19 @@
             },
             {
               "text": "Selten",
-              "value" : 0.015
+              "value" : -0.015
             },
             {
               "text": "Teilweise",
-              "value" : 0.03
+              "value" : -0.03
             },
             {
               "text": "Vorwiegend",
-              "value" : 0.045
+              "value" : -0.045
             },
             {
               "text": "Ausschließlich",
-              "value" : 0.06
+              "value" : -0.06
             }
           ],
           "selected": {
@@ -278,24 +281,24 @@
           "replies": [
             {
               "text": "Wenig (< 20qm)",
-              "value" : 0.8
+              "value" : 10
             },
             {
               "text": "Durchschnittlich (20 - 70qm)",
-              "value" : 1
+              "value" : 45
             },
             {
               "text": "Viel (70 - 200qm)",
-              "value" : 1.53
+              "value" : 135
             },
             {
               "text": "Sehr viel (>200 qm)",
-              "value" : 2.44
+              "value" : 220
             }
           ],
           "selected": {
             "text": "Durchschnittlich (20 - 70qm)",
-            "value" : 1
+            "value" : 45
           }
         },
         {
@@ -303,7 +306,7 @@
           "replies": [
             {
               "text" : "Nur ich",
-              "value" : 8
+              "value" : 1
             },
             {
               "text" : "Kleinfamilie (2-4 Personen)",
@@ -315,12 +318,12 @@
             },
             {
               "text" : "WG oder Großfamilie (6+ Personen)",
-              "value" : 1
+              "value" : 8
             }
           ],
           "selected": {
             "text" : "Nur ich",
-            "value" : 8
+            "value" : 1
           }
         },
         {
@@ -340,7 +343,7 @@
             },
             {
               "text" : "ab 2011",
-              "value" : -0.01
+              "value" : -0.22
             },
             {
               "text" : "unbekannt",
@@ -373,7 +376,7 @@
             },
             {
               "text" : "Fossil",
-              "value" : 1.01
+              "value" : 1.73
             },
             {
               "text" : "Solarthermie",
@@ -385,12 +388,12 @@
             },
             {
               "text" : "Grünstrom",
-              "value" : -6.8
+              "value" : 0.17
             }
           ],
           "selected": {
             "text" : "Fossil",
-            "value" : 1.01
+            "value" : 1.73
           }
         },
         {
@@ -398,20 +401,20 @@
           "replies": [
             {
               "text" : "Ökostrom",
-              "value" : -2.89
+              "value" : 0.03
             },
             {
               "text" : "Strommix",
-              "value" : 1.49
+              "value" : 0.49
             }
           ],
           "selected": {
             "text" : "Strommix",
-            "value" : 1.49
+            "value" : 0.49
           }
         }
       ],
-      "formula" : "function (value) { return (value[0] + value[1] + value[2] + (value[3]*1.2 - 0.3) + value[4])*0.2; }"
+      "formula" : "function (value) { return (0.7 * (0.0236 * (value[0] / value[1]) - 1.235) + value[2] + value[3] + value[4]); }"
     },
     {
       "name" : "Konsum",
@@ -421,7 +424,7 @@
           "replies": [
             {
               "text" : "sparsam",
-              "value" : -0.05
+              "value" : -0.07
             },
             {
               "text" : "normal",
@@ -429,7 +432,7 @@
             },
             {
               "text" : "großzügig",
-              "value" : 0.05
+              "value" : 0.07
             }
           ],
           "selected": {
@@ -442,7 +445,7 @@
           "replies": [
             {
               "text" : "Langlebigkeit",
-              "value" : -0.05
+              "value" : -0.07
             },
             {
               "text" : "Funktionalität",
@@ -450,7 +453,7 @@
             },
             {
               "text" : "Günstigster Preis",
-              "value" : 0.05
+              "value" : 0.07
             }
           ],
           "selected": {
@@ -462,16 +465,16 @@
           "text": "Wie oft kaufen Sie gebrauchte/secondhand Produkte?",
           "replies": [
             {
-              "text" : "Oft",
-              "value" : -0.05
+              "text" : "Nie",
+              "value" : 0.07
             },
             {
               "text" : "Manchmal",
               "value" : 0
             },
             {
-              "text" : "Nie",
-              "value" : 0.05
+              "text" : "Oft",
+              "value" : -0.07
             }
           ],
           "selected": {
@@ -484,24 +487,24 @@
           "replies" : [
             {
               "text" : "Niedrig (< 250€)",
-              "value" : 100
+              "value" : 125
             },
             {
               "text" : "Durchschnittlich (250 - 700€)",
-              "value" : 175
+              "value" : 500
             },
             {
               "text" : "Hoch (> 700€)",
-              "value" : 250
+              "value" : 900
             }
           ],
           "selected": {
-            "text" : "Niedrig (< 250€)",
-            "value" : 100
+            "text" : "Durchschnittlich (250 - 700€)",
+            "value" : 250
           }
         }
       ],
-      "formula" : "function (value) { return (((value[0] + value[1] + value[2]) * (value[3] * 0.0058)) + value[3]*0.0058); }"
+      "formula" : "function (values) { return 2.48 + ((values[0] + values[1] + values[2]) * Math.pow((Math.log10(values[3]/125) / Math.log10(6)), 2));  }"
     }
   ]
 }

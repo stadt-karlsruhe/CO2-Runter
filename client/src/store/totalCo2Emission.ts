@@ -31,7 +31,7 @@ export const useTotalCo2EmissionStore = defineStore('totalCo2Emission', {
                     this.categories.mobility +
                     this.categories.nutrition);
 
-            this.total = Math.round(actualTotal * 100) / 100
+            this.total = Math.round(actualTotal * 100) / 100;
         },
         calculateCo2ValuesPerCategory() {
             const questionStore = useQuestionStore();
@@ -40,9 +40,30 @@ export const useTotalCo2EmissionStore = defineStore('totalCo2Emission', {
             // calculate the total co2 emission per category
             const categoryTotals = questionStore.category.map((category) => {
                 // Collect all selected question values within the category
-                const questionValues = category.questions.map(
-                    (question) => question.selected.value
-                );
+                const questionValues = category.questions.map((question) => {
+                    if (question.formula) {
+                        let result;
+                        try {
+                            const calculateQuestionValue = eval(
+                                `(${question.formula})`
+                            );
+                            result = calculateQuestionValue(
+                                question.selected.value
+                            );
+                        } catch (e) {
+                            console.error(
+                                'Error evaluating formula:',
+                                question.formula,
+                                'Error:',
+                                e
+                            );
+                        }
+                        return result;
+                    } else {
+                        return question.selected.value;
+                    }
+                });
+
                 console.log('Selected Values per Category', questionValues);
                 // Convert string formula to a callable function and evaluate it
                 const calculateCategoryTotal = eval(`(${category.formula})`);
@@ -65,8 +86,6 @@ export const useTotalCo2EmissionStore = defineStore('totalCo2Emission', {
                 categoryTotals[QuestionsIndices.LIVING].totalEmission;
 
             console.log('Category Totals', this.categories);
-
-            console.log('Base', this.base);
 
             this.recalculateTotalCo2Emission();
 
