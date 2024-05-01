@@ -47,13 +47,7 @@
                         </v-col>
                     </v-row>
 
-                    <v-row class="my-16">
-                        <v-col>
-                            <v-divider></v-divider>
-                        </v-col>
-                    </v-row>
-
-                    <v-row class="my-16">
+                    <v-row>
                         <v-col>
                             <QuestionsBlock
                                 v-if="!isLoading"
@@ -94,13 +88,7 @@
                         </v-col>
                     </v-row>
 
-                    <v-row class="my-16">
-                        <v-col>
-                            <v-divider></v-divider>
-                        </v-col>
-                    </v-row>
-
-                    <v-row class="my-16">
+                    <v-row>
                         <v-col>
                             <QuestionsBlock
                                 v-if="!isLoading"
@@ -141,13 +129,7 @@
                         </v-col>
                     </v-row>
 
-                    <v-row class="my-16">
-                        <v-col>
-                            <v-divider></v-divider>
-                        </v-col>
-                    </v-row>
-
-                    <v-row class="my-16">
+                    <v-row>
                         <v-col>
                             <QuestionsBlock
                                 v-if="!isLoading"
@@ -188,13 +170,7 @@
                         </v-col>
                     </v-row>
 
-                    <v-row class="my-16">
-                        <v-col>
-                            <v-divider></v-divider>
-                        </v-col>
-                    </v-row>
-
-                    <v-row class="my-16">
+                    <v-row>
                         <v-col>
                             <QuestionsBlock
                                 v-if="!isLoading"
@@ -212,13 +188,11 @@
             </template>
 
             <template #next>
-                <v-btn @click="next">Weiter</v-btn>
+                <v-btn v-if="step !== 3" @click="next">Weiter</v-btn>
+                <v-btn v-if="step === 3" @click="ende()">Ende</v-btn>
             </template>
         </v-stepper-actions>
     </v-stepper>
-    <div class="text-end mr-8">
-        <v-btn @click="ende()" :disabled="step !== 3">Ende</v-btn>
-    </div>
 </template>
 
 <script lang="ts" setup>

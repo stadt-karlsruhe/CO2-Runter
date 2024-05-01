@@ -67,19 +67,12 @@ use([
     CanvasRenderer,
 ]);
 
-const { categories, dataSend, total } = useTotalCo2EmissionStore();
+const { categories, dataSend, total, base } = useTotalCo2EmissionStore();
 const chartOptions = ref<any>(null);
 const loadingOptions = {
     text: 'Loading…',
     color: '#4ea397',
     maskColor: 'rgba(255, 255, 255, 0.4)',
-};
-
-const updateChartOptions = () => {
-    const data = getData();
-    if (data) {
-        chartOptions.value = data;
-    }
 };
 
 function getData() {
@@ -99,6 +92,10 @@ function getData() {
                 radius: '55%',
                 center: ['50%', '60%'],
                 data: [
+                    {
+                        value: base,
+                        name: `Infrastruktur: ${base}`,
+                    },
                     {
                         value: categories.mobility,
                         name: `Mobilität: ${categories.mobility}`,

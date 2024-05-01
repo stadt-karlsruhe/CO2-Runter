@@ -3,17 +3,15 @@
         v-for="(item, index) in questionStore.category[props.categoryIndex]
             .questions"
         :key="index"
-        class="my-16"
+        class="my-4"
     >
-        <h3 class="text-center">{{ item.text }}</h3>
-
         <v-select
             v-model="item.selected"
             :items="item.replies"
             item-title="text"
             placeholder="Wählen Sie eine Option"
+            :label="item.text"
             variant="outlined"
-            class="mt-16"
             :return-object="true"
             @update:modelValue="updateTotalEmissions(index)"
         >
@@ -24,14 +22,6 @@
                 ></v-list-item>
             </template>
         </v-select>
-
-        <!--        <v-alert type="info" variant="tonal" tex>-->
-        <!--            <template #title> Titel für Tips und Tricks </template>-->
-        <!--            <template #text>-->
-        <!--                Beschriebung zu Tips und Tricks als auch eine Verlinkung die-->
-        <!--                dann gemacht werden muss-->
-        <!--            </template>-->
-        <!--        </v-alert>-->
     </div>
 </template>
 
@@ -46,7 +36,7 @@ const props = defineProps<{
 const questionStore = useQuestionStore();
 const totalCo2EmissionStore = useTotalCo2EmissionStore();
 
-const updateTotalEmissions = (newVal: any) => {
+const updateTotalEmissions = () => {
     console.log(questionStore.category);
     console.log(totalCo2EmissionStore.calculateCo2ValuesPerCategory());
 };
