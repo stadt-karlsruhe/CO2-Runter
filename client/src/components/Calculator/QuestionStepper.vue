@@ -189,7 +189,9 @@
 
             <template #next>
                 <v-btn v-if="step !== 3" @click="next">Weiter</v-btn>
-                <v-btn v-if="step === 3" @click="ende()" :disabled="false">Ende</v-btn>
+                <v-btn v-if="step === 3" @click="ende()" :disabled="false"
+                    >Ende</v-btn
+                >
             </template>
         </v-stepper-actions>
     </v-stepper>
@@ -213,7 +215,7 @@ const isLoading = ref(false);
 onMounted(async () => {
     isLoading.value = true;
     await fetchQuestions();
-    totalCo2EmissionStore.calculateCo2ValuesPerCategory()
+    totalCo2EmissionStore.calculateCo2ValuesPerCategory();
     isLoading.value = false;
 });
 
