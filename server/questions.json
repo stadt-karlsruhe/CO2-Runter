@@ -1,5 +1,5 @@
 {
-  "baseline": 8.6,
+  "baseline": 1.12,
   "category" : [
     {
       "name" : "Mobilität",
@@ -29,8 +29,8 @@
             }
           ],
           "selected" : {
-            "text" : " Wählen Sie eine Antwort ",
-            "value" : 0.0
+            "text" : "Durchschnittlich (100km - 200km)",
+            "value" : 1.1
           }
         },
         {
@@ -54,8 +54,8 @@
             }
           ],
           "selected" : {
-            "text" : "Wählen Sie eine Antwort",
-            "value" : 0.0
+            "text" : "Benzin",
+            "value" : 0.0027
           }
         },
         {
@@ -78,13 +78,13 @@
               "value" : 8.78
             },
             {
-              "text" : "Sehr hoch (> 12 l/km)",
-              "value" : 11.75
+              "text" : "Durchschnittlich (5-7 l/km)",
+              "value" : 6.7
             }
           ],
           "selected" : {
-            "text" : "Wählen Sie eine Antwort",
-            "value" : 0.0
+            "text" : "Durchschnittlich (5-7 l/km)",
+            "value" : 6.7
           }
         },
         {
@@ -112,8 +112,8 @@
             }
           ],
           "selected" : {
-            "text" : "Wählen Sie eine Antwort",
-            "value" : 0.0
+            "text" : "Durchschnittlich (50-70km)",
+            "value" : 0.3
           }
         },
         {
@@ -141,8 +141,8 @@
             }
           ],
           "selected" : {
-            "text" : "Wählen Sie eine Antwort",
-            "value" : 0.0
+            "text" : "Durchschnittlich (< 10h)",
+            "value" : 7.6
           }
         }
       ],
@@ -176,8 +176,8 @@
             }
           ],
           "selected" : {
-            "text" : "Wählen Sie eine Antwort",
-            "value" : 0.0
+            "text" : "Mischkost",
+            "value" : 1.1
           }
         },
         {
@@ -205,8 +205,8 @@
             }
           ],
           "selected" : {
-            "text": "Wählen Sie eine Antwort",
-            "value" : 0.0
+            "text": "Nie",
+            "value" : -0.05
           }
         },
         {
@@ -234,8 +234,8 @@
             }
           ],
           "selected": {
-            "text": "Wählen Sie eine Antwort",
-            "value" : 0.0
+            "text": "Teilweise",
+            "value" : 0.01
           }
         },
         {
@@ -263,12 +263,12 @@
             }
           ],
           "selected": {
-            "text": "Wählen Sie eine Antwort",
+            "text": "Nie",
             "value" : 0.0
           }
         }
       ],
-      "formula": "function (values) { return - (values[0] + (values[0] * (values[1] + values[2] + values[3]))); }"
+      "formula": "function (values) { return (values[0] + (values[0] * (values[1] + values[2] + values[3]))); }"
     },
     {
       "name" : "Wohnen",
@@ -294,8 +294,8 @@
             }
           ],
           "selected": {
-            "text": "Wählen Sie eine Antwort",
-            "value" : 0.0
+            "text": "Durchschnittlich (20 - 70qm)",
+            "value" : 1
           }
         },
         {
@@ -319,8 +319,8 @@
             }
           ],
           "selected": {
-            "text" : "Wählen Sie eine Antwort",
-            "value" : 0.0
+            "text" : "Nur ich",
+            "value" : 8
           }
         },
         {
@@ -348,8 +348,8 @@
             }
           ],
           "selected": {
-            "text" : "Wählen Sie eine Antwort",
-            "value" : 0.0
+            "text" : "1978-1994",
+            "value" : 0.53
           }
         },
         {
@@ -389,8 +389,8 @@
             }
           ],
           "selected": {
-            "text" : "Wählen Sie eine Antwort",
-            "value" : 0.0
+            "text" : "Fossil",
+            "value" : 1.01
           }
         },
         {
@@ -406,8 +406,8 @@
             }
           ],
           "selected": {
-            "text" : "Wählen Sie eine Antwort",
-            "value" : 0.0
+            "text" : "Strommix",
+            "value" : 1.49
           }
         }
       ],
@@ -433,7 +433,7 @@
             }
           ],
           "selected": {
-            "text" : "Wählen Sie eine Antwort",
+            "text" : "normal",
             "value" : 0.0
           }
         },
@@ -454,8 +454,8 @@
             }
           ],
           "selected": {
-            "text" : "Wählen Sie eine Antwort",
-            "value" : 0.0
+            "text" : "Funktionalität",
+            "value" : 0
           }
         },
         {
@@ -475,8 +475,8 @@
             }
           ],
           "selected": {
-            "text" : "Wählen Sie eine Antwort",
-            "value" : 0.0
+            "text" : "Manchmal",
+            "value" : 0
           }
         },
         {
@@ -496,12 +496,12 @@
             }
           ],
           "selected": {
-            "text" : "Wählen Sie eine Antwort",
-            "value" : 0.0
+            "text" : "Niedrig (< 250€)",
+            "value" : 100
           }
         }
       ],
-      "formula" : "function (value) { return (-2+((value[0] + value[1] + value[2]) * (value[3] * 0.0058)) + value[3]*0.0058); }"
+      "formula" : "function (value) { return (((value[0] + value[1] + value[2]) * (value[3] * 0.0058)) + value[3]*0.0058); }"
     }
   ]
 }
