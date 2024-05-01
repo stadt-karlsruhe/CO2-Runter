@@ -38,7 +38,7 @@ onMounted(async () => {
 
     // Check if there was an error with the fetch request
     if (error.value) {
-        error.value = 'An error occurred while fetching data.';
+        fetchError.value = 'An error occurred while fetching data.';
     } else {
         totalCo2Footprint.value = data.value[0].total;
     }
