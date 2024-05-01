@@ -24,12 +24,14 @@ export const useTotalCo2EmissionStore = defineStore('totalCo2Emission', {
             this.dataSend = newValue;
         },
         recalculateTotalCo2Emission() {
-            this.total =
+            const actualTotal =
                 this.base +
                 (this.categories.consume +
                     this.categories.housing +
                     this.categories.mobility +
                     this.categories.nutrition);
+
+            this.total = Math.round(actualTotal * 100) / 100
         },
         calculateCo2ValuesPerCategory() {
             const questionStore = useQuestionStore();
@@ -63,6 +65,8 @@ export const useTotalCo2EmissionStore = defineStore('totalCo2Emission', {
                 categoryTotals[QuestionsIndices.LIVING].totalEmission;
 
             console.log('Category Totals', this.categories);
+
+            console.log('Base', this.base);
 
             this.recalculateTotalCo2Emission();
 
