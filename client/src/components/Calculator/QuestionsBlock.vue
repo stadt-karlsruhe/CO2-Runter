@@ -13,7 +13,7 @@
             :label="item.text"
             variant="outlined"
             :return-object="true"
-            @update:modelValue="updateTotalEmissions(index)"
+            @update:modelValue="updateTotalEmissions()"
         >
             <template v-slot:item="{ props, item }">
                 <v-list-item
