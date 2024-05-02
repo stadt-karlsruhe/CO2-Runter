@@ -9,7 +9,7 @@
                 {{ error }}
             </v-alert>
 
-            <div v-if="footprintsData.length > 0 && averageData.length > 0 && groups.length > 0">
+            <div v-if="footprintsData.length > 0 && averageData.length > 0">
                 <v-chart
                     v-if="chartOptions"
                     :option="chartOptions!"

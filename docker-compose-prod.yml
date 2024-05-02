@@ -60,3 +60,13 @@ services:
     volumes:
       - /app/node_modules
       - ./client:/app
+
+  adminer:
+    image: adminer:latest
+    restart: unless-stopped
+    ports:
+      - 8000:8080
+    depends_on:
+      - mysql_db
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql_db

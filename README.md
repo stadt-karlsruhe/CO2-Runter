@@ -100,7 +100,9 @@ Follow these steps to build the application for production:
     docker compose -f docker-compose-prod.yml up --build
     ```
 3. To log in, use `mysql_db` as the server, `root` as the username, and the new password.
-4. Access the application at `http://localhost:9001/`.
+4. Or Log into Adminer on `http://localhost:8000/` and use the new password.
+5. Then import the `loader-new.sql` file into the database over the SQL command query box. (As described previously)
+6. Access the application at `http://localhost:9001/`.
 
 ## Contribution Workflow
 
