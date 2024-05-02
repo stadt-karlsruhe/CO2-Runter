@@ -9,46 +9,53 @@
                 {{ error }}
             </v-alert>
 
-            <v-chart
-                v-if="chartOptions"
-                :option="chartOptions!"
-                autoresize
-                :loading="isLoading"
-                :loadingOptions="loadingOptions"
-                style="height: 600px; width: 100%"
-            />
+            <div v-if="footprintsData.length > 0 && averageData.length > 0 && groups.length > 0">
+                <v-chart
+                    v-if="chartOptions"
+                    :option="chartOptions!"
+                    autoresize
+                    :loading="isLoading"
+                    :loadingOptions="loadingOptions"
+                    style="height: 600px; width: 100%"
+                />
 
-            <v-select
-                v-model="selectedGroups"
-                :items="groups.map((group) => group.groupname)"
-                :multiple="true"
-                variant="outlined"
-                label="Angezeigte Gruppen wählen"
-                @update:modelValue="updateChartOptions()"
-                hint="Falls die Gruppe(n) keine Datenanzeigt, bedeutet das lediglich, dass die Gruppe(n) noch keinen CO2-Fußabdruck gesetzt hat."
-                :persistent-hint="true"
-            />
+                <v-select
+                    v-model="selectedGroups"
+                    :items="groups.map((group) => group.groupname)"
+                    :multiple="true"
+                    variant="outlined"
+                    label="Angezeigte Gruppen wählen"
+                    @update:modelValue="updateChartOptions()"
+                    hint="Falls die Gruppe(n) keine Datenanzeigt, bedeutet das lediglich, dass die Gruppe(n) noch keinen CO2-Fußabdruck gesetzt hat."
+                    :persistent-hint="true"
+                />
 
-            <v-card class="pa-4" variant="flat">
-                <v-card-title>Du findest eine Gruppe nicht?</v-card-title>
+                <v-card class="pa-4" variant="flat">
+                    <v-card-title>Du findest eine Gruppe nicht?</v-card-title>
 
-                <v-card-text>
-                    Wenn du nicht nicht die Gruppe siehst zu der du gehörst,
-                    dann kannst du sie erneut hinzufügen, indem du zum
-                    Gruppensystem gehst und dich erneut hinzufügst.
-                </v-card-text>
+                    <v-card-text>
+                        Wenn du nicht nicht die Gruppe siehst zu der du gehörst,
+                        dann kannst du sie erneut hinzufügen, indem du zum
+                        Gruppensystem gehst und dich erneut hinzufügst.
+                    </v-card-text>
 
-                <v-btn
-                    variant="tonal"
-                    :rounded="true"
-                    color="info"
-                    append-icon="mdi-account-group-outline"
-                    size="large"
-                    to="/gruppensystem"
-                >
-                    Geh zum Gruppensystem
-                </v-btn>
-            </v-card>
+                    <v-btn
+                        variant="tonal"
+                        :rounded="true"
+                        color="info"
+                        append-icon="mdi-account-group-outline"
+                        size="large"
+                        to="/gruppensystem"
+                    >
+                        Geh zum Gruppensystem
+                    </v-btn>
+                </v-card>
+            </div>
+
+            <v-alert v-else icon="mdi-alert" type="error" variant="tonal">
+                Es gibt keine Daten zum anzeigen.
+            </v-alert>
+
         </v-card-text>
         <v-card-text v-else>
             <v-alert type="info" variant="tonal">
@@ -146,11 +153,11 @@ const fetchFootprintsForAllAvailableGroups = async () => {
                         Accept: 'application/json',
                         'Content-Type': 'application/json',
                     },
-                }
+                },
             );
             if (response.status === 200) {
                 const data = ref<GroupCo2FootprintEmissions>(
-                    await response.json()
+                    await response.json(),
                 );
 
                 if (
@@ -160,7 +167,7 @@ const fetchFootprintsForAllAvailableGroups = async () => {
                 ) {
                     const groupExists = footprintsData.value.some(
                         (groupFootprint: any) =>
-                            groupFootprint.name === data.value.name
+                            groupFootprint.name === data.value.name,
                     );
                     if (!groupExists) {
                         footprintsData.value = [
@@ -185,7 +192,7 @@ function getData() {
 
     const selectedData = selectedGroups.value.map((selectedGroup) => {
         const footprint = footprintsData.value.find(
-            (f) => f.name === selectedGroup
+            (f) => f.name === selectedGroup,
         );
 
         if (!footprint) {
@@ -201,14 +208,14 @@ function getData() {
 
     const selectedCategories = selectedGroups.value.map((selectedGroup) => {
         const footprint = footprintsData.value.find(
-            (f) => f.name === selectedGroup
+            (f) => f.name === selectedGroup,
         );
 
         return footprint ? footprint.name : 'Hat keine Daten';
     });
 
     const available_Categories = footprintsData.value[0].values.map(
-        (valueObj) => valueObj.category
+        (valueObj) => valueObj.category,
     );
 
     // extras
@@ -216,7 +223,7 @@ function getData() {
         averageData.value.map((valueObj) => ({
             category: valueObj.category,
             value: valueObj.value,
-        }))
+        })),
     );
     selectedCategories.push('Durchschnitt aller Beiträge');
 
@@ -275,7 +282,7 @@ function getData() {
             data: selectedData.map((selectedData: any) =>
                 selectedData && selectedData[index]?.value !== undefined
                     ? selectedData[index].value
-                    : 0
+                    : 0,
             ),
             label: {
                 show: true,

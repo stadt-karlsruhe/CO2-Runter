@@ -9,24 +9,29 @@
                 {{ error }}
             </v-alert>
 
-            <v-chart
-                v-if="chartOptions"
-                :option="chartOptions!"
-                autoresize
-                :loading="isLoading"
-                :loadingOptions="loadingOptions"
-                style="height: 600px; width: 100%"
-            />
+            <div v-if="footprintsData.length > 0 && averageData.length > 0">
+                <v-chart
+                    v-if="chartOptions"
+                    :option="chartOptions!"
+                    autoresize
+                    :loading="isLoading"
+                    :loadingOptions="loadingOptions"
+                    style="height: 600px; width: 100%"
+                />
 
-            <v-select
-                v-model="selectedFootprints"
-                :items="footprintsData.map((footprint) => footprint.name)"
-                :multiple="true"
-                variant="outlined"
-                label="Angezeigte Fußabdrücke wählen"
-                @update:modelValue="updateChartOptions()"
-            >
-            </v-select>
+                <v-select
+                    v-model="selectedFootprints"
+                    :items="footprintsData.map((footprint) => footprint.name)"
+                    :multiple="true"
+                    variant="outlined"
+                    label="Angezeigte Fußabdrücke wählen"
+                    @update:modelValue="updateChartOptions()"
+                />
+            </div>
+
+            <v-alert v-else icon="mdi-alert" type="error" variant="tonal">
+                Es gibt keine Daten zum anzeigen.
+            </v-alert>
         </v-card-text>
     </v-card>
 </template>
