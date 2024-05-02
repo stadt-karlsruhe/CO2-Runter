@@ -327,7 +327,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import QuestionsBlock from '@/components/Calculator/QuestionsBlock.vue';
 import { QuestionsIndices } from '@/constants/QuestionsIndices';
 import router from '@/router';
@@ -487,6 +487,12 @@ const checkUrlGroupCode = () => {
         }
     }
 };
+
+onMounted(async () => {
+    await fetchGroups();
+    await fetchCityDistricts();
+    checkUrlGroupCode();
+});
 </script>
 
 <style scoped></style>
