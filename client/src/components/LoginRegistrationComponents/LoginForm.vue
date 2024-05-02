@@ -14,6 +14,7 @@
                         variant="outlined"
                         label="Email"
                         v-model="email"
+                        type="email"
                         :rules="[
                             (val) =>
                                 emailRegex.test(val) ||

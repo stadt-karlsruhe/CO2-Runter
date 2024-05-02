@@ -20,6 +20,7 @@
                     <v-text-field
                         v-model="email"
                         label="Email"
+                        type="email"
                         :rules="[
                             (v) =>
                                 !!v ||
