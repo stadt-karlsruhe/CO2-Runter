@@ -30,7 +30,7 @@ export default function useAuth() {
                     isLoggedIn.value = true;
                 })
                 .catch((err) => {
-                    console.error(err);
+                    isLoggedIn.value = false;
                     (async () => {
                         await logout();
                     })();
@@ -101,5 +101,6 @@ export default function useAuth() {
         login,
         getCo2Token,
         setCo2Token,
+        executeFetch,
     };
 }

@@ -285,7 +285,7 @@
       "name" : "Wohnen",
       "questions" : [
         {
-          "text": "Wie viele Quadratmeter (qm) hat ihre Wohnung/Haus?",
+          "text": "Wie groß ist Ihre Wohnung/Haus (in qm)?",
           "replies": [
             {
               "text": "Wenig (< 20qm)",
@@ -339,7 +339,7 @@
           }
         },
         {
-          "text": "Wie alt ist Ihr Haus bzw wann wurde es zuletzt renoviert?",
+          "text": "Renovierungsjahr bzw. Hausalter?",
           "replies": [
             {
               "text" : "vor 1978",
@@ -474,7 +474,7 @@
           }
         },
         {
-          "text": "Wie oft kaufen Sie gebrauchte/secondhand Produkte?",
+          "text": "Wie oft kaufen Sie gebrauchte Produkte?",
           "replies": [
             {
               "text" : "Nie",

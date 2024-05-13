@@ -5,10 +5,9 @@
         >
             <v-col cols="12" class="text-center text-md-start">
                 <v-card class="text-primary" elevation="0">
-                    <v-card-title class="text-h5 text-primary-darken-1"
-                        >Dein aktueller CO₂-Fußabdruck beträgt:
-                        {{ totalCo2EmissionStore.total }}</v-card-title
-                    >
+                    <h1 class="text-h5 text-primary-darken-1">Dein CO₂-Fußabdruck beträgt:</h1>
+                    <h1 class="text-h4 text-primary-darken-1 font-weight-bold">
+                        {{ totalCo2EmissionStore.total }}</h1>
                 </v-card>
             </v-col>
         </v-row>

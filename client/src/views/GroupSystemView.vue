@@ -37,7 +37,7 @@
                     to="/gruppensystem/neue-gruppe"
                     size="large"
                 >
-                    Erstelle jetzt eine neue Gruppe
+                    Neue Gruppe erstellen
                 </v-btn>
 
                 <div class="my-16">
@@ -62,14 +62,14 @@
                         Einsparungen anregen.
                     </p>
 
-                    <div class="d-flex justify-center align-center my-8">
+                    <div class="align-center my-8 ">
                         <v-text-field
                             v-model="groupCode"
                             label="Gruppen-Code"
                             variant="outlined"
                             :hide-details="true"
                             :disabled="!isLoggedIn"
-                            class="mr-4"
+                            class="mb-4"
                         />
 
                         <v-btn

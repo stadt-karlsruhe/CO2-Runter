@@ -15,12 +15,12 @@
             :return-object="true"
             @update:modelValue="updateTotalEmissions()"
         >
-            <template v-slot:item="{ props, item }">
-                <v-list-item
-                    v-bind="props"
-                    :subtitle="item.value"
-                ></v-list-item>
-            </template>
+<!--            <template v-slot:item="{ props, item }">-->
+<!--                <v-list-item-->
+<!--                    v-bind="props"-->
+<!--                    :subtitle="item.value"-->
+<!--                ></v-list-item>-->
+<!--            </template>-->
         </v-select>
     </div>
 </template>

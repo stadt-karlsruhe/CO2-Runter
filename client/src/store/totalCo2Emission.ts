@@ -65,6 +65,7 @@ export const useTotalCo2EmissionStore = defineStore('totalCo2Emission', {
                 });
 
                 console.log('Selected Values per Category', questionValues);
+
                 // Convert string formula to a callable function and evaluate it
                 const calculateCategoryTotal = eval(`(${category.formula})`);
                 const categoryTotal = calculateCategoryTotal(questionValues);
@@ -76,14 +77,11 @@ export const useTotalCo2EmissionStore = defineStore('totalCo2Emission', {
                 };
             });
 
-            this.categories.mobility =
-                categoryTotals[QuestionsIndices.MOBILITY].totalEmission;
-            this.categories.nutrition =
-                categoryTotals[QuestionsIndices.NUTRITION].totalEmission;
-            this.categories.consume =
-                categoryTotals[QuestionsIndices.CONSUM].totalEmission;
-            this.categories.housing =
-                categoryTotals[QuestionsIndices.LIVING].totalEmission;
+            // Also round the values to 2 decimal places via Math.round * 100 / 100
+            this.categories.mobility = Math.round(categoryTotals[QuestionsIndices.MOBILITY].totalEmission * 100) / 100;
+            this.categories.nutrition = Math.round(categoryTotals[QuestionsIndices.NUTRITION].totalEmission * 100) / 100;
+            this.categories.consume = Math.round(categoryTotals[QuestionsIndices.CONSUM].totalEmission * 100) / 100;
+            this.categories.housing = Math.round(categoryTotals[QuestionsIndices.LIVING].totalEmission * 100) / 100;
 
             console.log('Category Totals', this.categories);
 
