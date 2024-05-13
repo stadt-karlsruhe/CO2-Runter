@@ -32,7 +32,7 @@ const dialogVisible = ref(false);
     padding-bottom: 30px;
 
     @media screen and (max-width: 600px) {
-        padding: 10px;
+        padding: 0px;
     }
 }
 

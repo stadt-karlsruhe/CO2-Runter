@@ -1,11 +1,11 @@
 <template>
     <v-card>
         <v-card-text>
-            <v-alert v-if="isLoading" type="info" variant="tonal">
+            <v-alert v-if="isLoading" type="info" variant="tonal" class="mb-4">
                 Daten werden geladen...
             </v-alert>
 
-            <v-alert v-if="error" icon="mdi-alert" type="error" variant="tonal">
+            <v-alert v-if="error" icon="mdi-alert" type="error" variant="tonal" class="mb-4">
                 {{ error }}
             </v-alert>
 

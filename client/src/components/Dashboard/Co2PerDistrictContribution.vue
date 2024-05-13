@@ -1,8 +1,8 @@
 <template>
     <v-card>
-        <v-card-title class="text-center"
-            >Beteiligung pro Karlsruher Stadtteil</v-card-title
-        >
+        <h2 class="text-center mt-8">
+            Beteiligung pro Karlsruher Stadtteil
+        </h2>
 
         <v-card-text>
             <v-chart
@@ -47,6 +47,9 @@ function getData() {
         textStyle: {
             fontFamily: 'Inter, "Helvetica Neue", Arial, sans-serif',
             fontWeight: 300,
+        },
+        grid: {
+            containLabel: true,
         },
         dataset: {
             dimensions: ['name', 'total'],

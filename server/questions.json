@@ -89,7 +89,7 @@
           }
         },
         {
-          "text" : "Wie häufig nutzen Sie öffentliche Verkehrsmittel in der Woche?",
+          "text" : "Wie häufig nutzen Sie den ÖPNV in der Woche?",
           "replies" : [
             {
               "text" : "Sehr selten (< 30km)",
@@ -122,8 +122,16 @@
           "text" : "Wie häufig fliegen Sie im Jahr?",
           "replies" : [
             {
-              "text" : "Durchschnittlich (< 10h)",
-              "value" : 10
+              "text" : "Garnicht (0h)",
+              "value" : 0
+            },
+            {
+              "text" : "Sehr selten (< 4h)",
+              "value" : 2
+            },
+            {
+              "text" : "Durchschnittlich (4 < 10h)",
+              "value" : 6
             },
             {
               "text" : "Mehrmals (10 - 30h)",
@@ -281,11 +289,15 @@
           "replies": [
             {
               "text": "Wenig (< 20qm)",
-              "value" : 10
+              "value" : 20
             },
             {
-              "text": "Durchschnittlich (20 - 70qm)",
-              "value" : 45
+              "text": "Durchschnittlich (20 - 45qm)",
+              "value" : 35
+            },
+            {
+              "text": "Durchschnittlich (45 - 70qm)",
+              "value" : 55
             },
             {
               "text": "Viel (70 - 200qm)",
@@ -483,7 +495,7 @@
           }
         },
         {
-          "text": "Wie hoch sind Ihre sonstigen Ausgaben pro Kopf und Monat?",
+          "text": "Wie hoch sind Ihre monatlichen Ausgaben?",
           "replies" : [
             {
               "text" : "Niedrig (< 250€)",

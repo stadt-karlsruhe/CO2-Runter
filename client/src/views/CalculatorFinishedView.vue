@@ -4,9 +4,32 @@
     >
         <v-row class="d-flex flex-column-reverse flex-md-row my-16">
             <v-col class="text-center">
-                <h1 class="text-primary-darken-1">
-                    Ihr Aktueller Fußabdruck beträgt: {{ total }} t CO2
+                <h1 class="text-primary-darken-1 text-center">
+                    Fertig! Ihr Fußabdruck beträgt: {{ total }}t CO<sub>2</sub>
                 </h1>
+
+                <p class="my-8 text-left">
+                    Die nachstehende Grafik zeigt die Verteilung Ihres
+                    CO2-Fußabdrucks auf verschiedene Kategorien. Jede Kategorie
+                    repräsentiert einen Bereich Ihres Lebens, der zur
+                    Gesamtemission beiträgt, darunter Infrastruktur, Mobilität,
+                    Ernährung, Wohnen und Konsum. Durch die Analyse dieser
+                    Verteilung können Sie sehen, welche Aspekte Ihrer
+                    Lebensweise den größten Einfluss auf Ihre
+                    CO<sub>2</sub>-Emissionen haben und gegebenenfalls Maßnahmen
+                    ergreifen, um diese zu reduzieren.
+                </p>
+
+                <v-alert
+                    v-if="!dataSend"
+                    type="error"
+                    variant="tonal"
+                    class="text-left"
+                >
+                    Schade das Sie ihre Daten nicht mit uns und den anderen
+                    Nutzern teilen wollen.
+                </v-alert>
+
                 <v-chart
                     v-if="chartOptions"
                     :option="chartOptions!"
@@ -14,19 +37,6 @@
                     :loadingOptions="loadingOptions"
                     style="height: 400px; width: 100%"
                 />
-            </v-col>
-        </v-row>
-
-        <v-row class="d-flex flex-column-reverse flex-md-row my-16">
-            <v-col class="text-center">
-                <h1 class="text-primary-darken-1">
-                    Fertig! Dein Ergebnis wurde gespeichert.
-                </h1>
-
-                <div v-if="!dataSend">
-                    Schade das Sie ihre Daten nicht mit uns und den anderen
-                    Nutzern teilen wollen.
-                </div>
 
                 <v-btn
                     class="my-8"
@@ -98,19 +108,19 @@ function getData() {
                     },
                     {
                         value: categories.mobility,
-                        name: `Mobilität: ${categories.mobility}`,
+                        name: `Mobilität: ${categories.mobility.toFixed(2)}`,
                     },
                     {
                         value: categories.nutrition,
-                        name: `Ernäherung: ${categories.nutrition}`,
+                        name: `Ernäherung: ${categories.nutrition.toFixed(2)}`,
                     },
                     {
                         value: categories.housing,
-                        name: `Wohnen: ${categories.housing}`,
+                        name: `Wohnen: ${categories.housing.toFixed(2)}`,
                     },
                     {
                         value: categories.consume,
-                        name: `Konsum: ${categories.consume}`,
+                        name: `Konsum: ${categories.consume.toFixed(2)}`,
                     },
                 ],
                 emphasis: {

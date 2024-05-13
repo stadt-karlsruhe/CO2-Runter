@@ -4,6 +4,8 @@
         v-model="step"
         :alt-labels="true"
         elevation="0"
+        class="ma-0 pa-0"
+        :mobile="true"
     >
         <v-stepper-header style="box-shadow: none">
             <v-stepper-item title="Mobilität" value="1"></v-stepper-item>
@@ -21,8 +23,8 @@
             <v-stepper-item title="Konsum" value="4"></v-stepper-item>
         </v-stepper-header>
 
-        <v-stepper-window>
-            <v-stepper-window-item value="1">
+        <v-stepper-window class="ma-0 removeMargin">
+            <v-stepper-window-item class="ma-0" value="1">
                 <v-container>
                     <v-row class="my-16">
                         <v-col
@@ -32,11 +34,20 @@
                         >
                             <h1 class="text-primary-darken-1">Mobilität</h1>
                             <p class="text-secondary my-8">
-                                CO2 werden jährlich allein von Deutschland
-                                freigesetzt. Wie groß ist dein CO2-Fußabdruck?
-                                Berechne ihn jetzt und entdecke, wie du einen
-                                positiven Beitrag zum Klimaschutz leisten
-                                kannst!
+                                Mobilität spielt eine entscheidende Rolle in
+                                unserem täglichen Leben und hat direkte
+                                Auswirkungen auf unseren
+                                CO<sub>2</sub>-Fußabdruck. Von der Wahl des
+                                Verkehrsmittels bis hin zur Fahrzeugnutzung
+                                beeinflussen unsere Entscheidungen maßgeblich
+                                die Menge an CO<sub>2</sub>-Emissionen, die wir
+                                verursachen. Indem du deine Mobilität bewusst
+                                betrachtest und optimierst, kannst du nicht nur
+                                deine Umweltbelastung verringern, sondern auch
+                                einen positiven Beitrag zum Klimaschutz leisten.
+                                Berechne jetzt deine Mobilitätsbilanz und
+                                entdecke Möglichkeiten, wie du effizienter und
+                                nachhaltiger unterwegs sein kannst!
                             </p>
                         </v-col>
                         <v-col
@@ -62,7 +73,7 @@
                 </v-container>
             </v-stepper-window-item>
 
-            <v-stepper-window-item value="2">
+            <v-stepper-window-item class="ma-0" value="2">
                 <v-container>
                     <v-row class="my-16">
                         <v-col
@@ -70,13 +81,21 @@
                             md="7"
                             class="text-center text-md-start"
                         >
-                            <h1 class="text-primary-darken-1">Ernäherung</h1>
+                            <h1 class="text-primary-darken-1">Ernährung</h1>
                             <p class="text-secondary my-8">
-                                CO2 werden jährlich allein von Deutschland
-                                freigesetzt. Wie groß ist dein CO2-Fußabdruck?
-                                Berechne ihn jetzt und entdecke, wie du einen
-                                positiven Beitrag zum Klimaschutz leisten
-                                kannst!
+                                Unsere Ernährungsgewohnheiten haben einen
+                                direkten Einfluss auf unseren
+                                CO<sub>2</sub>-Fußabdruck. Die Produktion, der
+                                Transport und die Zubereitung von Lebensmitteln
+                                tragen zur Freisetzung von Treibhausgasen bei.
+                                Indem du deine Ernährungsgewohnheiten bewusst
+                                hinterfragst und optimierst, kannst du nicht nur
+                                deinen persönlichen CO<sub>2</sub>-Fußabdruck
+                                reduzieren, sondern auch einen wichtigen Beitrag
+                                zum Umweltschutz leisten. Berechne jetzt deinen
+                                CO<sub>2</sub>-Fußabdruck durch Ernährung und
+                                entdecke Möglichkeiten, wie du nachhaltiger
+                                essen kannst!
                             </p>
                         </v-col>
                         <v-col
@@ -102,7 +121,7 @@
                 </v-container>
             </v-stepper-window-item>
 
-            <v-stepper-window-item value="3">
+            <v-stepper-window-item class="ma-0" value="3">
                 <v-container>
                     <v-row class="my-16">
                         <v-col
@@ -112,11 +131,19 @@
                         >
                             <h1 class="text-primary-darken-1">Wohnen</h1>
                             <p class="text-secondary my-8">
-                                CO2 werden jährlich allein von Deutschland
-                                freigesetzt. Wie groß ist dein CO2-Fußabdruck?
-                                Berechne ihn jetzt und entdecke, wie du einen
-                                positiven Beitrag zum Klimaschutz leisten
-                                kannst!
+                                Unser Wohnverhalten trägt maßgeblich zur
+                                Umweltbelastung bei. Von der Energieeffizienz
+                                unserer Häuser bis zur Nutzung von Ressourcen
+                                beeinflussen unsere Entscheidungen die Menge an
+                                CO<sub>2</sub>-Emissionen, die wir verursachen.
+                                Indem du dein Wohnverhalten überdenkst und
+                                nachhaltige Maßnahmen ergreifst, kannst du nicht
+                                nur deine Umweltbelastung verringern, sondern
+                                auch einen wichtigen Beitrag zum Klimaschutz
+                                leisten. Berechne jetzt deinen
+                                CO<sub>2</sub>-Fußabdruck durch Wohnen und
+                                entdecke Möglichkeiten, wie du dein Zuhause
+                                nachhaltiger gestalten kannst!
                             </p>
                         </v-col>
                         <v-col
@@ -142,7 +169,7 @@
                 </v-container>
             </v-stepper-window-item>
 
-            <v-stepper-window-item value="4">
+            <v-stepper-window-item class="ma-0" value="4">
                 <v-container>
                     <v-row class="my-16">
                         <v-col
@@ -152,11 +179,19 @@
                         >
                             <h1 class="text-primary-darken-1">Konsum</h1>
                             <p class="text-secondary my-8">
-                                CO2 werden jährlich allein von Deutschland
-                                freigesetzt. Wie groß ist dein CO2-Fußabdruck?
-                                Berechne ihn jetzt und entdecke, wie du einen
-                                positiven Beitrag zum Klimaschutz leisten
-                                kannst!
+                                Unsere Konsumentscheidungen haben eine
+                                erhebliche Auswirkung auf die Umwelt. Vom
+                                Kaufverhalten bis zur Nutzung von Ressourcen
+                                beeinflussen unsere Entscheidungen die Menge an
+                                CO<sub>2</sub>-Emissionen, die wir verursachen.
+                                Indem du deinen Konsum bewusst reflektierst und
+                                nachhaltige Alternativen wählst, kannst du
+                                deinen persönlichen CO<sub>2</sub>-Fußabdruck
+                                reduzieren und einen positiven Einfluss auf die
+                                Umwelt haben. Berechne jetzt deinen
+                                CO<sub>2</sub>-Fußabdruck durch Konsum und
+                                entdecke Möglichkeiten, wie du
+                                umweltfreundlicher leben kannst!
                             </p>
                         </v-col>
                         <v-col
@@ -205,14 +240,14 @@
             <v-col>
                 <h1 class="text-primary-darken-1">Geschafft!</h1>
                 <p>
-                    Herzlichen Glückwunsch. Sie haben den CO2-Rechner
-                    erfolgreich absolviert und ihr CO2-Wert konnte berechnet
-                    werden.
+                    Herzlichen Glückwunsch. Sie haben den CO<sub>2</sub>-Rechner
+                    erfolgreich absolviert und ihr CO<sub>2</sub>-Wert konnte
+                    berechnet werden.
                 </p>
             </v-col>
         </v-row>
 
-        <v-row class="my-16">
+        <v-row>
             <v-col>
                 <v-tabs
                     v-model="tab"
@@ -224,7 +259,7 @@
                     <v-tab value="group">Gruppen</v-tab>
                 </v-tabs>
 
-                <v-window v-model="tab">
+                <v-window v-model="tab" class="ma-0 pa-0">
                     <v-window-item value="district">
                         <v-alert
                             v-if="isLoadingCityDistricts"
@@ -249,9 +284,9 @@
                             :items="
                                 cityDistricts.map((district) => district.name)
                             "
-                            label="Bitte wählen Sie den Stadtteil, in dem Sie ansässig sind."
+                            label="Bitte wählen Sie den Stadtteil aus."
                             variant="outlined"
-                            class="my-16"
+                            class="my-4"
                             @update:modelValue="updateSelectedCityDistrictId()"
                         />
                     </v-window-item>
@@ -280,7 +315,7 @@
                                 v-model="selectedGroups"
                                 :items="groups.map((group) => group.groupname)"
                                 variant="outlined"
-                                class="my-16"
+                                class="my-4"
                                 label="Angezeigte Gruppen wählen"
                                 :multiple="true"
                                 @update:model-value="updateSelectedGroup()"
@@ -299,28 +334,37 @@
                 </v-window>
             </v-col>
         </v-row>
-        <v-row class="my-16">
-            <v-col>
-                <v-btn
-                    :rounded="true"
-                    append-icon="mdi-chevron-right"
-                    color="primary-darken-1"
-                    size="large"
-                    to="/"
-                    variant="tonal"
-                    @click="submitCo2EmissionsUpload()"
-                    >Daten abschicken
-                </v-btn>
+        <v-row class="px-4 mb-4">
+            <v-btn
+                :rounded="true"
+                append-icon="mdi-chevron-right"
+                color="primary-darken-1"
+                size="large"
+                to="/"
+                variant="tonal"
+                @click="submitCo2EmissionsUpload()"
+                >Daten abschicken
+            </v-btn>
 
-                <v-btn
-                    :rounded="true"
-                    append-icon="mdi-chevron-right"
-                    size="large"
-                    to="/"
-                    variant="tonal"
-                    @click="continueWithoutUpload()"
-                    >Weiter ohne Daten zu senden
-                </v-btn>
+            <v-spacer />
+
+            <v-btn
+                :rounded="true"
+                append-icon="mdi-chevron-right"
+                size="large"
+                to="/"
+                variant="tonal"
+                @click="continueWithoutUpload()"
+                >Ohne Upload fortfahren
+            </v-btn>
+        </v-row>
+        <v-row>
+            <v-col>
+                <v-alert type="info" variant="tonal"
+                    >Die Daten werden sicher auf einem städtischen Server
+                    hochgeladen und ausschließlich für die Anzeige
+                    verwendet.</v-alert
+                >
             </v-col>
         </v-row>
     </v-container>

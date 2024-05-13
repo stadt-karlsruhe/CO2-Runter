@@ -1,11 +1,11 @@
 <template>
     <v-card>
         <v-card-text v-if="isLoggedIn">
-            <v-alert v-if="isLoading" type="info" variant="tonal">
+            <v-alert v-if="isLoading" type="info" variant="tonal" class="mb-4">
                 Daten werden geladen...
             </v-alert>
 
-            <v-alert v-if="error" icon="mdi-alert" type="error" variant="tonal">
+            <v-alert v-if="error" icon="mdi-alert" type="error" variant="tonal" class="mb-4">
                 {{ error }}
             </v-alert>
 
@@ -30,13 +30,13 @@
                     :persistent-hint="true"
                 />
 
-                <v-card class="pa-4" variant="flat">
-                    <v-card-title>Du findest eine Gruppe nicht?</v-card-title>
+                <v-card class="py-4" variant="flat">
+                    <v-card-title>Sie finden eine Gruppe nicht?</v-card-title>
 
                     <v-card-text>
-                        Wenn du nicht nicht die Gruppe siehst zu der du gehörst,
-                        dann kannst du sie erneut hinzufügen, indem du zum
-                        Gruppensystem gehst und dich erneut hinzufügst.
+                        Wenn Sie die Gruppe, der Sie angehören, nicht finden,
+                        können Sie sie erneut hinzufügen, indem Sie zum
+                        Gruppensystem gehen und sich erneut anmelden.
                     </v-card-text>
 
                     <v-btn
@@ -47,7 +47,7 @@
                         size="large"
                         to="/gruppensystem"
                     >
-                        Geh zum Gruppensystem
+                        Das Gruppensystem
                     </v-btn>
                 </v-card>
             </div>
@@ -55,7 +55,6 @@
             <v-alert v-else icon="mdi-alert" type="error" variant="tonal">
                 Es gibt keine Daten zum anzeigen.
             </v-alert>
-
         </v-card-text>
         <v-card-text v-else>
             <v-alert type="info" variant="tonal">
@@ -153,11 +152,11 @@ const fetchFootprintsForAllAvailableGroups = async () => {
                         Accept: 'application/json',
                         'Content-Type': 'application/json',
                     },
-                },
+                }
             );
             if (response.status === 200) {
                 const data = ref<GroupCo2FootprintEmissions>(
-                    await response.json(),
+                    await response.json()
                 );
 
                 if (
@@ -167,7 +166,7 @@ const fetchFootprintsForAllAvailableGroups = async () => {
                 ) {
                     const groupExists = footprintsData.value.some(
                         (groupFootprint: any) =>
-                            groupFootprint.name === data.value.name,
+                            groupFootprint.name === data.value.name
                     );
                     if (!groupExists) {
                         footprintsData.value = [
@@ -192,7 +191,7 @@ function getData() {
 
     const selectedData = selectedGroups.value.map((selectedGroup) => {
         const footprint = footprintsData.value.find(
-            (f) => f.name === selectedGroup,
+            (f) => f.name === selectedGroup
         );
 
         if (!footprint) {
@@ -208,14 +207,14 @@ function getData() {
 
     const selectedCategories = selectedGroups.value.map((selectedGroup) => {
         const footprint = footprintsData.value.find(
-            (f) => f.name === selectedGroup,
+            (f) => f.name === selectedGroup
         );
 
         return footprint ? footprint.name : 'Hat keine Daten';
     });
 
     const available_Categories = footprintsData.value[0].values.map(
-        (valueObj) => valueObj.category,
+        (valueObj) => valueObj.category
     );
 
     // extras
@@ -223,7 +222,7 @@ function getData() {
         averageData.value.map((valueObj) => ({
             category: valueObj.category,
             value: valueObj.value,
-        })),
+        }))
     );
     selectedCategories.push('Durchschnitt aller Beiträge');
 
@@ -282,7 +281,7 @@ function getData() {
             data: selectedData.map((selectedData: any) =>
                 selectedData && selectedData[index]?.value !== undefined
                     ? selectedData[index].value
-                    : 0,
+                    : 0
             ),
             label: {
                 show: true,

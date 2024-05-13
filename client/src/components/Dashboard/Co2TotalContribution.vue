@@ -2,23 +2,23 @@
     <v-card>
         <v-alert v-if="fetchError" type="error">{{ fetchError }}</v-alert>
 
-        <v-card-text v-if="isLoading">
+        <div v-if="isLoading">
             <v-alert type="info" variant="tonal">
                 Daten werden geladen...
             </v-alert>
-        </v-card-text>
+        </div>
 
-        <v-card-text
+        <div
             v-else
             class="text-center d-flex align-center justify-center"
         >
             <v-icon class="text-primary-darken-1" size="32"
                 >mdi-foot-print</v-icon
             >
-            <h1 class="text-primary-darken-1">
+            <h2 class="text-primary-darken-1">
                 {{ totalCo2Footprint }} Abgegebene CO2-Fussabdrücke
-            </h1>
-        </v-card-text>
+            </h2>
+        </div>
     </v-card>
 </template>
 
