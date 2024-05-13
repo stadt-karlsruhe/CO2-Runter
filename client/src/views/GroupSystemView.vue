@@ -25,7 +25,7 @@
                         Der Zweck des Gruppensystems besteht darin, eine
                         motivierende Umgebung zu schaffen, in der sich die
                         Teilnehmer gegenseitig inspirieren können,
-                        CO2-Einsparungen zu erreichen...
+                        CO<sub>2</sub>-Einsparungen zu erreichen...
                     </p>
                 </div>
 
@@ -52,12 +52,13 @@
 
                 <div class="my-8">
                     <h2 class="text-secondary my-4">
-                        Zusammen CO2-Fußabdrücke erfassen
+                        Zusammen CO<sub>2</sub>-Fußabdrücke erfassen
                     </h2>
                     <p>
                         Über das Gruppensystem auf dieser Webseite können Sie
-                        gemeinsam mit anderen Nutzern CO2-Fußabdrücke erfassen.
-                        So können Sie sich gegenseitig zu weiteren CO2
+                        gemeinsam mit anderen Nutzern CO<sub>2</sub>-Fußabdrücke
+                        erfassen. So können Sie sich gegenseitig zu weiteren
+                        CO<sub>2</sub>
                         Einsparungen anregen.
                     </p>
 

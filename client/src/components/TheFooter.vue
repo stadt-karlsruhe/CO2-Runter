@@ -52,11 +52,11 @@
                         <v-list-item
                             to="/"
                             :exact="true"
-                            title="CO2Runter"
                             class="rounded-lg"
                             prepend-avatar="../../public/apple-touch-icon.png"
                             color="primary-darken-1"
-                        />
+                            >CO<sub>2</sub>Runter</v-list-item
+                        >
                     </v-list>
                 </v-col>
                 <v-col cols="12" md="4" order-md="2">
@@ -106,7 +106,7 @@
         color="primary"
     >
         <div class="text-primary-darken-1">
-            © 2023 - heute | CO2Runter. Alle Rechte vorbehalten.
+            © 2023 - heute | CO<sub>2</sub>Runter. Alle Rechte vorbehalten.
         </div>
     </v-footer>
 </template>

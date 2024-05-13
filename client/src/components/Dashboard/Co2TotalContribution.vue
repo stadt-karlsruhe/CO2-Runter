@@ -8,10 +8,7 @@
             </v-alert>
         </div>
 
-        <div
-            v-else
-            class="text-center d-flex align-center justify-center"
-        >
+        <div v-else class="text-center d-flex align-center justify-center">
             <v-icon class="text-primary-darken-1" size="32"
                 >mdi-foot-print</v-icon
             >

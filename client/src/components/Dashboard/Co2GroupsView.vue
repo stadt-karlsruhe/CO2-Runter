@@ -5,7 +5,13 @@
                 Daten werden geladen...
             </v-alert>
 
-            <v-alert v-if="error" icon="mdi-alert" type="error" variant="tonal" class="mb-4">
+            <v-alert
+                v-if="error"
+                icon="mdi-alert"
+                type="error"
+                variant="tonal"
+                class="mb-4"
+            >
                 {{ error }}
             </v-alert>
 

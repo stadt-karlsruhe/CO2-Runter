@@ -8,9 +8,9 @@
                     Sie haben Fragen zum Klimaschutz oder zur Webseite??
                 </h1>
                 <p class="text-secondary my-8">
-                    Hier finden Sie weitere Infos rund um die CO2Runter
-                    Webseite. Zusätzlich finden Sie hier Antworten und
-                    Erklärungen rund um das Thema Klimaschutz.
+                    Hier finden Sie weitere Infos rund um die
+                    CO<sub>2</sub>Runter Webseite. Zusätzlich finden Sie hier
+                    Antworten und Erklärungen rund um das Thema Klimaschutz.
                 </p>
             </v-col>
             <v-col class="d-flex justify-center" cols="12" md="5">
@@ -29,33 +29,34 @@
                 </h1>
 
                 <v-expansion-panels variant="accordion">
-                    <v-expansion-panel
-                        title="Wie funktionert der CO2 Rechner?"
-                        class="text-secondary"
-                        elevation="0"
-                    >
+                    <v-expansion-panel class="text-secondary" elevation="0">
+                        <v-expansion-panel-title>
+                            Wie funktionert der CO<sub>2</sub> Rechner?
+                        </v-expansion-panel-title>
                         <v-expansion-panel-text>
-                            Laut Energiebilanz Karlsruhe 2020 liegt der CO2
+                            Laut Energiebilanz Karlsruhe 2020 liegt der CO<sub
+                                >2</sub
+                            >
                             Ausstoß bei 7,4t jährlich pro Kopf. Die Effekte
                             durch privaten Konsum sind dabei nicht enthalten.
                             Addiert man hier den Grundwert (2,9t) gemäß unserer
                             Vereinfachung des UBA-Modells, dann erhält man 10,3t
-                            CO2. Diese Grundwert-Summe bildet sich aus 4
-                            "Sektoren", die wir durch unseren Lebensstil
+                            CO<sub>2</sub>. Diese Grundwert-Summe bildet sich
+                            aus 4 "Sektoren", die wir durch unseren Lebensstil
                             beeinflussen können, plus einer festen Zugabe für
-                            öffentliche Infrastruktur. Im CO2-Rechner können
-                            individuelle Angaben für die Sektoren Wohnen
+                            öffentliche Infrastruktur. Im CO<sub>2</sub>-Rechner
+                            können individuelle Angaben für die Sektoren Wohnen
                             (Heizung und Strom), Mobilität, Ernährung und
                             allgemeiner Konsum gemacht werden. Die
                             Auswahlmöglichkeiten und Berechnungsmodelle sind an
-                            den CO2-Rechner des Umweltbundesamts angelehnt. So
-                            lassen sich die Effekte zeigen, die wir durch einen
-                            sparsamen oder weniger sparsamen Lebensstil erzielen
-                            können. Eine exaktere Berechnung ist ohne weitere
-                            Informationen über die persönliche Situation im
-                            Einzelfall nicht möglich. Weitere Informationen zum
-                            UBA-Modell und den Einsparpotentialen finden sich in
-                            dieser
+                            den CO<sub>2</sub>-Rechner des Umweltbundesamts
+                            angelehnt. So lassen sich die Effekte zeigen, die
+                            wir durch einen sparsamen oder weniger sparsamen
+                            Lebensstil erzielen können. Eine exaktere Berechnung
+                            ist ohne weitere Informationen über die persönliche
+                            Situation im Einzelfall nicht möglich. Weitere
+                            Informationen zum UBA-Modell und den
+                            Einsparpotentialen finden sich in dieser
                             <a
                                 href="https://www.umweltbundesamt.de/publikationen/klimaneutral-leben"
                                 >Publikation</a
@@ -64,11 +65,11 @@
                         </v-expansion-panel-text>
                     </v-expansion-panel>
 
-                    <v-expansion-panel
-                        title="Wo kann ich die Ergebnisse vom CO2 Rechner einsehen?"
-                        class="text-secondary"
-                        elevation="0"
-                    >
+                    <v-expansion-panel class="text-secondary" elevation="0">
+                        <v-expansion-panel-title>
+                            Wo kann ich die Ergebnisse vom CO<sub>2</sub>
+                            Rechner einsehen?
+                        </v-expansion-panel-title>
                         <v-expansion-panel-text>
                             Persönliche Maßnahmen für den Klimaschutz werden
                             erfolgreicher, wenn wir auch andere Menschen von
@@ -77,8 +78,8 @@
                             Mitstreiterinnen und Mitstreiter gewinnen können und
                             nehmen Sie so an der Klima-Challenge teil. Die
                             aktuellen Ergebnisse sind auf unserem
-                            <a href="/Dashboard">CO2-Dashboard</a> sichtbar. Im
-                            Kanal "Grüne Stadt" der
+                            <a href="/Dashboard">CO<sub>2</sub>-Dashboard</a>
+                            sichtbar. Im Kanal "Grüne Stadt" der
                             <a
                                 href="https://www.karlsruhe.de/stadt-rathaus/so-ist-karlsruhe/digital-smart/karlsruheapp"
                                 >Karlsruhe-App</a
@@ -111,10 +112,10 @@
 
                 <p class="text-secondary my-8">
                     Dann finden Sie hier unsere Literaturliste. Anbei sind alle
-                    Informationen aufgelistet, die auf der CO2Runter Webseite
-                    präsentiert werden. Zusätzlich sind weitere interessante
-                    Artikel zum Thema Klimaschutz enthalten. Schauen Sie
-                    unbedingt rein!
+                    Informationen aufgelistet, die auf der CO<sub>2</sub>Runter
+                    Webseite präsentiert werden. Zusätzlich sind weitere
+                    interessante Artikel zum Thema Klimaschutz enthalten.
+                    Schauen Sie unbedingt rein!
                 </p>
             </v-col>
         </v-row>

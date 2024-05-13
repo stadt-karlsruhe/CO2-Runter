@@ -10,11 +10,11 @@
                 <v-list-item
                     to="/"
                     :exact="true"
-                    title="CO2Runter"
                     class="rounded-lg"
                     prepend-avatar="../assets/co2runter-logo.png"
                     color="primary-darken-1"
-                />
+                    >CO<sub>2</sub>Runter</v-list-item
+                >
             </v-list>
         </v-toolbar-title>
 
@@ -22,11 +22,11 @@
             <v-list class="d-flex">
                 <v-list-item
                     to="/rechner"
-                    title="CO2 Rechner"
                     prepend-icon="mdi-calculator-variant-outline"
                     class="mx-1 rounded-lg"
                     color="primary-darken-1"
-                />
+                    >CO<sub>2</sub> Rechner</v-list-item
+                >
 
                 <v-list-item
                     to="/dashboard"
@@ -118,11 +118,11 @@
 
             <v-list-item
                 to="/rechner"
-                title="CO2 Rechner"
                 prepend-icon="mdi-calculator-variant-outline"
                 class="mb-1 rounded-lg"
                 color="primary-darken-1"
-            />
+                >CO<sub>2</sub>Rechner</v-list-item
+            >
 
             <v-list-item
                 to="/dashboard"
