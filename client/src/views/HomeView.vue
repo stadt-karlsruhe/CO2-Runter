@@ -65,7 +65,7 @@
                 <p class="text-secondary my-8">
                     Was ist das denn überhaupt und was kann ich darunter
                     verstehen? Wenn dich das interessiert dann Informier dich
-                    direkt hier bei uns.
+                    direkt über diesen Link.
                 </p>
                 <v-btn
                     variant="tonal"
