@@ -78,10 +78,24 @@ export const useTotalCo2EmissionStore = defineStore('totalCo2Emission', {
             });
 
             // Also round the values to 2 decimal places via Math.round * 100 / 100
-            this.categories.mobility = Math.round(categoryTotals[QuestionsIndices.MOBILITY].totalEmission * 100) / 100;
-            this.categories.nutrition = Math.round(categoryTotals[QuestionsIndices.NUTRITION].totalEmission * 100) / 100;
-            this.categories.consume = Math.round(categoryTotals[QuestionsIndices.CONSUM].totalEmission * 100) / 100;
-            this.categories.housing = Math.round(categoryTotals[QuestionsIndices.LIVING].totalEmission * 100) / 100;
+            this.categories.mobility =
+                Math.round(
+                    categoryTotals[QuestionsIndices.MOBILITY].totalEmission *
+                        100
+                ) / 100;
+            this.categories.nutrition =
+                Math.round(
+                    categoryTotals[QuestionsIndices.NUTRITION].totalEmission *
+                        100
+                ) / 100;
+            this.categories.consume =
+                Math.round(
+                    categoryTotals[QuestionsIndices.CONSUM].totalEmission * 100
+                ) / 100;
+            this.categories.housing =
+                Math.round(
+                    categoryTotals[QuestionsIndices.LIVING].totalEmission * 100
+                ) / 100;
 
             console.log('Category Totals', this.categories);
 

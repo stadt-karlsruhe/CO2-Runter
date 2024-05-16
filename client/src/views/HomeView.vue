@@ -65,7 +65,7 @@
                 <p class="text-secondary my-8">
                     Was ist das denn überhaupt und was kann ich darunter
                     verstehen? Wenn dich das interessiert dann Informier dich
-                    direkt über diesen Link.
+                    direkt hier bei uns.
                 </p>
                 <v-btn
                     variant="tonal"
@@ -73,8 +73,7 @@
                     color="primary-darken-1"
                     append-icon="mdi-chevron-right"
                     size="large"
-                    href="https://www.firstclimate.com/was-ist-ein-co2-fussabdruck"
-                    target="_blank"
+                    @click="navigateToFaq()"
                 >
                     Machen Sie sich schlau
                 </v-btn>
@@ -90,6 +89,14 @@
     </v-container>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const navigateToFaq = () => {
+    router.push({ path: '/faq', hash: '#co2-footprint' });
+};
+</script>
 
 <style scoped></style>

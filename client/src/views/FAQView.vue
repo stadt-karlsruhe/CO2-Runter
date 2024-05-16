@@ -28,7 +28,148 @@
                     Frequently Asked Questions
                 </h1>
 
-                <v-expansion-panels variant="accordion">
+                <v-expansion-panels v-model="panel" variant="accordion">
+                    <v-expansion-panel class="text-secondary" elevation="0">
+                        <v-expansion-panel-title>
+                            Was versteht man unter einem
+                            CO<sub>2</sub>-Fußabdruck?
+                        </v-expansion-panel-title>
+                        <v-expansion-panel-text>
+                            <p class="text-secondary my-4">
+                                Der CO<sub>2</sub>-Fußabdruck ist das
+                                Ergebnis einer Emissionsberechnung
+                                beziehungsweise der sogenannten
+                                CO<sub>2</sub>-Bilanz. Er gibt an,
+                                welche Menge von Treibhausgasen durch
+                                eine Aktivität, einen Prozess oder eine
+                                Handlung freigesetzt wird. Ein
+                                CO<sub>2</sub>-Fußabdruck lässt sich
+                                beispielsweise für Geschäfts- oder
+                                Produktionsprozesse von Unternehmen
+                                angeben.
+                            </p>
+                            <p class="text-secondary my-4">
+                                Auch Produkte haben einen
+                                CO<sub>2</sub>-Fußabdruck, der die Summe
+                                der Emissionen umfasst, die durch die
+                                Herstellung, die Nutzung sowie die
+                                Verwertung und Entsorgung des jeweiligen
+                                Produktes entstehen. Das gilt für alle
+                                erdenklichen Artikel: vom Spielzeug,
+                                über technische Geräte, bis hin zu
+                                Möbeln und Einrichtungsgegenständen.
+                            </p>
+                            <p class="text-secondary my-4">
+                                Ein CO<sub>2</sub>-Fußabdruck lässt sich
+                                darüber hinaus aber auch für viele
+                                weitere Aktivitäten und Prozesse
+                                berechnen – sowohl für Unternehmen als
+                                auch für Privatpersonen. Zum Beispiel
+                                für eine Veranstaltung,
+                                Hotelübernachtung, eine Dienstreise per
+                                Auto, Bahn oder Flugzeug, oder die
+                                Bereitstellung einer bestimmten
+                                Dienstleistung.
+                            </p>
+                            <p class="text-secondary my-4">
+                                Für Unternehmen, die sich im Bereich
+                                Nachhaltigkeit engagieren, ist der
+                                CO<sub>2</sub>-Fußabdruck ein wichtiges
+                                Instrument zur Bewertung ihrer
+                                Klimawirkung und damit zentraler
+                                Bestandteil der Ökobilanz und der
+                                Nachhaltigkeitsberichterstattung.
+                            </p>
+
+                            <v-card variant="tonal">
+                                <v-card-title>
+                                    Faktoren des CO<sub>2</sub>-Fußabdrucks
+                                </v-card-title>
+                                <v-card-text>
+                                    <v-list lines="three">
+                                        <v-list-item>
+                                            <v-list-item-title class="font-weight-bold"
+                                            >Mobilität</v-list-item-title
+                                            >
+                                            <v-list-item-subtitle>
+                                                Verkehrsmittel wie Autos,
+                                                Flugzeuge und Züge verursachen
+                                                unterschiedliche Mengen an
+                                                CO<sub>2</sub>. Die Wahl des
+                                                Verkehrsmittels und die
+                                                Häufigkeit der Nutzung
+                                                beeinflussen den
+                                                CO<sub>2</sub>-Fußabdruck
+                                                erheblich.
+                                            </v-list-item-subtitle>
+                                        </v-list-item>
+                                        <v-list-item>
+                                            <v-list-item-title class="font-weight-bold"
+                                            >Ernährung</v-list-item-title
+                                            >
+                                            <v-list-item-subtitle>
+                                                Der Anbau, Transport und die
+                                                Verarbeitung von Lebensmitteln
+                                                tragen zur CO<sub>2</sub>-Bilanz
+                                                bei. Besonders tierische
+                                                Produkte haben oft einen höheren
+                                                CO<sub>2</sub>-Fußabdruck als
+                                                pflanzliche Lebensmittel.
+                                            </v-list-item-subtitle>
+                                        </v-list-item>
+                                        <v-list-item>
+                                            <v-list-item-title class="font-weight-bold"
+                                            >Konsum</v-list-item-title
+                                            >
+                                            <v-list-item-subtitle>
+                                                Der Kauf und die Entsorgung von
+                                                Konsumgütern beeinflussen den
+                                                CO<sub>2</sub>-Ausstoß. Die
+                                                Herstellung, Nutzung und
+                                                Entsorgung von Produkten, von
+                                                Spielzeug bis hin zu technischen
+                                                Geräten und Möbeln, tragen zur
+                                                CO<sub>2</sub>-Bilanz bei.
+                                            </v-list-item-subtitle>
+                                        </v-list-item>
+                                        <v-list-item>
+                                            <v-list-item-title class="font-weight-bold"
+                                            >Wohnung</v-list-item-title
+                                            >
+                                            <v-list-item-subtitle>
+                                                Energieverbrauch für Heizung,
+                                                Strom und Wasser in Haushalten
+                                                trägt zum
+                                                CO<sub>2</sub>-Fußabdruck bei.
+                                                Die Art der Energiequelle und
+                                                der Energieverbrauch
+                                                beeinflussen die Höhe der
+                                                Emissionen.
+                                            </v-list-item-subtitle>
+                                        </v-list-item>
+                                        <v-list-item>
+                                            <v-list-item-title class="font-weight-bold"
+                                            >Infrastruktur</v-list-item-title
+                                            >
+                                            <v-list-item-subtitle>
+                                                Öffentliche Dienste und
+                                                Infrastruktur wie Straßen,
+                                                Brücken und öffentliche Gebäude
+                                                haben ebenfalls einen
+                                                CO<sub>2</sub>-Fußabdruck. Diese
+                                                Emissionen werden oft durch
+                                                staatliche und kommunale
+                                                Projekte verursacht und
+                                                beeinflussen die
+                                                Gesamtemissionen einer Region.
+                                            </v-list-item-subtitle>
+                                        </v-list-item>
+                                    </v-list>
+                                </v-card-text>
+                            </v-card>
+                        </v-expansion-panel-text>
+                    </v-expansion-panel>
+
                     <v-expansion-panel class="text-secondary" elevation="0">
                         <v-expansion-panel-title>
                             Wie funktionert der CO<sub>2</sub> Rechner?
@@ -168,9 +309,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import LiteratureSources from '@/constants/LiteratureSources';
 
+const route = useRoute();
+const panel = ref(-1);
 const search = ref('');
 const page = ref(1);
 const pageCount = Math.ceil(LiteratureSources.length / 10);
@@ -203,4 +347,10 @@ const headers = [
         sortable: false,
     },
 ];
+
+onMounted(() => {
+    if (route.hash === '#co2-footprint') {
+        panel.value = 0;
+    }
+});
 </script>

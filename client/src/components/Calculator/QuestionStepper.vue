@@ -512,12 +512,12 @@ const fetchGroups = async () => {
         // console.log(groups.value, 'here i havethe groups ith group codes');
         // await postData(groups.value);
     } catch (fetchError) {
-        if(auth.isLoggedIn.value){
+        if (auth.isLoggedIn.value) {
             errorGroups.value =
-                "Sie sind Angemeldet, aber es gibt Probleme beim laden der Stadtteile. Bitte loggen Sie sich aus und erneut ein."
-        }else{
+                'Sie sind Angemeldet, aber es gibt Probleme beim laden der Stadtteile. Bitte loggen Sie sich aus und erneut ein.';
+        } else {
             errorGroups.value =
-                "Die Gruppen konnten nicht geladen werden. Bitte versuche es später erneut oder Logen sie sich ein."
+                'Die Gruppen konnten nicht geladen werden. Bitte versuche es später erneut oder Logen sie sich ein.';
         }
     }
     isLoadingGroups.value = false;

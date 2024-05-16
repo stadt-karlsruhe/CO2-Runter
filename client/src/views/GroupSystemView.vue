@@ -62,7 +62,7 @@
                         Einsparungen anregen.
                     </p>
 
-                    <div class="align-center my-8 ">
+                    <div class="align-center my-8">
                         <v-text-field
                             v-model="groupCode"
                             label="Gruppen-Code"
