@@ -9,7 +9,7 @@
                         Dein CO₂-Fußabdruck beträgt:
                     </h1>
                     <h1 class="text-h4 text-primary-darken-1 font-weight-bold">
-                        {{ totalCo2EmissionStore.total }}
+                        {{ totalCo2EmissionStore.total }}t
                     </h1>
                 </v-card>
             </v-col>
