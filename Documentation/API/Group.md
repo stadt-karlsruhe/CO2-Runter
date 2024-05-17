@@ -1,4 +1,6 @@
-## **User get Groups with Admin**
+# Group Endpoints
+
+## User get Groups with Admin
 
 This endpoint allows users to retrieve a list of groups they administer.
 
@@ -65,7 +67,7 @@ This endpoint allows users to retrieve a list of groups they are a member of.
   - **Code:** 500 Internal Server Error<br />
     **Content:** `{ error : A server error occurred." }`
 
-## **Add User to Group**
+## Add User to Group
 
 This endpoint allows adding a user to a group by entering the group code.
 
@@ -98,7 +100,7 @@ This endpoint allows adding a user to a group by entering the group code.
   - **Code:** 500 Internal Server Error<br />
     **Content:** `{ error : A server error occurred." }`
 
-## **Get Group by Groupcode**
+## Get Group by Groupcode
 
 This endpoint allows users to retrieve information about a group by providing its number.
 
@@ -128,7 +130,7 @@ This endpoint allows users to retrieve information about a group by providing it
   - **Code:** 500 Internal Server Error<br />
     **Content:** `{ error : A server error occurred." }` 
 
-## **Create Group**
+## Create Group
 
 This endpoint allows users to create a new group by providing a name.
 
@@ -160,8 +162,7 @@ This endpoint allows users to create a new group by providing a name.
   - **Code:** 500 Internal Server Error<br />
     **Content:** `{ error : A server error occurred." }`
 
-**Delete Group**
----
+## Delete Group
 
 This endpoint allows an admin to delete a group by providing its number.
 

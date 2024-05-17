@@ -1,5 +1,7 @@
-**Get Question**
-----
+# Footprint Questions Districts Endpoints
+
+## Get Questions
+
   This endpoint allows to retrieve a list of questions for the footprint survey
 
 * **URL**
@@ -22,8 +24,7 @@
   - **Code:** 500 Internal Server Error<br />
     **Content:** `{ error : A server error occurred." }`
 
-**Submit Footprint**
-----
+## Submit Footprint
 
 * **URL**
 
@@ -52,8 +53,8 @@
     **Content:** `{ error : A server error occurred." }`
 
 
-**Get Districts**
-----
+## Get Districts
+
   This endpoint allows to retrieve a list of all districts
 
 * **URL**
@@ -75,5 +76,3 @@
 
   - **Code:** 500 Internal Server Error<br />
     **Content:** `{ error : "Something went wrong" }`
-
-

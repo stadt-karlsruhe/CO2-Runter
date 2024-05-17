@@ -1,4 +1,6 @@
-## **Login**
+# Authentication Endpoints
+
+## Login
 
 Authenticates a user and returns a token that can be used for future requests.
 
@@ -28,7 +30,7 @@ Authenticates a user and returns a token that can be used for future requests.
   - **Code:** 500 Internal Server Error<br />
     **Content:** `{ error : A server error occurred." }`
 
-## **Register**
+## Register
 
 This endpoint allows users to create a new account by providing their username, email, and password.
 

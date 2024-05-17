@@ -1,4 +1,6 @@
-## **Get Footprint Data for all Districts**
+# Dashboard Endpoints
+
+## Get Footprint Data for all Districts
 
 This endpoint allows you to get the footprint data for all districts.
 
