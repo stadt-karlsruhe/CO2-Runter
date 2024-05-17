@@ -90,9 +90,11 @@ To develop the client and access the API, use the following steps:
 If you encounter errors, ensure you've loaded data into the database. Use `loader-new.sql` and paste it into the SQL
 command query box in Adminer.
 
-## Build Instructions for Production
+## Build Instructions for Production Environment
 
-Follow these steps to build the application for production:
+The recommended system for deployment is Ubuntu 22.04. Our team has validated the process on Ubuntu 22.04.02 LTS.
+
+Follow the outlined steps to construct the application for a production environment:
 
 1. Change DB Password and Token Key in `docker-compose-pord.yml` to something new.
 2. Run:
