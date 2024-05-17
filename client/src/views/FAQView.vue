@@ -36,49 +36,42 @@
                         </v-expansion-panel-title>
                         <v-expansion-panel-text>
                             <p class="text-secondary my-4">
-                                Der CO<sub>2</sub>-Fußabdruck ist das
-                                Ergebnis einer Emissionsberechnung
-                                beziehungsweise der sogenannten
-                                CO<sub>2</sub>-Bilanz. Er gibt an,
-                                welche Menge von Treibhausgasen durch
-                                eine Aktivität, einen Prozess oder eine
-                                Handlung freigesetzt wird. Ein
-                                CO<sub>2</sub>-Fußabdruck lässt sich
-                                beispielsweise für Geschäfts- oder
-                                Produktionsprozesse von Unternehmen
-                                angeben.
+                                Der CO<sub>2</sub>-Fußabdruck ist das Ergebnis
+                                einer Emissionsberechnung beziehungsweise der
+                                sogenannten CO<sub>2</sub>-Bilanz. Er gibt an,
+                                welche Menge von Treibhausgasen durch eine
+                                Aktivität, einen Prozess oder eine Handlung
+                                freigesetzt wird. Ein CO<sub>2</sub>-Fußabdruck
+                                lässt sich beispielsweise für Geschäfts- oder
+                                Produktionsprozesse von Unternehmen angeben.
                             </p>
                             <p class="text-secondary my-4">
                                 Auch Produkte haben einen
-                                CO<sub>2</sub>-Fußabdruck, der die Summe
-                                der Emissionen umfasst, die durch die
-                                Herstellung, die Nutzung sowie die
-                                Verwertung und Entsorgung des jeweiligen
-                                Produktes entstehen. Das gilt für alle
-                                erdenklichen Artikel: vom Spielzeug,
-                                über technische Geräte, bis hin zu
-                                Möbeln und Einrichtungsgegenständen.
+                                CO<sub>2</sub>-Fußabdruck, der die Summe der
+                                Emissionen umfasst, die durch die Herstellung,
+                                die Nutzung sowie die Verwertung und Entsorgung
+                                des jeweiligen Produktes entstehen. Das gilt für
+                                alle erdenklichen Artikel: vom Spielzeug, über
+                                technische Geräte, bis hin zu Möbeln und
+                                Einrichtungsgegenständen.
                             </p>
                             <p class="text-secondary my-4">
-                                Ein CO<sub>2</sub>-Fußabdruck lässt sich
-                                darüber hinaus aber auch für viele
-                                weitere Aktivitäten und Prozesse
-                                berechnen – sowohl für Unternehmen als
-                                auch für Privatpersonen. Zum Beispiel
-                                für eine Veranstaltung,
-                                Hotelübernachtung, eine Dienstreise per
-                                Auto, Bahn oder Flugzeug, oder die
-                                Bereitstellung einer bestimmten
+                                Ein CO<sub>2</sub>-Fußabdruck lässt sich darüber
+                                hinaus aber auch für viele weitere Aktivitäten
+                                und Prozesse berechnen – sowohl für Unternehmen
+                                als auch für Privatpersonen. Zum Beispiel für
+                                eine Veranstaltung, Hotelübernachtung, eine
+                                Dienstreise per Auto, Bahn oder Flugzeug, oder
+                                die Bereitstellung einer bestimmten
                                 Dienstleistung.
                             </p>
                             <p class="text-secondary my-4">
                                 Für Unternehmen, die sich im Bereich
                                 Nachhaltigkeit engagieren, ist der
                                 CO<sub>2</sub>-Fußabdruck ein wichtiges
-                                Instrument zur Bewertung ihrer
-                                Klimawirkung und damit zentraler
-                                Bestandteil der Ökobilanz und der
-                                Nachhaltigkeitsberichterstattung.
+                                Instrument zur Bewertung ihrer Klimawirkung und
+                                damit zentraler Bestandteil der Ökobilanz und
+                                der Nachhaltigkeitsberichterstattung.
                             </p>
 
                             <v-card variant="tonal">
@@ -88,8 +81,9 @@
                                 <v-card-text>
                                     <v-list lines="three">
                                         <v-list-item>
-                                            <v-list-item-title class="font-weight-bold"
-                                            >Mobilität</v-list-item-title
+                                            <v-list-item-title
+                                                class="font-weight-bold"
+                                                >Mobilität</v-list-item-title
                                             >
                                             <v-list-item-subtitle>
                                                 Verkehrsmittel wie Autos,
@@ -104,8 +98,9 @@
                                             </v-list-item-subtitle>
                                         </v-list-item>
                                         <v-list-item>
-                                            <v-list-item-title class="font-weight-bold"
-                                            >Ernährung</v-list-item-title
+                                            <v-list-item-title
+                                                class="font-weight-bold"
+                                                >Ernährung</v-list-item-title
                                             >
                                             <v-list-item-subtitle>
                                                 Der Anbau, Transport und die
@@ -118,8 +113,9 @@
                                             </v-list-item-subtitle>
                                         </v-list-item>
                                         <v-list-item>
-                                            <v-list-item-title class="font-weight-bold"
-                                            >Konsum</v-list-item-title
+                                            <v-list-item-title
+                                                class="font-weight-bold"
+                                                >Konsum</v-list-item-title
                                             >
                                             <v-list-item-subtitle>
                                                 Der Kauf und die Entsorgung von
@@ -133,8 +129,9 @@
                                             </v-list-item-subtitle>
                                         </v-list-item>
                                         <v-list-item>
-                                            <v-list-item-title class="font-weight-bold"
-                                            >Wohnung</v-list-item-title
+                                            <v-list-item-title
+                                                class="font-weight-bold"
+                                                >Wohnung</v-list-item-title
                                             >
                                             <v-list-item-subtitle>
                                                 Energieverbrauch für Heizung,
@@ -148,8 +145,9 @@
                                             </v-list-item-subtitle>
                                         </v-list-item>
                                         <v-list-item>
-                                            <v-list-item-title class="font-weight-bold"
-                                            >Infrastruktur</v-list-item-title
+                                            <v-list-item-title
+                                                class="font-weight-bold"
+                                                >Infrastruktur</v-list-item-title
                                             >
                                             <v-list-item-subtitle>
                                                 Öffentliche Dienste und
