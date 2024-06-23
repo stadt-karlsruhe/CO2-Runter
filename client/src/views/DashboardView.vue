@@ -11,17 +11,18 @@
                         :center-active="true"
                         :show-arrows="true"
                     >
+
                         <v-tab value="map" prepend-icon="mdi-map">
-                            Karten Diagramm
+                            Karte
                         </v-tab>
                         <v-tab value="charts" prepend-icon="mdi-chart-bar">
-                            Durchschnitt
+                            Werte
                         </v-tab>
                         <v-tab
                             value="groups"
                             prepend-icon="mdi-account-group-outline"
                         >
-                            Gruppen Diagramm
+                            Gruppen
                         </v-tab>
                         <v-tab
                             value="co2Footprint"
